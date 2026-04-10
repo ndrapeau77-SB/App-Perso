@@ -101,8 +101,8 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 🔽 cartes plus petites */
+      gap: 14px;
     }
 
     .card {
@@ -119,6 +119,8 @@
       position: relative;
       aspect-ratio: 16 / 9;
       background: #000;
+      max-height: 180px; /* 🔽 réduit la hauteur des previews */
+      overflow: hidden;
     }
 
     .video-wrap iframe,
@@ -256,57 +258,47 @@
 
   <script>
     const videos = [
-  {
-    id: 1,
-    title: "Exercice genoux",
-    category: "Rééducation",
-    duration: "10 min",
-    level: "Débutant",
-    notes: "Exercices pour renforcer et mobiliser les genoux.",
-    type: "mp4",
-    src: "videos/excercice genoux.mp4"
-  },
-  {
-    id: 2,
-    title: "Low Impact Cardio",
-    category: "Cardio",
-    duration: "15 min",
-    level: "Débutant",
-    notes: "Cardio léger sans impact, parfait pour reprendre.",
-    type: "mp4",
-    src: "videos/low impact cardio.mp4"
-  },
-  {
-    id: 3,
-    title: "Étirements du dos",
-    category: "Mobilité",
-    duration: "8 min",
-    level: "Tous niveaux",
-    notes: "Routine simple pour relâcher les tensions du dos.",
-    type: "mp4",
-    src: "videos/étirements dos.mp4"
-  },
-  {
-    id: 4,
-    title: "Lymphatic Drainage Routine",
-    category: "Récupération",
-    duration: "12 min",
-    level: "Tous niveaux",
-    notes: "Routine douce pour la circulation et la récupération.",
-    type: "mp4",
-    src: "videos/Lymphatic Drainage Routine.mp4"
-  },
       {
-  id: 5,
-  title: "Test vidéo",
-  category: "Test",
-  duration: "10 min",
-  level: "Tous niveaux",
-  notes: "Vidéo Drive",
-  type: "iframe",
-  src: "https://drive.google.com/file/d/1TGZse3Io9UQK2Rp_C3a3zxnO2spgB6fP/preview"
-}
-];
+        id: 1,
+        title: "Échauffement rapide",
+        category: "Échauffement",
+        duration: "5 min",
+        level: "Débutant",
+        notes: "Parfait avant une séance ou juste pour te délier un peu.",
+        type: "youtube",
+        src: "https://www.youtube.com/embed/ml6cT4AZdqI"
+      },
+      {
+        id: 2,
+        title: "Bas du corps maison",
+        category: "Jambes",
+        duration: "12 min",
+        level: "Débutant",
+        notes: "Une base simple pour jambes et fessiers, sans équipement.",
+        type: "youtube",
+        src: "https://www.youtube.com/embed/UBMk30rjy0o"
+      },
+      {
+        id: 3,
+        title: "Abdos express",
+        category: "Core",
+        duration: "8 min",
+        level: "Intermédiaire",
+        notes: "Petit bloc rapide quand tu veux bouger sans te compliquer la vie.",
+        type: "youtube",
+        src: "https://www.youtube.com/embed/AnYl6Nk9GOA"
+      },
+      {
+        id: 4,
+        title: "Cardio court",
+        category: "Cardio",
+        duration: "10 min",
+        level: "Intermédiaire",
+        notes: "Bon quand tu veux quelque chose de court mais qui réveille.",
+        type: "youtube",
+        src: "https://www.youtube.com/embed/gC_L9qAHVJ8"
+      }
+    ];
 
     const grid = document.getElementById("videosGrid");
     const searchInput = document.getElementById("searchInput");
@@ -362,24 +354,21 @@
       });
     }
 
-function renderMedia(video) {
-  if (video.type === "youtube") {
-    return `<iframe src="${video.src}" title="${video.title}" loading="lazy" allowfullscreen></iframe>`;
-  }
+    function renderMedia(video) {
+      if (video.type === "youtube") {
+        return `<iframe src="${video.src}" title="${video.title}" loading="lazy" allowfullscreen></iframe>`;
+      }
 
-  if (video.type === "mp4") {
-    return `<video controls preload="metadata">
-              <source src="${video.src}" type="video/mp4">
-              Ton navigateur ne supporte pas la vidéo.
-            </video>`;
-  }
+      if (video.type === "mp4") {
+        return `<video controls preload="metadata"><source src="${video.src}" type="video/mp4">Ton navigateur ne supporte pas la vidéo.</video>`;
+      }
 
-  if (video.type === "iframe") {
-    return `<iframe src="${video.src}" title="${video.title}" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-  }
+      if (video.type === "iframe") {
+        return `<iframe src="${video.src}" title="${video.title}" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+      }
 
-  return `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:white;">Vidéo non supportée</div>`;
-}
+      return `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:white;">Vidéo non supportée</div>`;
+    }
 
     function renderVideos() {
       const filtered = getFilteredVideos();
