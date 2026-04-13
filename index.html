@@ -557,25 +557,25 @@ select {
 </div>
 
 <div class="nav-grid">
-  <button type="button" class="nav-btn active" data-panel="videos">
+  <button type="button" class="nav-btn active" data-panel="videos" onclick="showPanel('videos', this)">
     <div class="nav-label">Vidéos</div>
   </button>
-  <button type="button" class="nav-btn" data-panel="activites">
+  <button type="button" class="nav-btn" data-panel="activites" onclick="showPanel('activites', this)">
     <div class="nav-label">Activités</div>
   </button>
-  <button type="button" class="nav-btn" data-panel="apprentissage">
+  <button type="button" class="nav-btn" data-panel="apprentissage" onclick="showPanel('apprentissage', this)">
     <div class="nav-label">Découverte</div>
   </button>
-  <button type="button" class="nav-btn" data-panel="recettes">
+  <button type="button" class="nav-btn" data-panel="recettes" onclick="showPanel('recettes', this)">
     <div class="nav-label">Recettes</div>
   </button>
-  <button type="button" class="nav-btn" data-panel="musique">
+  <button type="button" class="nav-btn" data-panel="musique" onclick="showPanel('musique', this)">
     <div class="nav-label">Musique</div>
   </button>
-  <button type="button" class="nav-btn" data-panel="moodboard">
+  <button type="button" class="nav-btn" data-panel="moodboard" onclick="showPanel('moodboard', this)">
     <div class="nav-label">Mood Board</div>
   </button>
-  <button type="button" class="nav-btn" data-panel="notes">
+  <button type="button" class="nav-btn" data-panel="notes" onclick="showPanel('notes', this)">
     <div class="nav-label">Notes</div>
   </button>
 </div>
@@ -1238,17 +1238,26 @@ select {
         : `<div class="empty">Aucune note pour l'instant.</div>`;
     }
 
-    function initNav() {
+    function showPanel(target, clickedBtn = null) {
       const navButtons = document.querySelectorAll('.nav-btn');
       const panels = document.querySelectorAll('.panel');
+
       navButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const target = btn.dataset.panel;
-          navButtons.forEach(b => b.classList.toggle('active', b === btn));
-          panels.forEach(panel => panel.classList.toggle('active', panel.id === target));
-          document.querySelector('.app').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+        btn.classList.toggle('active', btn.dataset.panel === target);
       });
+
+      panels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === target);
+      });
+
+      const app = document.querySelector('.app');
+      if (app) {
+        app.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function initNav() {
+      // La navigation principale fonctionne déjà via les onclick sur les boutons.
     }
 
     function initMusicTabs() {
@@ -1305,6 +1314,7 @@ select {
       initEvents();
     }
 
+    window.showPanel = showPanel;
     window.toggleFav = toggleFav;
     window.showActivitiesForDay = showActivitiesForDay;
     window.deleteNote = deleteNote;
