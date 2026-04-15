@@ -4,124 +4,296 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Mon App Motivation</title>
+  <title>Mon App Perso</title>
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0b1d1a">
-
-  <!-- iOS support (bonus) -->
+  <meta name="theme-color" content="#071b1a">
   <link rel="apple-touch-icon" href="image_pastille.png">
 
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      color: #f5f5f5;
-      background: linear-gradient(180deg, #0b1d1a, #102c28);
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0, 100, 80, 0.18), transparent 35%),
+        linear-gradient(180deg, #031313 0%, #05211f 55%, #082120 100%);
+      color: #f4f1e8;
+    }
+
+    body {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 460px;
+      min-height: 100vh;
+      padding: 18px 12px 40px;
+    }
+
+    .hero-card {
+      border: 1px solid rgba(170, 142, 65, 0.55);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.92), rgba(3, 27, 26, 0.94));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 14px 30px rgba(0,0,0,0.18);
+      padding: 24px 18px 28px;
       text-align: center;
+      margin-bottom: 18px;
     }
 
-    h1 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      opacity: 0.8;
+    .top-title {
+      color: #caa94d;
+      font-size: 1rem;
+      line-height: 1.2;
+      margin: 0 0 18px;
+      font-weight: 500;
     }
 
-    .quote {
-      font-size: 1.3rem;
-      font-weight: bold;
-      max-width: 90%;
-      margin-bottom: 20px;
+    .action-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
     }
 
-    .author {
-      font-size: 0.9rem;
-      opacity: 0.7;
-      margin-bottom: 30px;
-    }
-
-    button {
-      background: #d4af37;
-      color: #000;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
+    .pill-btn {
+      border: 1px solid rgba(170, 142, 65, 0.6);
+      background: rgba(7, 32, 30, 0.9);
+      color: #f4f1e8;
+      padding: 12px 18px;
+      border-radius: 999px;
       font-size: 1rem;
       cursor: pointer;
+      min-width: 145px;
+      transition: transform 0.12s ease, background 0.12s ease;
     }
 
-    button:active {
-      transform: scale(0.97);
+    .pill-btn:active {
+      transform: scale(0.98);
+    }
+
+    .routine-box {
+      margin-top: 6px;
+      border: 1px solid rgba(170, 142, 65, 0.45);
+      border-radius: 22px;
+      padding: 20px 16px;
+      background: rgba(7, 28, 27, 0.72);
+      text-align: left;
+    }
+
+    .routine-label {
+      font-size: 0.92rem;
+      letter-spacing: 2px;
+      color: #b7c8bf;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+
+    .routine-title {
+      font-size: 1.95rem;
+      line-height: 1.05;
+      font-weight: 700;
+      color: #d9b24b;
+      margin: 0 0 14px;
+    }
+
+    .routine-text {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: #f0eee8;
+      margin: 0;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .menu-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 118px;
+      text-align: center;
+      border-radius: 28px;
+      border: 1px solid rgba(170, 142, 65, 0.58);
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.94), rgba(3, 27, 26, 0.95));
+      color: #f2f0e8;
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+      transition: transform 0.12s ease, background 0.12s ease;
+    }
+
+    .menu-card:active {
+      transform: scale(0.985);
+    }
+
+    .install-banner {
+      position: sticky;
+      bottom: 12px;
+      display: none;
+      margin-top: 18px;
+      z-index: 10;
     }
 
     .install-btn {
-      position: fixed;
-      bottom: 20px;
-      background: #ffffff;
-      color: #000;
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 15px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      background: #d9b24b;
+      color: #1b1710;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    }
+
+    @media (min-width: 700px) {
+      .app {
+        max-width: 540px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   </style>
 </head>
-
 <body>
+  <main class="app">
+    <section class="hero-card">
+      <p class="top-title">Excellence personnelle</p>
 
-  <h1>Routine du jour</h1>
+      <div class="action-row">
+        <button class="pill-btn" id="favoritesBtn">☆ Favoris</button>
+        <button class="pill-btn" id="quoteBtn">Nouvelle citation</button>
+      </div>
 
-  <div class="quote" id="quote">
-    Clique pour charger une citation
-  </div>
+      <div class="routine-box">
+        <p class="routine-label">Routine du jour</p>
+        <h1 class="routine-title" id="routineTitle">Routine matinale</h1>
+        <p class="routine-text" id="quoteText">
+          Bouge un peu, prends une grande respiration et lance ta journée avec intention.
+          Le but : enclencher le momentum.
+        </p>
+      </div>
+    </section>
 
-  <div class="author" id="author"></div>
+    <section class="menu-grid">
+      <a href="videos.html" class="menu-card">Vidéos</a>
+      <a href="decouverte.html" class="menu-card">Découverte / apprentissage</a>
+      <a href="musique.html" class="menu-card">Musique</a>
+      <a href="notes.html" class="menu-card">Notes</a>
+      <a href="objectifs.html" class="menu-card">Objectifs</a>
+      <a href="moodboard.html" class="menu-card">Mood board</a>
+    </section>
 
-  <button onclick="loadRandomQuote()">Nouvelle citation</button>
-
-  <button id="installBtn" class="install-btn" style="display:none;">
-    Installer l'app
-  </button>
+    <div class="install-banner" id="installBanner">
+      <button class="install-btn" id="installBtn">Installer l’app</button>
+    </div>
+  </main>
 
   <script>
-    // Charger citations
-    async function loadRandomQuote() {
-      const response = await fetch('citations.json');
-      const data = await response.json();
+    const defaultQuotes = [
+      {
+        title: "Routine matinale",
+        text: "Bouge un peu, prends une grande respiration et lance ta journée avec intention. Le but : enclencher le momentum."
+      },
+      {
+        title: "Focus",
+        text: "Ce que tu répètes chaque jour finit par te définir. Même un petit pas compte quand il est constant."
+      },
+      {
+        title: "Discipline",
+        text: "Tu n’as pas besoin de te sentir prêt. Tu as juste besoin de commencer."
+      },
+      {
+        title: "Mentalité",
+        text: "If you really want to do something, you'll find a way. If you don't, you'll find an excuse."
+      }
+    ];
 
-      const random = data[Math.floor(Math.random() * data.length)];
+    let quotesData = defaultQuotes;
 
-      document.getElementById('quote').textContent = `"${random.text}"`;
-      document.getElementById('author').textContent = random.author || "";
+    async function loadQuotes() {
+      try {
+        const response = await fetch('./citations.json');
+        if (!response.ok) throw new Error('citations.json introuvable');
+        const data = await response.json();
+
+        if (Array.isArray(data) && data.length) {
+          quotesData = data.map(item => {
+            if (typeof item === 'string') {
+              return { title: 'Citation', text: item };
+            }
+            return {
+              title: item.title || 'Citation du jour',
+              text: item.text || item.quote || 'Contenu indisponible.'
+            };
+          });
+        }
+      } catch (e) {
+        console.log('Chargement citations: fallback local', e);
+      }
     }
 
-    loadRandomQuote();
+    function showRandomQuote() {
+      if (!quotesData.length) return;
+      const random = quotesData[Math.floor(Math.random() * quotesData.length)];
+      document.getElementById('routineTitle').textContent = random.title || 'Citation du jour';
+      document.getElementById('quoteText').textContent = random.text || '';
+    }
 
-    // INSTALL APP (PWA)
-    let deferredPrompt;
+    document.getElementById('quoteBtn').addEventListener('click', showRandomQuote);
+
+    document.getElementById('favoritesBtn').addEventListener('click', () => {
+      alert("Section Favoris à brancher ensuite.");
+    });
+
+    loadQuotes().then(showRandomQuote);
+
+    let deferredPrompt = null;
+    const installBanner = document.getElementById('installBanner');
+    const installBtn = document.getElementById('installBtn');
 
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      document.getElementById('installBtn').style.display = 'block';
+      installBanner.style.display = 'block';
     });
 
-    document.getElementById('installBtn').addEventListener('click', () => {
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
       deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => {
-        deferredPrompt = null;
-      });
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBanner.style.display = 'none';
     });
 
-    // SERVICE WORKER
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log("Service Worker enregistré"))
-        .catch(err => console.log("Erreur SW:", err));
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(() => console.log('Service Worker enregistré'))
+          .catch(err => console.log('Erreur Service Worker :', err));
+      });
     }
   </script>
-
 </body>
 </html>
