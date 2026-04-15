@@ -1,0 +1,20 @@
+{
+  "name": "Mon App Perso",
+  "short_name": "Mon App",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#06100c",
+  "theme_color": "#06100c",
+  "icons": [
+    {
+      "src": "image_pastille.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "image_pastille.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
