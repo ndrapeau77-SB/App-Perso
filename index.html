@@ -489,14 +489,16 @@ button, input, select, textarea { font: inherit; }
 </section>
 
   </div>  <script>
-    const quotes = [
-      { text: 'Your life does not get better by chance, it gets better by change.', author: 'Jim Rohn' },
-      { text: 'Discipline is the bridge between goals and accomplishment.', author: 'Jim Rohn' },
-      { text: 'Success is nothing more than a few simple disciplines, practiced every day.', author: 'Jim Rohn' },
-      { text: 'What you do today can improve all your tomorrows.', author: 'Ralph Marston' },
-      { text: 'Small daily improvements are the key to staggering long-term results.', author: 'Robin Sharma' },
-      { text: 'You do not have to be great to start, but you have to start to be great.', author: 'Zig Ziglar' }
-    ];
+fetch('citations.json')
+  .then(response => response.json())
+  .then(citations => {
+    const random = citations[Math.floor(Math.random() * citations.length)];
+    document.getElementById('quoteBox').innerHTML =
+      `${random.text}<small>— ${random.author}</small>`;
+  })
+  .catch(error => {
+    console.error("Erreur chargement citations :", error);
+  });
 
     const routines = [
       { title: 'Routine focus & énergie', desc: '5 minutes pour respirer, choisir 1 priorité claire, boire de l’eau, puis lancer ta première action utile.' },
