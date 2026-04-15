@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,489 +17,519 @@
       --line: rgba(214, 177, 100, 0.22);
       --shadow: 0 10px 30px rgba(0,0,0,0.35);
       --radius: 22px;
-    }* { box-sizing: border-box; }
+    }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at top, rgba(136, 183, 124, 0.08), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(214, 177, 100, 0.08), transparent 30%),
-    linear-gradient(180deg, #08120e 0%, #040906 100%);
-  min-height: 100%;
-}
+    * { box-sizing: border-box; }
 
-a { color: var(--gold); text-decoration: none; }
-button, input, select, textarea { font: inherit; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(136, 183, 124, 0.08), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(214, 177, 100, 0.08), transparent 30%),
+        linear-gradient(180deg, #08120e 0%, #040906 100%);
+      min-height: 100%;
+    }
 
-.app {
-  width: min(1100px, calc(100% - 18px));
-  margin: 0 auto;
-  padding: 12px 0 28px;
-}
+    a { color: var(--gold); text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
 
-.card {
-  background: linear-gradient(180deg, rgba(15, 26, 20, 0.97), rgba(10, 18, 14, 0.98));
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 16px;
-  margin-bottom: 14px;
-}
+    .app {
+      width: min(1100px, calc(100% - 18px));
+      margin: 0 auto;
+      padding: 12px 0 28px;
+    }
 
-.quote {
-  text-align: center;
-  color: var(--gold);
-  line-height: 1.6;
-}
+    .card {
+      background: linear-gradient(180deg, rgba(15, 26, 20, 0.97), rgba(10, 18, 14, 0.98));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
 
-.quote small {
-  display: block;
-  margin-top: 8px;
-  color: var(--muted);
-}
+    .quote {
+      text-align: center;
+      color: var(--gold);
+      line-height: 1.6;
+    }
 
-.eyebrow {
-  color: var(--green);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.76rem;
-  margin-bottom: 8px;
-}
+    .quote small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+    }
 
-.routine {
-  cursor: pointer;
-  transition: transform 0.18s ease, border-color 0.18s ease;
-}
+    .quote-actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-.routine:hover {
-  transform: translateY(-2px);
-  border-color: rgba(214, 177, 100, 0.42);
-}
+    .eyebrow {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.76rem;
+      margin-bottom: 8px;
+    }
 
-.routine-title {
-  color: var(--gold);
-  font-size: 1.16rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
+    .routine {
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
 
-.routine-desc, .subtle {
-  color: var(--muted);
-  line-height: 1.5;
-  font-size: 0.94rem;
-}
+    .routine:hover {
+      transform: translateY(-2px);
+      border-color: rgba(214, 177, 100, 0.42);
+    }
 
-.nav-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 14px;
-}
+    .routine-title {
+      color: var(--gold);
+      font-size: 1.16rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
 
-.nav-btn {
-  border: 1px solid rgba(214, 177, 100, 0.24);
-  border-radius: 22px;
-  background: linear-gradient(180deg, rgba(16, 29, 22, 0.98), rgba(9, 17, 13, 0.98));
-  box-shadow: var(--shadow);
-  color: var(--text);
-  min-height: 92px;
-  padding: 12px;
-  cursor: pointer;
-  transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-weight: 700;
-}
+    .routine-desc, .subtle {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.94rem;
+    }
 
-.nav-btn:hover, .nav-btn.active {
-  transform: translateY(-2px);
-  border-color: rgba(214, 177, 100, 0.5);
-  color: var(--gold);
-}
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
 
-.panel {
-  display: none;
-}
+    .nav-btn {
+      border: 1px solid rgba(214, 177, 100, 0.24);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(16, 29, 22, 0.98), rgba(9, 17, 13, 0.98));
+      box-shadow: var(--shadow);
+      color: var(--text);
+      min-height: 92px;
+      padding: 12px;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 700;
+    }
 
-.panel.active {
-  display: block;
-  animation: fadeIn 0.18s ease;
-}
+    .nav-btn:hover, .nav-btn.active {
+      transform: translateY(-2px);
+      border-color: rgba(214, 177, 100, 0.5);
+      color: var(--gold);
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    .panel {
+      display: none;
+    }
 
-.panel-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
+    .panel.active {
+      display: block;
+      animation: fadeIn 0.18s ease;
+    }
 
-.panel-title {
-  color: var(--gold);
-  font-size: 1.22rem;
-  font-weight: 700;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.toolbar {
-  display: grid;
-  grid-template-columns: 1.2fr 0.9fr auto;
-  gap: 10px;
-  margin-bottom: 12px;
-}
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
 
-.input, .select, .textarea, .btn, .chip, .mini-btn, .fav-btn, .tab-btn {
-  border-radius: 14px;
-  border: 1px solid rgba(214, 177, 100, 0.2);
-  background: rgba(8, 15, 12, 0.92);
-  color: var(--text);
-}
+    .panel-title {
+      color: var(--gold);
+      font-size: 1.22rem;
+      font-weight: 700;
+    }
 
-.input, .select, .textarea {
-  padding: 12px 13px;
-  width: 100%;
-  outline: none;
-}
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr auto;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
 
-.btn, .mini-btn, .fav-btn, .chip, .tab-btn {
-  padding: 10px 12px;
-  cursor: pointer;
-  transition: 0.16s ease;
-}
+    .input, .select, .textarea, .btn, .chip, .mini-btn, .fav-btn, .tab-btn {
+      border-radius: 14px;
+      border: 1px solid rgba(214, 177, 100, 0.2);
+      background: rgba(8, 15, 12, 0.92);
+      color: var(--text);
+    }
 
-.btn:hover, .mini-btn:hover, .fav-btn:hover, .chip:hover, .tab-btn:hover, .tab-btn.active {
-  border-color: rgba(214, 177, 100, 0.45);
-  color: var(--gold);
-  transform: translateY(-1px);
-}
+    .input, .select, .textarea {
+      padding: 12px 13px;
+      width: 100%;
+      outline: none;
+    }
 
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
+    .btn, .mini-btn, .fav-btn, .chip, .tab-btn {
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: 0.16s ease;
+    }
 
-.item-card {
-  border: 1px solid rgba(214, 177, 100, 0.18);
-  background: linear-gradient(180deg, rgba(15, 26, 20, 0.98), rgba(10, 18, 14, 0.98));
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
+    .btn:hover, .mini-btn:hover, .fav-btn:hover, .chip:hover, .tab-btn:hover, .tab-btn.active, .btn.active {
+      border-color: rgba(214, 177, 100, 0.45);
+      color: var(--gold);
+      transform: translateY(-1px);
+    }
 
-.thumb {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-  background: #09100d;
-}
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
 
-.body {
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
+    .item-card {
+      border: 1px solid rgba(214, 177, 100, 0.18);
+      background: linear-gradient(180deg, rgba(15, 26, 20, 0.98), rgba(10, 18, 14, 0.98));
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
 
-.title {
-  color: var(--gold);
-  font-weight: 700;
-  line-height: 1.35;
-}
+    .thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: #09100d;
+    }
 
-.meta {
-  color: var(--green);
-  font-size: 0.82rem;
-}
+    .body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
 
-.desc {
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.45;
-  flex: 1;
-}
+    .title {
+      color: var(--gold);
+      font-weight: 700;
+      line-height: 1.35;
+    }
 
-.actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: auto;
-}
+    .meta {
+      color: var(--green);
+      font-size: 0.82rem;
+    }
 
-.chips {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
+    .desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      flex: 1;
+    }
 
-.daily-box {
-  padding: 14px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(18, 29, 23, 0.96), rgba(10, 17, 13, 0.96));
-  border: 1px solid rgba(214, 177, 100, 0.2);
-  margin-bottom: 12px;
-}
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
 
-.daily-box strong { color: var(--gold); display: block; margin-bottom: 6px; }
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
 
-.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .daily-box {
+      padding: 14px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(18, 29, 23, 0.96), rgba(10, 17, 13, 0.96));
+      border: 1px solid rgba(214, 177, 100, 0.2);
+      margin-bottom: 12px;
+    }
 
-.note-layout {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 12px;
-}
+    .daily-box strong { color: var(--gold); display: block; margin-bottom: 6px; }
 
-.textarea { min-height: 180px; resize: vertical; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
 
-.note-list { display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow: auto; }
+    .note-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 12px;
+    }
 
-.note-item {
-  border: 1px solid rgba(214, 177, 100, 0.18);
-  border-radius: 16px;
-  padding: 12px;
-  background: rgba(9, 16, 13, 0.9);
-}
+    .textarea { min-height: 180px; resize: vertical; }
 
-.note-item h4 { margin: 0 0 6px; color: var(--gold); }
-.note-item p { margin: 0 0 8px; color: var(--muted); white-space: pre-wrap; line-height: 1.45; }
+    .note-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 420px;
+      overflow: auto;
+    }
 
-.mood-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
+    .note-item {
+      border: 1px solid rgba(214, 177, 100, 0.18);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(9, 16, 13, 0.9);
+    }
 
-.mood-box {
-  border: 1px solid rgba(214, 177, 100, 0.18);
-  border-radius: 18px;
-  padding: 14px;
-  background: rgba(8, 16, 12, 0.9);
-}
+    .note-item h4 { margin: 0 0 6px; color: var(--gold); }
+    .note-item p { margin: 0 0 8px; color: var(--muted); white-space: pre-wrap; line-height: 1.45; }
 
-.mood-box h4 { margin: 0 0 10px; color: var(--gold); }
-.mood-box ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.5; }
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
 
-.empty {
-  padding: 18px;
-  border: 1px dashed rgba(214, 177, 100, 0.18);
-  border-radius: 16px;
-  color: var(--muted);
-  text-align: center;
-}
+    .mood-box {
+      border: 1px solid rgba(214, 177, 100, 0.18);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(8, 16, 12, 0.9);
+    }
 
-@media (max-width: 760px) {
-  .toolbar, .note-layout { grid-template-columns: 1fr; }
-  .nav-grid, .grid-2, .mood-grid { grid-template-columns: repeat(2, 1fr); }
-}
+    .mood-box h4 { margin: 0 0 10px; color: var(--gold); }
+    .mood-box ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.5; }
 
-@media (max-width: 520px) {
-  .app { width: min(100% - 12px, 1100px); padding-top: 8px; }
-  .nav-grid, .grid-2, .mood-grid { grid-template-columns: repeat(2, 1fr); }
-  .card { padding: 13px; }
-  .title { font-size: 0.95rem; }
-  .desc, .subtle, .routine-desc { font-size: 0.88rem; }
-  .nav-btn { min-height: 82px; }
-}
+    .empty {
+      padding: 18px;
+      border: 1px dashed rgba(214, 177, 100, 0.18);
+      border-radius: 16px;
+      color: var(--muted);
+      text-align: center;
+    }
 
+    @media (max-width: 760px) {
+      .toolbar, .note-layout { grid-template-columns: 1fr; }
+      .nav-grid, .grid-2, .mood-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 520px) {
+      .app { width: min(100% - 12px, 1100px); padding-top: 8px; }
+      .nav-grid, .grid-2, .mood-grid { grid-template-columns: repeat(2, 1fr); }
+      .card { padding: 13px; }
+      .title { font-size: 0.95rem; }
+      .desc, .subtle, .routine-desc { font-size: 0.88rem; }
+      .nav-btn { min-height: 82px; }
+    }
   </style>
 </head>
 <body>
   <div class="app">
-    <div class="card quote" id="quoteBox"></div><div class="card routine" onclick="showPanel('moodboard')">
-  <div class="eyebrow">Routine du jour</div>
-  <div class="routine-title" id="routineTitle"></div>
-  <div class="routine-desc" id="routineDesc"></div>
-</div>
+    <div class="card">
+      <div class="quote" id="quoteBox"></div>
 
-<div class="nav-grid">
-  <button type="button" class="nav-btn active" onclick="showPanel('videos')">Vidéos</button>
-  <button type="button" class="nav-btn" onclick="showPanel('activites')">Activités</button>
-  <button type="button" class="nav-btn" onclick="showPanel('apprentissage')">Découverte</button>
-  <button type="button" class="nav-btn" onclick="showPanel('recettes')">Recettes</button>
-  <button type="button" class="nav-btn" onclick="showPanel('musique')">Musique</button>
-  <button type="button" class="nav-btn" onclick="showPanel('moodboard')">Mood Board</button>
-  <button type="button" class="nav-btn" onclick="showPanel('notes')">Notes</button>
-</div>
+      <div class="quote-actions">
+        <button class="btn" id="favQuoteBtn">☆ Favori</button>
+        <button class="btn" id="showQuoteFavsBtn">Mes citations favorites</button>
+        <button class="btn" id="toggleAddQuoteBtn">Ajouter une citation</button>
+      </div>
 
-<section class="panel active card" id="videos">
-  <div class="panel-head">
-    <div>
-      <div class="panel-title">Vidéos</div>
-      <div class="subtle">Recherche, tri, favoris, et 2 previews côte à côte sur téléphone.</div>
-    </div>
-  </div>
-  <div class="toolbar">
-    <input class="input" id="videoSearch" placeholder="Rechercher une vidéo, un thème, une chaîne...">
-    <select class="select" id="videoSort">
-      <option value="default">Classer : recommandé</option>
-      <option value="title">Titre A → Z</option>
-      <option value="fav">Favoris d'abord</option>
-    </select>
-    <button class="btn" id="toggleVideoFavs">Mes favoris</button>
-  </div>
-  <div class="grid-2" id="videoGrid"></div>
-</section>
+      <div id="addQuoteBox" style="display:none; margin-top:12px; text-align:left;">
+        <input class="input" id="newQuoteText" placeholder="Ta citation" />
+        <div style="height:8px"></div>
+        <input class="input" id="newQuoteAuthor" placeholder="Auteur" />
+        <div style="height:8px"></div>
+        <button class="btn" id="saveQuoteBtn">Enregistrer la citation</button>
+      </div>
 
-<section class="panel card" id="activites">
-  <div class="panel-head">
-    <div>
-      <div class="panel-title">Activités</div>
-      <div class="subtle">5 idées gratuites selon la journée, avec favoris et quelques liens utiles.</div>
+      <div id="quoteFavsBox" style="display:none; margin-top:12px; text-align:left;"></div>
     </div>
-  </div>
-  <div class="chips" id="activityDayChips"></div>
-  <div class="grid-2" id="activityGrid"></div>
-</section>
 
-<section class="panel card" id="apprentissage">
-  <div class="panel-head">
-    <div>
-      <div class="panel-title">Découverte & apprentissage</div>
-      <div class="subtle">Une découverte du jour et un bouton pour en faire apparaître une autre.</div>
+    <div class="card routine" onclick="showPanel('moodboard')">
+      <div class="eyebrow">Routine du jour</div>
+      <div class="routine-title" id="routineTitle"></div>
+      <div class="routine-desc" id="routineDesc"></div>
     </div>
-    <button class="btn" id="newDiscoveryBtn">Nouvelle découverte</button>
-  </div>
-  <div class="daily-box" id="discoveryBox"></div>
-  <div class="grid-2" id="discoveryArchive"></div>
-</section>
 
-<section class="panel card" id="recettes">
-  <div class="panel-head">
-    <div>
-      <div class="panel-title">Recettes</div>
-      <div class="subtle">Recherche rapide, recettes simples, économiques, et plus légères.</div>
+    <div class="nav-grid">
+      <button type="button" class="nav-btn active" onclick="showPanel('videos')">Vidéos</button>
+      <button type="button" class="nav-btn" onclick="showPanel('activites')">Activités</button>
+      <button type="button" class="nav-btn" onclick="showPanel('apprentissage')">Découverte</button>
+      <button type="button" class="nav-btn" onclick="showPanel('recettes')">Recettes</button>
+      <button type="button" class="nav-btn" onclick="showPanel('musique')">Musique</button>
+      <button type="button" class="nav-btn" onclick="showPanel('moodboard')">Mood Board</button>
+      <button type="button" class="nav-btn" onclick="showPanel('notes')">Notes</button>
     </div>
-  </div>
-  <div class="toolbar">
-    <input class="input" id="recipeSearch" placeholder="Rechercher : lunch, poulet, léger, économique...">
-    <select class="select" id="recipeFilter">
-      <option value="all">Toutes</option>
-      <option value="simple">Simples</option>
-      <option value="budget">Petit budget</option>
-      <option value="light">Plus légères</option>
-    </select>
-    <button class="btn" id="toggleRecipeFavs">Mes favoris</button>
-  </div>
-  <div class="grid-2" id="recipeGrid"></div>
-</section>
 
-<section class="panel card" id="musique">
-  <div class="panel-head">
-    <div>
-      <div class="panel-title">Musique</div>
-      <div class="subtle">Leçons de drum et découverte musicale du jour.</div>
-    </div>
-  </div>
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showMusicTab('lecons', this)">Leçons</button>
-    <button class="tab-btn" onclick="showMusicTab('ecoute', this)">Écoute</button>
-  </div>
-  <div id="musicLecons">
-    <div class="grid-2" id="musicLessonGrid"></div>
-  </div>
-  <div id="musicEcoute" style="display:none;">
-    <div class="daily-box" id="musicDiscoveryBox"></div>
-    <div class="grid-2" id="musicDiscoveriesGrid"></div>
-  </div>
-</section>
+    <section class="panel active card" id="videos">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Vidéos</div>
+          <div class="subtle">Recherche, tri, favoris, et 2 previews côte à côte sur téléphone.</div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <input class="input" id="videoSearch" placeholder="Rechercher une vidéo, un thème, une chaîne...">
+        <select class="select" id="videoSort">
+          <option value="default">Classer : recommandé</option>
+          <option value="title">Titre A → Z</option>
+          <option value="fav">Favoris d'abord</option>
+        </select>
+        <button class="btn" id="toggleVideoFavs">Mes favoris</button>
+      </div>
+      <div class="grid-2" id="videoGrid"></div>
+    </section>
 
-<section class="panel card" id="moodboard">
-  <div class="panel-head">
-    <div>
-      <div class="panel-title">Mood Board</div>
-      <div class="subtle">1 semaine, 1 mois, 1 an, avec questions-guides.</div>
-    </div>
-  </div>
-  <div class="mood-grid">
-    <div class="mood-box">
-      <h4>1 semaine</h4>
-      <ul>
-        <li>Comment je veux me sentir cette semaine ?</li>
-        <li>Quelle petite victoire me ferait du bien ?</li>
-        <li>Quelle habitude m'aiderait tout de suite ?</li>
-        <li>Qu'est-ce que je veux voir plus dans mes journées ?</li>
-      </ul>
-    </div>
-    <div class="mood-box">
-      <h4>1 mois</h4>
-      <ul>
-        <li>Quel changement concret je veux remarquer ?</li>
-        <li>Qu'est-ce que je veux bâtir ou apprendre ?</li>
-        <li>De quoi je serais fier dans 30 jours ?</li>
-        <li>Quels mots-clés représentent ce mois-là ?</li>
-      </ul>
-    </div>
-    <div class="mood-box">
-      <h4>1 an</h4>
-      <ul>
-        <li>Si l'année allait vraiment bien, qu'est-ce qui aurait changé ?</li>
-        <li>Quel genre de personne je veux devenir ?</li>
-        <li>Quelles sphères comptent le plus ?</li>
-        <li>Quels 3 grands thèmes guideront mon board ?</li>
-      </ul>
-    </div>
-    <div class="mood-box">
-      <h4>Comment le construire</h4>
-      <ul>
-        <li>Choisis 3 à 5 thèmes max pour garder ça clair.</li>
-        <li>Ajoute des images qui te font ressentir quelque chose.</li>
-        <li>Mets des mots courts : calme, discipline, énergie, famille, liberté.</li>
-        <li>Ajoute une action cette semaine et une ce mois-ci.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <section class="panel card" id="activites">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Activités</div>
+          <div class="subtle">5 idées gratuites selon la journée, avec favoris et quelques liens utiles.</div>
+        </div>
+      </div>
+      <div class="chips" id="activityDayChips"></div>
+      <div class="grid-2" id="activityGrid"></div>
+    </section>
 
-<section class="panel card" id="notes">
-  <div class="panel-head">
-    <div>
-      <div class="panel-title">Notes</div>
-      <div class="subtle">Un espace simple pour garder tes idées, rappels et réflexions.</div>
-    </div>
-  </div>
-  <div class="note-layout">
-    <div>
-      <input class="input" id="noteTitle" placeholder="Titre de la note">
-      <div style="height:10px"></div>
-      <textarea class="textarea" id="noteBody" placeholder="Écris ici..."></textarea>
-      <div style="height:10px"></div>
-      <button class="btn" id="saveNoteBtn">Enregistrer la note</button>
-    </div>
-    <div>
-      <div class="eyebrow">Mes notes</div>
-      <div class="note-list" id="notesList"></div>
-    </div>
-  </div>
-</section>
+    <section class="panel card" id="apprentissage">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Découverte & apprentissage</div>
+          <div class="subtle">Une découverte du jour et un bouton pour en faire apparaître une autre.</div>
+        </div>
+        <button class="btn" id="newDiscoveryBtn">Nouvelle découverte</button>
+      </div>
+      <div class="daily-box" id="discoveryBox"></div>
+      <div class="grid-2" id="discoveryArchive"></div>
+    </section>
 
-  </div>  <script>
-fetch('citations.json')
-  .then(response => response.json())
-  .then(citations => {
-    const random = citations[Math.floor(Math.random() * citations.length)];
-    document.getElementById('quoteBox').innerHTML =
-      `${random.text}<small>— ${random.author}</small>`;
-  })
-  .catch(error => {
-    console.error("Erreur chargement citations :", error);
-  });
+    <section class="panel card" id="recettes">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Recettes</div>
+          <div class="subtle">Recherche rapide, recettes simples, économiques, et plus légères.</div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <input class="input" id="recipeSearch" placeholder="Rechercher : lunch, poulet, léger, économique...">
+        <select class="select" id="recipeFilter">
+          <option value="all">Toutes</option>
+          <option value="simple">Simples</option>
+          <option value="budget">Petit budget</option>
+          <option value="light">Plus légères</option>
+        </select>
+        <button class="btn" id="toggleRecipeFavs">Mes favoris</button>
+      </div>
+      <div class="grid-2" id="recipeGrid"></div>
+    </section>
+
+    <section class="panel card" id="musique">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Musique</div>
+          <div class="subtle">Leçons de drum et découverte musicale du jour.</div>
+        </div>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showMusicTab('lecons', this)">Leçons</button>
+        <button class="tab-btn" onclick="showMusicTab('ecoute', this)">Écoute</button>
+      </div>
+      <div id="musicLecons">
+        <div class="grid-2" id="musicLessonGrid"></div>
+      </div>
+      <div id="musicEcoute" style="display:none;">
+        <div class="daily-box" id="musicDiscoveryBox"></div>
+        <div class="grid-2" id="musicDiscoveriesGrid"></div>
+      </div>
+    </section>
+
+    <section class="panel card" id="moodboard">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Mood Board</div>
+          <div class="subtle">1 semaine, 1 mois, 1 an, avec questions-guides.</div>
+        </div>
+      </div>
+      <div class="mood-grid">
+        <div class="mood-box">
+          <h4>1 semaine</h4>
+          <ul>
+            <li>Comment je veux me sentir cette semaine ?</li>
+            <li>Quelle petite victoire me ferait du bien ?</li>
+            <li>Quelle habitude m'aiderait tout de suite ?</li>
+            <li>Qu'est-ce que je veux voir plus dans mes journées ?</li>
+          </ul>
+        </div>
+        <div class="mood-box">
+          <h4>1 mois</h4>
+          <ul>
+            <li>Quel changement concret je veux remarquer ?</li>
+            <li>Qu'est-ce que je veux bâtir ou apprendre ?</li>
+            <li>De quoi je serais fier dans 30 jours ?</li>
+            <li>Quels mots-clés représentent ce mois-là ?</li>
+          </ul>
+        </div>
+        <div class="mood-box">
+          <h4>1 an</h4>
+          <ul>
+            <li>Si l'année allait vraiment bien, qu'est-ce qui aurait changé ?</li>
+            <li>Quel genre de personne je veux devenir ?</li>
+            <li>Quelles sphères comptent le plus ?</li>
+            <li>Quels 3 grands thèmes guideront mon board ?</li>
+          </ul>
+        </div>
+        <div class="mood-box">
+          <h4>Comment le construire</h4>
+          <ul>
+            <li>Choisis 3 à 5 thèmes max pour garder ça clair.</li>
+            <li>Ajoute des images qui te font ressentir quelque chose.</li>
+            <li>Mets des mots courts : calme, discipline, énergie, famille, liberté.</li>
+            <li>Ajoute une action cette semaine et une ce mois-ci.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel card" id="notes">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Notes</div>
+          <div class="subtle">Un espace simple pour garder tes idées, rappels et réflexions.</div>
+        </div>
+      </div>
+      <div class="note-layout">
+        <div>
+          <input class="input" id="noteTitle" placeholder="Titre de la note">
+          <div style="height:10px"></div>
+          <textarea class="textarea" id="noteBody" placeholder="Écris ici..."></textarea>
+          <div style="height:10px"></div>
+          <button class="btn" id="saveNoteBtn">Enregistrer la note</button>
+        </div>
+        <div>
+          <div class="eyebrow">Mes notes</div>
+          <div class="note-list" id="notesList"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let jsonQuotes = [];
+    let currentQuote = null;
+    let showVideoFavsOnly = false;
+    let showRecipeFavsOnly = false;
 
     const routines = [
       { title: 'Routine focus & énergie', desc: '5 minutes pour respirer, choisir 1 priorité claire, boire de l’eau, puis lancer ta première action utile.' },
@@ -598,14 +629,14 @@ fetch('citations.json')
 
     function daySeed() {
       const now = new Date();
-      return `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
+      return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
     }
 
     function dayIndex(total) {
       const seed = daySeed();
       let sum = 0;
       for (let i = 0; i < seed.length; i++) sum += seed.charCodeAt(i);
-      return sum % total;
+      return total > 0 ? sum % total : 0;
     }
 
     function getJSON(key, fallback) {
@@ -621,8 +652,13 @@ fetch('citations.json')
       localStorage.setItem(key, JSON.stringify(value));
     }
 
-    function getFavs() { return getJSON('app-favs', []); }
-    function isFav(id) { return getFavs().includes(id); }
+    function getFavs() {
+      return getJSON('app-favs', []);
+    }
+
+    function isFav(id) {
+      return getFavs().includes(id);
+    }
 
     function toggleFav(id) {
       const favs = getFavs();
@@ -631,6 +667,130 @@ fetch('citations.json')
       renderVideos();
       renderActivities(window.currentActivityDay ?? new Date().getDay());
       renderRecipes();
+    }
+
+    function getCustomQuotes() {
+      return getJSON('app-custom-quotes', []);
+    }
+
+    function setCustomQuotes(quotes) {
+      setJSON('app-custom-quotes', quotes);
+    }
+
+    function getFavQuoteIds() {
+      return getJSON('app-fav-quotes', []);
+    }
+
+    function setFavQuoteIds(ids) {
+      setJSON('app-fav-quotes', ids);
+    }
+
+    function isFavQuote(id) {
+      return getFavQuoteIds().includes(id);
+    }
+
+    function getAllQuotes() {
+      return [...jsonQuotes, ...getCustomQuotes()];
+    }
+
+    function getDailyQuote() {
+      const quotes = getAllQuotes();
+      if (!quotes.length) {
+        return {
+          id: 'fallback-quote',
+          text: 'Discipline is the bridge between goals and accomplishment.',
+          author: 'Jim Rohn'
+        };
+      }
+      return quotes[dayIndex(quotes.length)];
+    }
+
+    function updateQuoteFavButton() {
+      const btn = document.getElementById('favQuoteBtn');
+      if (!btn || !currentQuote) return;
+      const fav = isFavQuote(currentQuote.id);
+      btn.textContent = fav ? '★ Favori' : '☆ Favori';
+      btn.classList.toggle('active', fav);
+    }
+
+    function renderQuoteFavs() {
+      const favIds = getFavQuoteIds();
+      const quotes = getAllQuotes().filter(q => favIds.includes(q.id));
+      const box = document.getElementById('quoteFavsBox');
+
+      if (!box) return;
+
+      box.innerHTML = quotes.length
+        ? quotes.map(q => `
+          <div class="note-item" style="margin-bottom:8px;">
+            <p style="margin-bottom:6px;">${q.text}</p>
+            <div class="meta">— ${q.author}</div>
+            <div style="height:8px"></div>
+            <button class="mini-btn" onclick="removeFavQuote('${q.id}')">Retirer</button>
+          </div>
+        `).join('')
+        : '<div class="empty">Aucune citation favorite pour l’instant.</div>';
+    }
+
+    function renderQuote() {
+      currentQuote = getDailyQuote();
+      document.getElementById('quoteBox').innerHTML =
+        `${currentQuote.text}<small>— ${currentQuote.author}</small>`;
+      updateQuoteFavButton();
+      renderQuoteFavs();
+    }
+
+    function toggleCurrentQuoteFav() {
+      if (!currentQuote) return;
+      const favs = getFavQuoteIds();
+      const next = favs.includes(currentQuote.id)
+        ? favs.filter(id => id !== currentQuote.id)
+        : [...favs, currentQuote.id];
+      setFavQuoteIds(next);
+      updateQuoteFavButton();
+      renderQuoteFavs();
+    }
+
+    function removeFavQuote(id) {
+      setFavQuoteIds(getFavQuoteIds().filter(qid => qid !== id));
+      updateQuoteFavButton();
+      renderQuoteFavs();
+    }
+
+    function toggleQuoteFavsBox() {
+      const box = document.getElementById('quoteFavsBox');
+      if (!box) return;
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+      renderQuoteFavs();
+    }
+
+    function toggleAddQuoteBox() {
+      const box = document.getElementById('addQuoteBox');
+      if (!box) return;
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function saveCustomQuote() {
+      const textEl = document.getElementById('newQuoteText');
+      const authorEl = document.getElementById('newQuoteAuthor');
+
+      const text = textEl.value.trim();
+      const author = authorEl.value.trim() || 'Auteur inconnu';
+
+      if (!text) return;
+
+      const customQuotes = getCustomQuotes();
+      customQuotes.push({
+        id: `cq-${Date.now()}`,
+        text,
+        author
+      });
+
+      setCustomQuotes(customQuotes);
+      textEl.value = '';
+      authorEl.value = '';
+      renderQuote();
+      toggleAddQuoteBox();
     }
 
     function makeCard(item, linkLabel) {
@@ -650,14 +810,6 @@ fetch('citations.json')
       `;
     }
 
-    let showVideoFavsOnly = false;
-    let showRecipeFavsOnly = false;
-
-    function renderQuote() {
-      const q = quotes[dayIndex(quotes.length)];
-      document.getElementById('quoteBox').innerHTML = `${q.text}<small>— ${q.author}</small>`;
-    }
-
     function renderRoutine() {
       const r = routines[dayIndex(routines.length)];
       document.getElementById('routineTitle').textContent = r.title;
@@ -667,83 +819,122 @@ fetch('citations.json')
     function renderVideos() {
       const q = (document.getElementById('videoSearch').value || '').trim().toLowerCase();
       const sort = document.getElementById('videoSort').value;
-      let list = videos.filter(v => (`${v.title} ${v.channel} ${v.desc} ${(v.tags||[]).join(' ')}`).toLowerCase().includes(q));
+      let list = videos.filter(v => (`${v.title} ${v.channel} ${v.desc} ${(v.tags || []).join(' ')}`).toLowerCase().includes(q));
+
       if (showVideoFavsOnly) list = list.filter(v => isFav(v.id));
-      if (sort === 'title') list.sort((a,b) => a.title.localeCompare(b.title, 'fr'));
-      if (sort === 'fav') list.sort((a,b) => Number(isFav(b.id)) - Number(isFav(a.id)));
-      document.getElementById('videoGrid').innerHTML = list.length ? list.map(v => makeCard(v, 'Voir')).join('') : '<div class="empty">Aucune vidéo trouvée.</div>';
+      if (sort === 'title') list.sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+      if (sort === 'fav') list.sort((a, b) => Number(isFav(b.id)) - Number(isFav(a.id)));
+
+      document.getElementById('videoGrid').innerHTML = list.length
+        ? list.map(v => makeCard(v, 'Voir')).join('')
+        : '<div class="empty">Aucune vidéo trouvée.</div>';
     }
 
     function renderActivities(day) {
       window.currentActivityDay = day;
       const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
-      document.getElementById('activityDayChips').innerHTML = dayNames.map((name, idx) => `<button class="chip ${idx===day?'active':''}" onclick="renderActivities(${idx})">${name}</button>`).join('');
+      document.getElementById('activityDayChips').innerHTML = dayNames.map((name, idx) =>
+        `<button class="chip ${idx === day ? 'active' : ''}" onclick="renderActivities(${idx})">${name}</button>`
+      ).join('');
+
       const list = activitiesByDay[day] || [];
-      document.getElementById('activityGrid').innerHTML = list.length ? list.map(item => `
-        <article class="item-card">
-          <div class="body">
-            <div class="title">${item.title}</div>
-            <div class="meta">Activité gratuite / simple</div>
-            <div class="desc">${item.desc}</div>
-            <div class="actions">
-              ${item.link ? `<a class="mini-btn" href="${item.link}" target="_blank" rel="noopener">Voir lien</a>` : ''}
-              <button class="fav-btn" onclick="toggleFav('${item.id}')">${isFav(item.id) ? '★ Favori' : '☆ Favori'}</button>
+      document.getElementById('activityGrid').innerHTML = list.length
+        ? list.map(item => `
+          <article class="item-card">
+            <div class="body">
+              <div class="title">${item.title}</div>
+              <div class="meta">Activité gratuite / simple</div>
+              <div class="desc">${item.desc}</div>
+              <div class="actions">
+                ${item.link ? `<a class="mini-btn" href="${item.link}" target="_blank" rel="noopener">Voir lien</a>` : ''}
+                <button class="fav-btn" onclick="toggleFav('${item.id}')">${isFav(item.id) ? '★ Favori' : '☆ Favori'}</button>
+              </div>
             </div>
-          </div>
-        </article>
-      `).join('') : '<div class="empty">Aucune activité disponible.</div>';
+          </article>
+        `).join('')
+        : '<div class="empty">Aucune activité disponible.</div>';
     }
 
     function renderDiscovery() {
       const today = discoveries[dayIndex(discoveries.length)];
-      document.getElementById('discoveryBox').innerHTML = `<strong>${today.type} — ${today.title}</strong><div class="subtle">${today.text}</div>`;
-      document.getElementById('discoveryArchive').innerHTML = discoveries.filter(d => d.id !== today.id).slice(0,4).map(d => `
-        <article class="item-card">
-          <div class="body">
-            <div class="meta">${d.type}</div>
-            <div class="title">${d.title}</div>
-            <div class="desc">${d.text}</div>
-          </div>
-        </article>
-      `).join('');
+      document.getElementById('discoveryBox').innerHTML =
+        `<strong>${today.type} — ${today.title}</strong><div class="subtle">${today.text}</div>`;
+
+      document.getElementById('discoveryArchive').innerHTML = discoveries
+        .filter(d => d.id !== today.id)
+        .slice(0, 4)
+        .map(d => `
+          <article class="item-card">
+            <div class="body">
+              <div class="meta">${d.type}</div>
+              <div class="title">${d.title}</div>
+              <div class="desc">${d.text}</div>
+            </div>
+          </article>
+        `).join('');
     }
 
     function showNewDiscovery() {
       const d = discoveries[Math.floor(Math.random() * discoveries.length)];
-      document.getElementById('discoveryBox').innerHTML = `<strong>${d.type} — ${d.title}</strong><div class="subtle">${d.text}</div>`;
+      document.getElementById('discoveryBox').innerHTML =
+        `<strong>${d.type} — ${d.title}</strong><div class="subtle">${d.text}</div>`;
     }
 
     function renderRecipes() {
       const q = (document.getElementById('recipeSearch').value || '').trim().toLowerCase();
       const filter = document.getElementById('recipeFilter').value;
-      let list = recipes.filter(r => (`${r.title} ${r.desc} ${r.tags.join(' ')}`).toLowerCase().includes(q) && (filter === 'all' || r.tags.includes(filter)));
+
+      let list = recipes.filter(r =>
+        (`${r.title} ${r.desc} ${r.tags.join(' ')}`).toLowerCase().includes(q) &&
+        (filter === 'all' || r.tags.includes(filter))
+      );
+
       if (showRecipeFavsOnly) list = list.filter(r => isFav(r.id));
-      document.getElementById('recipeGrid').innerHTML = list.length ? list.map(r => makeCard(r, 'Voir suggestion')).join('') : '<div class="empty">Aucune recette trouvée.</div>';
+
+      document.getElementById('recipeGrid').innerHTML = list.length
+        ? list.map(r => makeCard(r, 'Voir suggestion')).join('')
+        : '<div class="empty">Aucune recette trouvée.</div>';
     }
 
     function renderMusic() {
-      document.getElementById('musicLessonGrid').innerHTML = musicLessons.map(item => makeCard(item, 'Voir leçon')).join('');
+      document.getElementById('musicLessonGrid').innerHTML =
+        musicLessons.map(item => makeCard(item, 'Voir leçon')).join('');
+
       const daily = musicDiscoveries[dayIndex(musicDiscoveries.length)];
-      document.getElementById('musicDiscoveryBox').innerHTML = `<strong>${daily.title}</strong><div class="subtle">${daily.desc}</div><div class="actions" style="margin-top:10px;"><a class="mini-btn" href="${daily.url}" target="_blank" rel="noopener">Explorer cette vibe</a></div>`;
-      document.getElementById('musicDiscoveriesGrid').innerHTML = musicDiscoveries.filter(item => item.id !== daily.id).map(item => `
-        <article class="item-card">
-          <div class="body">
-            <div class="title">${item.title}</div>
-            <div class="desc">${item.desc}</div>
-            <div class="actions"><a class="mini-btn" href="${item.url}" target="_blank" rel="noopener">Explorer</a></div>
-          </div>
-        </article>
-      `).join('');
+      document.getElementById('musicDiscoveryBox').innerHTML =
+        `<strong>${daily.title}</strong><div class="subtle">${daily.desc}</div><div class="actions" style="margin-top:10px;"><a class="mini-btn" href="${daily.url}" target="_blank" rel="noopener">Explorer cette vibe</a></div>`;
+
+      document.getElementById('musicDiscoveriesGrid').innerHTML = musicDiscoveries
+        .filter(item => item.id !== daily.id)
+        .map(item => `
+          <article class="item-card">
+            <div class="body">
+              <div class="title">${item.title}</div>
+              <div class="desc">${item.desc}</div>
+              <div class="actions"><a class="mini-btn" href="${item.url}" target="_blank" rel="noopener">Explorer</a></div>
+            </div>
+          </article>
+        `).join('');
     }
 
-    function getNotes() { return getJSON('app-notes', []); }
+    function getNotes() {
+      return getJSON('app-notes', []);
+    }
 
     function saveNote() {
       const title = document.getElementById('noteTitle').value.trim();
       const body = document.getElementById('noteBody').value.trim();
+
       if (!title && !body) return;
+
       const notes = getNotes();
-      notes.unshift({ id: `note-${Date.now()}`, title: title || 'Note sans titre', body, createdAt: new Date().toLocaleString('fr-CA') });
+      notes.unshift({
+        id: `note-${Date.now()}`,
+        title: title || 'Note sans titre',
+        body,
+        createdAt: new Date().toLocaleString('fr-CA')
+      });
+
       setJSON('app-notes', notes);
       document.getElementById('noteTitle').value = '';
       document.getElementById('noteBody').value = '';
@@ -757,28 +948,65 @@ fetch('citations.json')
 
     function renderNotes() {
       const notes = getNotes();
-      document.getElementById('notesList').innerHTML = notes.length ? notes.map(note => `
-        <div class="note-item">
-          <h4>${note.title}</h4>
-          <p>${note.body || ''}</p>
-          <div class="meta">${note.createdAt}</div>
-          <div style="height:8px"></div>
-          <button class="mini-btn" onclick="deleteNote('${note.id}')">Supprimer</button>
-        </div>
-      `).join('') : '<div class="empty">Aucune note pour l’instant.</div>';
+      document.getElementById('notesList').innerHTML = notes.length
+        ? notes.map(note => `
+          <div class="note-item">
+            <h4>${note.title}</h4>
+            <p>${note.body || ''}</p>
+            <div class="meta">${note.createdAt}</div>
+            <div style="height:8px"></div>
+            <button class="mini-btn" onclick="deleteNote('${note.id}')">Supprimer</button>
+          </div>
+        `).join('')
+        : '<div class="empty">Aucune note pour l’instant.</div>';
     }
 
     function showPanel(id) {
-      document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', panel.id === id));
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.trim().toLowerCase().includes(id === 'apprentissage' ? 'découverte' : id === 'activites' ? 'activités' : id === 'moodboard' ? 'mood board' : id)));
+      document.querySelectorAll('.panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === id);
+      });
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        const label = btn.textContent.trim().toLowerCase();
+        const target =
+          id === 'apprentissage' ? 'découverte' :
+          id === 'activites' ? 'activités' :
+          id === 'moodboard' ? 'mood board' :
+          id;
+        btn.classList.toggle('active', label.includes(target));
+      });
+
       document.querySelector('.app').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function showMusicTab(tab, btn) {
       document.getElementById('musicLecons').style.display = tab === 'lecons' ? 'block' : 'none';
       document.getElementById('musicEcoute').style.display = tab === 'ecoute' ? 'block' : 'none';
+
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
+    }
+
+    function initQuotes() {
+      fetch('citations.json')
+        .then(response => response.json())
+        .then(citations => {
+          jsonQuotes = citations.map((q, i) => ({
+            id: q.id || `jq-${i}`,
+            text: q.text,
+            author: q.author
+          }));
+          renderQuote();
+        })
+        .catch(error => {
+          console.error('Erreur chargement citations :', error);
+          jsonQuotes = [{
+            id: 'fallback-jim-rohn',
+            text: 'Discipline is the bridge between goals and accomplishment.',
+            author: 'Jim Rohn'
+          }];
+          renderQuote();
+        });
     }
 
     document.getElementById('videoSearch').addEventListener('input', renderVideos);
@@ -799,14 +1027,19 @@ fetch('citations.json')
 
     document.getElementById('newDiscoveryBtn').addEventListener('click', showNewDiscovery);
     document.getElementById('saveNoteBtn').addEventListener('click', saveNote);
+    document.getElementById('favQuoteBtn').addEventListener('click', toggleCurrentQuoteFav);
+    document.getElementById('showQuoteFavsBtn').addEventListener('click', toggleQuoteFavsBox);
+    document.getElementById('toggleAddQuoteBtn').addEventListener('click', toggleAddQuoteBox);
+    document.getElementById('saveQuoteBtn').addEventListener('click', saveCustomQuote);
 
     window.toggleFav = toggleFav;
     window.renderActivities = renderActivities;
     window.deleteNote = deleteNote;
     window.showPanel = showPanel;
     window.showMusicTab = showMusicTab;
+    window.removeFavQuote = removeFavQuote;
 
-    renderQuote();
+    initQuotes();
     renderRoutine();
     renderVideos();
     renderActivities(new Date().getDay());
@@ -814,5 +1047,6 @@ fetch('citations.json')
     renderRecipes();
     renderMusic();
     renderNotes();
-  </script></body>
+  </script>
+</body>
 </html>
