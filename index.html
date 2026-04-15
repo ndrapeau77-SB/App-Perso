@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -334,6 +335,12 @@
       .nav-btn { min-height: 82px; }
     }
   </style>
+  <link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#06100c" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Mon App Perso" />
+<link rel="apple-touch-icon" href="image_pastille.png" />
 </head>
 <body>
   <div class="app">
@@ -1048,5 +1055,13 @@
     renderMusic();
     renderNotes();
   </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js')
+        .catch(err => console.log('SW non enregistré:', err));
+    });
+  }
+</script>
 </body>
 </html>
