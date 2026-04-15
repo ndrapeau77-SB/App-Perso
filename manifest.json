@@ -3,8 +3,8 @@
   "short_name": "Mon App",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#06100c",
-  "theme_color": "#06100c",
+  "background_color": "#071b1a",
+  "theme_color": "#071b1a",
   "icons": [
     {
       "src": "image_pastille.png",
