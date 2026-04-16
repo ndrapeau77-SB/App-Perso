@@ -90,11 +90,9 @@
     }
 
     .toolbar-top,
-    .editor-actions,
     .filter-row,
     .inline-row,
-    .category-add,
-    .import-export-row {
+    .category-add {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -102,13 +100,6 @@
 
     .toolbar-top {
       margin-top: 14px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .import-export-row {
-      margin-top: 12px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
@@ -175,10 +166,6 @@
       background: rgba(216, 106, 106, 0.12);
       color: #ffd2d2;
       border-color: rgba(216,106,106,0.28);
-    }
-
-    .btn-soft {
-      background: rgba(212, 175, 55, 0.08);
     }
 
     .small {
@@ -457,13 +444,7 @@
         flex-wrap: wrap;
       }
 
-      .import-export-row {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .toolbar-top .btn,
-      .import-export-row .btn {
+      .toolbar-top .btn {
         width: auto;
       }
     }
@@ -480,13 +461,7 @@
         <button class="btn btn-primary" id="newNoteBtn">Nouvelle note</button>
         <button class="btn" id="newListBtn">Nouvelle liste</button>
         <a href="index.html" class="btn btn-home">← Accueil</a>
-        <button class="btn btn-soft" id="exportBtn">Exporter JSON</button>
-      </div>
-
-      <div class="import-export-row">
-        <button class="btn btn-soft" id="importBtn">Importer JSON</button>
         <button class="btn" id="resetFiltersBtn">Réinitialiser filtres</button>
-        <input type="file" id="importFile" accept=".json,application/json" class="hidden">
       </div>
     </section>
 
@@ -610,9 +585,6 @@
     const addCategoryBtn = document.getElementById("addCategoryBtn");
     const saveBtn = document.getElementById("saveBtn");
     const cancelEditBtn = document.getElementById("cancelEditBtn");
-    const exportBtn = document.getElementById("exportBtn");
-    const importBtn = document.getElementById("importBtn");
-    const importFile = document.getElementById("importFile");
     const resetFiltersBtn = document.getElementById("resetFiltersBtn");
 
     let currentType = "note";
@@ -721,54 +693,53 @@
 
       notes.forEach(note => {
         const categoryClass = normalizeCategoryClass(note.category);
-
         const card = document.createElement("article");
-        card.className = \`note-card \${categoryClass}\`;
+        card.className = `note-card ${categoryClass}`;
 
         const itemsHtml = note.type === "list"
-          ? \`
+          ? `
             <ul class="checklist">
-              \${(note.items || []).map(item => \`
+              ${(note.items || []).map(item => `
                 <li>
                   <input
                     type="checkbox"
-                    \${item.done ? "checked" : ""}
-                    onchange="toggleChecklistItem('\${note.id}', '\${item.id}')"
+                    ${item.done ? "checked" : ""}
+                    onchange="toggleChecklistItem('${note.id}', '${item.id}')"
                   />
-                  <span class="\${item.done ? "done" : ""}">\${escapeHtml(item.text)}</span>
+                  <span class="${item.done ? "done" : ""}">${escapeHtml(item.text)}</span>
                 </li>
-              \`).join("")}
+              `).join("")}
             </ul>
-          \`
+          `
           : "";
 
-        card.innerHTML = \`
+        card.innerHTML = `
           <div class="note-top">
-            <h3 class="note-title">\${escapeHtml(note.title || "(Sans titre)")}</h3>
+            <h3 class="note-title">${escapeHtml(note.title || "(Sans titre)")}</h3>
             <div class="note-actions">
-              <button class="btn" onclick="togglePinned('\${note.id}')">\${note.pinned ? "📌" : "📍"}</button>
-              <button class="btn" onclick="toggleFavorite('\${note.id}')">\${note.favorite ? "⭐" : "☆"}</button>
+              <button class="btn" onclick="togglePinned('${note.id}')">${note.pinned ? "📌" : "📍"}</button>
+              <button class="btn" onclick="toggleFavorite('${note.id}')">${note.favorite ? "⭐" : "☆"}</button>
             </div>
           </div>
 
           <div class="note-badges">
-            <span class="badge \${categoryClass}">\${escapeHtml(note.category)}</span>
-            <span class="badge type">\${note.type === "list" ? "Liste" : "Note"}</span>
-            \${note.favorite ? '<span class="badge favorite">Favori</span>' : ""}
-            \${note.pinned ? '<span class="badge pinned">Épinglée</span>' : ""}
+            <span class="badge ${categoryClass}">${escapeHtml(note.category)}</span>
+            <span class="badge type">${note.type === "list" ? "Liste" : "Note"}</span>
+            ${note.favorite ? '<span class="badge favorite">Favori</span>' : ""}
+            ${note.pinned ? '<span class="badge pinned">Épinglée</span>' : ""}
           </div>
 
-          \${note.content ? \`<div class="note-content">\${escapeHtml(note.content)}</div>\` : ""}
-          \${itemsHtml}
+          ${note.content ? `<div class="note-content">${escapeHtml(note.content)}</div>` : ""}
+          ${itemsHtml}
 
           <div class="note-footer">
-            <div class="note-date">Modifié : \${formatDate(note.updatedAt)}</div>
+            <div class="note-date">Modifié : ${formatDate(note.updatedAt)}</div>
             <div class="note-actions">
-              <button class="btn" onclick="editNote('\${note.id}')">Modifier</button>
-              <button class="btn btn-danger" onclick="deleteNote('\${note.id}')">Supprimer</button>
+              <button class="btn" onclick="editNote('${note.id}')">Modifier</button>
+              <button class="btn btn-danger" onclick="deleteNote('${note.id}')">Supprimer</button>
             </div>
           </div>
-        \`;
+        `;
 
         notesContainer.appendChild(card);
       });
@@ -828,7 +799,7 @@
 
         if (currentType === "list") {
           const rawItems = listItems.value
-            .split("\\n")
+            .split("\n")
             .map(item => item.trim())
             .filter(Boolean);
 
@@ -842,7 +813,7 @@
           note.items = rawItems.map(text => {
             const existing = oldItems.find(item => item.text === text);
             return existing || {
-              id: \`item_\${Date.now()}_\${Math.random().toString(16).slice(2, 8)}\`,
+              id: `item_${Date.now()}_${Math.random().toString(16).slice(2, 8)}`,
               text,
               done: false,
               createdAt: new Date().toISOString(),
@@ -882,7 +853,7 @@
       setEditorMode(note.type);
 
       if (note.type === "list") {
-        listItems.value = (note.items || []).map(item => item.text).join("\\n");
+        listItems.value = (note.items || []).map(item => item.text).join("\n");
       } else {
         listItems.value = "";
       }
@@ -918,33 +889,6 @@
     async function toggleChecklistItem(noteId, itemId) {
       await AppData.toggleChecklistItem(noteId, itemId);
       await renderNotes();
-    }
-
-    async function exportJson() {
-      await AppData.exportData("mon-app-backup.json");
-      showToast("Export lancé");
-    }
-
-    async function importJson(file) {
-      if (!file) return;
-
-      const merge = confirm(
-        "OK = fusionner avec les données existantes\\nAnnuler = remplacer les données existantes"
-      );
-
-      try {
-        await AppData.importDataFromFile(file, {
-          mode: merge ? "merge" : "replace"
-        });
-
-        await populateCategorySelectors();
-        await resetEditor();
-        await renderNotes();
-        importFile.value = "";
-        showToast("Import réussi");
-      } catch (error) {
-        alert(error.message);
-      }
     }
 
     function resetFilters() {
@@ -991,13 +935,6 @@
     filterCategory.addEventListener("change", renderNotes);
     filterType.addEventListener("change", renderNotes);
     filterFavorites.addEventListener("change", renderNotes);
-
-    exportBtn.addEventListener("click", exportJson);
-    importBtn.addEventListener("click", () => importFile.click());
-    importFile.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      importJson(file);
-    });
     resetFiltersBtn.addEventListener("click", resetFilters);
 
     window.editNote = editNote;
