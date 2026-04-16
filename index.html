@@ -17,7 +17,7 @@
     :root {
       --bg-top: #031313;
       --bg-bottom: #082120;
-      --panel: rgba(4, 37, 34, 0.94);
+      --panel: rgba(4, 37, 34, 0.96);
       --panel-2: rgba(7, 28, 27, 0.82);
       --border: rgba(170, 142, 65, 0.52);
       --accent: #d9b24b;
@@ -106,27 +106,26 @@
       letter-spacing: 3px;
       color: var(--muted);
       text-transform: uppercase;
-      margin: 0 0 8px;
+      margin: 0 0 14px;
     }
 
-    .routine-title {
-      font-size: 1.8rem;
-      line-height: 1.02;
-      font-weight: 700;
-      color: var(--accent);
-      margin: 0 0 12px;
-    }
-
-    .routine-text {
-      font-size: 1rem;
-      line-height: 1.5;
+    .quote-text {
+      font-size: 1.05rem;
+      line-height: 1.6;
       color: #f0eee8;
+      margin: 0 0 14px;
+    }
+
+    .quote-author {
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 600;
       margin: 0;
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
       margin-top: 4px;
     }
@@ -135,7 +134,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100px;
+      min-height: 108px;
       text-align: center;
       border-radius: 24px;
       border: 1px solid rgba(170, 142, 65, 0.56);
@@ -147,15 +146,11 @@
       padding: 14px 12px;
       box-shadow: 0 10px 24px rgba(0,0,0,0.12);
       transition: transform 0.12s ease, background 0.12s ease;
+      width: 100%;
     }
 
     .menu-card:active {
       transform: scale(0.985);
-    }
-
-    .menu-card.large {
-      grid-column: span 2;
-      min-height: 92px;
     }
 
     .install-banner {
@@ -184,16 +179,8 @@
         max-width: 640px;
       }
 
-      .pill-btn {
-        width: auto;
-      }
-
-      .action-row {
-        display: flex;
-      }
-
-      .action-row .pill-btn {
-        flex: 1;
+      .menu-card {
+        min-height: 118px;
       }
     }
   </style>
@@ -209,11 +196,11 @@
       </div>
 
       <div class="routine-box">
-        <p class="routine-label">Routine du jour</p>
-        <h1 class="routine-title" id="routineTitle">Citation du jour</h1>
-        <p class="routine-text" id="quoteText">
+        <p class="routine-label">Citation du jour</p>
+        <p class="quote-text" id="quoteText">
           Success doesn’t just find you. You have to go out and get it.
         </p>
+        <p class="quote-author" id="quoteAuthor">— Inconnu</p>
       </div>
     </section>
 
@@ -222,8 +209,8 @@
       <a href="decouverte.html" class="menu-card">Découverte / apprentissage</a>
       <a href="musique.html" class="menu-card">Musique</a>
       <a href="notes.html" class="menu-card">Notes</a>
-      <a href="objectifs.html" class="menu-card large">Objectifs</a>
-      <a href="moodboard.html" class="menu-card large">Mood board</a>
+      <a href="objectifs.html" class="menu-card">Objectifs</a>
+      <a href="moodboard.html" class="menu-card">Mood board</a>
     </section>
 
     <div class="install-banner" id="installBanner">
@@ -236,19 +223,23 @@
     const defaultQuotes = [
       {
         title: "Citation du jour",
-        text: "Success doesn’t just find you. You have to go out and get it."
+        text: "Success doesn’t just find you. You have to go out and get it.",
+        author: "Inconnu"
       },
       {
-        title: "Focus",
-        text: "Ce que tu fais souvent finit par devenir ce que tu es."
+        title: "Citation du jour",
+        text: "Ce que tu fais souvent finit par devenir ce que tu es.",
+        author: "Inconnu"
       },
       {
-        title: "Discipline",
-        text: "Tu n’as pas besoin d’attendre d’être motivé pour commencer."
+        title: "Citation du jour",
+        text: "Tu n’as pas besoin d’attendre d’être motivé pour commencer.",
+        author: "Inconnu"
       },
       {
-        title: "Mentalité",
-        text: "If you really want to do something, you'll find a way. If you don't, you'll find an excuse."
+        title: "Citation du jour",
+        text: "If you really want to do something, you'll find a way. If you don't, you'll find an excuse.",
+        author: "Jim Rohn"
       }
     ];
 
@@ -263,11 +254,15 @@
         if (Array.isArray(data) && data.length) {
           quotesData = data.map(item => {
             if (typeof item === "string") {
-              return { title: "Citation", text: item };
+              return {
+                text: item,
+                author: "Inconnu"
+              };
             }
+
             return {
-              title: item.title || "Citation du jour",
-              text: item.text || item.quote || "Contenu indisponible."
+              text: item.text || item.quote || "Contenu indisponible.",
+              author: item.author || item.auteur || "Inconnu"
             };
           });
         }
@@ -279,8 +274,8 @@
     function showRandomQuote() {
       if (!quotesData.length) return;
       const random = quotesData[Math.floor(Math.random() * quotesData.length)];
-      document.getElementById("routineTitle").textContent = random.title || "Citation du jour";
       document.getElementById("quoteText").textContent = random.text || "";
+      document.getElementById("quoteAuthor").textContent = `— ${random.author || "Inconnu"}`;
     }
 
     document.getElementById("quoteBtn").addEventListener("click", showRandomQuote);
