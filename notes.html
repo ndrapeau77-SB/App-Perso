@@ -51,7 +51,7 @@
     }
 
     body {
-      padding: 16px;
+      padding: 12px;
     }
 
     .app {
@@ -64,10 +64,10 @@
     .filters {
       background: linear-gradient(180deg, rgba(20,32,31,0.95), rgba(18,28,27,0.95));
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 18px;
+      border-radius: 22px;
+      padding: 16px;
       box-shadow: var(--shadow);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .topbar {
@@ -102,6 +102,16 @@
 
     .toolbar-top {
       margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .import-export-row {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
 
     input[type="text"],
@@ -133,14 +143,17 @@
       background: var(--panel-2);
       color: var(--text);
       border-radius: 14px;
-      padding: 12px 16px;
-      font-size: 0.98rem;
+      padding: 12px 14px;
+      font-size: 0.96rem;
       cursor: pointer;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       transition: transform 0.12s ease, background 0.12s ease;
+      min-height: 48px;
+      width: 100%;
+      text-align: center;
     }
 
     .btn:active {
@@ -260,7 +273,7 @@
 
     .note-title {
       margin: 0;
-      font-size: 1.18rem;
+      font-size: 1.12rem;
       line-height: 1.25;
       color: #fff9eb;
       word-break: break-word;
@@ -383,6 +396,12 @@
       flex-wrap: wrap;
     }
 
+    .note-actions .btn {
+      width: auto;
+      min-width: 46px;
+      padding: 10px 12px;
+    }
+
     .empty-state {
       text-align: center;
       background: rgba(20,32,31,0.82);
@@ -421,12 +440,31 @@
     }
 
     @media (min-width: 760px) {
+      body {
+        padding: 16px;
+      }
+
       .grid-2 {
         grid-template-columns: 1fr 1fr;
       }
 
       .notes-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .toolbar-top {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .import-export-row {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .toolbar-top .btn,
+      .import-export-row .btn {
+        width: auto;
       }
     }
   </style>
@@ -442,11 +480,12 @@
         <button class="btn btn-primary" id="newNoteBtn">Nouvelle note</button>
         <button class="btn" id="newListBtn">Nouvelle liste</button>
         <a href="index.html" class="btn btn-home">← Accueil</a>
+        <button class="btn btn-soft" id="exportBtn">Exporter JSON</button>
       </div>
 
-      <div class="import-export-row" style="margin-top: 12px;">
-        <button class="btn btn-soft" id="exportBtn">Exporter JSON</button>
+      <div class="import-export-row">
         <button class="btn btn-soft" id="importBtn">Importer JSON</button>
+        <button class="btn" id="resetFiltersBtn">Réinitialiser filtres</button>
         <input type="file" id="importFile" accept=".json,application/json" class="hidden">
       </div>
     </section>
@@ -574,6 +613,7 @@
     const exportBtn = document.getElementById("exportBtn");
     const importBtn = document.getElementById("importBtn");
     const importFile = document.getElementById("importFile");
+    const resetFiltersBtn = document.getElementById("resetFiltersBtn");
 
     let currentType = "note";
 
@@ -683,52 +723,52 @@
         const categoryClass = normalizeCategoryClass(note.category);
 
         const card = document.createElement("article");
-        card.className = `note-card ${categoryClass}`;
+        card.className = \`note-card \${categoryClass}\`;
 
         const itemsHtml = note.type === "list"
-          ? `
+          ? \`
             <ul class="checklist">
-              ${(note.items || []).map(item => `
+              \${(note.items || []).map(item => \`
                 <li>
                   <input
                     type="checkbox"
-                    ${item.done ? "checked" : ""}
-                    onchange="toggleChecklistItem('${note.id}', '${item.id}')"
+                    \${item.done ? "checked" : ""}
+                    onchange="toggleChecklistItem('\${note.id}', '\${item.id}')"
                   />
-                  <span class="${item.done ? "done" : ""}">${escapeHtml(item.text)}</span>
+                  <span class="\${item.done ? "done" : ""}">\${escapeHtml(item.text)}</span>
                 </li>
-              `).join("")}
+              \`).join("")}
             </ul>
-          `
+          \`
           : "";
 
-        card.innerHTML = `
+        card.innerHTML = \`
           <div class="note-top">
-            <h3 class="note-title">${escapeHtml(note.title || "(Sans titre)")}</h3>
+            <h3 class="note-title">\${escapeHtml(note.title || "(Sans titre)")}</h3>
             <div class="note-actions">
-              <button class="btn" onclick="togglePinned('${note.id}')">${note.pinned ? "📌" : "📍"}</button>
-              <button class="btn" onclick="toggleFavorite('${note.id}')">${note.favorite ? "⭐" : "☆"}</button>
+              <button class="btn" onclick="togglePinned('\${note.id}')">\${note.pinned ? "📌" : "📍"}</button>
+              <button class="btn" onclick="toggleFavorite('\${note.id}')">\${note.favorite ? "⭐" : "☆"}</button>
             </div>
           </div>
 
           <div class="note-badges">
-            <span class="badge ${categoryClass}">${escapeHtml(note.category)}</span>
-            <span class="badge type">${note.type === "list" ? "Liste" : "Note"}</span>
-            ${note.favorite ? '<span class="badge favorite">Favori</span>' : ""}
-            ${note.pinned ? '<span class="badge pinned">Épinglée</span>' : ""}
+            <span class="badge \${categoryClass}">\${escapeHtml(note.category)}</span>
+            <span class="badge type">\${note.type === "list" ? "Liste" : "Note"}</span>
+            \${note.favorite ? '<span class="badge favorite">Favori</span>' : ""}
+            \${note.pinned ? '<span class="badge pinned">Épinglée</span>' : ""}
           </div>
 
-          ${note.content ? `<div class="note-content">${escapeHtml(note.content)}</div>` : ""}
-          ${itemsHtml}
+          \${note.content ? \`<div class="note-content">\${escapeHtml(note.content)}</div>\` : ""}
+          \${itemsHtml}
 
           <div class="note-footer">
-            <div class="note-date">Modifié : ${formatDate(note.updatedAt)}</div>
+            <div class="note-date">Modifié : \${formatDate(note.updatedAt)}</div>
             <div class="note-actions">
-              <button class="btn" onclick="editNote('${note.id}')">Modifier</button>
-              <button class="btn btn-danger" onclick="deleteNote('${note.id}')">Supprimer</button>
+              <button class="btn" onclick="editNote('\${note.id}')">Modifier</button>
+              <button class="btn btn-danger" onclick="deleteNote('\${note.id}')">Supprimer</button>
             </div>
           </div>
-        `;
+        \`;
 
         notesContainer.appendChild(card);
       });
@@ -788,7 +828,7 @@
 
         if (currentType === "list") {
           const rawItems = listItems.value
-            .split("\n")
+            .split("\\n")
             .map(item => item.trim())
             .filter(Boolean);
 
@@ -802,7 +842,7 @@
           note.items = rawItems.map(text => {
             const existing = oldItems.find(item => item.text === text);
             return existing || {
-              id: `item_${Date.now()}_${Math.random().toString(16).slice(2, 8)}`,
+              id: \`item_\${Date.now()}_\${Math.random().toString(16).slice(2, 8)}\`,
               text,
               done: false,
               createdAt: new Date().toISOString(),
@@ -842,7 +882,7 @@
       setEditorMode(note.type);
 
       if (note.type === "list") {
-        listItems.value = (note.items || []).map(item => item.text).join("\n");
+        listItems.value = (note.items || []).map(item => item.text).join("\\n");
       } else {
         listItems.value = "";
       }
@@ -889,7 +929,7 @@
       if (!file) return;
 
       const merge = confirm(
-        "OK = fusionner avec les données existantes\nAnnuler = remplacer les données existantes"
+        "OK = fusionner avec les données existantes\\nAnnuler = remplacer les données existantes"
       );
 
       try {
@@ -905,6 +945,14 @@
       } catch (error) {
         alert(error.message);
       }
+    }
+
+    function resetFilters() {
+      searchInput.value = "";
+      filterCategory.value = "all";
+      filterType.value = "all";
+      filterFavorites.value = "all";
+      renderNotes();
     }
 
     async function applyUrlFilters() {
@@ -950,6 +998,7 @@
       const file = e.target.files[0];
       importJson(file);
     });
+    resetFiltersBtn.addEventListener("click", resetFilters);
 
     window.editNote = editNote;
     window.deleteNote = deleteNote;
