@@ -13,6 +13,9 @@
   }
 
   function uid(prefix = "id") {
+    if (typeof crypto !== "undefined" && crypto.randomUUID) {
+      return `${prefix}_${crypto.randomUUID()}`;
+    }
     return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2, 10)}`;
   }
 
@@ -40,13 +43,24 @@
     return Array.isArray(value) ? value : fallback;
   }
 
+  function slugify(value) {
+    return normalizeString(value)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
   function createDefaultData() {
+    const timestamp = nowIso();
+
     return {
       schemaVersion: APP_SCHEMA_VERSION,
       meta: {
         appName: "Mon App Perso",
-        createdAt: nowIso(),
-        updatedAt: nowIso()
+        createdAt: timestamp,
+        updatedAt: timestamp
       },
       settings: {
         theme: "dark",
@@ -59,46 +73,38 @@
           name: "Travail",
           slug: "travail",
           system: true,
-          createdAt: nowIso(),
-          updatedAt: nowIso()
+          createdAt: timestamp,
+          updatedAt: timestamp
         },
         {
           id: uid("cat"),
           name: "Perso",
           slug: "perso",
           system: true,
-          createdAt: nowIso(),
-          updatedAt: nowIso()
+          createdAt: timestamp,
+          updatedAt: timestamp
         },
         {
           id: uid("cat"),
           name: "Autres",
           slug: "autres",
           system: true,
-          createdAt: nowIso(),
-          updatedAt: nowIso()
+          createdAt: timestamp,
+          updatedAt: timestamp
         }
       ]
     };
   }
 
-  function slugify(value) {
-    return normalizeString(value)
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-  }
-
   function normalizeChecklistItem(item) {
     if (!isPlainObject(item)) {
+      const timestamp = nowIso();
       return {
         id: uid("item"),
         text: "",
         done: false,
-        createdAt: nowIso(),
-        updatedAt: nowIso()
+        createdAt: timestamp,
+        updatedAt: timestamp
       };
     }
 
@@ -118,14 +124,15 @@
   function normalizeCategory(category) {
     if (!isPlainObject(category)) {
       const name = normalizeString(category, "Sans catégorie");
-      const createdAt = nowIso();
+      const timestamp = nowIso();
+
       return {
         id: uid("cat"),
         name,
         slug: slugify(name) || uid("slug"),
         system: false,
-        createdAt,
-        updatedAt: createdAt
+        createdAt: timestamp,
+        updatedAt: timestamp
       };
     }
 
@@ -144,11 +151,10 @@
   }
 
   function normalizeNote(note, categories) {
-    const fallbackCategoryName =
-      categories[0]?.name || "Autres";
+    const fallbackCategoryName = categories[0]?.name || "Autres";
 
     if (!isPlainObject(note)) {
-      const createdAt = nowIso();
+      const timestamp = nowIso();
       return {
         id: uid("note"),
         type: "note",
@@ -160,8 +166,8 @@
         archived: false,
         tags: [],
         items: [],
-        createdAt,
-        updatedAt: createdAt
+        createdAt: timestamp,
+        updatedAt: timestamp
       };
     }
 
@@ -178,20 +184,47 @@
       favorite: normalizeBoolean(note.favorite),
       pinned: normalizeBoolean(note.pinned),
       archived: normalizeBoolean(note.archived),
-      tags: normalizeArray(note.tags, []).map(tag => normalizeString(tag)).filter(Boolean),
+      tags: normalizeArray(note.tags, [])
+        .map(tag => normalizeString(tag))
+        .filter(Boolean),
       items: normalizeArray(note.items, []).map(normalizeChecklistItem),
       createdAt,
       updatedAt
     };
   }
 
+  function ensureSystemCategories(data) {
+    const required = ["Travail", "Perso", "Autres"];
+    const existingNames = new Set(data.categories.map(cat => cat.name.toLowerCase()));
+    const timestamp = nowIso();
+
+    required.forEach(name => {
+      if (!existingNames.has(name.toLowerCase())) {
+        data.categories.push({
+          id: uid("cat"),
+          name,
+          slug: slugify(name),
+          system: true,
+          createdAt: timestamp,
+          updatedAt: timestamp
+        });
+      }
+    });
+
+    return data;
+  }
+
   function normalizeDataShape(data) {
     const base = createDefaultData();
     const source = isPlainObject(data) ? data : {};
 
-    const categories = normalizeArray(source.categories, base.categories).map(normalizeCategory);
+    let categories = normalizeArray(source.categories, base.categories).map(normalizeCategory);
 
-    return {
+    if (!categories.length) {
+      categories = deepClone(base.categories);
+    }
+
+    const normalized = {
       schemaVersion: Number.isInteger(source.schemaVersion)
         ? source.schemaVersion
         : APP_SCHEMA_VERSION,
@@ -207,10 +240,12 @@
       categories,
       notes: normalizeArray(source.notes, []).map(note => normalizeNote(note, categories))
     };
+
+    return ensureSystemCategories(normalized);
   }
 
   function migrateData(rawData) {
-    let data = normalizeDataShape(rawData);
+    const data = normalizeDataShape(rawData);
 
     if (data.schemaVersion < 1) {
       data.schemaVersion = 1;
@@ -287,8 +322,13 @@
       const a = document.createElement("a");
       a.href = url;
       a.download = filename;
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(url);
+      a.remove();
+
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 500);
     },
 
     async importDataFromFile(file, options = { mode: "replace" }) {
@@ -306,8 +346,9 @@
       validateImportedData(parsed);
 
       const imported = migrateData(parsed);
+      const mode = options?.mode === "merge" ? "merge" : "replace";
 
-      if (options.mode === "merge") {
+      if (mode === "merge") {
         const current = await this.getData();
         const merged = this.mergeData(current, imported);
         return this.saveData(merged);
@@ -368,9 +409,20 @@
       return deepClone(data.notes);
     },
 
+    async getNoteById(noteId) {
+      const data = await this.getData();
+      const note = data.notes.find(note => note.id === noteId);
+      return note ? deepClone(note) : null;
+    },
+
     async getCategories() {
       const data = await this.getData();
       return deepClone(data.categories);
+    },
+
+    async getCategoryNames() {
+      const categories = await this.getCategories();
+      return categories.map(cat => cat.name);
     },
 
     async addCategory(name) {
@@ -416,7 +468,10 @@
         throw new Error("La catégorie est requise.");
       }
 
-      const categoryExists = categories.some(cat => cat.name === normalized.category);
+      const categoryExists = categories.some(
+        cat => cat.name.toLowerCase() === normalized.category.toLowerCase()
+      );
+
       if (!categoryExists) {
         const timestamp = nowIso();
         data.categories.push({
@@ -570,5 +625,5 @@
     }
   };
 
-  window.AppData = AppData;
+  window.AppData = Object.freeze(AppData);
 })();
