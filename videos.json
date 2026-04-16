@@ -1,0 +1,65 @@
+[
+  // 🔥 WORKOUT / FITNESS
+  { "title": "Workout - Back on track", "file": "videos/workout - back on track.mp4", "category": "Workout" },
+  { "title": "Workout - Bras", "file": "videos/workout - bras.mp4", "category": "Workout" },
+  { "title": "Workout - Core finisher", "file": "videos/workout - core finisher.mp4", "category": "Workout" },
+  { "title": "Workout - Dumbbell 5x", "file": "videos/workout - dumbbell 5x.mp4", "category": "Workout" },
+  { "title": "Workout - Full body beginner", "file": "videos/workout - full body beginner.mp4", "category": "Workout" },
+  { "title": "Workout - Go", "file": "videos/workout - go.mp4", "category": "Workout" },
+  { "title": "Workout - Shred", "file": "videos/workout - shred.mp4", "category": "Workout" },
+  { "title": "Workout - Upper body", "file": "videos/workout - upper body.mp4", "category": "Workout" },
+  { "title": "Workout - Elastique", "file": "videos/workout - elastique.mp4", "category": "Workout" },
+  { "title": "Workout - 10 minutes", "file": "videos/workout - 10 minutes.mp4", "category": "Workout" },
+  { "title": "Workout - 3 min", "file": "videos/workout - 3 min.mp4", "category": "Workout" },
+  { "title": "Workout - 3 minutes full", "file": "videos/workout - 3 minutes full.mp4", "category": "Workout" },
+
+  // 🧘 MOBILITÉ / SANTÉ
+  { "title": "Lymphatic Drainage Routine", "file": "videos/Lymphatic Drainage Routine.mp4", "category": "Mobilité / Santé" },
+  { "title": "Lymphatic drainage routine 2", "file": "videos/Lymphatic drainage routine2.mp4", "category": "Mobilité / Santé" },
+  { "title": "Exercice genoux", "file": "videos/exercice genoux.mp4", "category": "Mobilité / Santé" },
+  { "title": "Exercices genoux", "file": "videos/exercices_genoux.mp4", "category": "Mobilité / Santé" },
+  { "title": "Exercices genoux 2", "file": "videos/exercices_genoux2.mp4", "category": "Mobilité / Santé" },
+  { "title": "Exercices genoux 3", "file": "videos/exercices_genoux3.mp4", "category": "Mobilité / Santé" },
+  { "title": "Exercices genoux 4", "file": "videos/exercices_genoux4.mp4", "category": "Mobilité / Santé" },
+  { "title": "Exercice genoux (variante)", "file": "videos/exercice genous.mp4", "category": "Mobilité / Santé" },
+  { "title": "Exercices épaules", "file": "videos/exercices epaules.mp4", "category": "Mobilité / Santé" },
+  { "title": "Low impact cardio", "file": "videos/low impact cardio.mp4", "category": "Mobilité / Santé" },
+  { "title": "6 étirements", "file": "videos/six_etirements.mp4", "category": "Mobilité / Santé" },
+  { "title": "Étirements dos", "file": "videos/etirements dos.mp4", "category": "Mobilité / Santé" },
+  { "title": "Fix lower back pain", "file": "videos/exercice - 3 exercises to fix lower back pain.mp4", "category": "Mobilité / Santé" },
+
+  // 🏏 SOFTBALL
+  { "title": "Softball - Curve pitch", "file": "videos/Softball - curve pitch.mp4", "category": "Sport" },
+  { "title": "Softball - Baton", "file": "videos/Softball - exercice baton.mp4", "category": "Sport" },
+  { "title": "Softball - Swing", "file": "videos/softball - swing.mp4", "category": "Sport" },
+
+  // 🧠 COMMUNICATION
+  { "title": "Communication - 5 questions", "file": "videos/communication - 5 questions.mp4", "category": "Développement personnel" },
+  { "title": "Communication - Improve skills", "file": "videos/communication - improve skills.mp4", "category": "Développement personnel" },
+  { "title": "Communication - Pause", "file": "videos/communication - pause.mp4", "category": "Développement personnel" },
+  { "title": "Communication - Couleurs", "file": "videos/communication - couleurs.mp4", "category": "Développement personnel" },
+
+  // 🍽️ RECETTES
+  { "title": "Quesadillas 350 cal", "file": "videos/recette - 350cal quesadillas.mp4", "category": "Recettes" },
+  { "title": "Korean chicken 490 cal", "file": "videos/recette - 490cal korean gochujan chicken.mp4", "category": "Recettes" },
+  { "title": "Greek chicken bowl", "file": "videos/recette - greek chicken bowl.mp4", "category": "Recettes" },
+  { "title": "High protein jello", "file": "videos/recette - high protein jello.mp4", "category": "Recettes" },
+  { "title": "Marry me chicken", "file": "videos/recette - marry me chicken.mp4", "category": "Recettes" },
+  { "title": "Oeuf asiatique", "file": "videos/recette - oeuf asiatique.mp4", "category": "Recettes" },
+  { "title": "Pork slow cooker", "file": "videos/recette - porc - slow cooker parmesan honey pork.mp4", "category": "Recettes" },
+  { "title": "Poulet street corn", "file": "videos/recette - poulet et street corn.mp4", "category": "Recettes" },
+  { "title": "Poulet feta patate douce", "file": "videos/recette - poulet feta et patate douce.mp4", "category": "Recettes" },
+  { "title": "Sauces", "file": "videos/recette - sauces.mp4", "category": "Recettes" },
+  { "title": "Street corn chicken", "file": "videos/recette - street corn chicken.mp4", "category": "Recettes" },
+  { "title": "Tortilla beef kebabs", "file": "videos/recette - tortilla beef kebabs.mp4", "category": "Recettes" },
+
+  // 🔨 RÉNO
+  { "title": "Escalier balcon", "file": "videos/reno - escalier-blacon.mp4", "category": "Rénovation" },
+  { "title": "Pick wood", "file": "videos/reno - how to pick wood.mp4", "category": "Rénovation" },
+  { "title": "Cache mur", "file": "videos/reno - rangement cache mur.mp4", "category": "Rénovation" },
+  { "title": "Sous escalier", "file": "videos/reno - rangement sous escalier.mp4", "category": "Rénovation" },
+  { "title": "Bordure porte", "file": "videos/reno - truc bordure porte.mp4", "category": "Rénovation" },
+
+  // 🥁 MUSIQUE
+  { "title": "Pratique drum", "file": "videos/pratique_drum.mp4", "category": "Musique" }
+]
