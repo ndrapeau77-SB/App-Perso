@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>Mon App Perso</title>
 
-  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#071b1a">
   <link rel="apple-touch-icon" href="image_pastille.png">
@@ -16,15 +14,27 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg-top: #031313;
+      --bg-bottom: #082120;
+      --panel: rgba(4, 37, 34, 0.94);
+      --panel-2: rgba(7, 28, 27, 0.82);
+      --border: rgba(170, 142, 65, 0.52);
+      --accent: #d9b24b;
+      --text: #f4f1e8;
+      --muted: #bcc8c0;
+      --shadow: 0 14px 30px rgba(0,0,0,0.14);
+    }
+
     html, body {
       margin: 0;
       padding: 0;
       min-height: 100%;
       font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at top, rgba(0, 100, 80, 0.18), transparent 35%),
-        linear-gradient(180deg, #031313 0%, #05211f 55%, #082120 100%);
-      color: #f4f1e8;
+        radial-gradient(circle at top, rgba(0, 100, 80, 0.16), transparent 35%),
+        linear-gradient(180deg, var(--bg-top) 0%, #05211f 55%, var(--bg-bottom) 100%);
+      color: var(--text);
     }
 
     body {
@@ -34,48 +44,47 @@
 
     .app {
       width: 100%;
-      max-width: 460px;
+      max-width: 520px;
       min-height: 100vh;
-      padding: 18px 12px 40px;
+      padding: 10px 10px 28px;
     }
 
     .hero-card {
-      border: 1px solid rgba(170, 142, 65, 0.55);
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(4, 37, 34, 0.92), rgba(3, 27, 26, 0.94));
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.02) inset,
-        0 14px 30px rgba(0,0,0,0.18);
-      padding: 24px 18px 28px;
+        var(--shadow);
+      padding: 18px 14px 16px;
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .top-title {
-      color: #caa94d;
+      color: var(--accent);
       font-size: 1rem;
       line-height: 1.2;
-      margin: 0 0 18px;
-      font-weight: 500;
+      margin: 2px 0 14px;
+      font-weight: 600;
     }
 
     .action-row {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
     .pill-btn {
-      border: 1px solid rgba(170, 142, 65, 0.6);
-      background: rgba(7, 32, 30, 0.9);
-      color: #f4f1e8;
-      padding: 12px 18px;
+      border: 1px solid rgba(170, 142, 65, 0.62);
+      background: rgba(7, 32, 30, 0.92);
+      color: var(--text);
+      padding: 12px 10px;
       border-radius: 999px;
-      font-size: 1rem;
+      font-size: 0.98rem;
       cursor: pointer;
-      min-width: 145px;
+      min-height: 54px;
       transition: transform 0.12s ease, background 0.12s ease;
     }
 
@@ -84,42 +93,41 @@
     }
 
     .routine-box {
-      margin-top: 6px;
       border: 1px solid rgba(170, 142, 65, 0.45);
-      border-radius: 22px;
-      padding: 20px 16px;
-      background: rgba(7, 28, 27, 0.72);
+      border-radius: 24px;
+      padding: 18px 16px;
+      background: rgba(7, 28, 27, 0.74);
       text-align: left;
     }
 
     .routine-label {
-      font-size: 0.92rem;
-      letter-spacing: 2px;
-      color: #b7c8bf;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      color: var(--muted);
       text-transform: uppercase;
       margin: 0 0 8px;
     }
 
     .routine-title {
-      font-size: 1.95rem;
-      line-height: 1.05;
+      font-size: 1.9rem;
+      line-height: 1.02;
       font-weight: 700;
-      color: #d9b24b;
-      margin: 0 0 14px;
+      color: var(--accent);
+      margin: 0 0 12px;
     }
 
     .routine-text {
-      font-size: 1.05rem;
-      line-height: 1.55;
+      font-size: 1.03rem;
+      line-height: 1.5;
       color: #f0eee8;
       margin: 0;
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-top: 12px;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
     }
 
     .menu-card {
@@ -129,14 +137,14 @@
       min-height: 118px;
       text-align: center;
       border-radius: 28px;
-      border: 1px solid rgba(170, 142, 65, 0.58);
-      background: linear-gradient(180deg, rgba(4, 37, 34, 0.94), rgba(3, 27, 26, 0.95));
+      border: 1px solid rgba(170, 142, 65, 0.56);
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
       color: #f2f0e8;
       text-decoration: none;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      padding: 14px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+      padding: 14px 12px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
       transition: transform 0.12s ease, background 0.12s ease;
     }
 
@@ -144,11 +152,16 @@
       transform: scale(0.985);
     }
 
+    .menu-card.large {
+      grid-column: 1 / -1;
+      min-height: 108px;
+    }
+
     .install-banner {
       position: sticky;
-      bottom: 12px;
+      bottom: 10px;
       display: none;
-      margin-top: 18px;
+      margin-top: 14px;
       z-index: 10;
     }
 
@@ -156,22 +169,69 @@
       width: 100%;
       border: none;
       border-radius: 18px;
-      padding: 15px 18px;
+      padding: 14px 16px;
       font-size: 1rem;
       font-weight: 700;
-      background: #d9b24b;
+      background: var(--accent);
       color: #1b1710;
       cursor: pointer;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.22);
+    }
+
+    @media (max-width: 390px) {
+      .app {
+        padding: 8px 8px 24px;
+      }
+
+      .hero-card {
+        padding: 14px 12px;
+        border-radius: 24px;
+      }
+
+      .action-row {
+        gap: 8px;
+      }
+
+      .pill-btn {
+        font-size: 0.92rem;
+        min-height: 50px;
+        padding: 10px 8px;
+      }
+
+      .routine-box {
+        padding: 16px 14px;
+      }
+
+      .routine-title {
+        font-size: 1.7rem;
+      }
+
+      .routine-text {
+        font-size: 0.98rem;
+      }
+
+      .menu-card {
+        min-height: 98px;
+        font-size: 1rem;
+        border-radius: 22px;
+      }
+
+      .menu-card.large {
+        min-height: 92px;
+      }
     }
 
     @media (min-width: 700px) {
       .app {
-        max-width: 540px;
+        max-width: 620px;
       }
 
       .menu-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .menu-card {
+        min-height: 128px;
       }
     }
   </style>
@@ -188,10 +248,9 @@
 
       <div class="routine-box">
         <p class="routine-label">Routine du jour</p>
-        <h1 class="routine-title" id="routineTitle">Routine matinale</h1>
+        <h1 class="routine-title" id="routineTitle">Citation du jour</h1>
         <p class="routine-text" id="quoteText">
-          Bouge un peu, prends une grande respiration et lance ta journée avec intention.
-          Le but : enclencher le momentum.
+          Success doesn’t just find you. You have to go out and get it.
         </p>
       </div>
     </section>
@@ -201,8 +260,8 @@
       <a href="decouverte.html" class="menu-card">Découverte / apprentissage</a>
       <a href="musique.html" class="menu-card">Musique</a>
       <a href="notes.html" class="menu-card">Notes</a>
-      <a href="objectifs.html" class="menu-card">Objectifs</a>
-      <a href="moodboard.html" class="menu-card">Mood board</a>
+      <a href="objectifs.html" class="menu-card large">Objectifs</a>
+      <a href="moodboard.html" class="menu-card large">Mood board</a>
     </section>
 
     <div class="install-banner" id="installBanner">
@@ -213,16 +272,16 @@
   <script>
     const defaultQuotes = [
       {
-        title: "Routine matinale",
-        text: "Bouge un peu, prends une grande respiration et lance ta journée avec intention. Le but : enclencher le momentum."
+        title: "Citation du jour",
+        text: "Success doesn’t just find you. You have to go out and get it."
       },
       {
         title: "Focus",
-        text: "Ce que tu répètes chaque jour finit par te définir. Même un petit pas compte quand il est constant."
+        text: "Ce que tu fais souvent finit par devenir ce que tu es."
       },
       {
         title: "Discipline",
-        text: "Tu n’as pas besoin de te sentir prêt. Tu as juste besoin de commencer."
+        text: "Tu n’as pas besoin d’attendre d’être motivé pour commencer."
       },
       {
         title: "Mentalité",
@@ -264,7 +323,7 @@
     document.getElementById('quoteBtn').addEventListener('click', showRandomQuote);
 
     document.getElementById('favoritesBtn').addEventListener('click', () => {
-      alert("Section Favoris à brancher ensuite.");
+      window.location.href = 'notes.html?filter=favorites';
     });
 
     loadQuotes().then(showRandomQuote);
