@@ -15,13 +15,11 @@
       --panel: #14201f;
       --panel-2: #1a2a28;
       --card: #1c2d2a;
-      --card-alt: #223633;
       --border: rgba(212, 175, 55, 0.28);
       --accent: #d4af37;
       --text: #f4f1e8;
       --muted: #b7bdb8;
       --danger: #d86a6a;
-      --success: #6eb18b;
       --shadow: 0 10px 24px rgba(0,0,0,0.22);
 
       --cat-travail-bg: rgba(86, 156, 214, 0.16);
@@ -57,11 +55,13 @@
     }
 
     .app {
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
     }
 
-    .header {
+    .header,
+    .editor,
+    .filters {
       background: linear-gradient(180deg, rgba(20,32,31,0.95), rgba(18,28,27,0.95));
       border: 1px solid var(--border);
       border-radius: 24px;
@@ -76,19 +76,31 @@
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 8px;
     }
 
-    .header h1 {
-      margin: 0;
-      font-size: 1.9rem;
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    .header h1,
+    .editor h2,
+    .notes-header h2 {
       color: var(--accent);
+      margin-bottom: 0;
     }
 
-    .toolbar-top {
+    .toolbar-top,
+    .editor-actions,
+    .filter-row,
+    .inline-row,
+    .category-add,
+    .import-export-row {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+    }
+
+    .toolbar-top {
       margin-top: 14px;
     }
 
@@ -111,7 +123,7 @@
     }
 
     textarea {
-      min-height: 130px;
+      min-height: 120px;
       resize: vertical;
       line-height: 1.5;
     }
@@ -124,11 +136,11 @@
       padding: 12px 16px;
       font-size: 0.98rem;
       cursor: pointer;
-      transition: transform 0.12s ease, opacity 0.12s ease, background 0.12s ease;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      transition: transform 0.12s ease, background 0.12s ease;
     }
 
     .btn:active {
@@ -141,40 +153,26 @@
       font-weight: 700;
     }
 
+    .btn-home {
+      background: rgba(212, 175, 55, 0.12);
+      color: #f2dfad;
+    }
+
     .btn-danger {
       background: rgba(216, 106, 106, 0.12);
       color: #ffd2d2;
       border-color: rgba(216,106,106,0.28);
     }
 
-    .btn-ghost {
-      background: transparent;
+    .btn-soft {
+      background: rgba(212, 175, 55, 0.08);
     }
 
-    .btn-home {
-      background: rgba(212, 175, 55, 0.12);
-      color: #f2dfad;
-    }
-
-    .editor {
-      background: linear-gradient(180deg, rgba(20,32,31,0.96), rgba(16,25,24,0.96));
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-      margin-bottom: 18px;
-    }
-
-    .editor h2 {
-      margin-top: 0;
-      margin-bottom: 14px;
-      color: var(--accent);
-      font-size: 1.3rem;
-    }
-
-    .editor-grid {
-      display: grid;
-      gap: 12px;
+    .small {
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
     }
 
     .grid-2 {
@@ -183,18 +181,13 @@
       gap: 12px;
     }
 
-    .inline-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
     .checkbox-row {
       display: flex;
       align-items: center;
       gap: 10px;
       color: var(--muted);
       margin-top: 6px;
+      flex-wrap: wrap;
     }
 
     .checkbox-row input {
@@ -203,37 +196,8 @@
       accent-color: var(--accent);
     }
 
-    .small {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .category-add {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .filters {
-      background: rgba(20,32,31,0.85);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 14px;
-      box-shadow: var(--shadow);
-      margin-bottom: 16px;
-    }
-
-    .filters label {
-      color: var(--muted);
-      font-size: 0.9rem;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .filter-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .filter-search {
+      flex: 1 1 100%;
     }
 
     .filter-group {
@@ -241,23 +205,13 @@
       min-width: 160px;
     }
 
-    .filter-search {
-      flex: 1 1 100%;
-    }
-
     .notes-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      margin-bottom: 12px;
       flex-wrap: wrap;
-    }
-
-    .notes-header h2 {
-      margin: 0;
-      color: var(--accent);
-      font-size: 1.3rem;
+      margin-bottom: 12px;
     }
 
     .count {
@@ -291,21 +245,10 @@
       background: rgba(212, 175, 55, 0.25);
     }
 
-    .note-card.cat-travail::before {
-      background: #569cd6;
-    }
-
-    .note-card.cat-perso::before {
-      background: #d07aff;
-    }
-
-    .note-card.cat-autres::before {
-      background: #6eb18b;
-    }
-
-    .note-card.cat-custom::before {
-      background: #d4af37;
-    }
+    .note-card.cat-travail::before { background: #569cd6; }
+    .note-card.cat-perso::before { background: #d07aff; }
+    .note-card.cat-autres::before { background: #6eb18b; }
+    .note-card.cat-custom::before { background: #d4af37; }
 
     .note-top {
       display: flex;
@@ -350,6 +293,12 @@
       background: rgba(255, 215, 0, 0.10);
       border-color: rgba(255,215,0,0.22);
       color: #ffe58a;
+    }
+
+    .badge.pinned {
+      background: rgba(255, 189, 89, 0.10);
+      border-color: rgba(255,189,89,0.22);
+      color: #ffd79a;
     }
 
     .badge.cat-travail {
@@ -443,6 +392,10 @@
       color: var(--muted);
     }
 
+    .hidden {
+      display: none !important;
+    }
+
     .toast {
       position: fixed;
       left: 50%;
@@ -458,6 +411,8 @@
       pointer-events: none;
       transition: 0.22s ease;
       z-index: 999;
+      max-width: calc(100vw - 24px);
+      text-align: center;
     }
 
     .toast.show {
@@ -465,17 +420,13 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    @media (min-width: 720px) {
+    @media (min-width: 760px) {
       .grid-2 {
         grid-template-columns: 1fr 1fr;
       }
 
       .notes-grid {
         grid-template-columns: 1fr 1fr;
-      }
-
-      .filter-search {
-        flex: 1 1 100%;
       }
     }
   </style>
@@ -491,6 +442,12 @@
         <button class="btn btn-primary" id="newNoteBtn">Nouvelle note</button>
         <button class="btn" id="newListBtn">Nouvelle liste</button>
         <a href="index.html" class="btn btn-home">← Accueil</a>
+      </div>
+
+      <div class="import-export-row" style="margin-top: 12px;">
+        <button class="btn btn-soft" id="exportBtn">Exporter JSON</button>
+        <button class="btn btn-soft" id="importBtn">Importer JSON</button>
+        <input type="file" id="importFile" accept=".json,application/json" class="hidden">
       </div>
     </section>
 
@@ -522,7 +479,7 @@
           <textarea id="noteContent" placeholder="Écris ta note ici..."></textarea>
         </div>
 
-        <div id="listEditor" style="display:none;">
+        <div id="listEditor" class="hidden">
           <label class="small" for="listItems">Items de la liste</label>
           <textarea id="listItems" placeholder="Un item par ligne&#10;Exemple :&#10;Acheter du lait&#10;Envoyer le suivi&#10;Appeler Martin"></textarea>
         </div>
@@ -530,11 +487,14 @@
         <div class="checkbox-row">
           <input type="checkbox" id="favoriteToggle" />
           <label for="favoriteToggle">Marquer comme favori</label>
+
+          <input type="checkbox" id="pinnedToggle" />
+          <label for="pinnedToggle">Épingler</label>
         </div>
 
         <div class="inline-row">
           <button class="btn btn-primary" id="saveBtn">Enregistrer</button>
-          <button class="btn btn-ghost" id="cancelEditBtn">Annuler</button>
+          <button class="btn" id="cancelEditBtn">Annuler</button>
         </div>
       </div>
     </section>
@@ -542,19 +502,19 @@
     <section class="filters">
       <div class="filter-row">
         <div class="filter-search">
-          <label for="searchInput">Recherche</label>
+          <label class="small" for="searchInput">Recherche</label>
           <input type="text" id="searchInput" placeholder="Rechercher par mot-clé..." />
         </div>
 
         <div class="filter-group">
-          <label for="filterCategory">Catégorie</label>
+          <label class="small" for="filterCategory">Catégorie</label>
           <select id="filterCategory">
             <option value="all">Toutes les catégories</option>
           </select>
         </div>
 
         <div class="filter-group">
-          <label for="filterType">Type</label>
+          <label class="small" for="filterType">Type</label>
           <select id="filterType">
             <option value="all">Tout</option>
             <option value="note">Notes</option>
@@ -563,7 +523,7 @@
         </div>
 
         <div class="filter-group">
-          <label for="filterFavorites">Favoris</label>
+          <label class="small" for="filterFavorites">Favoris</label>
           <select id="filterFavorites">
             <option value="all">Tout</option>
             <option value="favorites">Favoris seulement</option>
@@ -584,173 +544,132 @@
 
   <div class="toast" id="toast"></div>
 
+  <script src="data.js"></script>
   <script>
-    const STORAGE_NOTES_KEY = 'app_notes_v1';
-    const STORAGE_CATEGORIES_KEY = 'app_note_categories_v1';
+    const searchInput = document.getElementById("searchInput");
+    const filterCategory = document.getElementById("filterCategory");
+    const filterType = document.getElementById("filterType");
+    const filterFavorites = document.getElementById("filterFavorites");
 
-    let notes = [];
-    let categories = ['Travail', 'Perso', 'Autres'];
-    let currentType = 'note';
+    const editorTitle = document.getElementById("editorTitle");
+    const editingId = document.getElementById("editingId");
+    const noteTitle = document.getElementById("noteTitle");
+    const noteCategory = document.getElementById("noteCategory");
+    const newCategoryInput = document.getElementById("newCategoryInput");
+    const noteContent = document.getElementById("noteContent");
+    const listEditor = document.getElementById("listEditor");
+    const listItems = document.getElementById("listItems");
+    const favoriteToggle = document.getElementById("favoriteToggle");
+    const pinnedToggle = document.getElementById("pinnedToggle");
 
-    const searchInput = document.getElementById('searchInput');
-    const filterCategory = document.getElementById('filterCategory');
-    const filterType = document.getElementById('filterType');
-    const filterFavorites = document.getElementById('filterFavorites');
+    const notesContainer = document.getElementById("notesContainer");
+    const notesCount = document.getElementById("notesCount");
+    const toast = document.getElementById("toast");
 
-    const editorTitle = document.getElementById('editorTitle');
-    const editingId = document.getElementById('editingId');
-    const noteTitle = document.getElementById('noteTitle');
-    const noteCategory = document.getElementById('noteCategory');
-    const newCategoryInput = document.getElementById('newCategoryInput');
-    const noteContent = document.getElementById('noteContent');
-    const listEditor = document.getElementById('listEditor');
-    const listItems = document.getElementById('listItems');
-    const favoriteToggle = document.getElementById('favoriteToggle');
+    const newNoteBtn = document.getElementById("newNoteBtn");
+    const newListBtn = document.getElementById("newListBtn");
+    const addCategoryBtn = document.getElementById("addCategoryBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const cancelEditBtn = document.getElementById("cancelEditBtn");
+    const exportBtn = document.getElementById("exportBtn");
+    const importBtn = document.getElementById("importBtn");
+    const importFile = document.getElementById("importFile");
 
-    const notesContainer = document.getElementById('notesContainer');
-    const notesCount = document.getElementById('notesCount');
-    const toast = document.getElementById('toast');
+    let currentType = "note";
 
-    const newNoteBtn = document.getElementById('newNoteBtn');
-    const newListBtn = document.getElementById('newListBtn');
-    const addCategoryBtn = document.getElementById('addCategoryBtn');
-    const saveBtn = document.getElementById('saveBtn');
-    const cancelEditBtn = document.getElementById('cancelEditBtn');
-
-    function saveToStorage() {
-      localStorage.setItem(STORAGE_NOTES_KEY, JSON.stringify(notes));
-      localStorage.setItem(STORAGE_CATEGORIES_KEY, JSON.stringify(categories));
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1800);
     }
 
-    function loadFromStorage() {
-      const savedNotes = localStorage.getItem(STORAGE_NOTES_KEY);
-      const savedCategories = localStorage.getItem(STORAGE_CATEGORIES_KEY);
-
-      if (savedNotes) {
-        try {
-          notes = JSON.parse(savedNotes);
-        } catch (e) {
-          notes = [];
-        }
-      }
-
-      if (savedCategories) {
-        try {
-          const parsed = JSON.parse(savedCategories);
-          if (Array.isArray(parsed) && parsed.length) {
-            categories = parsed;
-          }
-        } catch (e) {
-          categories = ['Travail', 'Perso', 'Autres'];
-        }
-      }
-    }
-
-    function normalizeCategoryClass(category) {
-      const value = (category || '').trim().toLowerCase();
-      if (value === 'travail') return 'cat-travail';
-      if (value === 'perso') return 'cat-perso';
-      if (value === 'autres') return 'cat-autres';
-      return 'cat-custom';
-    }
-
-    function populateCategorySelectors() {
-      noteCategory.innerHTML = '';
-      filterCategory.innerHTML = '<option value="all">Toutes les catégories</option>';
-
-      categories.forEach(cat => {
-        const optionEditor = document.createElement('option');
-        optionEditor.value = cat;
-        optionEditor.textContent = cat;
-        noteCategory.appendChild(optionEditor);
-
-        const optionFilter = document.createElement('option');
-        optionFilter.value = cat;
-        optionFilter.textContent = cat;
-        filterCategory.appendChild(optionFilter);
-      });
-    }
-
-    function setEditorMode(type) {
-      currentType = type;
-      const isList = type === 'list';
-      editorTitle.textContent = isList ? 'Créer une liste' : 'Créer une note';
-      listEditor.style.display = isList ? 'block' : 'none';
-      noteContent.placeholder = isList
-        ? 'Ajoute une description optionnelle pour ta liste...'
-        : 'Écris ta note ici...';
-    }
-
-    function resetEditor() {
-      editingId.value = '';
-      noteTitle.value = '';
-      noteContent.value = '';
-      listItems.value = '';
-      favoriteToggle.checked = false;
-      setEditorMode('note');
-      if (categories.length) {
-        noteCategory.value = categories[0];
-      }
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text || "";
+      return div.innerHTML;
     }
 
     function formatDate(dateString) {
       const date = new Date(dateString);
-      return date.toLocaleString('fr-CA', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
+      return date.toLocaleString("fr-CA", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
       });
     }
 
-    function createId() {
-      return Date.now().toString() + Math.random().toString(16).slice(2);
+    function normalizeCategoryClass(category) {
+      const value = (category || "").trim().toLowerCase();
+      if (value === "travail") return "cat-travail";
+      if (value === "perso") return "cat-perso";
+      if (value === "autres") return "cat-autres";
+      return "cat-custom";
     }
 
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add('show');
-      clearTimeout(showToast._timer);
-      showToast._timer = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 1800);
+    function setEditorMode(type) {
+      currentType = type === "list" ? "list" : "note";
+      const isList = currentType === "list";
+      editorTitle.textContent = isList ? "Créer une liste" : "Créer une note";
+      listEditor.classList.toggle("hidden", !isList);
+      noteContent.placeholder = isList
+        ? "Ajoute une description optionnelle pour ta liste..."
+        : "Écris ta note ici...";
     }
 
-    function getFilteredNotes() {
-      const keyword = searchInput.value.trim().toLowerCase();
-      const categoryFilter = filterCategory.value;
-      const typeFilter = filterType.value;
-      const favoriteFilter = filterFavorites.value;
+    async function populateCategorySelectors() {
+      const categories = await AppData.getCategories();
 
-      return notes.filter(note => {
-        const inKeyword =
-          !keyword ||
-          note.title.toLowerCase().includes(keyword) ||
-          (note.content && note.content.toLowerCase().includes(keyword)) ||
-          note.category.toLowerCase().includes(keyword) ||
-          (note.items || []).some(item => item.text.toLowerCase().includes(keyword));
+      noteCategory.innerHTML = "";
+      filterCategory.innerHTML = '<option value="all">Toutes les catégories</option>';
 
-        const inCategory =
-          categoryFilter === 'all' || note.category === categoryFilter;
+      categories.forEach(cat => {
+        const optionEditor = document.createElement("option");
+        optionEditor.value = cat.name;
+        optionEditor.textContent = cat.name;
+        noteCategory.appendChild(optionEditor);
 
-        const inType =
-          typeFilter === 'all' || note.type === typeFilter;
-
-        const inFavorite =
-          favoriteFilter === 'all' || note.favorite === true;
-
-        return inKeyword && inCategory && inType && inFavorite;
-      }).sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+        const optionFilter = document.createElement("option");
+        optionFilter.value = cat.name;
+        optionFilter.textContent = cat.name;
+        filterCategory.appendChild(optionFilter);
+      });
     }
 
-    function renderNotes() {
-      const filtered = getFilteredNotes();
-      notesContainer.innerHTML = '';
+    async function resetEditor() {
+      editingId.value = "";
+      noteTitle.value = "";
+      noteContent.value = "";
+      listItems.value = "";
+      favoriteToggle.checked = false;
+      pinnedToggle.checked = false;
+      setEditorMode("note");
 
-      notesCount.textContent = `${filtered.length} ${filtered.length > 1 ? 'éléments' : 'élément'}`;
+      const categories = await AppData.getCategories();
+      if (categories.length) {
+        noteCategory.value = categories[0].name;
+      }
+    }
 
-      if (!filtered.length) {
+    async function renderNotes() {
+      const filters = {
+        keyword: searchInput.value.trim(),
+        category: filterCategory.value,
+        type: filterType.value,
+        favoritesOnly: filterFavorites.value === "favorites",
+        pinnedFirst: true,
+        includeArchived: false
+      };
+
+      const notes = await AppData.searchNotes(filters);
+      notesContainer.innerHTML = "";
+      notesCount.textContent = `${notes.length} ${notes.length > 1 ? "éléments" : "élément"}`;
+
+      if (!notes.length) {
         notesContainer.innerHTML = `
           <div class="empty-state">
             <strong>Aucune note trouvée.</strong><br><br>
@@ -760,45 +679,46 @@
         return;
       }
 
-      filtered.forEach(note => {
+      notes.forEach(note => {
         const categoryClass = normalizeCategoryClass(note.category);
 
-        const card = document.createElement('article');
+        const card = document.createElement("article");
         card.className = `note-card ${categoryClass}`;
 
-        const itemsHtml = note.type === 'list'
+        const itemsHtml = note.type === "list"
           ? `
             <ul class="checklist">
               ${(note.items || []).map(item => `
                 <li>
                   <input
                     type="checkbox"
-                    ${item.done ? 'checked' : ''}
+                    ${item.done ? "checked" : ""}
                     onchange="toggleChecklistItem('${note.id}', '${item.id}')"
                   />
-                  <span class="${item.done ? 'done' : ''}">${escapeHtml(item.text)}</span>
+                  <span class="${item.done ? "done" : ""}">${escapeHtml(item.text)}</span>
                 </li>
-              `).join('')}
+              `).join("")}
             </ul>
           `
-          : '';
+          : "";
 
         card.innerHTML = `
           <div class="note-top">
-            <h3 class="note-title">${escapeHtml(note.title || '(Sans titre)')}</h3>
-            <button class="btn btn-ghost" onclick="toggleFavorite('${note.id}')">
-              ${note.favorite ? '⭐' : '☆'}
-            </button>
+            <h3 class="note-title">${escapeHtml(note.title || "(Sans titre)")}</h3>
+            <div class="note-actions">
+              <button class="btn" onclick="togglePinned('${note.id}')">${note.pinned ? "📌" : "📍"}</button>
+              <button class="btn" onclick="toggleFavorite('${note.id}')">${note.favorite ? "⭐" : "☆"}</button>
+            </div>
           </div>
 
           <div class="note-badges">
             <span class="badge ${categoryClass}">${escapeHtml(note.category)}</span>
-            <span class="badge type">${note.type === 'list' ? 'Liste' : 'Note'}</span>
-            ${note.favorite ? '<span class="badge favorite">Favori</span>' : ''}
+            <span class="badge type">${note.type === "list" ? "Liste" : "Note"}</span>
+            ${note.favorite ? '<span class="badge favorite">Favori</span>' : ""}
+            ${note.pinned ? '<span class="badge pinned">Épinglée</span>' : ""}
           </div>
 
-          ${note.content ? `<div class="note-content">${escapeHtml(note.content)}</div>` : ''}
-
+          ${note.content ? `<div class="note-content">${escapeHtml(note.content)}</div>` : ""}
           ${itemsHtml}
 
           <div class="note-footer">
@@ -814,219 +734,227 @@
       });
     }
 
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text || '';
-      return div.innerHTML;
-    }
+    async function addCategory() {
+      const value = newCategoryInput.value.trim();
+      if (!value) return;
 
-    function addCategory() {
-      const newCat = newCategoryInput.value.trim();
-      if (!newCat) return;
-
-      const exists = categories.some(cat => cat.toLowerCase() === newCat.toLowerCase());
-      if (exists) {
-        alert('Cette catégorie existe déjà.');
-        return;
+      try {
+        const category = await AppData.addCategory(value);
+        newCategoryInput.value = "";
+        await populateCategorySelectors();
+        noteCategory.value = category.name;
+        showToast("Catégorie ajoutée");
+      } catch (error) {
+        alert(error.message);
       }
-
-      categories.push(newCat);
-      categories.sort((a, b) => a.localeCompare(b, 'fr'));
-      populateCategorySelectors();
-      noteCategory.value = newCat;
-      newCategoryInput.value = '';
-      saveToStorage();
-      renderNotes();
-      showToast('Catégorie ajoutée');
     }
 
-    function saveNote() {
+    async function saveNote() {
       const title = noteTitle.value.trim();
       const category = noteCategory.value;
       const content = noteContent.value.trim();
       const favorite = favoriteToggle.checked;
+      const pinned = pinnedToggle.checked;
+      const existingId = editingId.value.trim();
 
       if (!title) {
-        alert('Ajoute un titre à ta note.');
+        alert("Ajoute un titre à ta note.");
         return;
       }
 
       if (!category) {
-        alert('Choisis une catégorie.');
+        alert("Choisis une catégorie.");
         return;
       }
 
-      const now = new Date().toISOString();
-      const id = editingId.value.trim();
+      try {
+        let note;
 
-      if (currentType === 'list') {
-        const rawItems = listItems.value
-          .split('\n')
-          .map(item => item.trim())
-          .filter(Boolean);
-
-        if (!rawItems.length) {
-          alert('Ajoute au moins un item dans ta liste.');
-          return;
+        if (existingId) {
+          note = await AppData.getNoteById(existingId);
+          if (!note) {
+            note = AppData.createEmptyNote(currentType, category);
+          }
+        } else {
+          note = AppData.createEmptyNote(currentType, category);
         }
 
-        const existing = notes.find(note => note.id === id);
+        note.type = currentType;
+        note.title = title;
+        note.category = category;
+        note.content = content;
+        note.favorite = favorite;
+        note.pinned = pinned;
 
-        let items = rawItems.map(text => ({
-          id: createId(),
-          text,
-          done: false
-        }));
+        if (currentType === "list") {
+          const rawItems = listItems.value
+            .split("\n")
+            .map(item => item.trim())
+            .filter(Boolean);
 
-        if (existing && Array.isArray(existing.items)) {
-          items = rawItems.map(text => {
-            const found = existing.items.find(item => item.text === text);
-            return found || { id: createId(), text, done: false };
+          if (!rawItems.length) {
+            alert("Ajoute au moins un item dans ta liste.");
+            return;
+          }
+
+          const oldItems = Array.isArray(note.items) ? note.items : [];
+
+          note.items = rawItems.map(text => {
+            const existing = oldItems.find(item => item.text === text);
+            return existing || {
+              id: `item_${Date.now()}_${Math.random().toString(16).slice(2, 8)}`,
+              text,
+              done: false,
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString()
+            };
           });
+        } else {
+          if (!content) {
+            alert("Ajoute du contenu à ta note.");
+            return;
+          }
+          note.items = [];
         }
 
-        const payload = {
-          id: id || createId(),
-          type: 'list',
-          title,
-          category,
-          content,
-          items,
-          favorite,
-          createdAt: existing?.createdAt || now,
-          updatedAt: now
-        };
-
-        upsertNote(payload);
-      } else {
-        if (!content) {
-          alert('Ajoute du contenu à ta note.');
-          return;
-        }
-
-        const existing = notes.find(note => note.id === id);
-
-        const payload = {
-          id: id || createId(),
-          type: 'note',
-          title,
-          category,
-          content,
-          items: [],
-          favorite,
-          createdAt: existing?.createdAt || now,
-          updatedAt: now
-        };
-
-        upsertNote(payload);
-      }
-
-      resetEditor();
-      saveToStorage();
-      renderNotes();
-      showToast('Note enregistrée');
-    }
-
-    function upsertNote(payload) {
-      const index = notes.findIndex(note => note.id === payload.id);
-      if (index >= 0) {
-        notes[index] = payload;
-      } else {
-        notes.push(payload);
+        await AppData.saveNote(note);
+        await resetEditor();
+        await renderNotes();
+        showToast("Note enregistrée");
+      } catch (error) {
+        alert(error.message);
       }
     }
 
-    function editNote(id) {
-      const note = notes.find(n => n.id === id);
+    async function editNote(noteId) {
+      const note = await AppData.getNoteById(noteId);
       if (!note) return;
 
       editingId.value = note.id;
-      noteTitle.value = note.title;
-      noteCategory.value = note.category;
-      noteContent.value = note.content || '';
+      noteTitle.value = note.title || "";
+      noteContent.value = note.content || "";
       favoriteToggle.checked = !!note.favorite;
+      pinnedToggle.checked = !!note.pinned;
+
+      await populateCategorySelectors();
+      noteCategory.value = note.category;
 
       setEditorMode(note.type);
 
-      if (note.type === 'list') {
-        listItems.value = (note.items || []).map(item => item.text).join('\n');
+      if (note.type === "list") {
+        listItems.value = (note.items || []).map(item => item.text).join("\n");
       } else {
-        listItems.value = '';
+        listItems.value = "";
       }
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      showToast('Mode modification');
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      showToast("Mode modification");
     }
 
-    function deleteNote(id) {
-      const confirmed = confirm('Supprimer cette note ?');
+    async function deleteNote(noteId) {
+      const confirmed = confirm("Supprimer cette note ?");
       if (!confirmed) return;
 
-      notes = notes.filter(note => note.id !== id);
-      saveToStorage();
-      renderNotes();
-
-      if (editingId.value === id) {
-        resetEditor();
+      await AppData.deleteNote(noteId);
+      if (editingId.value === noteId) {
+        await resetEditor();
       }
-
-      showToast('Note supprimée');
+      await renderNotes();
+      showToast("Note supprimée");
     }
 
-    function toggleFavorite(id) {
-      const note = notes.find(n => n.id === id);
-      if (!note) return;
-      note.favorite = !note.favorite;
-      note.updatedAt = new Date().toISOString();
-      saveToStorage();
-      renderNotes();
-      showToast(note.favorite ? 'Ajoutée aux favoris' : 'Retirée des favoris');
+    async function toggleFavorite(noteId) {
+      const note = await AppData.toggleFavorite(noteId);
+      await renderNotes();
+      showToast(note.favorite ? "Ajoutée aux favoris" : "Retirée des favoris");
     }
 
-    function toggleChecklistItem(noteId, itemId) {
-      const note = notes.find(n => n.id === noteId);
-      if (!note || note.type !== 'list') return;
-
-      const item = note.items.find(i => i.id === itemId);
-      if (!item) return;
-
-      item.done = !item.done;
-      note.updatedAt = new Date().toISOString();
-      saveToStorage();
-      renderNotes();
+    async function togglePinned(noteId) {
+      const note = await AppData.togglePinned(noteId);
+      await renderNotes();
+      showToast(note.pinned ? "Note épinglée" : "Note désépinglée");
     }
 
-    function init() {
-      loadFromStorage();
-      populateCategorySelectors();
-      resetEditor();
-      renderNotes();
+    async function toggleChecklistItem(noteId, itemId) {
+      await AppData.toggleChecklistItem(noteId, itemId);
+      await renderNotes();
     }
 
-    newNoteBtn.addEventListener('click', () => {
-      resetEditor();
-      setEditorMode('note');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    async function exportJson() {
+      await AppData.exportData("mon-app-backup.json");
+      showToast("Export lancé");
+    }
+
+    async function importJson(file) {
+      if (!file) return;
+
+      const merge = confirm(
+        "OK = fusionner avec les données existantes\nAnnuler = remplacer les données existantes"
+      );
+
+      try {
+        await AppData.importDataFromFile(file, {
+          mode: merge ? "merge" : "replace"
+        });
+
+        await populateCategorySelectors();
+        await resetEditor();
+        await renderNotes();
+        importFile.value = "";
+        showToast("Import réussi");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    async function applyUrlFilters() {
+      const params = new URLSearchParams(window.location.search);
+      const filter = params.get("filter");
+
+      if (filter === "favorites") {
+        filterFavorites.value = "favorites";
+      }
+    }
+
+    async function init() {
+      await populateCategorySelectors();
+      await resetEditor();
+      await applyUrlFilters();
+      await renderNotes();
+    }
+
+    newNoteBtn.addEventListener("click", async () => {
+      await resetEditor();
+      setEditorMode("note");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    newListBtn.addEventListener('click', () => {
-      resetEditor();
-      setEditorMode('list');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    newListBtn.addEventListener("click", async () => {
+      await resetEditor();
+      setEditorMode("list");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    addCategoryBtn.addEventListener('click', addCategory);
-    saveBtn.addEventListener('click', saveNote);
-    cancelEditBtn.addEventListener('click', resetEditor);
+    addCategoryBtn.addEventListener("click", addCategory);
+    saveBtn.addEventListener("click", saveNote);
+    cancelEditBtn.addEventListener("click", resetEditor);
 
-    searchInput.addEventListener('input', renderNotes);
-    filterCategory.addEventListener('change', renderNotes);
-    filterType.addEventListener('change', renderNotes);
-    filterFavorites.addEventListener('change', renderNotes);
+    searchInput.addEventListener("input", renderNotes);
+    filterCategory.addEventListener("change", renderNotes);
+    filterType.addEventListener("change", renderNotes);
+    filterFavorites.addEventListener("change", renderNotes);
+
+    exportBtn.addEventListener("click", exportJson);
+    importBtn.addEventListener("click", () => importFile.click());
+    importFile.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      importJson(file);
+    });
 
     window.editNote = editNote;
     window.deleteNote = deleteNote;
     window.toggleFavorite = toggleFavorite;
+    window.togglePinned = togglePinned;
     window.toggleChecklistItem = toggleChecklistItem;
 
     init();
