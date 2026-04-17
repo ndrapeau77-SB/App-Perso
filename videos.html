@@ -416,11 +416,6 @@
       return slugify(video.file || video.title || Math.random().toString(16).slice(2));
     }
 
-    function autoDescription(video) {
-      const title = video.title || "";
-      const category = video.category || "Autres";
-      return `Vidéo dans la catégorie ${category} : ${title}.`;
-    }
 
     function getStorageData() {
       try {
