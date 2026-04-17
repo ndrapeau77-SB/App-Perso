@@ -1,1 +1,640 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DISC / Couleurs</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0d1414;
+      --panel: #14201f;
+      --panel-2: #1a2a28;
+      --border: rgba(212, 175, 55, 0.28);
+      --accent: #d4af37;
+      --text: #f4f1e8;
+      --muted: #b7bdb8;
+      --shadow: 0 10px 24px rgba(0,0,0,0.22);
+
+      --yellow: #e8c14c;
+      --red: #cf5b5b;
+      --green: #63a77a;
+      --blue: #5d8fcb;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.06), transparent 30%),
+        linear-gradient(180deg, #081111 0%, #0d1818 100%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100%;
+    }
+
+    body {
+      padding: 12px;
+    }
+
+    .app {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(20,32,31,0.95), rgba(18,28,27,0.95));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1, h2 {
+      color: var(--accent);
+    }
+
+    .top-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 0.96rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-home {
+      background: rgba(212, 175, 55, 0.12);
+      color: #f2dfad;
+    }
+
+    .intro {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .color-card {
+      border-radius: 20px;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(28,45,42,0.98), rgba(24,38,36,0.98));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .color-card.yellow { border-left: 8px solid var(--yellow); }
+    .color-card.red { border-left: 8px solid var(--red); }
+    .color-card.green { border-left: 8px solid var(--green); }
+    .color-card.blue { border-left: 8px solid var(--blue); }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .tag.yellow { background: rgba(232,193,76,0.12); color: #f4dd96; }
+    .tag.red { background: rgba(207,91,91,0.12); color: #f1b0b0; }
+    .tag.green { background: rgba(99,167,122,0.12); color: #bee4c8; }
+    .tag.blue { background: rgba(93,143,203,0.12); color: #c7dcf7; }
+
+    .color-card h3 {
+      margin-bottom: 10px;
+      color: #fff9eb;
+    }
+
+    .sub {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin: 14px 0 8px;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .quiz-question {
+      background: linear-gradient(180deg, rgba(28,45,42,0.98), rgba(24,38,36,0.98));
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .quiz-question h3 {
+      font-size: 1rem;
+      color: #fff9eb;
+      margin-bottom: 10px;
+    }
+
+    .choices {
+      display: grid;
+      gap: 8px;
+    }
+
+    .choice {
+      display: block;
+      border: 1px solid rgba(212,175,55,0.2);
+      background: rgba(255,255,255,0.02);
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+
+    .choice input {
+      margin-right: 8px;
+      accent-color: var(--accent);
+    }
+
+    .result-box {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.22);
+      display: none;
+    }
+
+    .result-title {
+      color: var(--accent);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .score-list {
+      display: grid;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .score-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .score-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .score-label {
+      font-weight: 700;
+    }
+
+    .score-label.yellow { color: var(--yellow); }
+    .score-label.red { color: var(--red); }
+    .score-label.green { color: var(--green); }
+    .score-label.blue { color: var(--blue); }
+
+    .score-bar {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      overflow: hidden;
+    }
+
+    .score-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    .score-fill.yellow { background: var(--yellow); }
+    .score-fill.red { background: var(--red); }
+    .score-fill.green { background: var(--green); }
+    .score-fill.blue { background: var(--blue); }
+
+    .dominant-card {
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+    }
+
+    @media (min-width: 760px) {
+      body {
+        padding: 16px;
+      }
+
+      .top-actions {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .top-actions .btn {
+        width: auto;
+      }
+
+      .color-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="panel">
+      <h1>DISC / Couleurs</h1>
+      <p class="intro">
+        Vue simple des 4 grands styles de communication : jaune, rouge, vert et bleu.
+        Ce n’est pas un test officiel, mais un bon outil pour mieux se comprendre et mieux communiquer avec les autres.
+      </p>
+
+      <div class="top-actions">
+        <a href="index.html" class="btn btn-home">← Accueil</a>
+        <button class="btn" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+          Aller au mini quiz
+        </button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Les 4 couleurs</h2>
+
+      <div class="color-grid">
+        <article class="color-card yellow">
+          <div class="tag yellow">Jaune — influence / enthousiasme</div>
+          <h3>Jaune</h3>
+          <p class="muted">Souvent énergique, sociable, spontané et orienté relations.</p>
+
+          <div class="sub">Besoins</div>
+          <ul class="list">
+            <li>Être apprécié</li>
+            <li>Avoir du plaisir</li>
+            <li>Pouvoir s’exprimer</li>
+            <li>Sentir une bonne ambiance</li>
+          </ul>
+
+          <div class="sub">Comment communiquer avec un jaune</div>
+          <ul class="list">
+            <li>Sois chaleureux et positif</li>
+            <li>Va à l’essentiel sans être froid</li>
+            <li>Laisse un peu d’espace pour parler</li>
+            <li>Mets l’accent sur les possibilités</li>
+          </ul>
+        </article>
+
+        <article class="color-card red">
+          <div class="tag red">Rouge — action / résultats</div>
+          <h3>Rouge</h3>
+          <p class="muted">Souvent direct, rapide, compétitif et orienté objectifs.</p>
+
+          <div class="sub">Besoins</div>
+          <ul class="list">
+            <li>Avoir du contrôle</li>
+            <li>Avancer vite</li>
+            <li>Obtenir des résultats</li>
+            <li>Sentir qu’on est efficace</li>
+          </ul>
+
+          <div class="sub">Comment communiquer avec un rouge</div>
+          <ul class="list">
+            <li>Sois clair et concis</li>
+            <li>Présente des options concrètes</li>
+            <li>Évite de tourner autour du pot</li>
+            <li>Parle résultats, délais, décisions</li>
+          </ul>
+        </article>
+
+        <article class="color-card green">
+          <div class="tag green">Vert — stabilité / harmonie</div>
+          <h3>Vert</h3>
+          <p class="muted">Souvent calme, patient, loyal et orienté harmonie.</p>
+
+          <div class="sub">Besoins</div>
+          <ul class="list">
+            <li>Se sentir en sécurité</li>
+            <li>Avoir de la stabilité</li>
+            <li>Éviter les tensions inutiles</li>
+            <li>Avoir du temps pour s’adapter</li>
+          </ul>
+
+          <div class="sub">Comment communiquer avec un vert</div>
+          <ul class="list">
+            <li>Sois calme et respectueux</li>
+            <li>Évite la pression agressive</li>
+            <li>Explique les changements doucement</li>
+            <li>Mets l’accent sur la collaboration</li>
+          </ul>
+        </article>
+
+        <article class="color-card blue">
+          <div class="tag blue">Bleu — précision / qualité</div>
+          <h3>Bleu</h3>
+          <p class="muted">Souvent analytique, structuré, prudent et orienté qualité.</p>
+
+          <div class="sub">Besoins</div>
+          <ul class="list">
+            <li>Avoir des faits clairs</li>
+            <li>Comprendre avant d’agir</li>
+            <li>Sentir de la rigueur</li>
+            <li>Avoir un cadre logique</li>
+          </ul>
+
+          <div class="sub">Comment communiquer avec un bleu</div>
+          <ul class="list">
+            <li>Sois précis et structuré</li>
+            <li>Donne des détails utiles</li>
+            <li>Évite les flous et les improvisations</li>
+            <li>Présente la logique derrière ta demande</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <h2>Mini quiz couleurs</h2>
+      <p class="intro">
+        Choisis la réponse qui te ressemble le plus pour chaque question.
+      </p>
+
+      <div class="quiz-question">
+        <h3>1. Quand je dois prendre une décision rapidement…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q1" value="blue"> Je veux d’abord les faits.</label>
+          <label class="choice"><input type="radio" name="q1" value="red"> Je tranche vite.</label>
+          <label class="choice"><input type="radio" name="q1" value="green"> Je pense aux autres.</label>
+          <label class="choice"><input type="radio" name="q1" value="yellow"> J’y vais au feeling.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>2. En équipe, on dit souvent que je suis…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q2" value="green"> Stable et fiable.</label>
+          <label class="choice"><input type="radio" name="q2" value="yellow"> Motivant et positif.</label>
+          <label class="choice"><input type="radio" name="q2" value="blue"> Structuré.</label>
+          <label class="choice"><input type="radio" name="q2" value="red"> Direct.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>3. Ce qui me fatigue le plus, c’est…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q3" value="yellow"> La routine plate.</label>
+          <label class="choice"><input type="radio" name="q3" value="blue"> Le manque de logique.</label>
+          <label class="choice"><input type="radio" name="q3" value="red"> La lenteur.</label>
+          <label class="choice"><input type="radio" name="q3" value="green"> Les conflits.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>4. Quand j’explique quelque chose…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q4" value="red"> Je vais droit au but.</label>
+          <label class="choice"><input type="radio" name="q4" value="blue"> Je structure bien.</label>
+          <label class="choice"><input type="radio" name="q4" value="yellow"> Je rends ça vivant.</label>
+          <label class="choice"><input type="radio" name="q4" value="green"> Je prends mon temps.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>5. Dans un changement imprévu…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q5" value="green"> J’ai besoin de temps.</label>
+          <label class="choice"><input type="radio" name="q5" value="red"> Je m’adapte vite.</label>
+          <label class="choice"><input type="radio" name="q5" value="blue"> Je veux comprendre.</label>
+          <label class="choice"><input type="radio" name="q5" value="yellow"> Je trouve ça excitant.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>6. Ce qui me motive le plus…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q6" value="red"> Atteindre des résultats.</label>
+          <label class="choice"><input type="radio" name="q6" value="yellow"> Avoir du fun.</label>
+          <label class="choice"><input type="radio" name="q6" value="green"> Être bien avec les autres.</label>
+          <label class="choice"><input type="radio" name="q6" value="blue"> Faire les choses correctement.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>7. Dans une discussion tendue…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q7" value="green"> J’essaie d’apaiser.</label>
+          <label class="choice"><input type="radio" name="q7" value="red"> Je confronte directement.</label>
+          <label class="choice"><input type="radio" name="q7" value="blue"> J’analyse calmement.</label>
+          <label class="choice"><input type="radio" name="q7" value="yellow"> Je change l’ambiance.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>8. Quand je commence quelque chose…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q8" value="yellow"> Je suis enthousiaste.</label>
+          <label class="choice"><input type="radio" name="q8" value="blue"> Je planifie.</label>
+          <label class="choice"><input type="radio" name="q8" value="red"> Je fonce.</label>
+          <label class="choice"><input type="radio" name="q8" value="green"> Je prends mon temps.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>9. Ce que les gens apprécient chez moi…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q9" value="blue"> Ma précision.</label>
+          <label class="choice"><input type="radio" name="q9" value="yellow"> Mon énergie.</label>
+          <label class="choice"><input type="radio" name="q9" value="green"> Ma fiabilité.</label>
+          <label class="choice"><input type="radio" name="q9" value="red"> Ma détermination.</label>
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        <h3>10. Ce qui me dérange le plus…</h3>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="q10" value="red"> Le manque d’efficacité.</label>
+          <label class="choice"><input type="radio" name="q10" value="green"> Les tensions.</label>
+          <label class="choice"><input type="radio" name="q10" value="yellow"> L’ennui.</label>
+          <label class="choice"><input type="radio" name="q10" value="blue"> Les erreurs.</label>
+        </div>
+      </div>
+
+      <button class="btn" onclick="calculateDisc()">Voir mon résultat</button>
+
+      <div class="result-box" id="resultBox">
+        <div class="result-title" id="resultTitle">Résultat</div>
+
+        <div class="score-list">
+          <div class="score-row">
+            <div class="score-top">
+              <span class="score-label yellow">Jaune</span>
+              <span id="yellowPct">0%</span>
+            </div>
+            <div class="score-bar"><div class="score-fill yellow" id="yellowBar"></div></div>
+          </div>
+
+          <div class="score-row">
+            <div class="score-top">
+              <span class="score-label red">Rouge</span>
+              <span id="redPct">0%</span>
+            </div>
+            <div class="score-bar"><div class="score-fill red" id="redBar"></div></div>
+          </div>
+
+          <div class="score-row">
+            <div class="score-top">
+              <span class="score-label green">Vert</span>
+              <span id="greenPct">0%</span>
+            </div>
+            <div class="score-bar"><div class="score-fill green" id="greenBar"></div></div>
+          </div>
+
+          <div class="score-row">
+            <div class="score-top">
+              <span class="score-label blue">Bleu</span>
+              <span id="bluePct">0%</span>
+            </div>
+            <div class="score-bar"><div class="score-fill blue" id="blueBar"></div></div>
+          </div>
+        </div>
+
+        <div class="dominant-card">
+          <div class="result-title" id="dominantTitle">Couleur dominante</div>
+          <p class="muted" id="resultText"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function calculateDisc() {
+      const scores = {
+        yellow: 0,
+        red: 0,
+        green: 0,
+        blue: 0
+      };
+
+      const questions = ["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10"];
+
+      for (const q of questions) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (!selected) {
+          alert("Réponds à toutes les questions avant de voir le résultat.");
+          return;
+        }
+        scores[selected.value]++;
+      }
+
+      const total = questions.length;
+
+      const percentages = {
+        yellow: Math.round((scores.yellow / total) * 100),
+        red: Math.round((scores.red / total) * 100),
+        green: Math.round((scores.green / total) * 100),
+        blue: Math.round((scores.blue / total) * 100)
+      };
+
+      let dominant = "yellow";
+      let max = scores.yellow;
+
+      for (const color of ["red", "green", "blue"]) {
+        if (scores[color] > max) {
+          dominant = color;
+          max = scores[color];
+        }
+      }
+
+      const sorted = Object.entries(scores)
+        .sort((a, b) => b[1] - a[1])
+        .map(entry => entry[0]);
+
+      const second = sorted[1];
+
+      const resultMap = {
+        yellow: {
+          title: "Tendance Jaune",
+          text: "Tu sembles orienté énergie, enthousiasme, relations et spontanéité. Tu gagnes souvent à être vu, entendu et à évoluer dans un climat positif."
+        },
+        red: {
+          title: "Tendance Rouge",
+          text: "Tu sembles orienté action, rapidité, défis et résultats. Tu apprécies souvent les décisions claires, les objectifs concrets et l’efficacité."
+        },
+        green: {
+          title: "Tendance Verte",
+          text: "Tu sembles orienté stabilité, respect, patience et harmonie. Tu apprécies souvent les environnements calmes, fiables et collaboratifs."
+        },
+        blue: {
+          title: "Tendance Bleue",
+          text: "Tu sembles orienté précision, logique, qualité et structure. Tu apprécies souvent les faits, la clarté et les façons de faire rigoureuses."
+        }
+      };
+
+      const secondMap = {
+        yellow: "avec une touche Jaune",
+        red: "avec une touche Rouge",
+        green: "avec une touche Verte",
+        blue: "avec une touche Bleue"
+      };
+
+      document.getElementById("resultTitle").textContent = "Répartition de ton profil";
+      document.getElementById("dominantTitle").textContent = `${resultMap[dominant].title} ${second ? `— ${secondMap[second]}` : ""}`;
+      document.getElementById("resultText").textContent = resultMap[dominant].text;
+
+      document.getElementById("yellowPct").textContent = `${percentages.yellow}%`;
+      document.getElementById("redPct").textContent = `${percentages.red}%`;
+      document.getElementById("greenPct").textContent = `${percentages.green}%`;
+      document.getElementById("bluePct").textContent = `${percentages.blue}%`;
+
+      document.getElementById("yellowBar").style.width = `${percentages.yellow}%`;
+      document.getElementById("redBar").style.width = `${percentages.red}%`;
+      document.getElementById("greenBar").style.width = `${percentages.green}%`;
+      document.getElementById("blueBar").style.width = `${percentages.blue}%`;
+
+      document.getElementById("resultBox").style.display = "block";
+      document.getElementById("resultBox").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  </script>
+</body>
+</html>
