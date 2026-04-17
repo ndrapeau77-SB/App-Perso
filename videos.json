@@ -1,17 +1,18 @@
 [
 
+  { "title": "Workout - 3 min", "file": "videos/workout - 3 min.mp4", "category": "Workout" },
+  { "title": "Workout - 3 minutes full", "file": "videos/workout - 3 minutes full.mp4", "category": "Workout" },
+  { "title": "Workout - Full body beginner", "file": "videos/workout - full body beginner.mp4", "category": "Workout" },
   { "title": "Workout - Back on track", "file": "videos/workout - back on track.mp4", "category": "Workout" },
   { "title": "Workout - Bras", "file": "videos/workout - bras.mp4", "category": "Workout" },
   { "title": "Workout - Core finisher", "file": "videos/workout - core finisher.mp4", "category": "Workout" },
   { "title": "Workout - Dumbbell 5x", "file": "videos/workout - dumbell 5x.mp4", "category": "Workout" },
-  { "title": "Workout - Full body beginner", "file": "videos/workout - full body beginner.mp4", "category": "Workout" },
   { "title": "Workout - Go", "file": "videos/workout - go.mp4", "category": "Workout" },
   { "title": "Workout - Shred", "file": "videos/workout - shred.mp4", "category": "Workout" },
   { "title": "Workout - Upper body", "file": "videos/workout - upper body.mp4", "category": "Workout" },
-  { "title": "Workout - Elastique", "file": "videos/workout- elastique.mp4", "category": "Workout" },
+  { "title": "Workout - Elastique", "file": "videos/workout- élastique.mp4", "category": "Workout" },
   { "title": "Workout - 10 minutes", "file": "videos/workout - 10 minutes.mp4", "category": "Workout" },
-  { "title": "Workout - 3 min", "file": "videos/workout - 3 min.mp4", "category": "Workout" },
-  { "title": "Workout - 3 minutes full", "file": "videos/workout - 3 minutes full.mp4", "category": "Workout" },
+ 
 
   { "title": "Lymphatic Drainage Routine", "file": "videos/Lymphatic Drainage Routine.mp4", "category": "Mobilité / Santé" },
   { "title": "Lymphatic drainage routine 2", "file": "videos/Lymphatic drainage routine2.mp4", "category": "Mobilité / Santé" },
