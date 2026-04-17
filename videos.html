@@ -44,8 +44,7 @@
 
     .header,
     .filters,
-    .player-panel,
-    .category-section {
+    .categories-panel {
       background: linear-gradient(180deg, rgba(20,32,31,0.95), rgba(18,28,27,0.95));
       border: 1px solid var(--border);
       border-radius: 22px;
@@ -67,8 +66,7 @@
     }
 
     .header h1,
-    .category-title,
-    .player-title {
+    .section-title {
       color: var(--accent);
       margin-bottom: 0;
     }
@@ -149,64 +147,44 @@
       min-width: 180px;
     }
 
-    .player-panel.hidden {
-      display: none;
-    }
-
-    .player-wrap {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      align-items: start;
-    }
-
-    .main-video {
-      width: 100%;
-      border-radius: 18px;
-      background: #000;
-      display: block;
-    }
-
-    .player-meta {
-      display: grid;
-      gap: 10px;
-    }
-
-    .player-desc {
-      color: var(--muted);
-      line-height: 1.55;
-      margin: 0;
-    }
-
-    .player-category {
-      display: inline-flex;
-      align-items: center;
-      width: fit-content;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(212, 175, 55, 0.10);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      color: #f0dfaa;
-      font-size: 0.84rem;
-    }
-
-    .player-actions {
+    .category-buttons {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
     }
 
-    .player-actions .btn {
+    .category-btn {
       width: auto;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.08);
+      color: var(--text);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      cursor: pointer;
+      font-size: 0.92rem;
+      transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
     }
 
-    .category-header {
+    .category-btn:active {
+      transform: scale(0.98);
+    }
+
+    .category-btn.active {
+      background: var(--accent);
+      color: #16130d;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .videos-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .count {
@@ -230,71 +208,40 @@
       gap: 12px;
     }
 
-    .video-thumb {
+    .video-preview-wrap {
       position: relative;
       border-radius: 16px;
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(212,175,55,0.16), rgba(255,255,255,0.04));
+      background: #000;
       border: 1px solid rgba(212,175,55,0.18);
-      min-height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      text-align: center;
     }
 
-    .thumb-title {
-      color: #fff9eb;
-      font-weight: 700;
-      font-size: 1rem;
-      line-height: 1.35;
-    }
-
-    .play-badge {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.45);
-      border: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
+    .video-preview {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+      background: #000;
+      max-height: 260px;
+      object-fit: cover;
     }
 
     .video-title {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: #fff9eb;
       margin: 0;
-    }
-
-    .video-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      line-height: 1.3;
     }
 
     .video-category {
       display: inline-flex;
       align-items: center;
+      width: fit-content;
       padding: 6px 10px;
       border-radius: 999px;
       background: rgba(212, 175, 55, 0.10);
       border: 1px solid rgba(212, 175, 55, 0.25);
       color: #f0dfaa;
       font-size: 0.82rem;
-    }
-
-    .favorite-btn {
-      width: auto;
-      min-width: 46px;
-      padding: 10px 12px;
     }
 
     .video-desc {
@@ -312,6 +259,12 @@
 
     .video-actions .btn {
       width: auto;
+      min-width: 120px;
+    }
+
+    .favorite-btn {
+      min-width: 52px !important;
+      padding: 10px 12px !important;
     }
 
     .empty-state {
@@ -364,9 +317,11 @@
       .video-grid {
         grid-template-columns: 1fr 1fr;
       }
+    }
 
-      .player-wrap {
-        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    @media (min-width: 1050px) {
+      .video-grid {
+        grid-template-columns: 1fr 1fr 1fr;
       }
     }
   </style>
@@ -392,13 +347,6 @@
         </div>
 
         <div class="filter-group">
-          <label class="small" for="filterCategory">Catégorie</label>
-          <select id="filterCategory">
-            <option value="all">Toutes les catégories</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
           <label class="small" for="filterFavorites">Favoris</label>
           <select id="filterFavorites">
             <option value="all">Tout</option>
@@ -408,25 +356,19 @@
       </div>
     </section>
 
-    <section class="player-panel hidden" id="playerPanel">
-      <div class="player-wrap">
-        <video id="mainVideo" class="main-video" controls preload="metadata" playsinline></video>
-
-        <div class="player-meta">
-          <h2 class="player-title" id="playerTitle">Titre vidéo</h2>
-          <div class="player-category" id="playerCategory">Catégorie</div>
-          <p class="player-desc" id="playerDesc">Description</p>
-
-          <div class="player-actions">
-            <button class="btn btn-soft" id="resumeBtn">Reprendre</button>
-            <button class="btn btn-soft" id="fullscreenBtn">Plein écran</button>
-            <button class="btn btn-soft" id="playerFavoriteBtn">☆ Favori</button>
-          </div>
-        </div>
-      </div>
+    <section class="categories-panel">
+      <h2 class="section-title">Catégories</h2>
+      <div class="category-buttons" id="categoryButtons"></div>
     </section>
 
-    <div id="videosContainer"></div>
+    <section>
+      <div class="videos-header">
+        <h2 class="section-title" id="currentCategoryTitle">Toutes les vidéos</h2>
+        <div class="count" id="videosCount">0 vidéo</div>
+      </div>
+
+      <div class="video-grid" id="videosContainer"></div>
+    </section>
   </div>
 
   <div class="toast" id="toast"></div>
@@ -435,23 +377,16 @@
     const STORAGE_KEY = "video_page_data_v1";
 
     const searchInput = document.getElementById("searchInput");
-    const filterCategory = document.getElementById("filterCategory");
     const filterFavorites = document.getElementById("filterFavorites");
     const resetFiltersBtn = document.getElementById("resetFiltersBtn");
     const videosContainer = document.getElementById("videosContainer");
-
-    const playerPanel = document.getElementById("playerPanel");
-    const mainVideo = document.getElementById("mainVideo");
-    const playerTitle = document.getElementById("playerTitle");
-    const playerCategory = document.getElementById("playerCategory");
-    const playerDesc = document.getElementById("playerDesc");
-    const resumeBtn = document.getElementById("resumeBtn");
-    const fullscreenBtn = document.getElementById("fullscreenBtn");
-    const playerFavoriteBtn = document.getElementById("playerFavoriteBtn");
+    const categoryButtons = document.getElementById("categoryButtons");
+    const currentCategoryTitle = document.getElementById("currentCategoryTitle");
+    const videosCount = document.getElementById("videosCount");
     const toast = document.getElementById("toast");
 
     let allVideos = [];
-    let currentVideo = null;
+    let activeCategory = "all";
 
     function showToast(message) {
       toast.textContent = message;
@@ -479,6 +414,12 @@
 
     function buildVideoId(video) {
       return slugify(video.file || video.title || Math.random().toString(16).slice(2));
+    }
+
+    function autoDescription(video) {
+      const title = video.title || "";
+      const category = video.category || "Autres";
+      return `Vidéo dans la catégorie ${category} : ${title}.`;
     }
 
     function getStorageData() {
@@ -540,15 +481,11 @@
         allVideos = data.map(video => ({
           ...video,
           id: buildVideoId(video),
-          description: video.description || ""
+          description: video.description || autoDescription(video)
         }));
 
-        populateCategories(allVideos);
+        renderCategoryButtons();
         renderVideos();
-
-        if (allVideos.length) {
-          openVideo(allVideos[0], false);
-        }
       } catch (error) {
         console.error(error);
         videosContainer.innerHTML = `
@@ -560,26 +497,40 @@
       }
     }
 
-    function populateCategories(videos) {
-      const categories = [...new Set(videos.map(video => video.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, "fr"));
+    function getCategories() {
+      return [...new Set(allVideos.map(video => video.category).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, "fr"));
+    }
 
-      filterCategory.innerHTML = `<option value="all">Toutes les catégories</option>`;
+    function renderCategoryButtons() {
+      const categories = getCategories();
 
-      categories.forEach(category => {
-        const option = document.createElement("option");
-        option.value = category;
-        option.textContent = category;
-        filterCategory.appendChild(option);
+      const buttons = [
+        `<button class="category-btn ${activeCategory === "all" ? "active" : ""}" data-category="all">Tout</button>`,
+        ...categories.map(category => `
+          <button class="category-btn ${activeCategory === category ? "active" : ""}" data-category="${escapeHtml(category)}">
+            ${escapeHtml(category)}
+          </button>
+        `)
+      ];
+
+      categoryButtons.innerHTML = buttons.join("");
+
+      categoryButtons.querySelectorAll(".category-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeCategory = btn.getAttribute("data-category");
+          renderCategoryButtons();
+          renderVideos();
+        });
       });
     }
 
     function getFilteredVideos() {
       const keyword = searchInput.value.trim().toLowerCase();
-      const category = filterCategory.value;
       const favoritesOnly = filterFavorites.value === "favorites";
 
       return allVideos.filter(video => {
-        const matchCategory = category === "all" || video.category === category;
+        const matchCategory = activeCategory === "all" || video.category === activeCategory;
         const matchFavorite = !favoritesOnly || isFavorite(video.id);
 
         const matchKeyword =
@@ -593,18 +544,13 @@
       });
     }
 
-    function groupByCategory(videos) {
-      return videos.reduce((acc, video) => {
-        const category = video.category || "Autres";
-        if (!acc[category]) acc[category] = [];
-        acc[category].push(video);
-        return acc;
-      }, {});
-    }
-
     function renderVideos() {
       const filtered = getFilteredVideos();
-      const grouped = groupByCategory(filtered);
+
+      currentCategoryTitle.textContent =
+        activeCategory === "all" ? "Toutes les vidéos" : activeCategory;
+
+      videosCount.textContent = `${filtered.length} vidéo${filtered.length > 1 ? "s" : ""}`;
 
       if (!filtered.length) {
         videosContainer.innerHTML = `
@@ -616,159 +562,92 @@
         return;
       }
 
-      const categoryOrder = Object.keys(grouped).sort((a, b) => a.localeCompare(b, "fr"));
-
-      videosContainer.innerHTML = categoryOrder.map(category => {
-        const videosHtml = grouped[category].map(video => {
-          const fav = isFavorite(video.id);
-          const progress = getProgress(video.id);
-          const progressText = progress > 0 ? `Reprendre à ${Math.floor(progress)} sec` : "Commencer";
-
-          return `
-            <article class="video-card">
-              <div class="video-thumb">
-                <div class="thumb-title">${escapeHtml(video.title || "Sans titre")}</div>
-                <div class="play-badge">▶</div>
-              </div>
-
-              <div class="video-meta">
-                <span class="video-category">${escapeHtml(video.category || "Autres")}</span>
-                <button class="btn favorite-btn" onclick="handleToggleFavorite('${video.id}')">${fav ? "⭐" : "☆"}</button>
-              </div>
-
-              <h3 class="video-title">${escapeHtml(video.title || "Sans titre")}</h3>
-              <p class="video-desc">${escapeHtml(video.description || "Aucune description pour l’instant.")}</p>
-
-              <div class="video-actions">
-                <button class="btn btn-soft" onclick="handleOpenVideo('${video.id}')">Lire</button>
-                <button class="btn btn-soft" onclick="handleResumeVideo('${video.id}')">${progressText}</button>
-              </div>
-            </article>
-          `;
-        }).join("");
+      videosContainer.innerHTML = filtered.map(video => {
+        const fav = isFavorite(video.id);
+        const progress = getProgress(video.id);
+        const progressText = progress > 0 ? `Reprendre (${Math.floor(progress)}s)` : "Lire";
 
         return `
-          <section class="category-section">
-            <div class="category-header">
-              <h2 class="category-title">${escapeHtml(category)}</h2>
-              <div class="count">${grouped[category].length} vidéo${grouped[category].length > 1 ? "s" : ""}</div>
+          <article class="video-card">
+            <div class="video-preview-wrap">
+              <video
+                class="video-preview"
+                controls
+                preload="metadata"
+                playsinline
+                ontimeupdate="handleTimeUpdate('${video.id}', this)"
+                onended="handleVideoEnded('${video.id}')"
+              >
+                <source src="${video.file}" type="video/mp4">
+                Ton navigateur ne supporte pas la lecture vidéo.
+              </video>
             </div>
-            <div class="video-grid">
-              ${videosHtml}
+
+            <span class="video-category">${escapeHtml(video.category || "Autres")}</span>
+            <h3 class="video-title">${escapeHtml(video.title || "Sans titre")}</h3>
+            <p class="video-desc">${escapeHtml(video.description || "")}</p>
+
+            <div class="video-actions">
+              <button class="btn btn-soft" onclick="handleResumeVideo('${video.id}')">${progressText}</button>
+              <button class="btn favorite-btn" onclick="handleToggleFavorite('${video.id}')">${fav ? "⭐" : "☆"}</button>
             </div>
-          </section>
+          </article>
         `;
       }).join("");
-    }
-
-    function openVideo(video, autoPlay = true, resume = false) {
-      if (!video) return;
-
-      currentVideo = video;
-      playerPanel.classList.remove("hidden");
-
-      playerTitle.textContent = video.title || "Sans titre";
-      playerCategory.textContent = video.category || "Autres";
-      playerDesc.textContent = video.description || "Aucune description pour l’instant.";
-
-      mainVideo.src = video.file;
-      mainVideo.load();
-
-      const progress = getProgress(video.id);
-
-      mainVideo.onloadedmetadata = () => {
-        if (resume && progress > 0 && progress < mainVideo.duration) {
-          mainVideo.currentTime = progress;
-        }
-
-        if (autoPlay) {
-          mainVideo.play().catch(() => {});
-        }
-      };
-
-      updatePlayerFavoriteButton();
-      playerPanel.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function updatePlayerFavoriteButton() {
-      if (!currentVideo) return;
-      playerFavoriteBtn.textContent = isFavorite(currentVideo.id) ? "⭐ Favori" : "☆ Favori";
-    }
-
-    function handleOpenVideo(videoId) {
-      const video = allVideos.find(v => v.id === videoId);
-      openVideo(video, true, false);
-    }
-
-    function handleResumeVideo(videoId) {
-      const video = allVideos.find(v => v.id === videoId);
-      openVideo(video, true, true);
     }
 
     function handleToggleFavorite(videoId) {
       const favoriteNow = toggleFavorite(videoId);
       renderVideos();
-
-      if (currentVideo && currentVideo.id === videoId) {
-        updatePlayerFavoriteButton();
-      }
-
       showToast(favoriteNow ? "Ajoutée aux favoris" : "Retirée des favoris");
+    }
+
+    function handleResumeVideo(videoId) {
+      const progress = getProgress(videoId);
+      const videos = document.querySelectorAll(".video-preview");
+
+      videos.forEach(videoEl => {
+        const source = videoEl.querySelector("source");
+        if (!source) return;
+
+        const matchedVideo = allVideos.find(v => v.id === videoId);
+        if (!matchedVideo) return;
+
+        if (source.getAttribute("src") === matchedVideo.file) {
+          videoEl.currentTime = progress || 0;
+          videoEl.play().catch(() => {});
+          videoEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
+    }
+
+    function handleTimeUpdate(videoId, videoEl) {
+      if (!videoEl.paused && !videoEl.ended) {
+        saveProgress(videoId, videoEl.currentTime);
+      }
+    }
+
+    function handleVideoEnded(videoId) {
+      saveProgress(videoId, 0);
+      renderVideos();
     }
 
     function resetFilters() {
       searchInput.value = "";
-      filterCategory.value = "all";
       filterFavorites.value = "all";
+      activeCategory = "all";
+      renderCategoryButtons();
       renderVideos();
     }
 
     searchInput.addEventListener("input", renderVideos);
-    filterCategory.addEventListener("change", renderVideos);
     filterFavorites.addEventListener("change", renderVideos);
     resetFiltersBtn.addEventListener("click", resetFilters);
 
-    resumeBtn.addEventListener("click", () => {
-      if (!currentVideo) return;
-      const progress = getProgress(currentVideo.id);
-      if (progress > 0) {
-        mainVideo.currentTime = progress;
-        mainVideo.play().catch(() => {});
-        showToast(`Reprise à ${Math.floor(progress)} sec`);
-      } else {
-        showToast("Aucune progression sauvegardée");
-      }
-    });
-
-    fullscreenBtn.addEventListener("click", () => {
-      if (!mainVideo) return;
-      if (mainVideo.requestFullscreen) {
-        mainVideo.requestFullscreen();
-      } else if (mainVideo.webkitEnterFullscreen) {
-        mainVideo.webkitEnterFullscreen();
-      }
-    });
-
-    playerFavoriteBtn.addEventListener("click", () => {
-      if (!currentVideo) return;
-      handleToggleFavorite(currentVideo.id);
-    });
-
-    mainVideo.addEventListener("timeupdate", () => {
-      if (currentVideo && !mainVideo.paused && !mainVideo.ended) {
-        saveProgress(currentVideo.id, mainVideo.currentTime);
-      }
-    });
-
-    mainVideo.addEventListener("ended", () => {
-      if (currentVideo) {
-        saveProgress(currentVideo.id, 0);
-      }
-    });
-
-    window.handleOpenVideo = handleOpenVideo;
-    window.handleResumeVideo = handleResumeVideo;
     window.handleToggleFavorite = handleToggleFavorite;
+    window.handleResumeVideo = handleResumeVideo;
+    window.handleTimeUpdate = handleTimeUpdate;
+    window.handleVideoEnded = handleVideoEnded;
 
     loadVideos();
   </script>
