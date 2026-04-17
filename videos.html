@@ -244,12 +244,7 @@
       font-size: 0.82rem;
     }
 
-    .video-desc {
-      color: var(--muted);
-      line-height: 1.5;
-      margin: 0;
-      font-size: 0.94rem;
-    }
+
 
     .video-actions {
       display: flex;
@@ -472,12 +467,10 @@
         if (!Array.isArray(data)) {
           throw new Error("videos.json doit contenir un tableau");
         }
-
-        allVideos = data.map(video => ({
-          ...video,
-          id: buildVideoId(video),
-          description: video.description || autoDescription(video)
-        }));
+allVideos = data.map(video => ({
+  ...video,
+  id: buildVideoId(video)
+}));
 
         renderCategoryButtons();
         renderVideos();
@@ -580,7 +573,7 @@
 
             <span class="video-category">${escapeHtml(video.category || "Autres")}</span>
             <h3 class="video-title">${escapeHtml(video.title || "Sans titre")}</h3>
-            <p class="video-desc">${escapeHtml(video.description || "")}</p>
+
 
             <div class="video-actions">
               <button class="btn btn-soft" onclick="handleResumeVideo('${video.id}')">${progressText}</button>
