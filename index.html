@@ -49,7 +49,8 @@
       padding: 10px 10px 28px;
     }
 
-    .hero-card {
+    .hero-card,
+    .task-card {
       border: 1px solid var(--border);
       border-radius: 28px;
       background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
@@ -89,11 +90,13 @@
       width: 100%;
     }
 
-    .pill-btn:active {
+    .pill-btn:active,
+    .menu-card:active {
       transform: scale(0.98);
     }
 
-    .routine-box {
+    .routine-box,
+    .task-box {
       border: 1px solid rgba(170, 142, 65, 0.45);
       border-radius: 22px;
       padding: 18px 16px;
@@ -116,11 +119,106 @@
       margin: 0 0 14px;
     }
 
-    .quote-author {
+    .quote-author,
+    .task-heading {
       font-size: 0.95rem;
       color: var(--accent);
       font-weight: 600;
       margin: 0;
+    }
+
+    .task-summary {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0 0 12px;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid rgba(170, 142, 65, 0.30);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(4, 24, 23, 0.72);
+    }
+
+    .task-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .task-text {
+      flex: 1;
+      color: var(--text);
+      line-height: 1.45;
+      font-size: 0.97rem;
+    }
+
+    .task-meta {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 4px;
+    }
+
+    .empty-tasks {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 12px 2px 4px;
+    }
+
+    .planner-box {
+      display: none;
+      margin-top: 14px;
+      border-top: 1px solid rgba(170, 142, 65, 0.24);
+      padding-top: 14px;
+      text-align: left;
+    }
+
+    .planner-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .planner-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .planner-day {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .planner-input {
+      width: 100%;
+      border: 1px solid rgba(170, 142, 65, 0.45);
+      background: rgba(7, 32, 30, 0.92);
+      color: var(--text);
+      padding: 11px 12px;
+      border-radius: 14px;
+      outline: none;
+    }
+
+    .planner-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
     }
 
     .menu-grid {
@@ -147,10 +245,6 @@
       box-shadow: 0 10px 24px rgba(0,0,0,0.12);
       transition: transform 0.12s ease, background 0.12s ease;
       width: 100%;
-    }
-
-    .menu-card:active {
-      transform: scale(0.985);
     }
 
     .install-banner {
@@ -204,15 +298,67 @@
       </div>
     </section>
 
+    <section class="task-card">
+      <p class="top-title">Tâches du jour</p>
+
+      <div class="task-box">
+        <p class="task-summary" id="taskSummary">Planifie tes tâches de la semaine et coche-les quand elles sont terminées.</p>
+        <div class="task-list" id="todayTasksList"></div>
+
+        <div class="action-row" style="margin-top:14px; margin-bottom:0;">
+          <button class="pill-btn" id="togglePlannerBtn">Planifier la semaine</button>
+          <button class="pill-btn" id="resetTasksBtn">Réinitialiser</button>
+        </div>
+
+        <div class="planner-box" id="plannerBox">
+          <div class="planner-grid">
+            <div class="planner-row">
+              <div class="planner-day">Lundi</div>
+              <input class="planner-input" data-day="1" placeholder="Ex. Appeler X / avancer Y" />
+            </div>
+            <div class="planner-row">
+              <div class="planner-day">Mardi</div>
+              <input class="planner-input" data-day="2" placeholder="Ex. 30 min focus perso" />
+            </div>
+            <div class="planner-row">
+              <div class="planner-day">Mercredi</div>
+              <input class="planner-input" data-day="3" placeholder="Ex. Envoyer un suivi" />
+            </div>
+            <div class="planner-row">
+              <div class="planner-day">Jeudi</div>
+              <input class="planner-input" data-day="4" placeholder="Ex. Lire 10 pages" />
+            </div>
+            <div class="planner-row">
+              <div class="planner-day">Vendredi</div>
+              <input class="planner-input" data-day="5" placeholder="Ex. Faire le bilan" />
+            </div>
+            <div class="planner-row">
+              <div class="planner-day">Samedi</div>
+              <input class="planner-input" data-day="6" placeholder="Ex. Temps famille / projet" />
+            </div>
+            <div class="planner-row">
+              <div class="planner-day">Dimanche</div>
+              <input class="planner-input" data-day="0" placeholder="Ex. Planifier la semaine" />
+            </div>
+          </div>
+
+          <div class="planner-actions">
+            <button class="pill-btn" id="savePlannerBtn">Enregistrer</button>
+            <button class="pill-btn" id="closePlannerBtn">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="menu-grid">
       <a href="videos.html" class="menu-card">Vidéos</a>
       <a href="notes.html" class="menu-card">Notes</a>
-      <a href="calendrier.html" class="menu-card">Calendrier</a>
       <a href="disc.html" class="menu-card">DISC / Couleurs</a>
       <a href="decouverte.html" class="menu-card">Découverte / apprentissage</a>
       <a href="musique.html" class="menu-card">Musique</a>
       <a href="objectifs.html" class="menu-card">Objectifs</a>
       <a href="moodboard.html" class="menu-card">Mood board</a>
+      <a href="calendrier.html" class="menu-card">Calendrier</a>
     </section>
 
     <div class="install-banner" id="installBanner">
@@ -286,7 +432,146 @@
       window.location.href = "notes.html?filter=favorites";
     });
 
-    loadQuotes().then(showRandomQuote);
+    function getTaskPlan() {
+      try {
+        return JSON.parse(localStorage.getItem("weeklyTaskPlan")) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function setTaskPlan(plan) {
+      localStorage.setItem("weeklyTaskPlan", JSON.stringify(plan));
+    }
+
+    function getTaskDoneState() {
+      try {
+        return JSON.parse(localStorage.getItem("weeklyTaskDone")) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function setTaskDoneState(done) {
+      localStorage.setItem("weeklyTaskDone", JSON.stringify(done));
+    }
+
+    function todayKey() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function currentDayIndex() {
+      return new Date().getDay();
+    }
+
+    function dayNameFr(index) {
+      const names = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+      return names[index] || "jour";
+    }
+
+    function renderTodayTasks() {
+      const plan = getTaskPlan();
+      const doneState = getTaskDoneState();
+      const dayIndex = currentDayIndex();
+      const today = todayKey();
+      const listEl = document.getElementById("todayTasksList");
+      const summaryEl = document.getElementById("taskSummary");
+
+      const rawTasks = (plan[dayIndex] || []).filter(Boolean).map(text => text.trim()).filter(Boolean);
+      const visibleTasks = rawTasks.filter((task, idx) => !doneState[`${today}-${dayIndex}-${idx}`]);
+
+      if (!rawTasks.length) {
+        summaryEl.textContent = `Aucune tâche prévue pour ${dayNameFr(dayIndex)}. Planifie ta semaine pour les voir ici.`;
+        listEl.innerHTML = `<div class="empty-tasks">Rien à faire aujourd’hui pour le moment.</div>`;
+        return;
+      }
+
+      summaryEl.textContent = visibleTasks.length
+        ? `${visibleTasks.length} tâche${visibleTasks.length > 1 ? 's' : ''} à faire aujourd’hui.`
+        : `Bravo, toutes tes tâches du ${dayNameFr(dayIndex)} sont cochées.`;
+
+      listEl.innerHTML = visibleTasks.length
+        ? visibleTasks.map((task, visibleIndex) => {
+            const originalIndex = rawTasks.findIndex((t, idx) => t === task && !doneState[`${today}-${dayIndex}-${idx}`] && rawTasks.slice(0, idx).filter((t2, idx2) => t2 === task && !doneState[`${today}-${dayIndex}-${idx2}`]).length === visibleIndex);
+            const taskId = `${today}-${dayIndex}-${originalIndex}`;
+            return `
+              <label class="task-item">
+                <input type="checkbox" onchange="completeTask('${taskId}')">
+                <div class="task-text">
+                  ${task}
+                  <div class="task-meta">Tâche du ${dayNameFr(dayIndex)}</div>
+                </div>
+              </label>
+            `;
+          }).join("")
+        : `<div class="empty-tasks">Tu as tout terminé pour aujourd’hui ✨</div>`;
+    }
+
+    function fillPlannerInputs() {
+      const plan = getTaskPlan();
+      document.querySelectorAll(".planner-input").forEach(input => {
+        const day = input.dataset.day;
+        input.value = (plan[day] || []).join(" | ");
+      });
+    }
+
+    function savePlanner() {
+      const nextPlan = {};
+      document.querySelectorAll(".planner-input").forEach(input => {
+        const day = input.dataset.day;
+        nextPlan[day] = input.value
+          .split("|")
+          .map(item => item.trim())
+          .filter(Boolean);
+      });
+      setTaskPlan(nextPlan);
+      renderTodayTasks();
+      togglePlanner(false);
+    }
+
+    function togglePlanner(forceOpen = null) {
+      const box = document.getElementById("plannerBox");
+      const isOpen = box.style.display === "block";
+      const shouldOpen = forceOpen === null ? !isOpen : forceOpen;
+      box.style.display = shouldOpen ? "block" : "none";
+      if (shouldOpen) fillPlannerInputs();
+    }
+
+    function completeTask(taskId) {
+      const done = getTaskDoneState();
+      done[taskId] = true;
+      setTaskDoneState(done);
+      renderTodayTasks();
+    }
+
+    function resetTodayTasks() {
+      const done = getTaskDoneState();
+      const dayIndex = currentDayIndex();
+      const today = todayKey();
+      Object.keys(done).forEach(key => {
+        if (key.startsWith(`${today}-${dayIndex}-`)) {
+          delete done[key];
+        }
+      });
+      setTaskDoneState(done);
+      renderTodayTasks();
+    }
+
+    document.getElementById("togglePlannerBtn").addEventListener("click", () => togglePlanner());
+    document.getElementById("closePlannerBtn").addEventListener("click", () => togglePlanner(false));
+    document.getElementById("savePlannerBtn").addEventListener("click", savePlanner);
+    document.getElementById("resetTasksBtn").addEventListener("click", resetTodayTasks);
+
+    window.completeTask = completeTask;
+
+    loadQuotes().then(() => {
+      showRandomQuote();
+      renderTodayTasks();
+    });
 
     let deferredPrompt = null;
     const installBanner = document.getElementById("installBanner");
