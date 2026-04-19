@@ -24,6 +24,8 @@
       --text: #f4f1e8;
       --muted: #bcc8c0;
       --shadow: 0 14px 30px rgba(0,0,0,0.14);
+      --green-soft: #7dc8a3;
+      --green-deep: #2e6a5d;
     }
 
     html, body {
@@ -50,7 +52,8 @@
     }
 
     .hero-card,
-    .task-card {
+    .task-card,
+    .tracker-card {
       border: 1px solid var(--border);
       border-radius: 28px;
       background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
@@ -96,7 +99,8 @@
     }
 
     .routine-box,
-    .task-box {
+    .task-box,
+    .tracker-box {
       border: 1px solid rgba(170, 142, 65, 0.45);
       border-radius: 22px;
       padding: 18px 16px;
@@ -120,14 +124,16 @@
     }
 
     .quote-author,
-    .task-heading {
+    .task-heading,
+    .tracker-heading {
       font-size: 0.95rem;
       color: var(--accent);
       font-weight: 600;
       margin: 0;
     }
 
-    .task-summary {
+    .task-summary,
+    .tracker-summary {
       color: var(--muted);
       font-size: 0.92rem;
       margin: 0 0 12px;
@@ -139,7 +145,9 @@
       gap: 10px;
     }
 
-    .task-item {
+    .task-item,
+    .habit-item,
+    .history-item {
       display: flex;
       align-items: flex-start;
       gap: 10px;
@@ -149,7 +157,8 @@
       background: rgba(4, 24, 23, 0.72);
     }
 
-    .task-item input[type="checkbox"] {
+    .task-item input[type="checkbox"],
+    .habit-item input[type="checkbox"] {
       width: 20px;
       height: 20px;
       margin-top: 2px;
@@ -158,14 +167,17 @@
       flex-shrink: 0;
     }
 
-    .task-text {
+    .task-text,
+    .habit-text {
       flex: 1;
       color: var(--text);
       line-height: 1.45;
       font-size: 0.97rem;
     }
 
-    .task-meta {
+    .task-meta,
+    .habit-meta,
+    .history-meta {
       color: var(--muted);
       font-size: 0.82rem;
       margin-top: 4px;
@@ -204,7 +216,9 @@
       font-size: 0.92rem;
     }
 
-    .planner-input {
+    .planner-input,
+    .tracker-input,
+    .tracker-textarea {
       width: 100%;
       border: 1px solid rgba(170, 142, 65, 0.45);
       background: rgba(7, 32, 30, 0.92);
@@ -214,11 +228,135 @@
       outline: none;
     }
 
+    .tracker-textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
     .planner-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-top: 12px;
+    }
+
+    .tracker-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .tracker-section {
+      border: 1px solid rgba(170, 142, 65, 0.30);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(4, 24, 23, 0.62);
+    }
+
+    .tracker-section-title {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin: 0 0 10px;
+    }
+
+    .water-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .water-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      border: 1px solid rgba(170, 142, 65, 0.22);
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green-deep), var(--green-soft));
+      transition: width 0.18s ease;
+    }
+
+    .water-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .energy-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .energy-btn.active {
+      background: rgba(217, 178, 75, 0.16);
+      color: var(--accent);
+      border-color: rgba(217, 178, 75, 0.75);
+    }
+
+    .brain-actions,
+    .review-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .history-box {
+      display: none;
+      margin-top: 14px;
+      border-top: 1px solid rgba(170, 142, 65, 0.24);
+      padding-top: 14px;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .history-title {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .history-text {
+      color: var(--text);
+      line-height: 1.45;
+      font-size: 0.92rem;
+      white-space: pre-wrap;
+    }
+
+    .mini-progress {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .mini-progress > div {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green-deep), var(--green-soft));
     }
 
     .menu-grid {
@@ -346,6 +484,87 @@
             <button class="pill-btn" id="savePlannerBtn">Enregistrer</button>
             <button class="pill-btn" id="closePlannerBtn">Fermer</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tracker-card">
+      <p class="top-title">Suivi du jour</p>
+
+      <div class="tracker-box">
+        <div class="tracker-grid">
+          <div class="tracker-section">
+            <p class="tracker-section-title">Eau</p>
+            <div class="water-top">
+              <div class="tracker-summary" style="margin:0;">Objectif : 3 L</div>
+              <div class="water-value" id="waterValue">0 ml / 3000 ml</div>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-bar" id="waterProgressBar"></div>
+            </div>
+            <div class="water-actions">
+              <button class="pill-btn" id="waterMinusBtn">-250 ml</button>
+              <button class="pill-btn" id="waterPlusBtn">+250 ml</button>
+              <button class="pill-btn" id="waterResetBtn">Reset</button>
+            </div>
+          </div>
+
+          <div class="tracker-section">
+            <p class="tracker-section-title">Niveau d’énergie</p>
+            <div class="energy-row">
+              <button class="pill-btn energy-btn" data-energy="low">Bas</button>
+              <button class="pill-btn energy-btn" data-energy="medium">Moyen</button>
+              <button class="pill-btn energy-btn" data-energy="high">Élevé</button>
+            </div>
+          </div>
+
+          <div class="tracker-section">
+            <p class="tracker-section-title">Habitudes</p>
+
+            <label class="habit-item">
+              <input type="checkbox" id="habitMove">
+              <div class="habit-text">
+                Bouger
+                <div class="habit-meta">Un peu de mouvement, même court</div>
+              </div>
+            </label>
+
+            <label class="habit-item" style="margin-top:10px;">
+              <input type="checkbox" id="habitRelax">
+              <div class="habit-text">
+                Pause méditation / relaxation
+                <div class="habit-meta">Quelques minutes pour ralentir</div>
+              </div>
+            </label>
+          </div>
+
+          <div class="tracker-section">
+            <p class="tracker-section-title">Brain dump</p>
+            <textarea class="tracker-textarea" id="brainDumpText" placeholder="Écris ce que tu as en tête..."></textarea>
+            <div class="brain-actions">
+              <button class="pill-btn" id="saveBrainDumpBtn">Enregistrer</button>
+              <button class="pill-btn" id="clearBrainDumpBtn">Effacer</button>
+            </div>
+          </div>
+
+          <div class="tracker-section">
+            <p class="tracker-section-title">Review du jour</p>
+            <textarea class="tracker-textarea" id="reviewText" placeholder="Ex. Ce que j’ai accompli, ce que je veux améliorer, une pensée de fin de journée..."></textarea>
+            <div class="review-actions">
+              <button class="pill-btn" id="saveReviewBtn">Enregistrer</button>
+              <button class="pill-btn" id="clearReviewBtn">Effacer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-row" style="margin-top:14px; margin-bottom:0;">
+          <button class="pill-btn" id="toggleResultsBtn">Résultats</button>
+          <button class="pill-btn" id="closeResultsBtn">Fermer historique</button>
+        </div>
+
+        <div class="history-box" id="resultsBox">
+          <p class="tracker-section-title">Historique des journées</p>
+          <div class="history-list" id="resultsList"></div>
         </div>
       </div>
     </section>
@@ -496,7 +715,13 @@
 
       listEl.innerHTML = visibleTasks.length
         ? visibleTasks.map((task, visibleIndex) => {
-            const originalIndex = rawTasks.findIndex((t, idx) => t === task && !doneState[`${today}-${dayIndex}-${idx}`] && rawTasks.slice(0, idx).filter((t2, idx2) => t2 === task && !doneState[`${today}-${dayIndex}-${idx2}`]).length === visibleIndex);
+            const originalIndex = rawTasks.findIndex((t, idx) =>
+              t === task &&
+              !doneState[`${today}-${dayIndex}-${idx}`] &&
+              rawTasks.slice(0, idx).filter((t2, idx2) =>
+                t2 === task && !doneState[`${today}-${dayIndex}-${idx2}`]
+              ).length === visibleIndex
+            );
             const taskId = `${today}-${dayIndex}-${originalIndex}`;
             return `
               <label class="task-item">
@@ -561,16 +786,221 @@
       renderTodayTasks();
     }
 
+    function getDailyTrackerStore() {
+      try {
+        return JSON.parse(localStorage.getItem("dailyTrackerStore")) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function setDailyTrackerStore(store) {
+      localStorage.setItem("dailyTrackerStore", JSON.stringify(store));
+    }
+
+    function ensureTodayTracker() {
+      const store = getDailyTrackerStore();
+      const key = todayKey();
+      if (!store[key]) {
+        store[key] = {
+          water: 0,
+          energy: "",
+          move: false,
+          relax: false,
+          brainDump: "",
+          review: ""
+        };
+        setDailyTrackerStore(store);
+      }
+      return store[key];
+    }
+
+    function updateTodayTracker(patch) {
+      const store = getDailyTrackerStore();
+      const key = todayKey();
+      const current = store[key] || {
+        water: 0,
+        energy: "",
+        move: false,
+        relax: false,
+        brainDump: "",
+        review: ""
+      };
+      store[key] = { ...current, ...patch };
+      setDailyTrackerStore(store);
+      return store[key];
+    }
+
+    function renderWater() {
+      const today = ensureTodayTracker();
+      const water = Math.max(0, Math.min(3000, today.water || 0));
+      const percent = (water / 3000) * 100;
+      document.getElementById("waterValue").textContent = `${water} ml / 3000 ml`;
+      document.getElementById("waterProgressBar").style.width = `${percent}%`;
+    }
+
+    function changeWater(amount) {
+      const today = ensureTodayTracker();
+      let next = (today.water || 0) + amount;
+      next = Math.max(0, Math.min(3000, next));
+      updateTodayTracker({ water: next });
+      renderWater();
+      renderResults();
+    }
+
+    function resetWater() {
+      updateTodayTracker({ water: 0 });
+      renderWater();
+      renderResults();
+    }
+
+    function renderEnergy() {
+      const today = ensureTodayTracker();
+      document.querySelectorAll(".energy-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.energy === today.energy);
+      });
+    }
+
+    function setEnergy(value) {
+      updateTodayTracker({ energy: value });
+      renderEnergy();
+      renderResults();
+    }
+
+    function renderHabits() {
+      const today = ensureTodayTracker();
+      document.getElementById("habitMove").checked = !!today.move;
+      document.getElementById("habitRelax").checked = !!today.relax;
+    }
+
+    function renderBrainDump() {
+      const today = ensureTodayTracker();
+      document.getElementById("brainDumpText").value = today.brainDump || "";
+    }
+
+    function renderReview() {
+      const today = ensureTodayTracker();
+      document.getElementById("reviewText").value = today.review || "";
+    }
+
+    function saveBrainDump() {
+      const value = document.getElementById("brainDumpText").value.trim();
+      updateTodayTracker({ brainDump: value });
+      renderResults();
+    }
+
+    function clearBrainDump() {
+      document.getElementById("brainDumpText").value = "";
+      updateTodayTracker({ brainDump: "" });
+      renderResults();
+    }
+
+    function saveReview() {
+      const value = document.getElementById("reviewText").value.trim();
+      updateTodayTracker({ review: value });
+      renderResults();
+    }
+
+    function clearReview() {
+      document.getElementById("reviewText").value = "";
+      updateTodayTracker({ review: "" });
+      renderResults();
+    }
+
+    function energyLabel(value) {
+      if (value === "low") return "Bas";
+      if (value === "medium") return "Moyen";
+      if (value === "high") return "Élevé";
+      return "Non défini";
+    }
+
+    function renderResults() {
+      const box = document.getElementById("resultsList");
+      const store = getDailyTrackerStore();
+      const entries = Object.entries(store)
+        .sort((a, b) => b[0].localeCompare(a[0]))
+        .slice(0, 14);
+
+      if (!entries.length) {
+        box.innerHTML = `<div class="empty-tasks">Aucun historique pour l’instant.</div>`;
+        return;
+      }
+
+      box.innerHTML = entries.map(([date, item]) => {
+        const water = Math.max(0, Math.min(3000, item.water || 0));
+        const waterPercent = (water / 3000) * 100;
+        const habitsDone = [item.move, item.relax].filter(Boolean).length;
+
+        return `
+          <div class="history-item">
+            <div style="width:100%;">
+              <div class="history-title">${date}</div>
+              <div class="history-meta">Énergie : ${energyLabel(item.energy)}</div>
+              <div class="history-meta">Habitudes : ${habitsDone}/2</div>
+              <div class="history-meta">Eau : ${water} ml</div>
+              <div class="mini-progress"><div style="width:${waterPercent}%"></div></div>
+              ${item.brainDump ? `<div class="history-text" style="margin-top:8px;"><strong>Brain dump :</strong><br>${item.brainDump}</div>` : ""}
+              ${item.review ? `<div class="history-text" style="margin-top:8px;"><strong>Review :</strong><br>${item.review}</div>` : ""}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function toggleResults(forceOpen = null) {
+      const box = document.getElementById("resultsBox");
+      const isOpen = box.style.display === "block";
+      const shouldOpen = forceOpen === null ? !isOpen : forceOpen;
+      box.style.display = shouldOpen ? "block" : "none";
+      if (shouldOpen) renderResults();
+    }
+
+    function initTracker() {
+      ensureTodayTracker();
+      renderWater();
+      renderEnergy();
+      renderHabits();
+      renderBrainDump();
+      renderReview();
+      renderResults();
+    }
+
     document.getElementById("togglePlannerBtn").addEventListener("click", () => togglePlanner());
     document.getElementById("closePlannerBtn").addEventListener("click", () => togglePlanner(false));
     document.getElementById("savePlannerBtn").addEventListener("click", savePlanner);
     document.getElementById("resetTasksBtn").addEventListener("click", resetTodayTasks);
+
+    document.getElementById("waterMinusBtn").addEventListener("click", () => changeWater(-250));
+    document.getElementById("waterPlusBtn").addEventListener("click", () => changeWater(250));
+    document.getElementById("waterResetBtn").addEventListener("click", resetWater);
+
+    document.querySelectorAll(".energy-btn").forEach(btn => {
+      btn.addEventListener("click", () => setEnergy(btn.dataset.energy));
+    });
+
+    document.getElementById("habitMove").addEventListener("change", (e) => {
+      updateTodayTracker({ move: e.target.checked });
+      renderResults();
+    });
+
+    document.getElementById("habitRelax").addEventListener("change", (e) => {
+      updateTodayTracker({ relax: e.target.checked });
+      renderResults();
+    });
+
+    document.getElementById("saveBrainDumpBtn").addEventListener("click", saveBrainDump);
+    document.getElementById("clearBrainDumpBtn").addEventListener("click", clearBrainDump);
+    document.getElementById("saveReviewBtn").addEventListener("click", saveReview);
+    document.getElementById("clearReviewBtn").addEventListener("click", clearReview);
+    document.getElementById("toggleResultsBtn").addEventListener("click", () => toggleResults());
+    document.getElementById("closeResultsBtn").addEventListener("click", () => toggleResults(false));
 
     window.completeTask = completeTask;
 
     loadQuotes().then(() => {
       showRandomQuote();
       renderTodayTasks();
+      initTracker();
     });
 
     let deferredPrompt = null;
