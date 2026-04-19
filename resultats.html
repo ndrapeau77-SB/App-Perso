@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Résultats</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#071b1a">
+  <link rel="apple-touch-icon" href="image_pastille.png">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg-top: #031313;
+      --bg-bottom: #082120;
+      --border: rgba(170, 142, 65, 0.52);
+      --accent: #d9b24b;
+      --text: #f4f1e8;
+      --muted: #bcc8c0;
+      --shadow: 0 14px 30px rgba(0,0,0,0.14);
+      --green-soft: #7dc8a3;
+      --green-deep: #2e6a5d;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0, 100, 80, 0.16), transparent 35%),
+        linear-gradient(180deg, var(--bg-top) 0%, #05211f 55%, var(--bg-bottom) 100%);
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 560px;
+      min-height: 100vh;
+      padding: 10px 10px 28px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        var(--shadow);
+      padding: 18px 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .top-title {
+      color: var(--accent);
+      font-size: 1.02rem;
+      line-height: 1.2;
+      margin: 2px 0 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      text-decoration: none;
+      border: 1px solid rgba(170, 142, 65, 0.62);
+      background: rgba(7, 32, 30, 0.92);
+      color: var(--text);
+      padding: 12px 10px;
+      border-radius: 999px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      min-height: 52px;
+      margin-bottom: 14px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat-box {
+      border: 1px solid rgba(170, 142, 65, 0.30);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(4, 24, 23, 0.72);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      color: var(--accent);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .section-title {
+      color: var(--accent);
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-item {
+      border: 1px solid rgba(170, 142, 65, 0.30);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(4, 24, 23, 0.72);
+    }
+
+    .history-date {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .history-meta {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+    }
+
+    .history-text {
+      color: var(--text);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      margin-top: 8px;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      border: 1px solid rgba(170, 142, 65, 0.18);
+      margin-top: 8px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green-deep), var(--green-soft));
+    }
+
+    .empty {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 8px 2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <a href="index.html" class="back-link">← Retour à l’accueil</a>
+
+    <section class="card">
+      <p class="top-title">Résultats</p>
+      <p class="subtle">Vue plus poussée de tes journées, habitudes, énergie, eau et reviews.</p>
+    </section>
+
+    <section class="card">
+      <p class="section-title">7 derniers jours</p>
+      <div class="stats-grid" id="stats7"></div>
+    </section>
+
+    <section class="card">
+      <p class="section-title">30 derniers jours</p>
+      <div class="stats-grid" id="stats30"></div>
+    </section>
+
+    <section class="card">
+      <p class="section-title">Historique détaillé</p>
+      <div class="history-list" id="historyList"></div>
+    </section>
+  </main>
+
+  <script>
+    function getJSON(key, fallback) {
+      try {
+        const v = localStorage.getItem(key);
+        return v ? JSON.parse(v) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function todayKey() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function getDateKeysBack(days) {
+      const result = [];
+      const now = new Date();
+      for (let i = 0; i < days; i++) {
+        const d = new Date(now);
+        d.setDate(now.getDate() - i);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        result.push(`${y}-${m}-${day}`);
+      }
+      return result;
+    }
+
+    function getDailyTrackerStore() {
+      return getJSON("dailyTrackerStore", {});
+    }
+
+    function getTaskDoneState() {
+      return getJSON("weeklyTaskDone", {});
+    }
+
+    function energyLabel(value) {
+      if (value === "low") return "Bas";
+      if (value === "medium") return "Moyen";
+      if (value === "high") return "Élevé";
+      return "Non défini";
+    }
+
+    function buildStats(days) {
+      const store = getDailyTrackerStore();
+      const taskDone = getTaskDoneState();
+      const keys = getDateKeysBack(days);
+
+      let waterTotal = 0;
+      let moveCount = 0;
+      let relaxCount = 0;
+      let reviewCount = 0;
+      let brainDumpCount = 0;
+      let tasksDoneCount = 0;
+      let energyCount = { low: 0, medium: 0, high: 0 };
+
+      keys.forEach(date => {
+        const item = store[date];
+        if (item) {
+          waterTotal += item.water || 0;
+          if (item.move) moveCount++;
+          if (item.relax) relaxCount++;
+          if (item.review) reviewCount++;
+          if (item.brainDump) brainDumpCount++;
+          if (item.energy && energyCount[item.energy] !== undefined) {
+            energyCount[item.energy]++;
+          }
+        }
+
+        Object.keys(taskDone).forEach(key => {
+          if (key.startsWith(`${date}-`)) tasksDoneCount++;
+        });
+      });
+
+      const avgWater = Math.round(waterTotal / days);
+      const bestEnergy =
+        Object.entries(energyCount).sort((a, b) => b[1] - a[1])[0]?.[0] || "";
+
+      return {
+        avgWater,
+        moveCount,
+        relaxCount,
+        reviewCount,
+        brainDumpCount,
+        tasksDoneCount,
+        bestEnergy: energyLabel(bestEnergy)
+      };
+    }
+
+    function statBox(label, value) {
+      return `
+        <div class="stat-box">
+          <div class="stat-label">${label}</div>
+          <div class="stat-value">${value}</div>
+        </div>
+      `;
+    }
+
+    function renderStats() {
+      const s7 = buildStats(7);
+      const s30 = buildStats(30);
+
+      document.getElementById("stats7").innerHTML = [
+        statBox("Moyenne eau", `${s7.avgWater} ml`),
+        statBox("Jours bouger", `${s7.moveCount}/7`),
+        statBox("Jours pause", `${s7.relaxCount}/7`),
+        statBox("Tâches cochées", s7.tasksDoneCount),
+        statBox("Reviews écrites", s7.reviewCount),
+        statBox("Énergie dominante", s7.bestEnergy)
+      ].join("");
+
+      document.getElementById("stats30").innerHTML = [
+        statBox("Moyenne eau", `${s30.avgWater} ml`),
+        statBox("Jours bouger", `${s30.moveCount}/30`),
+        statBox("Jours pause", `${s30.relaxCount}/30`),
+        statBox("Tâches cochées", s30.tasksDoneCount),
+        statBox("Reviews écrites", s30.reviewCount),
+        statBox("Énergie dominante", s30.bestEnergy)
+      ].join("");
+    }
+
+    function renderHistory() {
+      const store = getDailyTrackerStore();
+      const taskDone = getTaskDoneState();
+      const entries = Object.entries(store)
+        .sort((a, b) => b[0].localeCompare(a[0]));
+
+      const list = document.getElementById("historyList");
+
+      if (!entries.length) {
+        list.innerHTML = `<div class="empty">Aucun historique pour l’instant.</div>`;
+        return;
+      }
+
+      list.innerHTML = entries.map(([date, item]) => {
+        const water = Math.max(0, Math.min(3000, item.water || 0));
+        const waterPercent = (water / 3000) * 100;
+        const tasksDone = Object.keys(taskDone).filter(key => key.startsWith(`${date}-`)).length;
+        const habitsDone = [item.move, item.relax].filter(Boolean).length;
+
+        return `
+          <div class="history-item">
+            <div class="history-date">${date}</div>
+            <div class="history-meta">Eau : ${water} ml</div>
+            <div class="progress-wrap">
+              <div class="progress-bar" style="width:${waterPercent}%"></div>
+            </div>
+            <div class="history-meta">Énergie : ${energyLabel(item.energy)}</div>
+            <div class="history-meta">Habitudes : ${habitsDone}/2</div>
+            <div class="history-meta">Tâches cochées : ${tasksDone}</div>
+            ${item.brainDump ? `<div class="history-text"><strong>Brain dump :</strong><br>${item.brainDump}</div>` : ""}
+            ${item.review ? `<div class="history-text"><strong>Review :</strong><br>${item.review}</div>` : ""}
+          </div>
+        `;
+      }).join("");
+    }
+
+    renderStats();
+    renderHistory();
+  </script>
+</body>
+</html>
