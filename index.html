@@ -2,1251 +2,317 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mon App Perso</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#071b1a">
+  <link rel="apple-touch-icon" href="image_pastille.png">
+
   <style>
-    :root {
-      --bg: #06100c;
-      --bg2: #0b1712;
-      --panel: rgba(11, 20, 16, 0.96);
-      --panel2: rgba(15, 26, 20, 0.98);
-      --gold: #d6b164;
-      --green: #88b77c;
-      --text: #f5ecd8;
-      --muted: #c9c0ad;
-      --line: rgba(214, 177, 100, 0.22);
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
-      --radius: 22px;
+    * {
+      box-sizing: border-box;
     }
 
-    * { box-sizing: border-box; }
+    :root {
+      --bg-top: #031313;
+      --bg-bottom: #082120;
+      --panel: rgba(4, 37, 34, 0.96);
+      --panel-2: rgba(7, 28, 27, 0.82);
+      --border: rgba(170, 142, 65, 0.52);
+      --accent: #d9b24b;
+      --text: #f4f1e8;
+      --muted: #bcc8c0;
+      --shadow: 0 14px 30px rgba(0,0,0,0.14);
+    }
 
     html, body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top, rgba(136, 183, 124, 0.08), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(214, 177, 100, 0.08), transparent 30%),
-        linear-gradient(180deg, #08120e 0%, #040906 100%);
       min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0, 100, 80, 0.16), transparent 35%),
+        linear-gradient(180deg, var(--bg-top) 0%, #05211f 55%, var(--bg-bottom) 100%);
+      color: var(--text);
     }
 
-    a { color: var(--gold); text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
+    body {
+      display: flex;
+      justify-content: center;
+    }
 
     .app {
-      width: min(1100px, calc(100% - 18px));
-      margin: 0 auto;
-      padding: 12px 0 28px;
+      width: 100%;
+      max-width: 560px;
+      min-height: 100vh;
+      padding: 10px 10px 28px;
     }
 
-    .card {
-      background: linear-gradient(180deg, rgba(15, 26, 20, 0.97), rgba(10, 18, 14, 0.98));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px;
-      margin-bottom: 14px;
-    }
-
-    .quote {
+    .hero-card {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        var(--shadow);
+      padding: 18px 14px 16px;
       text-align: center;
-      color: var(--gold);
-      line-height: 1.6;
-    }
-
-    .quote small {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-    }
-
-    .eyebrow {
-      color: var(--green);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.76rem;
-      margin-bottom: 8px;
-    }
-
-    .routine {
-      cursor: pointer;
-      transition: transform 0.18s ease, border-color 0.18s ease;
-    }
-
-    .routine:hover {
-      transform: translateY(-2px);
-      border-color: rgba(214, 177, 100, 0.42);
-    }
-
-    .routine-title {
-      color: var(--gold);
-      font-size: 1.16rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .routine-desc, .subtle {
-      color: var(--muted);
-      line-height: 1.5;
-      font-size: 0.94rem;
-    }
-
-    .nav-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
       margin-bottom: 14px;
     }
 
-    .nav-btn {
-      border: 1px solid rgba(214, 177, 100, 0.24);
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(16, 29, 22, 0.98), rgba(9, 17, 13, 0.98));
-      box-shadow: var(--shadow);
+    .top-title {
+      color: var(--accent);
+      font-size: 1rem;
+      line-height: 1.2;
+      margin: 2px 0 14px;
+      font-weight: 600;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .pill-btn {
+      border: 1px solid rgba(170, 142, 65, 0.62);
+      background: rgba(7, 32, 30, 0.92);
       color: var(--text);
-      min-height: 92px;
-      padding: 12px;
+      padding: 12px 10px;
+      border-radius: 999px;
+      font-size: 0.96rem;
       cursor: pointer;
-      transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+      min-height: 52px;
+      transition: transform 0.12s ease, background 0.12s ease;
+      width: 100%;
+    }
+
+    .pill-btn:active {
+      transform: scale(0.98);
+    }
+
+    .routine-box {
+      border: 1px solid rgba(170, 142, 65, 0.45);
+      border-radius: 22px;
+      padding: 18px 16px;
+      background: rgba(7, 28, 27, 0.74);
+      text-align: left;
+    }
+
+    .routine-label {
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+
+    .quote-text {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #f0eee8;
+      margin: 0 0 14px;
+    }
+
+    .quote-author {
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .menu-card {
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 108px;
       text-align: center;
+      border-radius: 24px;
+      border: 1px solid rgba(170, 142, 65, 0.56);
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
+      color: #f2f0e8;
+      text-decoration: none;
+      font-size: 1.02rem;
       font-weight: 700;
+      padding: 14px 12px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+      transition: transform 0.12s ease, background 0.12s ease;
+      width: 100%;
     }
 
-    .nav-btn:hover, .nav-btn.active {
-      transform: translateY(-2px);
-      border-color: rgba(214, 177, 100, 0.5);
-      color: var(--gold);
+    .menu-card:active {
+      transform: scale(0.985);
     }
 
-    .panel {
+    .install-banner {
+      position: sticky;
+      bottom: 10px;
       display: none;
+      margin-top: 14px;
+      z-index: 10;
     }
 
-    .panel.active {
-      display: block;
-      animation: fadeIn 0.18s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .panel-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .panel-title {
-      color: var(--gold);
-      font-size: 1.22rem;
-      font-weight: 700;
-    }
-
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1.2fr 0.9fr auto;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .input, .select, .textarea, .btn, .chip, .mini-btn, .fav-btn, .tab-btn {
-      border-radius: 14px;
-      border: 1px solid rgba(214, 177, 100, 0.2);
-      background: rgba(8, 15, 12, 0.92);
-      color: var(--text);
-    }
-
-    .input, .select, .textarea {
-      padding: 12px 13px;
+    .install-btn {
       width: 100%;
-      outline: none;
-    }
-
-    .btn, .mini-btn, .fav-btn, .chip, .tab-btn {
-      padding: 10px 12px;
+      border: none;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      background: var(--accent);
+      color: #1b1710;
       cursor: pointer;
-      transition: 0.16s ease;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.22);
     }
 
-    .btn:hover, .mini-btn:hover, .fav-btn:hover, .chip:hover, .tab-btn:hover, .tab-btn.active {
-      border-color: rgba(214, 177, 100, 0.45);
-      color: var(--gold);
-      transform: translateY(-1px);
-    }
+    @media (min-width: 700px) {
+      .app {
+        max-width: 640px;
+      }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .item-card {
-      border: 1px solid rgba(214, 177, 100, 0.18);
-      background: linear-gradient(180deg, rgba(15, 26, 20, 0.98), rgba(10, 18, 14, 0.98));
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      min-height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .thumb {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      display: block;
-      background: #09100d;
-    }
-
-    .body {
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex: 1;
-    }
-
-    .title {
-      color: var(--gold);
-      font-weight: 700;
-      line-height: 1.35;
-    }
-
-    .meta {
-      color: var(--green);
-      font-size: 0.82rem;
-    }
-
-    .desc {
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.45;
-      flex: 1;
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: auto;
-    }
-
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .daily-box {
-      padding: 14px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(18, 29, 23, 0.96), rgba(10, 17, 13, 0.96));
-      border: 1px solid rgba(214, 177, 100, 0.2);
-      margin-bottom: 12px;
-    }
-
-    .daily-box strong { color: var(--gold); display: block; margin-bottom: 6px; }
-
-    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-
-    .note-layout {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 12px;
-    }
-
-    .textarea { min-height: 180px; resize: vertical; }
-
-    .note-list { display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow: auto; }
-
-    .note-item {
-      border: 1px solid rgba(214, 177, 100, 0.18);
-      border-radius: 16px;
-      padding: 12px;
-      background: rgba(9, 16, 13, 0.9);
-    }
-
-    .note-item h4 { margin: 0 0 6px; color: var(--gold); }
-    .note-item p { margin: 0 0 8px; color: var(--muted); white-space: pre-wrap; line-height: 1.45; }
-
-    .mood-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .mood-box {
-      border: 1px solid rgba(214, 177, 100, 0.18);
-      border-radius: 18px;
-      padding: 14px;
-      background: rgba(8, 16, 12, 0.9);
-    }
-
-    .mood-box h4 { margin: 0 0 10px; color: var(--gold); }
-    .mood-box ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.5; }
-
-    .calendar-hero {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .calendar-date-box,
-    .calendar-summary-box {
-      border: 1px solid rgba(214, 177, 100, 0.18);
-      border-radius: 18px;
-      padding: 14px;
-      background: rgba(8, 16, 12, 0.9);
-    }
-
-    .calendar-date-big {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .calendar-date-line {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .calendar-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .calendar-section {
-      border: 1px solid rgba(214, 177, 100, 0.18);
-      border-radius: 18px;
-      padding: 14px;
-      background: rgba(8, 16, 12, 0.9);
-    }
-
-    .calendar-item {
-      border: 1px solid rgba(214, 177, 100, 0.14);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(11, 20, 16, 0.9);
-      margin-bottom: 10px;
-    }
-
-    .calendar-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .calendar-item h4 {
-      margin: 0 0 6px;
-      color: var(--gold);
-      font-size: 0.98rem;
-    }
-
-    .calendar-item .time {
-      color: var(--green);
-      font-size: 0.82rem;
-      margin-bottom: 6px;
-    }
-
-    .calendar-inline-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .calendar-inline-form .full {
-      grid-column: 1 / -1;
-    }
-
-    .calendar-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .empty {
-      padding: 18px;
-      border: 1px dashed rgba(214, 177, 100, 0.18);
-      border-radius: 16px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    @media (max-width: 760px) {
-      .calendar-hero, .calendar-layout, .calendar-inline-form { grid-template-columns: 1fr; }
-      .toolbar, .note-layout { grid-template-columns: 1fr; }
-      .nav-grid, .grid-2, .mood-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 520px) {
-      .app { width: min(100% - 12px, 1100px); padding-top: 8px; }
-      .nav-grid, .grid-2, .mood-grid { grid-template-columns: repeat(2, 1fr); }
-      .card { padding: 13px; }
-      .title { font-size: 0.95rem; }
-      .desc, .subtle, .routine-desc { font-size: 0.88rem; }
-      .nav-btn { min-height: 82px; }
+      .menu-card {
+        min-height: 118px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <div class="card quote-section">
-      <div class="quote" id="quoteBox"></div>
-      <div class="quote-actions" style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-        <button class="btn" id="favQuoteBtn">☆ Favori</button>
-        <button class="btn" id="showQuoteFavsBtn">Mes citations favorites</button>
-        <button class="btn" id="toggleAddQuoteBtn">Ajouter une citation</button>
+  <main class="app">
+    <section class="hero-card">
+      <p class="top-title">Excellence personnelle</p>
+
+      <div class="action-row">
+        <button class="pill-btn" id="favoritesBtn">☆ Favoris</button>
+        <button class="pill-btn" id="quoteBtn">Nouvelle citation</button>
       </div>
-      <div id="addQuoteBox" style="display:none; margin-top:12px; text-align:left;">
-        <input class="input" id="newQuoteText" placeholder="Ta citation" />
-        <div style="height:8px"></div>
-        <input class="input" id="newQuoteAuthor" placeholder="Auteur" />
-        <div style="height:8px"></div>
-        <button class="btn" id="saveQuoteBtn">Enregistrer la citation</button>
+
+      <div class="routine-box">
+        <p class="routine-label">Citation du jour</p>
+        <p class="quote-text" id="quoteText">
+          Success doesn’t just find you. You have to go out and get it.
+        </p>
+        <p class="quote-author" id="quoteAuthor">— Inconnu</p>
       </div>
-      <div id="quoteFavsBox" style="display:none; margin-top:12px; text-align:left;"></div>
+    </section>
+
+    <section class="menu-grid">
+      <a href="videos.html" class="menu-card">Vidéos</a>
+      <a href="notes.html" class="menu-card">Notes</a>
+      <a href="calendrier.html" class="menu-card">Calendrier</a>
+      <a href="disc.html" class="menu-card">DISC / Couleurs</a>
+      <a href="decouverte.html" class="menu-card">Découverte / apprentissage</a>
+      <a href="musique.html" class="menu-card">Musique</a>
+      <a href="objectifs.html" class="menu-card">Objectifs</a>
+      <a href="moodboard.html" class="menu-card">Mood board</a>
+    </section>
+
+    <div class="install-banner" id="installBanner">
+      <button class="install-btn" id="installBtn">Installer l’app</button>
     </div>
+  </main>
 
-    <div class="card routine" onclick="showPanel('moodboard')">
-      <div class="eyebrow">Routine du jour</div>
-      <div class="routine-title" id="routineTitle"></div>
-      <div class="routine-desc" id="routineDesc"></div>
-    </div>
-
-    <div class="nav-grid">
-      <button type="button" class="nav-btn active" onclick="showPanel('videos')">Vidéos</button>
-      <button type="button" class="nav-btn" onclick="showPanel('activites')">Activités</button>
-      <button type="button" class="nav-btn" onclick="showPanel('apprentissage')">Découverte</button>
-      <button type="button" class="nav-btn" onclick="showPanel('recettes')">Recettes</button>
-      <button type="button" class="nav-btn" onclick="showPanel('musique')">Musique</button>
-      <button type="button" class="nav-btn" onclick="showPanel('calendrier')">Calendrier</button>
-      <button type="button" class="nav-btn" onclick="showPanel('moodboard')">Mood Board</button>
-      <button type="button" class="nav-btn" onclick="showPanel('notes')">Notes</button>
-    </div>
-
-    <section class="panel active card" id="videos">
-      <div class="panel-head">
-        <div>
-          <div class="panel-title">Vidéos</div>
-          <div class="subtle">Recherche, tri, favoris, et 2 previews côte à côte sur téléphone.</div>
-        </div>
-      </div>
-      <div class="toolbar">
-        <input class="input" id="videoSearch" placeholder="Rechercher une vidéo, un thème, une chaîne...">
-        <select class="select" id="videoSort">
-          <option value="default">Classer : recommandé</option>
-          <option value="title">Titre A → Z</option>
-          <option value="fav">Favoris d'abord</option>
-        </select>
-        <button class="btn" id="toggleVideoFavs">Mes favoris</button>
-      </div>
-      <div class="grid-2" id="videoGrid"></div>
-    </section>
-
-    <section class="panel card" id="activites">
-      <div class="panel-head">
-        <div>
-          <div class="panel-title">Activités</div>
-          <div class="subtle">5 idées gratuites selon la journée, avec favoris et quelques liens utiles.</div>
-        </div>
-      </div>
-      <div class="chips" id="activityDayChips"></div>
-      <div class="grid-2" id="activityGrid"></div>
-    </section>
-
-    <section class="panel card" id="apprentissage">
-      <div class="panel-head">
-        <div>
-          <div class="panel-title">Découverte & apprentissage</div>
-          <div class="subtle">Une découverte du jour et un bouton pour en faire apparaître une autre.</div>
-        </div>
-        <button class="btn" id="newDiscoveryBtn">Nouvelle découverte</button>
-      </div>
-      <div class="daily-box" id="discoveryBox"></div>
-      <div class="grid-2" id="discoveryArchive"></div>
-    </section>
-
-    <section class="panel card" id="recettes">
-      <div class="panel-head">
-        <div>
-          <div class="panel-title">Recettes</div>
-          <div class="subtle">Recherche rapide, recettes simples, économiques, et plus légères.</div>
-        </div>
-      </div>
-      <div class="toolbar">
-        <input class="input" id="recipeSearch" placeholder="Rechercher : lunch, poulet, léger, économique...">
-        <select class="select" id="recipeFilter">
-          <option value="all">Toutes</option>
-          <option value="simple">Simples</option>
-          <option value="budget">Petit budget</option>
-          <option value="light">Plus légères</option>
-        </select>
-        <button class="btn" id="toggleRecipeFavs">Mes favoris</button>
-      </div>
-      <div class="grid-2" id="recipeGrid"></div>
-    </section>
-
-    <section class="panel card" id="musique">
-      <div class="panel-head">
-        <div>
-          <div class="panel-title">Musique</div>
-          <div class="subtle">Leçons de drum et découverte musicale du jour.</div>
-        </div>
-      </div>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="showMusicTab('lecons', this)">Leçons</button>
-        <button class="tab-btn" onclick="showMusicTab('ecoute', this)">Écoute</button>
-      </div>
-      <div id="musicLecons">
-        <div class="grid-2" id="musicLessonGrid"></div>
-      </div>
-      <div id="musicEcoute" style="display:none;">
-        <div class="daily-box" id="musicDiscoveryBox"></div>
-        <div class="grid-2" id="musicDiscoveriesGrid"></div>
-      </div>
-    </section>
-
-    <section class="panel card" id="calendrier">
-      <div class="panel-head">
-        <div>
-          <div class="panel-title">Calendrier</div>
-          <div class="subtle">Ta journée en un coup d'œil : date du jour, routine, événements, rappels et éléments à venir.</div>
-        </div>
-      </div>
-
-      <div class="calendar-hero">
-        <div class="calendar-date-box">
-          <div class="eyebrow">Aujourd'hui</div>
-          <div class="calendar-date-big" id="calendarDayNumber"></div>
-          <div class="calendar-date-line" id="calendarFullDate"></div>
-        </div>
-        <div class="calendar-summary-box">
-          <div class="eyebrow">Routine du jour</div>
-          <div class="routine-title" id="calendarRoutineTitle"></div>
-          <div class="routine-desc" id="calendarRoutineDesc"></div>
-        </div>
-      </div>
-
-      <div class="calendar-layout">
-        <div class="calendar-section">
-          <div class="panel-title" style="font-size:1.05rem; margin-bottom:10px;">Événements du jour</div>
-          <div id="todayEventsList"></div>
-        </div>
-
-        <div class="calendar-section">
-          <div class="panel-title" style="font-size:1.05rem; margin-bottom:10px;">Rappels</div>
-          <div id="todayRemindersList"></div>
-        </div>
-
-        <div class="calendar-section">
-          <div class="panel-title" style="font-size:1.05rem; margin-bottom:10px;">Événements à venir</div>
-          <div id="upcomingEventsList"></div>
-        </div>
-
-        <div class="calendar-section">
-          <div class="panel-title" style="font-size:1.05rem; margin-bottom:10px;">Ajouter un élément</div>
-          <div class="subtle">Crée un événement ou un rappel dans l'app, puis ouvre-le dans le calendrier de ton cell.</div>
-
-          <div class="calendar-inline-form">
-            <input class="input" id="calendarTitle" placeholder="Titre" />
-            <input class="input" id="calendarTime" type="time" />
-            <input class="input full" id="calendarDate" type="date" />
-            <textarea class="textarea full" id="calendarNote" placeholder="Note ou détail" style="min-height:110px;"></textarea>
-          </div>
-
-          <div class="calendar-actions">
-            <button class="btn" id="saveCalendarItemBtn">Ajouter dans l'app</button>
-            <button class="btn" id="addToPhoneCalendarBtn">Ajouter au calendrier du cell</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel card" id="moodboard">
-      <div class="panel-head">
-        <div>
-          <div class="panel-title">Mood Board</div>
-          <div class="subtle">1 semaine, 1 mois, 1 an, avec questions-guides.</div>
-        </div>
-      </div>
-      <div class="mood-grid">
-        <div class="mood-box">
-          <h4>1 semaine</h4>
-          <ul>
-            <li>Comment je veux me sentir cette semaine ?</li>
-            <li>Quelle petite victoire me ferait du bien ?</li>
-            <li>Quelle habitude m'aiderait tout de suite ?</li>
-            <li>Qu'est-ce que je veux voir plus dans mes journées ?</li>
-          </ul>
-        </div>
-        <div class="mood-box">
-          <h4>1 mois</h4>
-          <ul>
-            <li>Quel changement concret je veux remarquer ?</li>
-            <li>Qu'est-ce que je veux bâtir ou apprendre ?</li>
-            <li>De quoi je serais fier dans 30 jours ?</li>
-            <li>Quels mots-clés représentent ce mois-là ?</li>
-          </ul>
-        </div>
-        <div class="mood-box">
-          <h4>1 an</h4>
-          <ul>
-            <li>Si l'année allait vraiment bien, qu'est-ce qui aurait changé ?</li>
-            <li>Quel genre de personne je veux devenir ?</li>
-            <li>Quelles sphères comptent le plus ?</li>
-            <li>Quels 3 grands thèmes guideront mon board ?</li>
-          </ul>
-        </div>
-        <div class="mood-box">
-          <h4>Comment le construire</h4>
-          <ul>
-            <li>Choisis 3 à 5 thèmes max pour garder ça clair.</li>
-            <li>Ajoute des images qui te font ressentir quelque chose.</li>
-            <li>Mets des mots courts : calme, discipline, énergie, famille, liberté.</li>
-            <li>Ajoute une action cette semaine et une ce mois-ci.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel card" id="notes">
-      <div class="panel-head">
-        <div>
-          <div class="panel-title">Notes</div>
-          <div class="subtle">Un espace simple pour garder tes idées, rappels et réflexions.</div>
-        </div>
-      </div>
-      <div class="note-layout">
-        <div>
-          <input class="input" id="noteTitle" placeholder="Titre de la note">
-          <div style="height:10px"></div>
-          <textarea class="textarea" id="noteBody" placeholder="Écris ici..."></textarea>
-          <div style="height:10px"></div>
-          <button class="btn" id="saveNoteBtn">Enregistrer la note</button>
-        </div>
-        <div>
-          <div class="eyebrow">Mes notes</div>
-          <div class="note-list" id="notesList"></div>
-        </div>
-      </div>
-    </section>
-  </div>
-
+  <script src="data.js"></script>
   <script>
     const defaultQuotes = [
-      { id: 'q1', text: 'You are the average of the five people you spend the most time with.', author: 'Jim Rohn' },
-      { id: 'q2', text: 'Formal education will make you a living; self-education will make you a fortune.', author: 'Jim Rohn' },
-      { id: 'q3', text: 'Don\'t wish it were easier. Wish you were better.', author: 'Jim Rohn' },
-      { id: 'q4', text: 'If you really want to do something, you\'ll find a way. If you don\'t, you\'ll find an excuse.', author: 'Jim Rohn' },
-      { id: 'q5', text: 'Your life does not get better by chance, it gets better by change.', author: 'Jim Rohn' },
-      { id: 'q6', text: 'Those who will not read are no better off than those who cannot read.', author: 'Jim Rohn' },
-      { id: 'q7', text: 'Success is something you attract by the person you become.', author: 'Jim Rohn' },
-      { id: 'q8', text: 'Leadership is the challenge to be something more than average.', author: 'Jim Rohn' },
-      { id: 'q9', text: 'You don\'t get paid for the hour. You get paid for the value you bring to the hour.', author: 'Jim Rohn' },
-      { id: 'q10', text: 'Happiness is not something you postpone for the future; it is something you design for the present.', author: 'Jim Rohn' },
-      { id: 'q11', text: 'The ultimate reason for setting goals is to become the person it takes to achieve them.', author: 'Jim Rohn' },
-      { id: 'q12', text: 'Success is nothing more than a few simple disciplines, practiced every day.', author: 'Jim Rohn' },
-      { id: 'q13', text: 'Don\'t wish for less problems; wish for more skills.', author: 'Jim Rohn' },
-      { id: 'q14', text: 'Learn to work harder on yourself than you do on your job.', author: 'Jim Rohn' },
-      { id: 'q15', text: 'How long should you try? Until.', author: 'Jim Rohn' },
-      { id: 'q16', text: 'For things to change, you have to change.', author: 'Jim Rohn' },
-      { id: 'q17', text: 'You have two choices: make a living or design a life.', author: 'Jim Rohn' },
-      { id: 'q18', text: 'Motivation is what gets you started. Habit is what keeps you going.', author: 'Jim Rohn' },
-      { id: 'q19', text: 'We must all suffer one of two things: the pain of discipline or the pain of regret.', author: 'Jim Rohn' },
-      { id: 'q20', text: 'Discipline is the bridge between goals and accomplishment.', author: 'Jim Rohn' },
-      { id: 'q21', text: 'Either you run the day or the day runs you.', author: 'Jim Rohn' },
-      { id: 'q22', text: 'If you are not willing to risk the unusual, you will have to settle for the ordinary.', author: 'Jim Rohn' },
-      { id: 'q23', text: 'The greatest gift you can give somebody is your own personal development.', author: 'Jim Rohn' },
-      { id: 'q24', text: 'You must take personal responsibility.', author: 'Jim Rohn' },
-      { id: 'q25', text: 'One of the greatest gifts you can give to anyone is your attention.', author: 'Jim Rohn' },
-      { id: 'q26', text: 'Excuses are the nails used to build a house of failure.', author: 'Jim Rohn' },
-      { id: 'q27', text: 'Happiness is not by chance, but by choice.', author: 'Jim Rohn' },
-      { id: 'q28', text: 'Success is doing ordinary things extraordinarily well.', author: 'Jim Rohn' },
-      { id: 'q29', text: 'What you do today can improve all your tomorrows.', author: 'Ralph Marston' },
-      { id: 'q30', text: 'Small daily improvements are the key to staggering long-term results.', author: 'Robin Sharma' },
-      { id: 'q31', text: 'Do what you can, with what you have, where you are.', author: 'Theodore Roosevelt' },
-      { id: 'q32', text: 'The future depends on what you do today.', author: 'Mahatma Gandhi' },
-      { id: 'q33', text: 'Don’t wait. The time will never be just right.', author: 'Napoleon Hill' },
-      { id: 'q34', text: 'A goal properly set is halfway reached.', author: 'Zig Ziglar' },
-      { id: 'q35', text: 'You don’t have to be great to start, but you have to start to be great.', author: 'Zig Ziglar' },
-      { id: 'q36', text: 'Success is the sum of small efforts, repeated day in and day out.', author: 'Robert Collier' },
-      { id: 'q37', text: 'Start where you are. Use what you have. Do what you can.', author: 'Arthur Ashe' },
-      { id: 'q38', text: 'The secret of getting ahead is getting started.', author: 'Mark Twain' },
-      { id: 'q39', text: 'It always seems impossible until it\'s done.', author: 'Nelson Mandela' },
-      { id: 'q40', text: 'You miss 100% of the shots you don’t take.', author: 'Wayne Gretzky' },
-      { id: 'q41', text: 'The harder you work for something, the greater you’ll feel when you achieve it.', author: 'Anonymous' },
-      { id: 'q42', text: 'Success doesn’t just find you. You have to go out and get it.', author: 'Anonymous' }
+      {
+        title: "Citation du jour",
+        text: "Success doesn’t just find you. You have to go out and get it.",
+        author: "Inconnu"
+      },
+      {
+        title: "Citation du jour",
+        text: "Ce que tu fais souvent finit par devenir ce que tu es.",
+        author: "Inconnu"
+      },
+      {
+        title: "Citation du jour",
+        text: "Tu n’as pas besoin d’attendre d’être motivé pour commencer.",
+        author: "Inconnu"
+      },
+      {
+        title: "Citation du jour",
+        text: "If you really want to do something, you'll find a way. If you don't, you'll find an excuse.",
+        author: "Jim Rohn"
+      }
     ];
 
-    let currentQuote = null;
+    let quotesData = defaultQuotes;
 
-    const routines = [
-      { title: 'Routine focus & énergie', desc: '5 minutes pour respirer, choisir 1 priorité claire, boire de l’eau, puis lancer ta première action utile.' },
-      { title: 'Routine reset mental', desc: 'Prends 3 minutes pour fermer les distractions, noter ce qui te stresse, puis choisir une seule petite action.' },
-      { title: 'Routine momentum', desc: 'Bouge un peu, pense clair, termine une mini-tâche. Le but : enclencher la journée.' },
-      { title: 'Routine calme & clarté', desc: 'Avant de consommer du contenu, décide comment tu veux te sentir aujourd’hui : calme, efficace, présent.' }
-    ];
-
-    const videos = [
-      { id: 'video-1', title: 'Morning motivation reset', channel: 'MotivationHub', desc: 'Pour repartir du bon pied avec énergie et clarté.', thumb: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=morning+motivation+reset', tags: ['motivation','focus'] },
-      { id: 'video-2', title: 'Guided breathing for focus', channel: 'Mindful Minutes', desc: 'Une pause courte pour se recentrer rapidement.', thumb: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=guided+breathing+for+focus', tags: ['respiration','calme'] },
-      { id: 'video-3', title: 'Productive deep work session', channel: 'Focus Lab', desc: 'Idéal pour te mettre dans une bulle de travail.', thumb: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=productive+deep+work+session', tags: ['productivité','travail'] },
-      { id: 'video-4', title: 'Stoic mindset in simple terms', channel: 'Better Every Day', desc: 'Développement personnel avec une vibe simple et solide.', thumb: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=stoic+mindset+simple+video', tags: ['mental','croissance'] }
-    ];
-
-    const activitiesByDay = {
-      0: [
-        { id: 'a1', title: 'Marche découverte 20 min', desc: 'Pars sans but précis et prends 3 photos de choses intéressantes.', link: 'https://www.alltrails.com/' },
-        { id: 'a2', title: 'Mini défi rangement', desc: 'Choisis un tiroir ou une surface et remets-la clean en 10 minutes.' },
-        { id: 'a3', title: 'Méditation gratuite', desc: 'Essaie une courte séance guidée.', link: 'https://www.youtube.com/results?search_query=meditation+10+minutes+francais' },
-        { id: 'a4', title: 'Dessine ton humeur', desc: 'Pas besoin d’être bon : juste des formes, couleurs, mots-clés.' },
-        { id: 'a5', title: 'Lecture inspiration', desc: 'Lis un article inspirant ou éducatif.', link: 'https://fs.blog/' }
-      ],
-      1: [
-        { id: 'b1', title: 'Workout maison 15 min', desc: 'Choisis une vidéo simple sans équipement.', link: 'https://www.youtube.com/results?search_query=15+minute+home+workout+no+equipment' },
-        { id: 'b2', title: 'Liste 10 idées', desc: 'Écris 10 idées pour améliorer ta semaine, sans te censurer.' },
-        { id: 'b3', title: 'Visite virtuelle', desc: 'Explore un musée gratuitement.', link: 'https://artsandculture.google.com/' },
-        { id: 'b4', title: 'Cuisine simple', desc: 'Essaie une recette 3 ingrédients ou presque.' },
-        { id: 'b5', title: 'Playlist intention', desc: 'Crée une playlist selon l’humeur que tu veux cultiver.' }
-      ],
-      2: [
-        { id: 'c1', title: 'Balado inspirant', desc: 'Écoute un épisode court qui te fait réfléchir.', link: 'https://www.youtube.com/results?search_query=podcast+developpement+personnel+francais' },
-        { id: 'c2', title: 'Jeu avec les enfants', desc: '20 minutes sans écran, juste pour rire ou construire quelque chose.' },
-        { id: 'c3', title: 'Nettoyage numérique', desc: 'Supprime 20 photos inutiles, 10 vieux onglets ou 5 applis inutiles.' },
-        { id: 'c4', title: 'Respiration + étirement', desc: '5 à 10 minutes pour relâcher la tension.' },
-        { id: 'c5', title: 'Cherche une place locale', desc: 'Trouve un parc, café ou coin à découvrir près de toi.', link: 'https://www.google.com/maps' }
-      ],
-      3: [
-        { id: 'd1', title: 'Page de journal', desc: 'Écris une page sur ce que tu veux plus dans ta vie.' },
-        { id: 'd2', title: 'Routine silence', desc: '10 minutes sans bruit ni téléphone.' },
-        { id: 'd3', title: 'Cherche une nouvelle recette', desc: 'Trouve une recette santé qui a l’air facile.' },
-        { id: 'd4', title: 'Apprendre un truc', desc: 'Va voir une capsule éducative courte.', link: 'https://www.youtube.com/results?search_query=comment+c%27est+fait' },
-        { id: 'd5', title: 'Mission gratitude', desc: 'Écris 3 choses vraies qui vont bien en ce moment.' }
-      ],
-      4: [
-        { id: 'e1', title: 'Session photo mobile', desc: 'Fais 10 photos avec un thème : texture, lumière, nature, détails.' },
-        { id: 'e2', title: 'Défi zéro dépense', desc: 'Trouve une activité le fun sans dépenser un sou.' },
-        { id: 'e3', title: 'Vidéo apprentissage rapide', desc: 'Va voir une capsule éducative courte.', link: 'https://www.ted.com/talks' },
-        { id: 'e4', title: 'Mini projet maison', desc: 'Répare, déplace ou améliore un petit coin chez toi.' },
-        { id: 'e5', title: 'Pause soleil', desc: '10 à 15 minutes dehors sans écran.' }
-      ],
-      5: [
-        { id: 'f1', title: 'Sortie nature', desc: 'Marche, parc, forêt, bord de l’eau : reconnecte-toi un peu.' },
-        { id: 'f2', title: 'Soirée jeu maison', desc: 'Cartes, dés, société, ou invention de règles maison.' },
-        { id: 'f3', title: 'Mood board express', desc: 'Trouve 5 images qui représentent ta prochaine semaine.' },
-        { id: 'f4', title: 'Découverte musicale', desc: 'Écoute un artiste jamais essayé avant.', link: 'https://bandcamp.com/discover' },
-        { id: 'f5', title: 'Rangement relâche', desc: 'Mets une bonne musique et range une zone.' }
-      ],
-      6: [
-        { id: 'g1', title: 'Bilan doux', desc: 'Qu’est-ce qui t’a fait du bien cette semaine ?' },
-        { id: 'g2', title: 'Prépare 3 repas simples', desc: 'Planifie léger pour t’aider la semaine prochaine.' },
-        { id: 'g3', title: 'Vision semaine', desc: 'Choisis 3 intentions pour les 7 prochains jours.' },
-        { id: 'g4', title: 'Longue écoute relax', desc: 'Trouve une ambiance sonore qui ralentit le rythme.', link: 'https://www.youtube.com/results?search_query=relaxing+music' },
-        { id: 'g5', title: 'Appel à quelqu’un', desc: 'Prends des nouvelles d’une personne que tu apprécies.' }
-      ]
-    };
-
-    const discoveries = [
-      { id: 'disc-1', type: 'Savais-tu que', title: 'Le miel ne se périme presque pas', text: 'Des pots de miel très anciens ont été retrouvés encore consommables grâce à sa faible humidité et son acidité naturelle.' },
-      { id: 'disc-2', type: 'Comment c’est fait', title: 'Le verre vient du sable', text: 'Quand on chauffe principalement de la silice à très haute température, elle fond et devient le verre utilisé sous mille formes.' },
-      { id: 'disc-3', type: 'Innovation', title: 'Certaines fermes verticales cultivent sans sol', text: 'Grâce à l’hydroponie et à un contrôle précis de la lumière, de l’eau et des nutriments, on peut produire en intérieur avec très peu d’espace.' },
-      { id: 'disc-4', type: 'Savais-tu que', title: 'Les pieuvres ont trois cœurs', text: 'Deux pompent le sang vers les branchies et un autre vers le reste du corps.' },
-      { id: 'disc-5', type: 'Comment c’est fait', title: 'Le chocolat commence avec une fève fermentée', text: 'Les fèves de cacao sont fermentées, séchées, torréfiées puis broyées avant de devenir du chocolat.' },
-      { id: 'disc-6', type: 'Innovation', title: 'Certaines prothèses réagissent à des signaux musculaires', text: 'Des capteurs détectent l’intention de mouvement et la traduisent en action mécanique.' }
-    ];
-
-    const recipes = [
-      { id: 'r1', title: 'Bol de poulet, riz et légumes', desc: 'Simple, soutenant, facile à préparer à l’avance.', tags: ['simple','budget','light'], thumb: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=healthy+chicken+rice+bowl' },
-      { id: 'r2', title: 'Soupe aux légumes économique', desc: 'Peu coûteuse, rassasiante et pratique pour la semaine.', tags: ['simple','budget','light'], thumb: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=easy+vegetable+soup+healthy' },
-      { id: 'r3', title: 'Wrap thon grec léger', desc: 'Rapide pour lunch et facile à emporter.', tags: ['simple','light'], thumb: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=healthy+tuna+wrap' },
-      { id: 'r4', title: 'Omelette légumes et fromage léger', desc: 'Simple, protéinée et pas trop chère.', tags: ['simple','budget','light'], thumb: 'https://images.unsplash.com/photo-1510693206972-df098062cb71?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=vegetable+omelette+healthy' }
-    ];
-
-    const musicLessons = [
-      { id: 'm1', title: 'Drum fill simple mais efficace', desc: 'Une passe facile à intégrer pour rendre ton jeu plus vivant.', thumb: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=simple+drum+fill+lesson' },
-      { id: 'm2', title: 'Groove débutant à intermédiaire', desc: 'Parfait pour solidifier la base et garder le tempo propre.', thumb: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=drum+groove+lesson' },
-      { id: 'm3', title: 'Coordination mains/pieds', desc: 'Utile pour progresser sans te perdre dans trop de théorie.', thumb: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=drum+coordination+lesson' },
-      { id: 'm4', title: 'Passe de drum musicale', desc: 'Une leçon tournée vers le groove et le feeling.', thumb: 'https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=800&q=80', url: 'https://www.youtube.com/results?search_query=musical+drum+fill+lesson' }
-    ];
-
-    const musicDiscoveries = [
-      { id: 'md1', title: 'Découverte du jour : jazz fusion énergique', desc: 'Des pièces où la batterie est vraiment vivante et créative.', url: 'https://www.youtube.com/results?search_query=jazz+fusion+drumming' },
-      { id: 'md2', title: 'Découverte du jour : afrobeat groove', desc: 'Des rythmes qui donnent envie de bouger.', url: 'https://www.youtube.com/results?search_query=afrobeat+groove+playlist' },
-      { id: 'md3', title: 'Découverte du jour : indie instrumental', desc: 'Parfait pour travailler ou ralentir.', url: 'https://www.youtube.com/results?search_query=indie+instrumental+playlist' },
-      { id: 'md4', title: 'Découverte du jour : classic soul', desc: 'Une vibe intemporelle, chaleureuse et élégante.', url: 'https://www.youtube.com/results?search_query=classic+soul+playlist' }
-    ];
-
-    const defaultCalendarItems = [
-      { id: 'cal-1', title: 'Révision des priorités', date: '2026-04-19', time: '09:00', note: 'Faire le point sur les tâches importantes de la journée.', type: 'event' },
-      { id: 'cal-2', title: 'Rappel eau + pause', date: '2026-04-19', time: '14:30', note: 'Petite pause, respiration et hydratation.', type: 'reminder' },
-      { id: 'cal-3', title: 'Bloc focus personnel', date: '2026-04-20', time: '19:30', note: '30 à 45 minutes pour une tâche qui me fait avancer.', type: 'event' },
-      { id: 'cal-4', title: 'Planifier la semaine', date: '2026-04-21', time: '20:00', note: 'Regarder les rendez-vous, objectifs et temps de famille.', type: 'reminder' }
-    ];
-
-    function daySeed() {
-      const now = new Date();
-      return `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
-    }
-
-    function dayIndex(total) {
-      const seed = daySeed();
-      let sum = 0;
-      for (let i = 0; i < seed.length; i++) sum += seed.charCodeAt(i);
-      return sum % total;
-    }
-
-    function getJSON(key, fallback) {
+    async function loadQuotes() {
       try {
-        const v = localStorage.getItem(key);
-        return v ? JSON.parse(v) : fallback;
+        const response = await fetch("./citations.json");
+        if (!response.ok) throw new Error("citations.json introuvable");
+        const data = await response.json();
+
+        if (Array.isArray(data) && data.length) {
+          quotesData = data.map(item => {
+            if (typeof item === "string") {
+              return {
+                text: item,
+                author: "Inconnu"
+              };
+            }
+
+            return {
+              text: item.text || item.quote || "Contenu indisponible.",
+              author: item.author || item.auteur || "Inconnu"
+            };
+          });
+        }
       } catch (e) {
-        return fallback;
+        console.log("Chargement citations: fallback local", e);
       }
     }
 
-    function setJSON(key, value) {
-      localStorage.setItem(key, JSON.stringify(value));
+    function showRandomQuote() {
+      if (!quotesData.length) return;
+      const random = quotesData[Math.floor(Math.random() * quotesData.length)];
+      document.getElementById("quoteText").textContent = random.text || "";
+      document.getElementById("quoteAuthor").textContent = `— ${random.author || "Inconnu"}`;
     }
 
-    function getFavs() { return getJSON('app-favs', []); }
-    function isFav(id) { return getFavs().includes(id); }
+    document.getElementById("quoteBtn").addEventListener("click", showRandomQuote);
 
-    function toggleFav(id) {
-      const favs = getFavs();
-      const next = favs.includes(id) ? favs.filter(x => x !== id) : [...favs, id];
-      setJSON('app-favs', next);
-      renderVideos();
-      renderActivities(window.currentActivityDay ?? new Date().getDay());
-      renderRecipes();
-    }
+    document.getElementById("favoritesBtn").addEventListener("click", () => {
+      window.location.href = "notes.html?filter=favorites";
+    });
 
-    function makeCard(item, linkLabel) {
-      return `
-        <article class="item-card">
-          ${item.thumb ? `<img class="thumb" src="${item.thumb}" alt="${item.title}">` : ''}
-          <div class="body">
-            <div class="title">${item.title}</div>
-            ${item.channel ? `<div class="meta">${item.channel}</div>` : ''}
-            <div class="desc">${item.desc || ''}</div>
-            <div class="actions">
-              ${item.url ? `<a class="mini-btn" href="${item.url}" target="_blank" rel="noopener">${linkLabel || 'Ouvrir'}</a>` : ''}
-              <button class="fav-btn" onclick="toggleFav('${item.id}')">${isFav(item.id) ? '★ Favori' : '☆ Favori'}</button>
-            </div>
-          </div>
-        </article>
-      `;
-    }
+    loadQuotes().then(showRandomQuote);
 
-    let showVideoFavsOnly = false;
-    let showRecipeFavsOnly = false;
+    let deferredPrompt = null;
+    const installBanner = document.getElementById("installBanner");
+    const installBtn = document.getElementById("installBtn");
 
-    function getCustomQuotes() {
-      return getJSON('app-custom-quotes', []);
-    }
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBanner.style.display = "block";
+    });
 
-    function setCustomQuotes(quotes) {
-      setJSON('app-custom-quotes', quotes);
-    }
+    installBtn.addEventListener("click", async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBanner.style.display = "none";
+    });
 
-    function getAllQuotes() {
-      return [...defaultQuotes, ...getCustomQuotes()];
-    }
-
-    function getFavQuoteIds() {
-      return getJSON('app-fav-quotes', []);
-    }
-
-    function setFavQuoteIds(ids) {
-      setJSON('app-fav-quotes', ids);
-    }
-
-    function isFavQuote(id) {
-      return getFavQuoteIds().includes(id);
-    }
-
-    function getDailyQuote() {
-      const quotes = getAllQuotes();
-      const index = dayIndex(quotes.length);
-      return quotes[index];
-    }
-
-    function renderQuote() {
-      currentQuote = getDailyQuote();
-      const box = document.getElementById('quoteBox');
-      box.innerHTML = `${currentQuote.text}<small>— ${currentQuote.author}</small>`;
-      updateQuoteFavButton();
-      renderQuoteFavs();
-    }
-
-    function updateQuoteFavButton() {
-      const btn = document.getElementById('favQuoteBtn');
-      if (!btn || !currentQuote) return;
-      btn.textContent = isFavQuote(currentQuote.id) ? '★ Favori' : '☆ Favori';
-      btn.classList.toggle('active', isFavQuote(currentQuote.id));
-    }
-
-    function toggleCurrentQuoteFav() {
-      if (!currentQuote) return;
-      const favs = getFavQuoteIds();
-      const next = favs.includes(currentQuote.id)
-        ? favs.filter(id => id !== currentQuote.id)
-        : [...favs, currentQuote.id];
-      setFavQuoteIds(next);
-      updateQuoteFavButton();
-      renderQuoteFavs();
-    }
-
-    function renderQuoteFavs() {
-      const favIds = getFavQuoteIds();
-      const quotes = getAllQuotes().filter(q => favIds.includes(q.id));
-      const box = document.getElementById('quoteFavsBox');
-      if (!box) return;
-      box.innerHTML = quotes.length ? quotes.map(q => `
-        <div class="note-item" style="margin-bottom:8px;">
-          <p style="margin-bottom:6px;">${q.text}</p>
-          <div class="meta">— ${q.author}</div>
-          <div style="height:8px"></div>
-          <button class="mini-btn" onclick="removeFavQuote('${q.id}')">Retirer</button>
-        </div>
-      `).join('') : '<div class="empty">Aucune citation favorite pour l’instant.</div>';
-    }
-
-    function removeFavQuote(id) {
-      setFavQuoteIds(getFavQuoteIds().filter(qid => qid !== id));
-      updateQuoteFavButton();
-      renderQuoteFavs();
-    }
-
-    function toggleQuoteFavsBox() {
-      const box = document.getElementById('quoteFavsBox');
-      if (!box) return;
-      box.style.display = box.style.display === 'none' ? 'block' : 'none';
-      renderQuoteFavs();
-    }
-
-    function toggleAddQuoteBox() {
-      const box = document.getElementById('addQuoteBox');
-      if (!box) return;
-      box.style.display = box.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function saveCustomQuote() {
-      const textEl = document.getElementById('newQuoteText');
-      const authorEl = document.getElementById('newQuoteAuthor');
-      const text = textEl.value.trim();
-      const author = authorEl.value.trim() || 'Auteur inconnu';
-      if (!text) return;
-      const customQuotes = getCustomQuotes();
-      customQuotes.push({
-        id: `cq-${Date.now()}`,
-        text,
-        author
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+          .then(() => console.log("Service Worker enregistré"))
+          .catch(err => console.log("Erreur Service Worker :", err));
       });
-      setCustomQuotes(customQuotes);
-      textEl.value = '';
-      authorEl.value = '';
-      renderQuote();
-      toggleAddQuoteBox();
-    }<small>— ${q.author}</small>`;
     }
-
-    function renderRoutine() {
-      const r = routines[dayIndex(routines.length)];
-      document.getElementById('routineTitle').textContent = r.title;
-      document.getElementById('routineDesc').textContent = r.desc;
-    }
-
-    function renderVideos() {
-      const q = (document.getElementById('videoSearch').value || '').trim().toLowerCase();
-      const sort = document.getElementById('videoSort').value;
-      let list = videos.filter(v => (`${v.title} ${v.channel} ${v.desc} ${(v.tags||[]).join(' ')}`).toLowerCase().includes(q));
-      if (showVideoFavsOnly) list = list.filter(v => isFav(v.id));
-      if (sort === 'title') list.sort((a,b) => a.title.localeCompare(b.title, 'fr'));
-      if (sort === 'fav') list.sort((a,b) => Number(isFav(b.id)) - Number(isFav(a.id)));
-      document.getElementById('videoGrid').innerHTML = list.length ? list.map(v => makeCard(v, 'Voir')).join('') : '<div class="empty">Aucune vidéo trouvée.</div>';
-    }
-
-    function renderActivities(day) {
-      window.currentActivityDay = day;
-      const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
-      document.getElementById('activityDayChips').innerHTML = dayNames.map((name, idx) => `<button class="chip ${idx===day?'active':''}" onclick="renderActivities(${idx})">${name}</button>`).join('');
-      const list = activitiesByDay[day] || [];
-      document.getElementById('activityGrid').innerHTML = list.length ? list.map(item => `
-        <article class="item-card">
-          <div class="body">
-            <div class="title">${item.title}</div>
-            <div class="meta">Activité gratuite / simple</div>
-            <div class="desc">${item.desc}</div>
-            <div class="actions">
-              ${item.link ? `<a class="mini-btn" href="${item.link}" target="_blank" rel="noopener">Voir lien</a>` : ''}
-              <button class="fav-btn" onclick="toggleFav('${item.id}')">${isFav(item.id) ? '★ Favori' : '☆ Favori'}</button>
-            </div>
-          </div>
-        </article>
-      `).join('') : '<div class="empty">Aucune activité disponible.</div>';
-    }
-
-    function renderDiscovery() {
-      const today = discoveries[dayIndex(discoveries.length)];
-      document.getElementById('discoveryBox').innerHTML = `<strong>${today.type} — ${today.title}</strong><div class="subtle">${today.text}</div>`;
-      document.getElementById('discoveryArchive').innerHTML = discoveries.filter(d => d.id !== today.id).slice(0,4).map(d => `
-        <article class="item-card">
-          <div class="body">
-            <div class="meta">${d.type}</div>
-            <div class="title">${d.title}</div>
-            <div class="desc">${d.text}</div>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    function showNewDiscovery() {
-      const d = discoveries[Math.floor(Math.random() * discoveries.length)];
-      document.getElementById('discoveryBox').innerHTML = `<strong>${d.type} — ${d.title}</strong><div class="subtle">${d.text}</div>`;
-    }
-
-    function renderRecipes() {
-      const q = (document.getElementById('recipeSearch').value || '').trim().toLowerCase();
-      const filter = document.getElementById('recipeFilter').value;
-      let list = recipes.filter(r => (`${r.title} ${r.desc} ${r.tags.join(' ')}`).toLowerCase().includes(q) && (filter === 'all' || r.tags.includes(filter)));
-      if (showRecipeFavsOnly) list = list.filter(r => isFav(r.id));
-      document.getElementById('recipeGrid').innerHTML = list.length ? list.map(r => makeCard(r, 'Voir suggestion')).join('') : '<div class="empty">Aucune recette trouvée.</div>';
-    }
-
-    function renderMusic() {
-      document.getElementById('musicLessonGrid').innerHTML = musicLessons.map(item => makeCard(item, 'Voir leçon')).join('');
-      const daily = musicDiscoveries[dayIndex(musicDiscoveries.length)];
-      document.getElementById('musicDiscoveryBox').innerHTML = `<strong>${daily.title}</strong><div class="subtle">${daily.desc}</div><div class="actions" style="margin-top:10px;"><a class="mini-btn" href="${daily.url}" target="_blank" rel="noopener">Explorer cette vibe</a></div>`;
-      document.getElementById('musicDiscoveriesGrid').innerHTML = musicDiscoveries.filter(item => item.id !== daily.id).map(item => `
-        <article class="item-card">
-          <div class="body">
-            <div class="title">${item.title}</div>
-            <div class="desc">${item.desc}</div>
-            <div class="actions"><a class="mini-btn" href="${item.url}" target="_blank" rel="noopener">Explorer</a></div>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    function formatDateKey(date = new Date()) {
-      const y = date.getFullYear();
-      const m = String(date.getMonth() + 1).padStart(2, '0');
-      const d = String(date.getDate()).padStart(2, '0');
-      return `${y}-${m}-${d}`;
-    }
-
-    function getCalendarItems() {
-      return getJSON('app-calendar-items', defaultCalendarItems);
-    }
-
-    function setCalendarItems(items) {
-      setJSON('app-calendar-items', items);
-    }
-
-    function saveCalendarItem() {
-      const titleEl = document.getElementById('calendarTitle');
-      const dateEl = document.getElementById('calendarDate');
-      const timeEl = document.getElementById('calendarTime');
-      const noteEl = document.getElementById('calendarNote');
-      const title = titleEl.value.trim();
-      const date = dateEl.value || formatDateKey(new Date());
-      const time = timeEl.value || '09:00';
-      const note = noteEl.value.trim();
-      if (!title) return;
-      const items = getCalendarItems();
-      items.push({ id: `cal-${Date.now()}`, title, date, time, note, type: note.toLowerCase().includes('rappel') ? 'reminder' : 'event' });
-      items.sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
-      setCalendarItems(items);
-      titleEl.value = '';
-      dateEl.value = formatDateKey(new Date());
-      timeEl.value = '';
-      noteEl.value = '';
-      renderCalendar();
-    }
-
-    function createICSContent(item) {
-      const start = `${item.date.replace(/-/g, '')}T${(item.time || '09:00').replace(':', '')}00`;
-      const endDate = new Date(`${item.date}T${item.time || '09:00'}:00`);
-      endDate.setMinutes(endDate.getMinutes() + 60);
-      const end = `${endDate.getFullYear()}${String(endDate.getMonth() + 1).padStart(2, '0')}${String(endDate.getDate()).padStart(2, '0')}T${String(endDate.getHours()).padStart(2, '0')}${String(endDate.getMinutes()).padStart(2, '0')}00`;
-      const desc = (item.note || '').replace(/\n/g, '\\n');
-      return `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${item.title}\nDESCRIPTION:${desc}\nDTSTART:${start}\nDTEND:${end}\nEND:VEVENT\nEND:VCALENDAR`;
-    }
-
-    function addCurrentFormToPhoneCalendar() {
-      const title = document.getElementById('calendarTitle').value.trim();
-      const date = document.getElementById('calendarDate').value || formatDateKey(new Date());
-      const time = document.getElementById('calendarTime').value || '09:00';
-      const note = document.getElementById('calendarNote').value.trim();
-      if (!title) return;
-      const item = { title, date, time, note };
-      const ics = createICSContent(item);
-      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${title.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'evenement'}.ics`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }
-
-    function renderCalendarList(items, targetId, emptyText) {
-      const el = document.getElementById(targetId);
-      if (!el) return;
-      el.innerHTML = items.length ? items.map(item => `
-        <div class="calendar-item">
-          <h4>${item.title}</h4>
-          <div class="time">${item.date} • ${item.time || '—'}</div>
-          <div class="subtle">${item.note || 'Aucun détail.'}</div>
-          <div class="calendar-actions">
-            <button class="mini-btn" onclick="downloadCalendarItem('${item.id}')">Ajouter au cell</button>
-          </div>
-        </div>
-      `).join('') : `<div class="empty">${emptyText}</div>`;
-    }
-
-    function downloadCalendarItem(id) {
-      const item = getCalendarItems().find(x => x.id === id);
-      if (!item) return;
-      const ics = createICSContent(item);
-      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${item.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'evenement'}.ics`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }
-
-    function renderCalendar() {
-      const now = new Date();
-      const todayKey = formatDateKey(now);
-      const todayItems = getCalendarItems().filter(item => item.date === todayKey);
-      const upcomingItems = getCalendarItems().filter(item => item.date > todayKey).sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`)).slice(0, 6);
-      const todayEvents = todayItems.filter(item => item.type !== 'reminder');
-      const todayReminders = todayItems.filter(item => item.type === 'reminder');
-      const routine = routines[dayIndex(routines.length)];
-      const weekday = now.toLocaleDateString('fr-CA', { weekday: 'long' });
-      const month = now.toLocaleDateString('fr-CA', { month: 'long' });
-      document.getElementById('calendarDayNumber').textContent = String(now.getDate()).padStart(2, '0');
-      document.getElementById('calendarFullDate').textContent = `${weekday} ${now.getDate()} ${month} ${now.getFullYear()}`;
-      document.getElementById('calendarRoutineTitle').textContent = routine.title;
-      document.getElementById('calendarRoutineDesc').textContent = routine.desc;
-      const dateInput = document.getElementById('calendarDate');
-      if (dateInput && !dateInput.value) dateInput.value = todayKey;
-      renderCalendarList(todayEvents, 'todayEventsList', 'Aucun événement prévu aujourd’hui.');
-      renderCalendarList(todayReminders, 'todayRemindersList', 'Aucun rappel pour aujourd’hui.');
-      renderCalendarList(upcomingItems, 'upcomingEventsList', 'Rien à venir pour le moment.');
-    }
-
-    function getNotes() { return getJSON('app-notes', []); }
-
-    function saveNote() {
-      const title = document.getElementById('noteTitle').value.trim();
-      const body = document.getElementById('noteBody').value.trim();
-      if (!title && !body) return;
-      const notes = getNotes();
-      notes.unshift({ id: `note-${Date.now()}`, title: title || 'Note sans titre', body, createdAt: new Date().toLocaleString('fr-CA') });
-      setJSON('app-notes', notes);
-      document.getElementById('noteTitle').value = '';
-      document.getElementById('noteBody').value = '';
-      renderNotes();
-    }
-
-    function deleteNote(id) {
-      setJSON('app-notes', getNotes().filter(n => n.id !== id));
-      renderNotes();
-    }
-
-    function renderNotes() {
-      const notes = getNotes();
-      document.getElementById('notesList').innerHTML = notes.length ? notes.map(note => `
-        <div class="note-item">
-          <h4>${note.title}</h4>
-          <p>${note.body || ''}</p>
-          <div class="meta">${note.createdAt}</div>
-          <div style="height:8px"></div>
-          <button class="mini-btn" onclick="deleteNote('${note.id}')">Supprimer</button>
-        </div>
-      `).join('') : '<div class="empty">Aucune note pour l’instant.</div>';
-    }
-
-    function showPanel(id) {
-      document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', panel.id === id));
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.trim().toLowerCase().includes(id === 'apprentissage' ? 'découverte' : id === 'activites' ? 'activités' : id === 'moodboard' ? 'mood board' : id)));
-      document.querySelector('.app').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function showMusicTab(tab, btn) {
-      document.getElementById('musicLecons').style.display = tab === 'lecons' ? 'block' : 'none';
-      document.getElementById('musicEcoute').style.display = tab === 'ecoute' ? 'block' : 'none';
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-    }
-
-    document.getElementById('videoSearch').addEventListener('input', renderVideos);
-    document.getElementById('videoSort').addEventListener('change', renderVideos);
-    document.getElementById('toggleVideoFavs').addEventListener('click', function() {
-      showVideoFavsOnly = !showVideoFavsOnly;
-      this.classList.toggle('active', showVideoFavsOnly);
-      renderVideos();
-    });
-
-    document.getElementById('recipeSearch').addEventListener('input', renderRecipes);
-    document.getElementById('recipeFilter').addEventListener('change', renderRecipes);
-    document.getElementById('toggleRecipeFavs').addEventListener('click', function() {
-      showRecipeFavsOnly = !showRecipeFavsOnly;
-      this.classList.toggle('active', showRecipeFavsOnly);
-      renderRecipes();
-    });
-
-    document.getElementById('newDiscoveryBtn').addEventListener('click', showNewDiscovery);
-    document.getElementById('saveNoteBtn').addEventListener('click', saveNote);
-    document.getElementById('saveCalendarItemBtn').addEventListener('click', saveCalendarItem);
-    document.getElementById('addToPhoneCalendarBtn').addEventListener('click', addCurrentFormToPhoneCalendar);
-    document.getElementById('favQuoteBtn').addEventListener('click', toggleCurrentQuoteFav);
-    document.getElementById('showQuoteFavsBtn').addEventListener('click', toggleQuoteFavsBox);
-    document.getElementById('toggleAddQuoteBtn').addEventListener('click', toggleAddQuoteBox);
-    document.getElementById('saveQuoteBtn').addEventListener('click', saveCustomQuote);
-
-    window.toggleFav = toggleFav;
-    window.renderActivities = renderActivities;
-    window.deleteNote = deleteNote;
-    window.showPanel = showPanel;
-    window.showMusicTab = showMusicTab;
-    window.removeFavQuote = removeFavQuote;
-    window.downloadCalendarItem = downloadCalendarItem;
-
-    renderQuote();
-    renderRoutine();
-    renderVideos();
-    renderActivities(new Date().getDay());
-    renderDiscovery();
-    renderRecipes();
-    renderMusic();
-    renderCalendar();
-    renderNotes();
   </script>
 </body>
 </html>
