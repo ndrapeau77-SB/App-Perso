@@ -22,6 +22,8 @@
       --shadow: 0 14px 30px rgba(0,0,0,0.14);
       --green-soft: #7dc8a3;
       --green-deep: #2e6a5d;
+      --panel: rgba(4, 37, 34, 0.96);
+      --panel-soft: rgba(4, 24, 23, 0.72);
     }
 
     html, body {
@@ -73,11 +75,11 @@
       line-height: 1.45;
     }
 
-    .back-link {
+    .back-link,
+    .filter-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
       text-decoration: none;
       border: 1px solid rgba(170, 142, 65, 0.62);
       background: rgba(7, 32, 30, 0.92);
@@ -87,7 +89,21 @@
       font-size: 0.96rem;
       font-weight: 700;
       min-height: 52px;
-      margin-bottom: 14px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .filter-btn.active {
+      background: rgba(217, 178, 75, 0.14);
+      color: var(--accent);
+      border-color: rgba(217, 178, 75, 0.8);
     }
 
     .stats-grid {
@@ -96,11 +112,13 @@
       gap: 10px;
     }
 
-    .stat-box {
+    .stat-box,
+    .trend-box,
+    .history-item {
       border: 1px solid rgba(170, 142, 65, 0.30);
       border-radius: 18px;
       padding: 14px;
-      background: rgba(4, 24, 23, 0.72);
+      background: var(--panel-soft);
     }
 
     .stat-label {
@@ -122,17 +140,11 @@
       margin: 0 0 10px;
     }
 
-    .history-list {
+    .history-list,
+    .trend-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
-    }
-
-    .history-item {
-      border: 1px solid rgba(170, 142, 65, 0.30);
-      border-radius: 18px;
-      padding: 14px;
-      background: rgba(4, 24, 23, 0.72);
     }
 
     .history-date {
@@ -170,10 +182,39 @@
       background: linear-gradient(90deg, var(--green-deep), var(--green-soft));
     }
 
+    .trend-line {
+      display: grid;
+      grid-template-columns: 78px 1fr 54px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .trend-date {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .trend-value {
+      text-align: right;
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
     .empty {
       color: var(--muted);
       font-size: 0.95rem;
       padding: 8px 2px;
+    }
+
+    @media (max-width: 520px) {
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .trend-line {
+        grid-template-columns: 70px 1fr 48px;
+      }
     }
   </style>
 </head>
@@ -183,17 +224,23 @@
 
     <section class="card">
       <p class="top-title">Résultats</p>
-      <p class="subtle">Vue plus poussée de tes journées, habitudes, énergie, eau et reviews.</p>
+      <p class="subtle">Une vue plus claire de tes journées : eau, énergie, habitudes, tâches complétées, brain dump et review.</p>
+
+      <div class="filters">
+        <button class="filter-btn active" data-range="7">7 jours</button>
+        <button class="filter-btn" data-range="30">30 jours</button>
+        <button class="filter-btn" data-range="all">Tout</button>
+      </div>
     </section>
 
     <section class="card">
-      <p class="section-title">7 derniers jours</p>
-      <div class="stats-grid" id="stats7"></div>
+      <p class="section-title">Vue d’ensemble</p>
+      <div class="stats-grid" id="statsGrid"></div>
     </section>
 
     <section class="card">
-      <p class="section-title">30 derniers jours</p>
-      <div class="stats-grid" id="stats30"></div>
+      <p class="section-title">Tendance eau</p>
+      <div class="trend-list" id="waterTrend"></div>
     </section>
 
     <section class="card">
@@ -203,6 +250,8 @@
   </main>
 
   <script>
+    let currentRange = "7";
+
     function getJSON(key, fallback) {
       try {
         const v = localStorage.getItem(key);
@@ -210,28 +259,6 @@
       } catch {
         return fallback;
       }
-    }
-
-    function todayKey() {
-      const now = new Date();
-      const y = now.getFullYear();
-      const m = String(now.getMonth() + 1).padStart(2, "0");
-      const d = String(now.getDate()).padStart(2, "0");
-      return `${y}-${m}-${d}`;
-    }
-
-    function getDateKeysBack(days) {
-      const result = [];
-      const now = new Date();
-      for (let i = 0; i < days; i++) {
-        const d = new Date(now);
-        d.setDate(now.getDate() - i);
-        const y = d.getFullYear();
-        const m = String(d.getMonth() + 1).padStart(2, "0");
-        const day = String(d.getDate()).padStart(2, "0");
-        result.push(`${y}-${m}-${day}`);
-      }
-      return result;
     }
 
     function getDailyTrackerStore() {
@@ -249,10 +276,37 @@
       return "Non défini";
     }
 
-    function buildStats(days) {
+    function dateKeysBack(days) {
+      const result = [];
+      const now = new Date();
+      for (let i = 0; i < days; i++) {
+        const d = new Date(now);
+        d.setDate(now.getDate() - i);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        result.push(`${y}-${m}-${day}`);
+      }
+      return result;
+    }
+
+    function getFilteredEntries() {
       const store = getDailyTrackerStore();
+      let entries = Object.entries(store).sort((a, b) => b[0].localeCompare(a[0]));
+
+      if (currentRange === "7") {
+        const keys = new Set(dateKeysBack(7));
+        entries = entries.filter(([date]) => keys.has(date));
+      } else if (currentRange === "30") {
+        const keys = new Set(dateKeysBack(30));
+        entries = entries.filter(([date]) => keys.has(date));
+      }
+
+      return entries;
+    }
+
+    function buildSummary(entries) {
       const taskDone = getTaskDoneState();
-      const keys = getDateKeysBack(days);
 
       let waterTotal = 0;
       let moveCount = 0;
@@ -262,17 +316,14 @@
       let tasksDoneCount = 0;
       let energyCount = { low: 0, medium: 0, high: 0 };
 
-      keys.forEach(date => {
-        const item = store[date];
-        if (item) {
-          waterTotal += item.water || 0;
-          if (item.move) moveCount++;
-          if (item.relax) relaxCount++;
-          if (item.review) reviewCount++;
-          if (item.brainDump) brainDumpCount++;
-          if (item.energy && energyCount[item.energy] !== undefined) {
-            energyCount[item.energy]++;
-          }
+      entries.forEach(([date, item]) => {
+        waterTotal += item.water || 0;
+        if (item.move) moveCount++;
+        if (item.relax) relaxCount++;
+        if (item.review) reviewCount++;
+        if (item.brainDump) brainDumpCount++;
+        if (item.energy && energyCount[item.energy] !== undefined) {
+          energyCount[item.energy]++;
         }
 
         Object.keys(taskDone).forEach(key => {
@@ -280,11 +331,12 @@
         });
       });
 
-      const avgWater = Math.round(waterTotal / days);
-      const bestEnergy =
-        Object.entries(energyCount).sort((a, b) => b[1] - a[1])[0]?.[0] || "";
+      const totalDays = entries.length || 1;
+      const avgWater = Math.round(waterTotal / totalDays);
+      const bestEnergy = Object.entries(energyCount).sort((a, b) => b[1] - a[1])[0]?.[0] || "";
 
       return {
+        daysTracked: entries.length,
         avgWater,
         moveCount,
         relaxCount,
@@ -304,39 +356,54 @@
       `;
     }
 
-    function renderStats() {
-      const s7 = buildStats(7);
-      const s30 = buildStats(30);
-
-      document.getElementById("stats7").innerHTML = [
-        statBox("Moyenne eau", `${s7.avgWater} ml`),
-        statBox("Jours bouger", `${s7.moveCount}/7`),
-        statBox("Jours pause", `${s7.relaxCount}/7`),
-        statBox("Tâches cochées", s7.tasksDoneCount),
-        statBox("Reviews écrites", s7.reviewCount),
-        statBox("Énergie dominante", s7.bestEnergy)
-      ].join("");
-
-      document.getElementById("stats30").innerHTML = [
-        statBox("Moyenne eau", `${s30.avgWater} ml`),
-        statBox("Jours bouger", `${s30.moveCount}/30`),
-        statBox("Jours pause", `${s30.relaxCount}/30`),
-        statBox("Tâches cochées", s30.tasksDoneCount),
-        statBox("Reviews écrites", s30.reviewCount),
-        statBox("Énergie dominante", s30.bestEnergy)
+    function renderStats(entries) {
+      const s = buildSummary(entries);
+      document.getElementById("statsGrid").innerHTML = [
+        statBox("Jours suivis", s.daysTracked),
+        statBox("Moyenne eau", `${s.avgWater} ml`),
+        statBox("Jours bouger", `${s.moveCount}/${s.daysTracked || 0}`),
+        statBox("Jours pause", `${s.relaxCount}/${s.daysTracked || 0}`),
+        statBox("Tâches cochées", s.tasksDoneCount),
+        statBox("Reviews écrites", s.reviewCount),
+        statBox("Brain dumps", s.brainDumpCount),
+        statBox("Énergie dominante", s.bestEnergy)
       ].join("");
     }
 
-    function renderHistory() {
-      const store = getDailyTrackerStore();
-      const taskDone = getTaskDoneState();
-      const entries = Object.entries(store)
-        .sort((a, b) => b[0].localeCompare(a[0]));
+    function renderWaterTrend(entries) {
+      const box = document.getElementById("waterTrend");
 
+      if (!entries.length) {
+        box.innerHTML = `<div class="empty">Aucune donnée d’eau pour cette période.</div>`;
+        return;
+      }
+
+      const trendEntries = [...entries].reverse();
+
+      box.innerHTML = trendEntries.map(([date, item]) => {
+        const water = Math.max(0, Math.min(3000, item.water || 0));
+        const percent = (water / 3000) * 100;
+
+        return `
+          <div class="trend-box">
+            <div class="trend-line">
+              <div class="trend-date">${date}</div>
+              <div class="progress-wrap" style="margin:0;">
+                <div class="progress-bar" style="width:${percent}%"></div>
+              </div>
+              <div class="trend-value">${water} ml</div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderHistory(entries) {
+      const taskDone = getTaskDoneState();
       const list = document.getElementById("historyList");
 
       if (!entries.length) {
-        list.innerHTML = `<div class="empty">Aucun historique pour l’instant.</div>`;
+        list.innerHTML = `<div class="empty">Aucun historique pour cette période.</div>`;
         return;
       }
 
@@ -363,8 +430,23 @@
       }).join("");
     }
 
-    renderStats();
-    renderHistory();
+    function renderAll() {
+      const entries = getFilteredEntries();
+      renderStats(entries);
+      renderWaterTrend(entries);
+      renderHistory(entries);
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentRange = btn.dataset.range;
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderAll();
+      });
+    });
+
+    renderAll();
   </script>
 </body>
 </html>
