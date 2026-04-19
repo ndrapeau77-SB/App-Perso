@@ -91,6 +91,10 @@
       min-height: 52px;
       transition: transform 0.12s ease, background 0.12s ease;
       width: 100%;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .pill-btn:active,
@@ -146,8 +150,7 @@
     }
 
     .task-item,
-    .habit-item,
-    .history-item {
+    .habit-item {
       display: flex;
       align-items: flex-start;
       gap: 10px;
@@ -176,8 +179,7 @@
     }
 
     .task-meta,
-    .habit-meta,
-    .history-meta {
+    .habit-meta {
       color: var(--muted);
       font-size: 0.82rem;
       margin-top: 4px;
@@ -315,48 +317,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 8px;
       margin-top: 10px;
-    }
-
-    .history-box {
-      display: none;
-      margin-top: 14px;
-      border-top: 1px solid rgba(170, 142, 65, 0.24);
-      padding-top: 14px;
-    }
-
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .history-title {
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 6px;
-      font-size: 0.95rem;
-    }
-
-    .history-text {
-      color: var(--text);
-      line-height: 1.45;
-      font-size: 0.92rem;
-      white-space: pre-wrap;
-    }
-
-    .mini-progress {
-      width: 100%;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      overflow: hidden;
-      margin-top: 8px;
-    }
-
-    .mini-progress > div {
-      height: 100%;
-      background: linear-gradient(90deg, var(--green-deep), var(--green-soft));
     }
 
     .menu-grid {
@@ -558,13 +518,8 @@
         </div>
 
         <div class="action-row" style="margin-top:14px; margin-bottom:0;">
-          <button class="pill-btn" id="toggleResultsBtn">Résultats</button>
-          <button class="pill-btn" id="closeResultsBtn">Fermer historique</button>
-        </div>
-
-        <div class="history-box" id="resultsBox">
-          <p class="tracker-section-title">Historique des journées</p>
-          <div class="history-list" id="resultsList"></div>
+          <a href="resultats.html" class="pill-btn">Résultats</a>
+          <a href="resultats.html" class="pill-btn">Historique</a>
         </div>
       </div>
     </section>
@@ -845,13 +800,11 @@
       next = Math.max(0, Math.min(3000, next));
       updateTodayTracker({ water: next });
       renderWater();
-      renderResults();
     }
 
     function resetWater() {
       updateTodayTracker({ water: 0 });
       renderWater();
-      renderResults();
     }
 
     function renderEnergy() {
@@ -864,7 +817,6 @@
     function setEnergy(value) {
       updateTodayTracker({ energy: value });
       renderEnergy();
-      renderResults();
     }
 
     function renderHabits() {
@@ -886,73 +838,21 @@
     function saveBrainDump() {
       const value = document.getElementById("brainDumpText").value.trim();
       updateTodayTracker({ brainDump: value });
-      renderResults();
     }
 
     function clearBrainDump() {
       document.getElementById("brainDumpText").value = "";
       updateTodayTracker({ brainDump: "" });
-      renderResults();
     }
 
     function saveReview() {
       const value = document.getElementById("reviewText").value.trim();
       updateTodayTracker({ review: value });
-      renderResults();
     }
 
     function clearReview() {
       document.getElementById("reviewText").value = "";
       updateTodayTracker({ review: "" });
-      renderResults();
-    }
-
-    function energyLabel(value) {
-      if (value === "low") return "Bas";
-      if (value === "medium") return "Moyen";
-      if (value === "high") return "Élevé";
-      return "Non défini";
-    }
-
-    function renderResults() {
-      const box = document.getElementById("resultsList");
-      const store = getDailyTrackerStore();
-      const entries = Object.entries(store)
-        .sort((a, b) => b[0].localeCompare(a[0]))
-        .slice(0, 14);
-
-      if (!entries.length) {
-        box.innerHTML = `<div class="empty-tasks">Aucun historique pour l’instant.</div>`;
-        return;
-      }
-
-      box.innerHTML = entries.map(([date, item]) => {
-        const water = Math.max(0, Math.min(3000, item.water || 0));
-        const waterPercent = (water / 3000) * 100;
-        const habitsDone = [item.move, item.relax].filter(Boolean).length;
-
-        return `
-          <div class="history-item">
-            <div style="width:100%;">
-              <div class="history-title">${date}</div>
-              <div class="history-meta">Énergie : ${energyLabel(item.energy)}</div>
-              <div class="history-meta">Habitudes : ${habitsDone}/2</div>
-              <div class="history-meta">Eau : ${water} ml</div>
-              <div class="mini-progress"><div style="width:${waterPercent}%"></div></div>
-              ${item.brainDump ? `<div class="history-text" style="margin-top:8px;"><strong>Brain dump :</strong><br>${item.brainDump}</div>` : ""}
-              ${item.review ? `<div class="history-text" style="margin-top:8px;"><strong>Review :</strong><br>${item.review}</div>` : ""}
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    function toggleResults(forceOpen = null) {
-      const box = document.getElementById("resultsBox");
-      const isOpen = box.style.display === "block";
-      const shouldOpen = forceOpen === null ? !isOpen : forceOpen;
-      box.style.display = shouldOpen ? "block" : "none";
-      if (shouldOpen) renderResults();
     }
 
     function initTracker() {
@@ -962,7 +862,6 @@
       renderHabits();
       renderBrainDump();
       renderReview();
-      renderResults();
     }
 
     document.getElementById("togglePlannerBtn").addEventListener("click", () => togglePlanner());
@@ -980,20 +879,16 @@
 
     document.getElementById("habitMove").addEventListener("change", (e) => {
       updateTodayTracker({ move: e.target.checked });
-      renderResults();
     });
 
     document.getElementById("habitRelax").addEventListener("change", (e) => {
       updateTodayTracker({ relax: e.target.checked });
-      renderResults();
     });
 
     document.getElementById("saveBrainDumpBtn").addEventListener("click", saveBrainDump);
     document.getElementById("clearBrainDumpBtn").addEventListener("click", clearBrainDump);
     document.getElementById("saveReviewBtn").addEventListener("click", saveReview);
     document.getElementById("clearReviewBtn").addEventListener("click", clearReview);
-    document.getElementById("toggleResultsBtn").addEventListener("click", () => toggleResults());
-    document.getElementById("closeResultsBtn").addEventListener("click", () => toggleResults(false));
 
     window.completeTask = completeTask;
 
