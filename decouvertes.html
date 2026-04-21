@@ -29,7 +29,7 @@
       font-family: Arial, Helvetica, sans-serif;
       background:
         radial-gradient(circle at top, rgba(0, 100, 80, 0.16), transparent 35%),
-        linear-gradient(180deg, var(--bg-top) 0%, #05211f 55%, var(--bg-bottom) 100%);
+        linear-gradient(180deg, #031313 0%, #05211f 55%, #082120 100%);
       color: var(--text);
     }
 
@@ -94,6 +94,13 @@
       margin-bottom: 14px;
     }
 
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
     .result-box {
       border: 1px solid rgba(170, 142, 65, 0.30);
       border-radius: 22px;
@@ -104,7 +111,7 @@
 
     .result-title {
       color: var(--accent);
-      font-size: 1.02rem;
+      font-size: 1.05rem;
       font-weight: 700;
       margin-bottom: 10px;
     }
@@ -112,7 +119,7 @@
     .result-text {
       color: var(--text);
       font-size: 0.96rem;
-      line-height: 1.55;
+      line-height: 1.6;
       margin-bottom: 12px;
     }
 
@@ -137,6 +144,54 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
+
+    .why-box {
+      border: 1px solid rgba(170, 142, 65, 0.18);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      margin-bottom: 12px;
+    }
+
+    .small-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .history-item {
+      border: 1px solid rgba(170, 142, 65, 0.20);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .history-title {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .history-meta {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .history-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -146,21 +201,118 @@
     <section class="card">
       <p class="top-title">Découverte / apprentissage</p>
 
-      <button class="pill-btn" id="discoverBtn">Nouvelle découverte</button>
+      <div class="actions">
+        <button class="pill-btn" id="discoverBtn">Nouvelle découverte</button>
+        <button class="pill-btn" id="showHistoryBtn">Historique</button>
+      </div>
 
       <div class="result-box" id="discoveryBox">
         <div class="loading">Clique pour découvrir quelque chose de nouveau.</div>
       </div>
     </section>
+
+    <section class="card" id="historySection" style="display:none;">
+      <p class="top-title">Mes découvertes récentes</p>
+      <div class="history-list" id="historyList"></div>
+    </section>
   </main>
 
   <script>
+    const WORKER_URL = "https://decouverte-app.ndrapeau77.workers.dev/";
+    const HISTORY_KEY = "discoveryHistory";
+    const FAVORITES_KEY = "discoveryFavorites";
+
+    function getJSON(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function setJSON(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function getHistory() {
+      return getJSON(HISTORY_KEY, []);
+    }
+
+    function setHistory(data) {
+      setJSON(HISTORY_KEY, data);
+    }
+
+    function getFavorites() {
+      return getJSON(FAVORITES_KEY, []);
+    }
+
+    function setFavorites(data) {
+      setJSON(FAVORITES_KEY, data);
+    }
+
+    function pushHistory(item) {
+      const current = getHistory();
+      const next = [item, ...current.filter(x => x.title !== item.title)].slice(0, 20);
+      setHistory(next);
+    }
+
+    function toggleFavorite(item) {
+      const current = getFavorites();
+      const exists = current.some(x => x.title === item.title);
+      const next = exists
+        ? current.filter(x => x.title !== item.title)
+        : [item, ...current].slice(0, 30);
+      setFavorites(next);
+      renderHistory();
+    }
+
+    function isFavorite(title) {
+      return getFavorites().some(x => x.title === title);
+    }
+
+    function buildExcludeParam() {
+      const history = getHistory().slice(0, 8).map(x => x.title.toLowerCase());
+      return encodeURIComponent(history.join("|"));
+    }
+
+    function renderDiscovery(data) {
+      const box = document.getElementById("discoveryBox");
+      const favLabel = isFavorite(data.title) ? "Retirer favori" : "Ajouter favori";
+
+      box.innerHTML = `
+        ${data.category ? `<div class="theme-badge">${data.category}</div>` : ""}
+        <div class="result-title">${data.title || "Découverte"}</div>
+        ${data.image ? `<img class="result-img" src="${data.image}" alt="" style="display:block;">` : ""}
+        <div class="why-box">
+          <div class="subtle">${data.why || ""}</div>
+        </div>
+        <div class="result-text">${data.summary || ""}</div>
+        <div class="small-links">
+          ${data.url ? `<a class="link-btn" href="${data.url}" target="_blank" rel="noopener">Lire plus</a>` : `<span></span>`}
+          ${data.videoSearchUrl ? `<a class="link-btn" href="${data.videoSearchUrl}" target="_blank" rel="noopener">Voir une vidéo</a>` : `<span></span>`}
+        </div>
+        <div class="small-links" style="margin-top:10px;">
+          <button class="pill-btn" id="favoriteBtn">${favLabel}</button>
+          <button class="pill-btn" id="anotherBtn">Encore</button>
+        </div>
+      `;
+
+      document.getElementById("favoriteBtn").addEventListener("click", () => {
+        toggleFavorite(data);
+        renderDiscovery(data);
+      });
+
+      document.getElementById("anotherBtn").addEventListener("click", loadDiscovery);
+    }
+
     async function loadDiscovery() {
       const box = document.getElementById("discoveryBox");
       box.innerHTML = `<div class="loading">Chargement...</div>`;
 
       try {
-        const res = await fetch("https://decouverte-app.ndrapeau77.workers.dev/", {
+        const exclude = buildExcludeParam();
+        const res = await fetch(`${WORKER_URL}?exclude=${exclude}`, {
           method: "GET",
           mode: "cors",
           cache: "no-store"
@@ -171,21 +323,62 @@
         }
 
         const data = await res.json();
-
-        box.innerHTML = `
-          ${data.theme ? `<div class="theme-badge">${data.theme}</div>` : ""}
-          <div class="result-title">${data.title || "Découverte"}</div>
-          ${data.image ? `<img class="result-img" src="${data.image}" alt="" style="display:block;">` : ""}
-          <div class="result-text">${data.summary || ""}</div>
-          ${data.url ? `<a class="link-btn" href="${data.url}" target="_blank" rel="noopener">Voir plus</a>` : ""}
-        `;
+        pushHistory(data);
+        renderDiscovery(data);
+        renderHistory();
       } catch (e) {
         box.innerHTML = `<div class="loading">Erreur : ${e.message}</div>`;
         console.error("Erreur découverte :", e);
       }
     }
 
+    function renderHistory() {
+      const history = getHistory();
+      const list = document.getElementById("historyList");
+
+      if (!history.length) {
+        list.innerHTML = `<div class="loading">Aucune découverte sauvegardée pour l’instant.</div>`;
+        return;
+      }
+
+      list.innerHTML = history.map(item => `
+        <div class="history-item">
+          <div class="history-title">${item.title}</div>
+          <div class="history-meta">${item.category || ""}</div>
+          <div class="subtle">${(item.summary || "").slice(0, 140)}${(item.summary || "").length > 140 ? "..." : ""}</div>
+          <div class="history-actions">
+            <button class="pill-btn" onclick='openFromHistory(${JSON.stringify(JSON.stringify(item))})'>Ouvrir</button>
+            <button class="pill-btn" onclick='toggleFavoriteFromHistory(${JSON.stringify(JSON.stringify(item))})'>
+              ${isFavorite(item.title) ? "Retirer favori" : "Ajouter favori"}
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openFromHistory(raw) {
+      const item = JSON.parse(raw);
+      renderDiscovery(item);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function toggleFavoriteFromHistory(raw) {
+      const item = JSON.parse(raw);
+      toggleFavorite(item);
+      renderHistory();
+    }
+
+    function toggleHistory() {
+      const section = document.getElementById("historySection");
+      section.style.display = section.style.display === "none" ? "block" : "none";
+      renderHistory();
+    }
+
+    window.openFromHistory = openFromHistory;
+    window.toggleFavoriteFromHistory = toggleFavoriteFromHistory;
+
     document.getElementById("discoverBtn").addEventListener("click", loadDiscovery);
+    document.getElementById("showHistoryBtn").addEventListener("click", toggleHistory);
   </script>
 </body>
 </html>
