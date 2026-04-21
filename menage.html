@@ -1,1 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ménage familial</title>
 
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#071b1a">
+  <link rel="apple-touch-icon" href="image_pastille.png">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg-top: #031313;
+      --bg-bottom: #082120;
+      --border: rgba(170, 142, 65, 0.52);
+      --accent: #d9b24b;
+      --text: #f4f1e8;
+      --muted: #bcc8c0;
+      --shadow: 0 14px 30px rgba(0,0,0,0.14);
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0, 100, 80, 0.16), transparent 35%),
+        linear-gradient(180deg, var(--bg-top) 0%, #05211f 55%, var(--bg-bottom) 100%);
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 560px;
+      min-height: 100vh;
+      padding: 10px 10px 28px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        var(--shadow);
+      padding: 18px 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .top-title {
+      color: var(--accent);
+      font-size: 1.08rem;
+      line-height: 1.2;
+      margin: 2px 0 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .back-link,
+    .pill-btn,
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 1px solid rgba(170, 142, 65, 0.62);
+      background: rgba(7, 32, 30, 0.92);
+      color: var(--text);
+      padding: 12px 10px;
+      border-radius: 999px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      min-height: 52px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .back-link {
+      margin-bottom: 14px;
+    }
+
+    .tab-row,
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .tab-row-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .tab-btn.active {
+      background: rgba(217, 178, 75, 0.14);
+      color: var(--accent);
+      border-color: rgba(217, 178, 75, 0.8);
+    }
+
+    .section-box {
+      border: 1px solid rgba(170, 142, 65, 0.30);
+      border-radius: 22px;
+      padding: 16px;
+      background: rgba(4, 24, 23, 0.72);
+      margin-top: 6px;
+    }
+
+    .section-title {
+      color: var(--accent);
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid rgba(170, 142, 65, 0.24);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .task-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .task-content {
+      flex: 1;
+    }
+
+    .task-title {
+      color: var(--text);
+      font-size: 0.96rem;
+      line-height: 1.45;
+    }
+
+    .task-meta {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 4px;
+    }
+
+    .progress-box {
+      border: 1px solid rgba(170, 142, 65, 0.24);
+      border-radius: 18px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      margin-bottom: 12px;
+    }
+
+    .progress-text {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      border: 1px solid rgba(170, 142, 65, 0.18);
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #2e6a5d, #7dc8a3);
+      transition: width 0.18s ease;
+    }
+
+    .badge-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(170, 142, 65, 0.24);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .empty {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 8px 2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <a href="index.html" class="back-link">← Retour à l’accueil</a>
+
+    <section class="card">
+      <p class="top-title">Ménage familial</p>
+      <p class="subtle">Une checklist simple pour la maison, les enfants et les journées où ça déborde un peu.</p>
+    </section>
+
+    <section class="card">
+      <div class="tab-row-4">
+        <button class="tab-btn active" data-tab="today">Aujourd’hui</button>
+        <button class="tab-btn" data-tab="week">Cette semaine</button>
+        <button class="tab-btn" data-tab="kids">Enfants</button>
+        <button class="tab-btn" data-tab="reset">Reset rapide</button>
+      </div>
+
+      <div class="action-row">
+        <button class="pill-btn" id="resetCurrentBtn">Réinitialiser l’onglet</button>
+        <button class="pill-btn" id="resetAllBtn">Tout remettre à zéro</button>
+      </div>
+
+      <div class="section-box" id="todaySection">
+        <p class="section-title">Ménage du jour</p>
+        <p class="section-subtitle">Le minimum utile pour garder la maison sous contrôle sans s’épuiser.</p>
+
+        <div class="progress-box">
+          <div class="progress-text" id="todayProgressText">0 / 0 complété</div>
+          <div class="progress-wrap">
+            <div class="progress-bar" id="todayProgressBar"></div>
+          </div>
+        </div>
+
+        <div class="task-list" id="todayList"></div>
+      </div>
+
+      <div class="section-box hidden" id="weekSection">
+        <p class="section-title">Ménage de la semaine</p>
+        <p class="section-subtitle">Les tâches plus profondes pour remettre la maison en ordre.</p>
+
+        <div class="progress-box">
+          <div class="progress-text" id="weekProgressText">0 / 0 complété</div>
+          <div class="progress-wrap">
+            <div class="progress-bar" id="weekProgressBar"></div>
+          </div>
+        </div>
+
+        <div class="task-list" id="weekList"></div>
+      </div>
+
+      <div class="section-box hidden" id="kidsSection">
+        <p class="section-title">Mini objectifs enfants</p>
+        <p class="section-subtitle">Des missions courtes, simples et motivantes.</p>
+
+        <div class="badge-box" id="kidsBadge">⭐ 0 mission réussie aujourd’hui</div>
+
+        <div class="progress-box">
+          <div class="progress-text" id="kidsProgressText">0 / 0 complété</div>
+          <div class="progress-wrap">
+            <div class="progress-bar" id="kidsProgressBar"></div>
+          </div>
+        </div>
+
+        <div class="task-list" id="kidsList"></div>
+      </div>
+
+      <div class="section-box hidden" id="resetSection">
+        <p class="section-title">Reset rapide</p>
+        <p class="section-subtitle">Quand ça déborde : un 10 minutes utile pour remettre la maison sur les rails.</p>
+
+        <div class="progress-box">
+          <div class="progress-text" id="resetProgressText">0 / 0 complété</div>
+          <div class="progress-wrap">
+            <div class="progress-bar" id="resetProgressBar"></div>
+          </div>
+        </div>
+
+        <div class="task-list" id="resetList"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DATA = {
+      today: [
+        { id: "today-bed", title: "Faire les lits", meta: "Petit geste, gros effet visuel." },
+        { id: "today-pickup", title: "Ramasser les objets qui traînent", meta: "Salon, cuisine, entrée." },
+        { id: "today-dishes", title: "Vaisselle / vider le lave-vaisselle", meta: "Évite l’accumulation." },
+        { id: "today-counters", title: "Essuyer les comptoirs", meta: "Cuisine + salle de bain si besoin." },
+        { id: "today-sweep", title: "Balai rapide cuisine / entrée", meta: "Les zones qui se salissent vite." },
+        { id: "today-laundry", title: "Lavage ou pliage", meta: "Une mini action suffit." }
+      ],
+      week: [
+        { id: "week-vacuum", title: "Passer l’aspirateur partout", meta: "Pièces principales." },
+        { id: "week-floor", title: "Laver les planchers", meta: "Cuisine, salle de bain, zones passantes." },
+        { id: "week-bathroom", title: "Salle de bain complète", meta: "Toilette, lavabo, bain/douche." },
+        { id: "week-bedsheets", title: "Changer les draps", meta: "Un reset qui fait du bien." },
+        { id: "week-fridge", title: "Frigo rapide", meta: "Trier et essuyer vite fait." },
+        { id: "week-dust", title: "Épousseter les surfaces", meta: "Meubles, tablettes, coins visibles." },
+        { id: "week-entry", title: "Trier l’entrée / papiers / sacs", meta: "Souliers, papier, petits tas." },
+        { id: "week-zone", title: "Ranger une zone encombrée", meta: "Choisir une seule zone à la fois." }
+      ],
+      kids: [
+        { id: "kids-bed", title: "Faire son lit", meta: "Même pas parfait, juste essayé." },
+        { id: "kids-toys", title: "Ranger 5 jouets", meta: "Mission express." },
+        { id: "kids-laundry", title: "Mettre son linge sale au bon endroit", meta: "Panier ou bac." },
+        { id: "kids-shoes", title: "Mettre ses souliers / manteau à la bonne place", meta: "Mission entrée propre." },
+        { id: "kids-table", title: "Aider à mettre la table", meta: "Une petite responsabilité." },
+        { id: "kids-dishes", title: "Mettre son verre / assiette au comptoir", meta: "Après le repas." }
+      ],
+      reset: [
+        { id: "reset-pickup", title: "Ramasser tout ce qui traîne", meta: "Objectif : effet wow rapide." },
+        { id: "reset-kitchen", title: "Cuisine rapide", meta: "Comptoir + vaisselle + évier." },
+        { id: "reset-bathroom", title: "Salle de bain lavabo + toilette rapide", meta: "Version express." },
+        { id: "reset-laundry", title: "Lancer une brassée", meta: "Même si tu ne fais que ça." },
+        { id: "reset-sweep", title: "Balai dans les zones visibles", meta: "Entrée, cuisine, salon." }
+      ]
+    };
+
+    let currentTab = "today";
+
+    function todayKey() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function weekKey() {
+      const now = new Date();
+      const oneJan = new Date(now.getFullYear(), 0, 1);
+      const numberOfDays = Math.floor((now - oneJan) / 86400000);
+      const week = Math.ceil((numberOfDays + oneJan.getDay() + 1) / 7);
+      return `${now.getFullYear()}-W${week}`;
+    }
+
+    function getStore() {
+      try {
+        return JSON.parse(localStorage.getItem("familyCleaningChecklist")) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function setStore(store) {
+      localStorage.setItem("familyCleaningChecklist", JSON.stringify(store));
+    }
+
+    function getSectionKey(section) {
+      if (section === "week") return `week-${weekKey()}`;
+      return `${section}-${todayKey()}`;
+    }
+
+    function isChecked(section, id) {
+      const store = getStore();
+      const sectionKey = getSectionKey(section);
+      return !!store[sectionKey]?.[id];
+    }
+
+    function setChecked(section, id, value) {
+      const store = getStore();
+      const sectionKey = getSectionKey(section);
+
+      if (!store[sectionKey]) {
+        store[sectionKey] = {};
+      }
+
+      store[sectionKey][id] = value;
+      setStore(store);
+    }
+
+    function resetSection(section) {
+      const store = getStore();
+      const sectionKey = getSectionKey(section);
+      delete store[sectionKey];
+      setStore(store);
+      renderAll();
+    }
+
+    function resetAll() {
+      localStorage.removeItem("familyCleaningChecklist");
+      renderAll();
+    }
+
+    function renderSection(section, listId, progressTextId, progressBarId) {
+      const list = DATA[section];
+      const listEl = document.getElementById(listId);
+
+      listEl.innerHTML = list.map(item => `
+        <label class="task-item">
+          <input
+            type="checkbox"
+            ${isChecked(section, item.id) ? "checked" : ""}
+            onchange="toggleTask('${section}', '${item.id}', this.checked)"
+          >
+          <div class="task-content">
+            <div class="task-title">${item.title}</div>
+            <div class="task-meta">${item.meta}</div>
+          </div>
+        </label>
+      `).join("");
+
+      const total = list.length;
+      const done = list.filter(item => isChecked(section, item.id)).length;
+      const percent = total ? (done / total) * 100 : 0;
+
+      document.getElementById(progressTextId).textContent = `${done} / ${total} complété`;
+      document.getElementById(progressBarId).style.width = `${percent}%`;
+
+      if (section === "kids") {
+        const badge = document.getElementById("kidsBadge");
+        badge.textContent =
+          done === 0
+            ? "⭐ 0 mission réussie aujourd’hui"
+            : done === 1
+            ? "⭐ 1 mission réussie aujourd’hui"
+            : `⭐ ${done} missions réussies aujourd’hui`;
+      }
+    }
+
+    function renderAll() {
+      renderSection("today", "todayList", "todayProgressText", "todayProgressBar");
+      renderSection("week", "weekList", "weekProgressText", "weekProgressBar");
+      renderSection("kids", "kidsList", "kidsProgressText", "kidsProgressBar");
+      renderSection("reset", "resetList", "resetProgressText", "resetProgressBar");
+    }
+
+    function showTab(tab) {
+      currentTab = tab;
+
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tab === tab);
+      });
+
+      document.getElementById("todaySection").classList.toggle("hidden", tab !== "today");
+      document.getElementById("weekSection").classList.toggle("hidden", tab !== "week");
+      document.getElementById("kidsSection").classList.toggle("hidden", tab !== "kids");
+      document.getElementById("resetSection").classList.toggle("hidden", tab !== "reset");
+    }
+
+    function toggleTask(section, id, checked) {
+      setChecked(section, id, checked);
+      renderAll();
+    }
+
+    window.toggleTask = toggleTask;
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => showTab(btn.dataset.tab));
+    });
+
+    document.getElementById("resetCurrentBtn").addEventListener("click", () => {
+      resetSection(currentTab);
+    });
+
+    document.getElementById("resetAllBtn").addEventListener("click", () => {
+      resetAll();
+    });
+
+    renderAll();
+    showTab("today");
+  </script>
+</body>
+</html>
