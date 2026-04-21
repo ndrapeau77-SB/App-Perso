@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notes vocales</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#071b1a">
+  <link rel="apple-touch-icon" href="image_pastille.png">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg-top: #031313;
+      --bg-bottom: #082120;
+      --border: rgba(170, 142, 65, 0.52);
+      --accent: #d9b24b;
+      --text: #f4f1e8;
+      --muted: #bcc8c0;
+      --shadow: 0 14px 30px rgba(0,0,0,0.14);
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0, 100, 80, 0.16), transparent 35%),
+        linear-gradient(180deg, var(--bg-top) 0%, #05211f 55%, var(--bg-bottom) 100%);
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 560px;
+      min-height: 100vh;
+      padding: 10px 10px 28px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        var(--shadow);
+      padding: 18px 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .top-title {
+      color: var(--accent);
+      font-size: 1.02rem;
+      line-height: 1.2;
+      margin: 2px 0 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .back-link,
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 1px solid rgba(170, 142, 65, 0.62);
+      background: rgba(7, 32, 30, 0.92);
+      color: var(--text);
+      padding: 12px 10px;
+      border-radius: 999px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      min-height: 52px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .back-link {
+      margin-bottom: 14px;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pill-btn.recording {
+      background: rgba(140, 20, 20, 0.9);
+      border-color: rgba(220, 90, 90, 0.7);
+    }
+
+    .status-box {
+      border: 1px solid rgba(170, 142, 65, 0.30);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(4, 24, 23, 0.72);
+      margin-top: 14px;
+    }
+
+    .status-line {
+      color: var(--text);
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
+    .timer {
+      color: var(--accent);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .field {
+      margin-top: 14px;
+    }
+
+    .field-label {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .text-input {
+      width: 100%;
+      border: 1px solid rgba(170, 142, 65, 0.45);
+      background: rgba(7, 32, 30, 0.92);
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 16px;
+      outline: none;
+      font-size: 0.96rem;
+    }
+
+    .note-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .note-item {
+      border: 1px solid rgba(170, 142, 65, 0.30);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(4, 24, 23, 0.72);
+    }
+
+    .note-title {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .note-meta {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .note-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .note-actions-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .rename-box {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(170, 142, 65, 0.18);
+    }
+
+    .rename-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .empty {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 8px 2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <a href="index.html" class="back-link">← Retour à l’accueil</a>
+
+    <section class="card">
+      <p class="top-title">Notes vocales</p>
+      <p class="subtle">Enregistre une pensée rapide, une idée, un rappel ou un brain dump vocal.</p>
+
+      <div class="field">
+        <label class="field-label" for="voiceTitleInput">Titre de la note</label>
+        <input
+          class="text-input"
+          id="voiceTitleInput"
+          type="text"
+          placeholder="Ex. idée de projet, rappel important, brain dump..."
+        />
+      </div>
+
+      <div class="action-row">
+        <button class="pill-btn" id="recordBtn">Commencer</button>
+        <button class="pill-btn" id="stopBtn" disabled>Arrêter</button>
+      </div>
+
+      <div class="status-box">
+        <div class="status-line" id="statusLine">Prêt à enregistrer.</div>
+        <div class="timer" id="timerDisplay">00:00</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <p class="top-title">Mes enregistrements</p>
+      <div class="note-list" id="notesList"></div>
+    </section>
+  </main>
+
+  <script>
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let isRecording = false;
+    let timerInterval = null;
+    let secondsElapsed = 0;
+    let db = null;
+
+    const recordBtn = document.getElementById("recordBtn");
+    const stopBtn = document.getElementById("stopBtn");
+    const statusLine = document.getElementById("statusLine");
+    const timerDisplay = document.getElementById("timerDisplay");
+    const notesList = document.getElementById("notesList");
+    const voiceTitleInput = document.getElementById("voiceTitleInput");
+
+    function formatTime(totalSeconds) {
+      const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+      const seconds = String(totalSeconds % 60).padStart(2, "0");
+      return `${minutes}:${seconds}`;
+    }
+
+    function updateTimer() {
+      secondsElapsed += 1;
+      timerDisplay.textContent = formatTime(secondsElapsed);
+    }
+
+    function resetTimer() {
+      secondsElapsed = 0;
+      timerDisplay.textContent = "00:00";
+    }
+
+    function startTimer() {
+      resetTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    function buildDefaultTitle() {
+      const now = new Date();
+      return `Note vocale ${now.toLocaleDateString("fr-CA")} ${now.toLocaleTimeString("fr-CA", {
+        hour: "2-digit",
+        minute: "2-digit"
+      })}`;
+    }
+
+    function openDB() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open("voiceNotesDB", 1);
+
+        request.onupgradeneeded = function(event) {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains("notes")) {
+            db.createObjectStore("notes", { keyPath: "id" });
+          }
+        };
+
+        request.onsuccess = function(event) {
+          db = event.target.result;
+          resolve(db);
+        };
+
+        request.onerror = function() {
+          reject(request.error);
+        };
+      });
+    }
+
+    function saveNote(note) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(["notes"], "readwrite");
+        const store = tx.objectStore("notes");
+        store.put(note);
+
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    function getAllNotes() {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(["notes"], "readonly");
+        const store = tx.objectStore("notes");
+        const request = store.getAll();
+
+        request.onsuccess = () => {
+          const notes = request.result.sort((a, b) => b.createdAt - a.createdAt);
+          resolve(notes);
+        };
+
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    function getNoteById(id) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(["notes"], "readonly");
+        const store = tx.objectStore("notes");
+        const request = store.get(id);
+
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    function deleteNote(id) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(["notes"], "readwrite");
+        const store = tx.objectStore("notes");
+        store.delete(id);
+
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    async function renderNotes() {
+      const notes = await getAllNotes();
+
+      if (!notes.length) {
+        notesList.innerHTML = `<div class="empty">Aucune note vocale pour l’instant.</div>`;
+        return;
+      }
+
+      notesList.innerHTML = notes.map(note => {
+        const date = new Date(note.createdAt).toLocaleString("fr-CA");
+        return `
+          <div class="note-item">
+            <div class="note-title">${note.title || "Note vocale"}</div>
+            <div class="note-meta">${date} • ${formatTime(note.duration || 0)}</div>
+            <audio controls src="${note.audioUrl}"></audio>
+
+            <div class="note-actions-3">
+              <button class="pill-btn" onclick="toggleRenameBox('${note.id}')">Renommer</button>
+              <button class="pill-btn" onclick="downloadVoiceNote('${note.id}')">Télécharger</button>
+              <button class="pill-btn" onclick="removeVoiceNote('${note.id}')">Supprimer</button>
+            </div>
+
+            <div class="rename-box" id="rename-box-${note.id}">
+              <input
+                class="text-input"
+                id="rename-input-${note.id}"
+                type="text"
+                value="${escapeHtml(note.title || "")}"
+                placeholder="Nouveau titre"
+              />
+              <div class="rename-actions">
+                <button class="pill-btn" onclick="saveVoiceRename('${note.id}')">Enregistrer</button>
+                <button class="pill-btn" onclick="toggleRenameBox('${note.id}', false)">Annuler</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    async function startRecording() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+        audioChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = event => {
+          if (event.data.size > 0) {
+            audioChunks.push(event.data);
+          }
+        };
+
+        mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+          const audioUrl = URL.createObjectURL(audioBlob);
+
+          const noteTitle = voiceTitleInput.value.trim() || buildDefaultTitle();
+
+          const note = {
+            id: `voice-${Date.now()}`,
+            title: noteTitle,
+            createdAt: Date.now(),
+            duration: secondsElapsed,
+            audioBlob,
+            audioUrl
+          };
+
+          await saveNote(note);
+          await renderNotes();
+
+          statusLine.textContent = "Enregistrement sauvegardé.";
+          stopTimer();
+          resetTimer();
+          voiceTitleInput.value = "";
+
+          stream.getTracks().forEach(track => track.stop());
+        };
+
+        mediaRecorder.start();
+        isRecording = true;
+        statusLine.textContent = "Enregistrement en cours...";
+        recordBtn.disabled = true;
+        stopBtn.disabled = false;
+        recordBtn.classList.add("recording");
+        startTimer();
+      } catch (error) {
+        statusLine.textContent = "Accès micro refusé ou indisponible.";
+      }
+    }
+
+    function stopRecording() {
+      if (!mediaRecorder || !isRecording) return;
+
+      mediaRecorder.stop();
+      isRecording = false;
+      recordBtn.disabled = false;
+      stopBtn.disabled = true;
+      recordBtn.classList.remove("recording");
+    }
+
+    async function downloadVoiceNote(id) {
+      const note = await getNoteById(id);
+      if (!note) return;
+
+      const a = document.createElement("a");
+      a.href = note.audioUrl;
+      a.download = `${(note.title || "note-vocale").replace(/[^a-z0-9]/gi, "_").toLowerCase()}.webm`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    async function removeVoiceNote(id) {
+      await deleteNote(id);
+      await renderNotes();
+    }
+
+    function toggleRenameBox(id, force = null) {
+      const box = document.getElementById(`rename-box-${id}`);
+      if (!box) return;
+
+      const isOpen = box.style.display === "block";
+      const shouldOpen = force === null ? !isOpen : force;
+      box.style.display = shouldOpen ? "block" : "none";
+    }
+
+    async function saveVoiceRename(id) {
+      const input = document.getElementById(`rename-input-${id}`);
+      if (!input) return;
+
+      const newTitle = input.value.trim();
+      const note = await getNoteById(id);
+      if (!note) return;
+
+      note.title = newTitle || buildDefaultTitle();
+      await saveNote(note);
+      await renderNotes();
+    }
+
+    window.downloadVoiceNote = downloadVoiceNote;
+    window.removeVoiceNote = removeVoiceNote;
+    window.toggleRenameBox = toggleRenameBox;
+    window.saveVoiceRename = saveVoiceRename;
+
+    recordBtn.addEventListener("click", startRecording);
+    stopBtn.addEventListener("click", stopRecording);
+
+    async function init() {
+      await openDB();
+      await renderNotes();
+    }
+
+    init();
+  </script>
+</body>
+</html>
