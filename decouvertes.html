@@ -1,32 +1,191 @@
-<script>
-async function loadDiscovery() {
-  const box = document.getElementById("discoveryBox");
-  box.innerHTML = `<div class="loading">Chargement...</div>`;
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Découverte / apprentissage</title>
 
-  try {
-    const res = await fetch("https://decouverte-app.ndrapeau77.workers.dev/", {
-      method: "GET",
-      mode: "cors",
-      cache: "no-store"
-    });
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#071b1a">
+  <link rel="apple-touch-icon" href="image_pastille.png">
 
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}`);
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg-top: #031313;
+      --bg-bottom: #082120;
+      --border: rgba(170, 142, 65, 0.52);
+      --accent: #d9b24b;
+      --text: #f4f1e8;
+      --muted: #bcc8c0;
+      --shadow: 0 14px 30px rgba(0,0,0,0.14);
     }
 
-    const data = await res.json();
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0, 100, 80, 0.16), transparent 35%),
+        linear-gradient(180deg, var(--bg-top) 0%, #05211f 55%, var(--bg-bottom) 100%);
+      color: var(--text);
+    }
 
-    box.innerHTML = `
-      <div class="result-title">${data.title || "Découverte"}</div>
-      ${data.image ? `<img class="result-img" src="${data.image}" alt="" style="width:100%;border-radius:12px;margin-bottom:10px;display:block;">` : ""}
-      <div class="result-text">${data.summary || ""}</div>
-      ${data.url ? `<a class="link" href="${data.url}" target="_blank" rel="noopener">Voir plus</a>` : ""}
-    `;
-  } catch (e) {
-    box.innerHTML = `<div class="loading">Erreur : ${e.message}</div>`;
-    console.error("Erreur découverte :", e);
-  }
-}
+    body {
+      display: flex;
+      justify-content: center;
+    }
 
-document.getElementById("discoverBtn").addEventListener("click", loadDiscovery);
-</script>
+    .app {
+      width: 100%;
+      max-width: 560px;
+      min-height: 100vh;
+      padding: 10px 10px 28px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        var(--shadow);
+      padding: 18px 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .top-title {
+      color: var(--accent);
+      font-size: 1.08rem;
+      line-height: 1.2;
+      margin: 2px 0 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .back-link,
+    .pill-btn,
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 1px solid rgba(170, 142, 65, 0.62);
+      background: rgba(7, 32, 30, 0.92);
+      color: var(--text);
+      padding: 12px 10px;
+      border-radius: 999px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      min-height: 52px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .back-link {
+      margin-bottom: 14px;
+    }
+
+    .result-box {
+      border: 1px solid rgba(170, 142, 65, 0.30);
+      border-radius: 22px;
+      padding: 16px;
+      background: rgba(4, 24, 23, 0.72);
+      margin-top: 14px;
+    }
+
+    .result-title {
+      color: var(--accent);
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .result-text {
+      color: var(--text);
+      font-size: 0.96rem;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .result-img {
+      width: 100%;
+      border-radius: 16px;
+      margin-bottom: 12px;
+      display: none;
+      border: 1px solid rgba(170, 142, 65, 0.24);
+    }
+
+    .loading {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .theme-badge {
+      display: inline-block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <a href="index.html" class="back-link">← Retour à l’accueil</a>
+
+    <section class="card">
+      <p class="top-title">Découverte / apprentissage</p>
+
+      <button class="pill-btn" id="discoverBtn">Nouvelle découverte</button>
+
+      <div class="result-box" id="discoveryBox">
+        <div class="loading">Clique pour découvrir quelque chose de nouveau.</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    async function loadDiscovery() {
+      const box = document.getElementById("discoveryBox");
+      box.innerHTML = `<div class="loading">Chargement...</div>`;
+
+      try {
+        const res = await fetch("https://decouverte-app.ndrapeau77.workers.dev/", {
+          method: "GET",
+          mode: "cors",
+          cache: "no-store"
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        box.innerHTML = `
+          ${data.theme ? `<div class="theme-badge">${data.theme}</div>` : ""}
+          <div class="result-title">${data.title || "Découverte"}</div>
+          ${data.image ? `<img class="result-img" src="${data.image}" alt="" style="display:block;">` : ""}
+          <div class="result-text">${data.summary || ""}</div>
+          ${data.url ? `<a class="link-btn" href="${data.url}" target="_blank" rel="noopener">Voir plus</a>` : ""}
+        `;
+      } catch (e) {
+        box.innerHTML = `<div class="loading">Erreur : ${e.message}</div>`;
+        console.error("Erreur découverte :", e);
+      }
+    }
+
+    document.getElementById("discoverBtn").addEventListener("click", loadDiscovery);
+  </script>
+</body>
+</html>
