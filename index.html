@@ -366,6 +366,61 @@
       box-shadow: 0 8px 22px rgba(0,0,0,0.22);
     }
 
+    /* NAVIGATION PASTILLES */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 6px 0 10px;
+      margin-bottom: 10px;
+      background: linear-gradient(180deg, rgba(3, 19, 19, 0.96), rgba(3, 19, 19, 0.7));
+      backdrop-filter: blur(6px);
+    }
+
+    .top-nav-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 2px;
+      scrollbar-width: none;
+    }
+
+    .top-nav-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pill {
+      flex: 0 0 auto;
+      width: 68px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-pill-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      border: 1px solid rgba(170, 142, 65, 0.56);
+      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+
+    .nav-pill-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nav-pill-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
     @media (min-width: 700px) {
       .app {
         max-width: 640px;
@@ -379,6 +434,38 @@
 </head>
 <body>
   <main class="app">
+    <div class="top-nav">
+      <div class="top-nav-scroll">
+        <a href="menage.html" class="nav-pill">
+          <div class="nav-pill-icon">
+            <img src="pastille/menage.png" alt="Ménage">
+          </div>
+          <div class="nav-pill-label">Ménage</div>
+        </a>
+
+        <a href="notes.html" class="nav-pill">
+          <div class="nav-pill-icon">
+            <img src="pastille/notes.png" alt="Notes">
+          </div>
+          <div class="nav-pill-label">Notes</div>
+        </a>
+
+        <a href="notes-vocales.html" class="nav-pill">
+          <div class="nav-pill-icon">
+            <img src="pastille/notesvocales.png" alt="Notes vocales">
+          </div>
+          <div class="nav-pill-label">Vocales</div>
+        </a>
+
+        <a href="videos.html" class="nav-pill">
+          <div class="nav-pill-icon">
+            <img src="pastille/video.png" alt="Vidéos">
+          </div>
+          <div class="nav-pill-label">Vidéos</div>
+        </a>
+      </div>
+    </div>
+
     <section class="hero-card">
       <p class="top-title">Excellence personnelle</p>
 
