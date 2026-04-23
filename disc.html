@@ -6,9 +6,7 @@
   <title>DISC / Couleurs</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     :root {
       --bg: #0d1414;
@@ -19,7 +17,6 @@
       --text: #f4f1e8;
       --muted: #b7bdb8;
       --shadow: 0 10px 24px rgba(0,0,0,0.22);
-
       --yellow: #e8c14c;
       --red: #cf5b5b;
       --green: #63a77a;
@@ -27,24 +24,18 @@
     }
 
     html, body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background:
-        radial-gradient(circle at top, rgba(212, 175, 55, 0.06), transparent 30%),
+        radial-gradient(circle at top, rgba(212,175,55,0.06), transparent 30%),
         linear-gradient(180deg, #081111 0%, #0d1818 100%);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
       min-height: 100%;
     }
 
-    body {
-      padding: 12px;
-    }
+    body { padding: 12px; }
 
-    .app {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .app { max-width: 1100px; margin: 0 auto; }
 
     .panel {
       background: linear-gradient(180deg, rgba(20,32,31,0.95), rgba(18,28,27,0.95));
@@ -55,13 +46,8 @@
       margin-bottom: 14px;
     }
 
-    h1, h2, h3, p {
-      margin-top: 0;
-    }
-
-    h1, h2 {
-      color: var(--accent);
-    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { color: var(--accent); }
 
     .top-actions {
       display: grid;
@@ -87,21 +73,23 @@
       text-align: center;
     }
 
-    .btn:active {
-      transform: scale(0.98);
-    }
+    .btn:active { transform: scale(0.98); }
 
     .btn-home {
-      background: rgba(212, 175, 55, 0.12);
+      background: rgba(212,175,55,0.12);
       color: #f2dfad;
     }
 
-    .intro {
-      color: var(--muted);
-      line-height: 1.6;
-      margin-top: 10px;
+    .btn-accent {
+      background: rgba(212,175,55,0.18);
+      color: #f2dfad;
+      border-color: rgba(212,175,55,0.45);
+      font-weight: 700;
     }
 
+    .intro { color: var(--muted); line-height: 1.6; margin-top: 10px; }
+
+    /* ===== COLOR CARDS ===== */
     .color-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -117,9 +105,9 @@
     }
 
     .color-card.yellow { border-left: 8px solid var(--yellow); }
-    .color-card.red { border-left: 8px solid var(--red); }
-    .color-card.green { border-left: 8px solid var(--green); }
-    .color-card.blue { border-left: 8px solid var(--blue); }
+    .color-card.red    { border-left: 8px solid var(--red); }
+    .color-card.green  { border-left: 8px solid var(--green); }
+    .color-card.blue   { border-left: 8px solid var(--blue); }
 
     .tag {
       display: inline-flex;
@@ -132,26 +120,102 @@
     }
 
     .tag.yellow { background: rgba(232,193,76,0.12); color: #f4dd96; }
-    .tag.red { background: rgba(207,91,91,0.12); color: #f1b0b0; }
-    .tag.green { background: rgba(99,167,122,0.12); color: #bee4c8; }
-    .tag.blue { background: rgba(93,143,203,0.12); color: #c7dcf7; }
+    .tag.red    { background: rgba(207,91,91,0.12);  color: #f1b0b0; }
+    .tag.green  { background: rgba(99,167,122,0.12); color: #bee4c8; }
+    .tag.blue   { background: rgba(93,143,203,0.12); color: #c7dcf7; }
 
-    .color-card h3 {
-      margin-bottom: 10px;
-      color: #fff9eb;
-    }
+    .color-card h3 { margin-bottom: 10px; color: #fff9eb; }
 
-    .sub {
-      color: var(--accent);
-      font-size: 0.95rem;
-      margin: 14px 0 8px;
-    }
+    .sub { color: var(--accent); font-size: 0.95rem; margin: 14px 0 8px; }
 
     .list {
       margin: 0;
       padding-left: 18px;
       color: var(--text);
+      line-height: 1.7;
+    }
+
+    .more-toggle-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.86rem;
+      cursor: pointer;
+      margin-top: 14px;
+      width: 100%;
+      transition: background 0.15s;
+    }
+
+    .more-toggle-btn:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+
+    .more-content {
+      display: none;
+      margin-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 14px;
+    }
+
+    .more-content.open { display: block; }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .strength-chip {
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: var(--muted);
+    }
+
+    .profile-combo-note {
+      font-size: 0.88rem;
+      color: var(--muted);
       line-height: 1.6;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    /* ===== QUIZ ===== */
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .progress-label { font-size: 0.88rem; color: var(--muted); }
+    .progress-pct   { font-size: 0.88rem; color: var(--accent); font-weight: 700; }
+
+    .quiz-progress-wrap {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      overflow: hidden;
+      border: 1px solid rgba(212,175,55,0.18);
+      margin-bottom: 20px;
+    }
+
+    .quiz-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(212,175,55,0.6), var(--accent));
+      transition: width 0.3s ease;
     }
 
     .quiz-question {
@@ -168,10 +232,15 @@
       margin-bottom: 10px;
     }
 
-    .choices {
-      display: grid;
-      gap: 8px;
+    .q-category {
+      font-size: 0.76rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
     }
+
+    .choices { display: grid; gap: 8px; }
 
     .choice {
       display: block;
@@ -180,6 +249,12 @@
       border-radius: 14px;
       padding: 10px 12px;
       cursor: pointer;
+      transition: background 0.12s, border-color 0.12s;
+    }
+
+    .choice:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(212,175,55,0.4);
     }
 
     .choice input {
@@ -187,6 +262,7 @@
       accent-color: var(--accent);
     }
 
+    /* ===== RESULTS ===== */
     .result-box {
       margin-top: 14px;
       padding: 16px;
@@ -196,44 +272,26 @@
       display: none;
     }
 
-    .result-title {
-      color: var(--accent);
-      font-size: 1.15rem;
-      margin-bottom: 8px;
-    }
+    .result-title { color: var(--accent); font-size: 1.15rem; margin-bottom: 8px; }
 
-    .muted {
-      color: var(--muted);
-      line-height: 1.6;
-    }
+    .muted { color: var(--muted); line-height: 1.6; }
 
-    .score-list {
-      display: grid;
-      gap: 12px;
-      margin: 16px 0;
-    }
+    .score-list { display: grid; gap: 12px; margin: 16px 0; }
 
-    .score-row {
-      display: grid;
-      gap: 6px;
-    }
+    .score-row { display: grid; gap: 6px; }
 
     .score-top {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
       align-items: center;
       font-size: 0.95rem;
     }
 
-    .score-label {
-      font-weight: 700;
-    }
-
+    .score-label { font-weight: 700; }
     .score-label.yellow { color: var(--yellow); }
-    .score-label.red { color: var(--red); }
-    .score-label.green { color: var(--green); }
-    .score-label.blue { color: var(--blue); }
+    .score-label.red    { color: var(--red); }
+    .score-label.green  { color: var(--green); }
+    .score-label.blue   { color: var(--blue); }
 
     .score-bar {
       width: 100%;
@@ -247,13 +305,13 @@
       height: 100%;
       width: 0;
       border-radius: 999px;
-      transition: width 0.35s ease;
+      transition: width 0.4s ease;
     }
 
     .score-fill.yellow { background: var(--yellow); }
-    .score-fill.red { background: var(--red); }
-    .score-fill.green { background: var(--green); }
-    .score-fill.blue { background: var(--blue); }
+    .score-fill.red    { background: var(--red); }
+    .score-fill.green  { background: var(--green); }
+    .score-fill.blue   { background: var(--blue); }
 
     .dominant-card {
       border-radius: 16px;
@@ -263,378 +321,630 @@
       background: rgba(255,255,255,0.03);
     }
 
+    .combo-card {
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 12px;
+      border: 1px solid rgba(212,175,55,0.18);
+      background: rgba(212,175,55,0.05);
+    }
+
+    .combo-title {
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .tip-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .tip-item strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+    .reset-btn-wrap { margin-top: 14px; }
+
     @media (min-width: 760px) {
-      body {
-        padding: 16px;
-      }
-
-      .top-actions {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .top-actions .btn {
-        width: auto;
-      }
-
-      .color-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+      body { padding: 16px; }
+      .top-actions { display: flex; flex-wrap: wrap; }
+      .top-actions .btn { width: auto; }
+      .color-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <section class="panel">
-      <h1>DISC / Couleurs</h1>
-      <p class="intro">
-        Vue simple des 4 grands styles de communication : jaune, rouge, vert et bleu.
-        Ce n’est pas un test officiel, mais un bon outil pour mieux se comprendre et mieux communiquer avec les autres.
-      </p>
+<div class="app">
 
-      <div class="top-actions">
-        <a href="index.html" class="btn btn-home">← Accueil</a>
-        <button class="btn" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
-          Aller au mini quiz
-        </button>
-      </div>
-    </section>
+  <!-- HEADER -->
+  <section class="panel">
+    <h1>DISC / Couleurs</h1>
+    <p class="intro">
+      Le modèle DISC, développé par le psychologue William Moulton Marston (1928), identifie 4 grandes tendances comportementales.
+      Ce test maison de 40 questions te donne une bonne estimation de ton profil dominant et secondaire.
+      Ce n'est pas un outil clinique, mais un excellent point de départ pour mieux se connaître et mieux communiquer.
+    </p>
+    <div class="top-actions">
+      <a href="index.html" class="btn btn-home">← Accueil</a>
+      <button class="btn" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+        Faire le test (40 questions)
+      </button>
+    </div>
+  </section>
 
-    <section class="panel">
-      <h2>Les 4 couleurs</h2>
+  <!-- LES 4 COULEURS -->
+  <section class="panel">
+    <h2>Les 4 couleurs</h2>
 
-      <div class="color-grid">
-        <article class="color-card yellow">
-          <div class="tag yellow">Jaune — influence / enthousiasme</div>
-          <h3>Jaune</h3>
-          <p class="muted">Souvent énergique, sociable, spontané et orienté relations.</p>
+    <div class="color-grid">
 
-          <div class="sub">Besoins</div>
-          <ul class="list">
-            <li>Être apprécié</li>
-            <li>Avoir du plaisir</li>
-            <li>Pouvoir s’exprimer</li>
-            <li>Sentir une bonne ambiance</li>
-          </ul>
+      <!-- JAUNE -->
+      <article class="color-card yellow">
+        <div class="tag yellow">Jaune — Influence / Enthousiasme</div>
+        <h3>🟡 Jaune (I — Influence)</h3>
+        <p class="muted">Spontané, chaleureux, expressif et orienté relations. Le Jaune aime les gens, les idées nouvelles et les environnements dynamiques. Il est souvent perçu comme le moteur émotionnel d'un groupe.</p>
 
-          <div class="sub">Comment communiquer avec un jaune</div>
-          <ul class="list">
-            <li>Sois chaleureux et positif</li>
-            <li>Va à l’essentiel sans être froid</li>
-            <li>Laisse un peu d’espace pour parler</li>
-            <li>Mets l’accent sur les possibilités</li>
-          </ul>
-        </article>
+        <div class="sub">Besoins fondamentaux</div>
+        <ul class="list">
+          <li>Être reconnu et apprécié</li>
+          <li>Avoir du plaisir et de la liberté</li>
+          <li>Pouvoir s'exprimer librement</li>
+          <li>Sentir une bonne énergie dans son entourage</li>
+          <li>Éviter la routine et l'isolement</li>
+        </ul>
 
-        <article class="color-card red">
-          <div class="tag red">Rouge — action / résultats</div>
-          <h3>Rouge</h3>
-          <p class="muted">Souvent direct, rapide, compétitif et orienté objectifs.</p>
+        <div class="sub">Comment communiquer avec un Jaune</div>
+        <ul class="list">
+          <li>Sois chaleureux et enthousiaste</li>
+          <li>Va à l'essentiel sans être froid ou distant</li>
+          <li>Laisse-lui de l'espace pour parler et partager</li>
+          <li>Mets l'accent sur les possibilités et la vision</li>
+          <li>Évite les longs détails techniques en introduction</li>
+        </ul>
 
-          <div class="sub">Besoins</div>
-          <ul class="list">
-            <li>Avoir du contrôle</li>
-            <li>Avancer vite</li>
-            <li>Obtenir des résultats</li>
-            <li>Sentir qu’on est efficace</li>
-          </ul>
-
-          <div class="sub">Comment communiquer avec un rouge</div>
-          <ul class="list">
-            <li>Sois clair et concis</li>
-            <li>Présente des options concrètes</li>
-            <li>Évite de tourner autour du pot</li>
-            <li>Parle résultats, délais, décisions</li>
-          </ul>
-        </article>
-
-        <article class="color-card green">
-          <div class="tag green">Vert — stabilité / harmonie</div>
-          <h3>Vert</h3>
-          <p class="muted">Souvent calme, patient, loyal et orienté harmonie.</p>
-
-          <div class="sub">Besoins</div>
-          <ul class="list">
-            <li>Se sentir en sécurité</li>
-            <li>Avoir de la stabilité</li>
-            <li>Éviter les tensions inutiles</li>
-            <li>Avoir du temps pour s’adapter</li>
-          </ul>
-
-          <div class="sub">Comment communiquer avec un vert</div>
-          <ul class="list">
-            <li>Sois calme et respectueux</li>
-            <li>Évite la pression agressive</li>
-            <li>Explique les changements doucement</li>
-            <li>Mets l’accent sur la collaboration</li>
-          </ul>
-        </article>
-
-        <article class="color-card blue">
-          <div class="tag blue">Bleu — précision / qualité</div>
-          <h3>Bleu</h3>
-          <p class="muted">Souvent analytique, structuré, prudent et orienté qualité.</p>
-
-          <div class="sub">Besoins</div>
-          <ul class="list">
-            <li>Avoir des faits clairs</li>
-            <li>Comprendre avant d’agir</li>
-            <li>Sentir de la rigueur</li>
-            <li>Avoir un cadre logique</li>
-          </ul>
-
-          <div class="sub">Comment communiquer avec un bleu</div>
-          <ul class="list">
-            <li>Sois précis et structuré</li>
-            <li>Donne des détails utiles</li>
-            <li>Évite les flous et les improvisations</li>
-            <li>Présente la logique derrière ta demande</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="panel" id="quiz">
-      <h2>Mini quiz couleurs</h2>
-      <p class="intro">
-        Choisis la réponse qui te ressemble le plus pour chaque question.
-      </p>
-
-      <div class="quiz-question">
-        <h3>1. Quand je dois prendre une décision rapidement…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q1" value="blue"> Je veux d’abord les faits.</label>
-          <label class="choice"><input type="radio" name="q1" value="red"> Je tranche vite.</label>
-          <label class="choice"><input type="radio" name="q1" value="green"> Je pense aux autres.</label>
-          <label class="choice"><input type="radio" name="q1" value="yellow"> J’y vais au feeling.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>2. En équipe, on dit souvent que je suis…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q2" value="green"> Stable et fiable.</label>
-          <label class="choice"><input type="radio" name="q2" value="yellow"> Motivant et positif.</label>
-          <label class="choice"><input type="radio" name="q2" value="blue"> Structuré.</label>
-          <label class="choice"><input type="radio" name="q2" value="red"> Direct.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>3. Ce qui me fatigue le plus, c’est…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q3" value="yellow"> La routine plate.</label>
-          <label class="choice"><input type="radio" name="q3" value="blue"> Le manque de logique.</label>
-          <label class="choice"><input type="radio" name="q3" value="red"> La lenteur.</label>
-          <label class="choice"><input type="radio" name="q3" value="green"> Les conflits.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>4. Quand j’explique quelque chose…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q4" value="red"> Je vais droit au but.</label>
-          <label class="choice"><input type="radio" name="q4" value="blue"> Je structure bien.</label>
-          <label class="choice"><input type="radio" name="q4" value="yellow"> Je rends ça vivant.</label>
-          <label class="choice"><input type="radio" name="q4" value="green"> Je prends mon temps.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>5. Dans un changement imprévu…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q5" value="green"> J’ai besoin de temps.</label>
-          <label class="choice"><input type="radio" name="q5" value="red"> Je m’adapte vite.</label>
-          <label class="choice"><input type="radio" name="q5" value="blue"> Je veux comprendre.</label>
-          <label class="choice"><input type="radio" name="q5" value="yellow"> Je trouve ça excitant.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>6. Ce qui me motive le plus…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q6" value="red"> Atteindre des résultats.</label>
-          <label class="choice"><input type="radio" name="q6" value="yellow"> Avoir du fun.</label>
-          <label class="choice"><input type="radio" name="q6" value="green"> Être bien avec les autres.</label>
-          <label class="choice"><input type="radio" name="q6" value="blue"> Faire les choses correctement.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>7. Dans une discussion tendue…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q7" value="green"> J’essaie d’apaiser.</label>
-          <label class="choice"><input type="radio" name="q7" value="red"> Je confronte directement.</label>
-          <label class="choice"><input type="radio" name="q7" value="blue"> J’analyse calmement.</label>
-          <label class="choice"><input type="radio" name="q7" value="yellow"> Je change l’ambiance.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>8. Quand je commence quelque chose…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q8" value="yellow"> Je suis enthousiaste.</label>
-          <label class="choice"><input type="radio" name="q8" value="blue"> Je planifie.</label>
-          <label class="choice"><input type="radio" name="q8" value="red"> Je fonce.</label>
-          <label class="choice"><input type="radio" name="q8" value="green"> Je prends mon temps.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>9. Ce que les gens apprécient chez moi…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q9" value="blue"> Ma précision.</label>
-          <label class="choice"><input type="radio" name="q9" value="yellow"> Mon énergie.</label>
-          <label class="choice"><input type="radio" name="q9" value="green"> Ma fiabilité.</label>
-          <label class="choice"><input type="radio" name="q9" value="red"> Ma détermination.</label>
-        </div>
-      </div>
-
-      <div class="quiz-question">
-        <h3>10. Ce qui me dérange le plus…</h3>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="q10" value="red"> Le manque d’efficacité.</label>
-          <label class="choice"><input type="radio" name="q10" value="green"> Les tensions.</label>
-          <label class="choice"><input type="radio" name="q10" value="yellow"> L’ennui.</label>
-          <label class="choice"><input type="radio" name="q10" value="blue"> Les erreurs.</label>
-        </div>
-      </div>
-
-      <button class="btn" onclick="calculateDisc()">Voir mon résultat</button>
-
-      <div class="result-box" id="resultBox">
-        <div class="result-title" id="resultTitle">Résultat</div>
-
-        <div class="score-list">
-          <div class="score-row">
-            <div class="score-top">
-              <span class="score-label yellow">Jaune</span>
-              <span id="yellowPct">0%</span>
-            </div>
-            <div class="score-bar"><div class="score-fill yellow" id="yellowBar"></div></div>
+        <button class="more-toggle-btn" onclick="toggleMore('yellow-more', this)">▼ En savoir plus sur le profil Jaune</button>
+        <div class="more-content" id="yellow-more">
+          <div class="sub">Forces clés</div>
+          <div class="strengths-grid">
+            <div class="strength-chip">Communicateur naturel</div>
+            <div class="strength-chip">Créatif & innovant</div>
+            <div class="strength-chip">Optimiste</div>
+            <div class="strength-chip">Persuasif</div>
+            <div class="strength-chip">Enthousiaste</div>
+            <div class="strength-chip">Fédérateur</div>
           </div>
 
-          <div class="score-row">
-            <div class="score-top">
-              <span class="score-label red">Rouge</span>
-              <span id="redPct">0%</span>
-            </div>
-            <div class="score-bar"><div class="score-fill red" id="redBar"></div></div>
-          </div>
+          <div class="sub">Points de vigilance</div>
+          <ul class="list">
+            <li>Peut manquer de rigueur dans le suivi des tâches</li>
+            <li>Tendance à s'éparpiller ou commencer sans finir</li>
+            <li>Peut être trop émotif dans les prises de décision</li>
+            <li>Peut parler plus qu'écouter</li>
+          </ul>
 
-          <div class="score-row">
-            <div class="score-top">
-              <span class="score-label green">Vert</span>
-              <span id="greenPct">0%</span>
-            </div>
-            <div class="score-bar"><div class="score-fill green" id="greenBar"></div></div>
-          </div>
+          <div class="sub">En contexte de travail</div>
+          <p class="muted">Le Jaune excelle dans les rôles de vente, de communication, de relation client, de coaching et d'animation. Il motive les équipes et insuffle de l'énergie dans les projets. Il a besoin de variété et de reconnaissance pour rester engagé.</p>
 
-          <div class="score-row">
-            <div class="score-top">
-              <span class="score-label blue">Bleu</span>
-              <span id="bluePct">0%</span>
-            </div>
-            <div class="score-bar"><div class="score-fill blue" id="blueBar"></div></div>
+          <div class="sub">Profils combinés fréquents</div>
+          <div class="profile-combo-note">
+            <strong>Jaune-Rouge :</strong> Très dynamique et orienté résultats avec beaucoup d'entrain. Excellent vendeur ou entrepreneur.<br><br>
+            <strong>Jaune-Vert :</strong> Chaud, empathique et social. Très à l'aise dans les rôles d'accompagnement et de service aux personnes.
           </div>
         </div>
+      </article>
 
-        <div class="dominant-card">
-          <div class="result-title" id="dominantTitle">Couleur dominante</div>
-          <p class="muted" id="resultText"></p>
+      <!-- ROUGE -->
+      <article class="color-card red">
+        <div class="tag red">Rouge — Dominance / Action</div>
+        <h3>🔴 Rouge (D — Dominance)</h3>
+        <p class="muted">Direct, déterminé, compétitif et orienté résultats. Le Rouge prend des décisions rapidement et aime relever des défis. Il est souvent perçu comme un leader naturel, parfois perçu comme trop brusque par les profils plus doux.</p>
+
+        <div class="sub">Besoins fondamentaux</div>
+        <ul class="list">
+          <li>Avoir du contrôle sur les décisions</li>
+          <li>Avancer vite et efficacement</li>
+          <li>Obtenir des résultats concrets et mesurables</li>
+          <li>Relever des défis stimulants</li>
+          <li>Être vu comme compétent et efficace</li>
+        </ul>
+
+        <div class="sub">Comment communiquer avec un Rouge</div>
+        <ul class="list">
+          <li>Sois clair, direct et concis</li>
+          <li>Présente des options concrètes avec des délais</li>
+          <li>Évite de tourner autour du pot</li>
+          <li>Parle en termes de résultats et d'impacts</li>
+          <li>Respecte son temps — va droit au but</li>
+        </ul>
+
+        <button class="more-toggle-btn" onclick="toggleMore('red-more', this)">▼ En savoir plus sur le profil Rouge</button>
+        <div class="more-content" id="red-more">
+          <div class="sub">Forces clés</div>
+          <div class="strengths-grid">
+            <div class="strength-chip">Leadership naturel</div>
+            <div class="strength-chip">Décisif</div>
+            <div class="strength-chip">Orienté objectifs</div>
+            <div class="strength-chip">Courageux</div>
+            <div class="strength-chip">Efficace</div>
+            <div class="strength-chip">Ambitieux</div>
+          </div>
+
+          <div class="sub">Points de vigilance</div>
+          <ul class="list">
+            <li>Peut paraître impatient, autoritaire ou brusque</li>
+            <li>Tendance à négliger les émotions des autres</li>
+            <li>Risque de prendre des décisions trop vite sans assez d'information</li>
+            <li>Peut intimider sans le vouloir</li>
+          </ul>
+
+          <div class="sub">En contexte de travail</div>
+          <p class="muted">Le Rouge excelle dans les rôles de gestion, de direction, de vente compétitive, d'entrepreneuriat et de négociation. Il a besoin d'autonomie, de défis et de reconnaissances concrètes (résultats, promotions, responsabilités).</p>
+
+          <div class="sub">Profils combinés fréquents</div>
+          <div class="profile-combo-note">
+            <strong>Rouge-Bleu :</strong> Combine ambition et rigueur. Excellent gestionnaire de projet, stratège ou dirigeant technique.<br><br>
+            <strong>Rouge-Jaune :</strong> Très charismatique et persuasif. Profil entrepreneurial fort, souvent en vente ou en leadership.
+          </div>
+        </div>
+      </article>
+
+      <!-- VERT -->
+      <article class="color-card green">
+        <div class="tag green">Vert — Stabilité / Harmonie</div>
+        <h3>🟢 Vert (S — Stabilité)</h3>
+        <p class="muted">Patient, loyal, empathique et orienté harmonie. Le Vert est le pilier discret mais indispensable d'une équipe. Il favorise la collaboration, la confiance et la continuité plutôt que le changement rapide.</p>
+
+        <div class="sub">Besoins fondamentaux</div>
+        <ul class="list">
+          <li>Se sentir en sécurité et en confiance</li>
+          <li>Avoir de la stabilité et une routine claire</li>
+          <li>Entretenir des relations harmonieuses</li>
+          <li>Avoir du temps pour s'adapter aux changements</li>
+          <li>Sentir qu'il contribue concrètement</li>
+        </ul>
+
+        <div class="sub">Comment communiquer avec un Vert</div>
+        <ul class="list">
+          <li>Sois calme, patient et respectueux</li>
+          <li>Évite la pression agressive ou les ultimatums</li>
+          <li>Explique les changements à l'avance et doucement</li>
+          <li>Mets l'accent sur la collaboration et le soutien mutuel</li>
+          <li>Valorise sa fiabilité et sa contribution</li>
+        </ul>
+
+        <button class="more-toggle-btn" onclick="toggleMore('green-more', this)">▼ En savoir plus sur le profil Vert</button>
+        <div class="more-content" id="green-more">
+          <div class="sub">Forces clés</div>
+          <div class="strengths-grid">
+            <div class="strength-chip">Loyal & fiable</div>
+            <div class="strength-chip">Bon écoutant</div>
+            <div class="strength-chip">Patient</div>
+            <div class="strength-chip">Collaboratif</div>
+            <div class="strength-chip">Empathique</div>
+            <div class="strength-chip">Stable sous pression</div>
+          </div>
+
+          <div class="sub">Points de vigilance</div>
+          <ul class="list">
+            <li>Peut avoir du mal à dire non ou à confronter</li>
+            <li>Résiste aux changements brusques</li>
+            <li>Tendance à mettre les besoins des autres avant les siens</li>
+            <li>Peut sembler passif ou indécis</li>
+          </ul>
+
+          <div class="sub">En contexte de travail</div>
+          <p class="muted">Le Vert excelle dans les rôles de soutien, de coordination, de ressources humaines, de service à la clientèle, d'enseignement et de soins. Il est le "ciment" des équipes — il maintient la cohésion dans le temps.</p>
+
+          <div class="sub">Profils combinés fréquents</div>
+          <div class="profile-combo-note">
+            <strong>Vert-Bleu :</strong> Méthodique, fiable et organisé. Excellent dans les rôles qui demandent précision ET bonne relation avec les gens.<br><br>
+            <strong>Vert-Jaune :</strong> Très chaleureux et social. Profil idéal pour le coaching, l'accompagnement ou les services aux personnes.
+          </div>
+        </div>
+      </article>
+
+      <!-- BLEU -->
+      <article class="color-card blue">
+        <div class="tag blue">Bleu — Précision / Qualité</div>
+        <h3>🔵 Bleu (C — Conformité)</h3>
+        <p class="muted">Analytique, rigoureux, structuré et orienté qualité. Le Bleu prend le temps de comprendre avant d'agir. Il cherche l'exactitude, la logique et la cohérence dans tout ce qu'il fait.</p>
+
+        <div class="sub">Besoins fondamentaux</div>
+        <ul class="list">
+          <li>Avoir accès à des informations complètes et fiables</li>
+          <li>Comprendre le pourquoi avant d'agir</li>
+          <li>Travailler dans un cadre clair et logique</li>
+          <li>Éviter les erreurs et maintenir une qualité élevée</li>
+          <li>Être reconnu pour son expertise</li>
+        </ul>
+
+        <div class="sub">Comment communiquer avec un Bleu</div>
+        <ul class="list">
+          <li>Sois précis, structuré et factuel</li>
+          <li>Donne des données, des exemples et de la logique</li>
+          <li>Évite les vagues et les improvisations</li>
+          <li>Donne-lui le temps de réfléchir avant de décider</li>
+          <li>Respecte ses standards de qualité</li>
+        </ul>
+
+        <button class="more-toggle-btn" onclick="toggleMore('blue-more', this)">▼ En savoir plus sur le profil Bleu</button>
+        <div class="more-content" id="blue-more">
+          <div class="sub">Forces clés</div>
+          <div class="strengths-grid">
+            <div class="strength-chip">Analytique</div>
+            <div class="strength-chip">Rigoureux</div>
+            <div class="strength-chip">Organisé</div>
+            <div class="strength-chip">Orienté qualité</div>
+            <div class="strength-chip">Systématique</div>
+            <div class="strength-chip">Expert dans son domaine</div>
+          </div>
+
+          <div class="sub">Points de vigilance</div>
+          <ul class="list">
+            <li>Peut être paralysé par l'excès d'analyse</li>
+            <li>Tendance au perfectionnisme qui freine l'action</li>
+            <li>Peut paraître froid ou distant émotionnellement</li>
+            <li>Difficulté à déléguer par peur de l'erreur</li>
+          </ul>
+
+          <div class="sub">En contexte de travail</div>
+          <p class="muted">Le Bleu excelle dans les rôles techniques, d'analyse, de finance, de qualité, d'ingénierie, de recherche ou de conformité. Il produit un travail de haute qualité et est souvent l'expert incontournable de son équipe.</p>
+
+          <div class="sub">Profils combinés fréquents</div>
+          <div class="profile-combo-note">
+            <strong>Bleu-Rouge :</strong> Stratège redoutable — combine ambition et rigueur. Profil de directeur technique ou de gestionnaire orienté performance.<br><br>
+            <strong>Bleu-Vert :</strong> Prudent, fiable et très consciencieux. Excellent dans les rôles d'expert-conseil ou de spécialiste de haut niveau.
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" id="quiz">
+    <h2>Test DISC — 40 questions</h2>
+    <p class="intro">
+      Choisis la réponse qui te ressemble le plus pour chaque question. Réponds spontanément — il n'y a pas de bonne ou mauvaise réponse.
+    </p>
+
+    <div class="progress-top">
+      <span class="progress-label" id="progressLabel">0 / 40 réponses</span>
+      <span class="progress-pct" id="progressPct">0%</span>
+    </div>
+    <div class="quiz-progress-wrap">
+      <div class="quiz-progress-bar" id="quizProgressBar"></div>
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <button class="btn btn-accent" onclick="calculateDisc()" style="margin-top:8px;">
+      Voir mon résultat DISC
+    </button>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-title" id="resultTitle">Répartition de ton profil</div>
+
+      <div class="score-list">
+        <div class="score-row">
+          <div class="score-top">
+            <span class="score-label yellow">🟡 Jaune (Influence)</span>
+            <span id="yellowPct">0%</span>
+          </div>
+          <div class="score-bar"><div class="score-fill yellow" id="yellowBar"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-top">
+            <span class="score-label red">🔴 Rouge (Dominance)</span>
+            <span id="redPct">0%</span>
+          </div>
+          <div class="score-bar"><div class="score-fill red" id="redBar"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-top">
+            <span class="score-label green">🟢 Vert (Stabilité)</span>
+            <span id="greenPct">0%</span>
+          </div>
+          <div class="score-bar"><div class="score-fill green" id="greenBar"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-top">
+            <span class="score-label blue">🔵 Bleu (Conformité)</span>
+            <span id="bluePct">0%</span>
+          </div>
+          <div class="score-bar"><div class="score-fill blue" id="blueBar"></div></div>
         </div>
       </div>
-    </section>
-  </div>
 
-  <script>
-    function calculateDisc() {
-      const scores = {
-        yellow: 0,
-        red: 0,
-        green: 0,
-        blue: 0
-      };
+      <div class="dominant-card">
+        <div class="result-title" id="dominantTitle">Couleur dominante</div>
+        <p class="muted" id="resultText"></p>
+      </div>
 
-      const questions = ["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10"];
+      <div class="combo-card" id="comboCard">
+        <div class="combo-title" id="comboTitle">Ton profil combiné</div>
+        <p class="muted" id="comboText"></p>
 
-      for (const q of questions) {
-        const selected = document.querySelector(`input[name="${q}"]:checked`);
-        if (!selected) {
-          alert("Réponds à toutes les questions avant de voir le résultat.");
-          return;
-        }
-        scores[selected.value]++;
+        <div class="tip-grid" id="tipGrid"></div>
+      </div>
+
+      <div class="reset-btn-wrap">
+        <button class="btn" onclick="resetQuiz()">🔄 Recommencer le test</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ===== QUESTIONS =====
+const questions = [
+  // Décision & rapidité (10 questions)
+  { id: "q1",  cat: "Décision",     text: "Quand je dois prendre une décision rapidement…",
+    choices: [{v:"blue","t":"Je veux d'abord tous les faits."},{v:"red","t":"Je tranche vite et j'assume."},{v:"green","t":"Je pense à l'impact sur les autres."},{v:"yellow","t":"J'y vais au feeling et à l'intuition."}] },
+  { id: "q2",  cat: "Décision",     text: "Face à un problème inattendu au travail…",
+    choices: [{v:"red","t":"Je prends les rênes et je règle ça."},{v:"blue","t":"J'analyse avant de réagir."},{v:"green","t":"Je consulte l'équipe pour trouver ensemble."},{v:"yellow","t":"Je reste positif et j'improvise."}] },
+  { id: "q3",  cat: "Décision",     text: "Dans une situation de crise, je…",
+    choices: [{v:"red","t":"Prends le contrôle et dirige."},{v:"green","t":"Maintiens le calme et soutiens les autres."},{v:"blue","t":"Cherche la meilleure solution logique."},{v:"yellow","t":"Communique et remonte le moral."}] },
+  { id: "q4",  cat: "Décision",     text: "Quand j'ai plusieurs options devant moi…",
+    choices: [{v:"blue","t":"Je compare chaque option en détail."},{v:"red","t":"Je choisis celle qui donne le meilleur résultat le plus vite."},{v:"yellow","t":"Je choisis celle qui me semble la plus excitante."},{v:"green","t":"Je choisis celle qui crée le moins de friction."}] },
+  { id: "q5",  cat: "Décision",     text: "Quand on me demande de décider pour un groupe…",
+    choices: [{v:"red","t":"Je décide clairement et j'avance."},{v:"green","t":"Je m'assure que tout le monde est à l'aise."},{v:"blue","t":"Je rassemble les données avant de trancher."},{v:"yellow","t":"Je favorise la discussion et le consensus."}] },
+
+  // Relations & communication (10 questions)
+  { id: "q6",  cat: "Communication", text: "En équipe, on dit souvent que je suis…",
+    choices: [{v:"green","t":"Stable, fiable et présent."},{v:"yellow","t":"Motivant, positif et communicatif."},{v:"blue","t":"Structuré, précis et rigoureux."},{v:"red","t":"Direct, efficace et décisif."}] },
+  { id: "q7",  cat: "Communication", text: "Quand j'explique quelque chose à quelqu'un…",
+    choices: [{v:"red","t":"Je vais droit au but sans détails inutiles."},{v:"blue","t":"Je structure bien et je m'assure que c'est complet."},{v:"yellow","t":"Je rends ça vivant avec des exemples et des anecdotes."},{v:"green","t":"Je prends le temps de m'adapter à l'autre."}] },
+  { id: "q8",  cat: "Communication", text: "Dans une discussion tendue ou un conflit…",
+    choices: [{v:"green","t":"J'essaie d'apaiser et de trouver un terrain commun."},{v:"red","t":"Je confronte directement pour régler le problème."},{v:"blue","t":"J'analyse calmement et présente les faits."},{v:"yellow","t":"Je détends l'atmosphère avec une touche d'humour."}] },
+  { id: "q9",  cat: "Communication", text: "Quand je dois convaincre quelqu'un…",
+    choices: [{v:"yellow","t":"Je mise sur l'enthousiasme et la vision."},{v:"red","t":"Je mise sur les résultats concrets et les arguments percutants."},{v:"blue","t":"Je présente des données et une argumentation logique."},{v:"green","t":"Je construis la confiance sur le long terme."}] },
+  { id: "q10", cat: "Communication", text: "En réunion, j'ai tendance à…",
+    choices: [{v:"red","t":"Prendre la parole et diriger la conversation."},{v:"yellow","t":"Animer, faire rire et garder l'énergie haute."},{v:"blue","t":"Écouter, prendre des notes et poser des questions précises."},{v:"green","t":"Soutenir les idées des autres et assurer la cohésion."}] },
+  { id: "q11", cat: "Communication", text: "Ma façon préférée de recevoir un feedback…",
+    choices: [{v:"red","t":"Direct et sans détour."},{v:"yellow","t":"Positif et encourageant."},{v:"blue","t":"Structuré et basé sur des faits concrets."},{v:"green","t":"Doux et constructif, dans un contexte de confiance."}] },
+  { id: "q12", cat: "Communication", text: "Quand quelqu'un fait une erreur dans mon équipe…",
+    choices: [{v:"red","t":"Je le signale directement et on corrige vite."},{v:"blue","t":"J'analyse pourquoi c'est arrivé pour éviter la récidive."},{v:"green","t":"J'en parle doucement pour ne pas blesser."},{v:"yellow","t":"Je reste positif et cherche une solution ensemble."}] },
+
+  // Motivation & travail (10 questions)
+  { id: "q13", cat: "Motivation",    text: "Ce qui me motive le plus au travail…",
+    choices: [{v:"red","t":"Atteindre des résultats concrets et mesurables."},{v:"yellow","t":"Avoir du plaisir et de la liberté."},{v:"green","t":"Être bien avec mes collègues et contribuer à quelque chose."},{v:"blue","t":"Faire les choses correctement et avec rigueur."}] },
+  { id: "q14", cat: "Motivation",    text: "Ce qui me fatigue le plus…",
+    choices: [{v:"yellow","t":"La routine plate et répétitive."},{v:"blue","t":"Le manque de logique et les approximations."},{v:"red","t":"La lenteur et le manque d'efficacité."},{v:"green","t":"Les tensions relationnelles et les conflits."}] },
+  { id: "q15", cat: "Motivation",    text: "Ce que les gens apprécient le plus chez moi…",
+    choices: [{v:"blue","t":"Ma précision et ma fiabilité."},{v:"yellow","t":"Mon énergie et ma créativité."},{v:"green","t":"Ma patience et ma loyauté."},{v:"red","t":"Ma détermination et mon efficacité."}] },
+  { id: "q16", cat: "Motivation",    text: "Ce qui me dérange le plus…",
+    choices: [{v:"red","t":"Le manque d'efficacité et les pertes de temps."},{v:"green","t":"Les tensions et l'ambiance négative."},{v:"yellow","t":"L'ennui et le manque de créativité."},{v:"blue","t":"Les erreurs, le flou et le manque de rigueur."}] },
+  { id: "q17", cat: "Motivation",    text: "Quand je commence un nouveau projet…",
+    choices: [{v:"yellow","t":"Je suis enthousiaste et plein d'idées."},{v:"blue","t":"Je planifie méthodiquement avant de commencer."},{v:"red","t":"Je fonce et j'ajuste en cours de route."},{v:"green","t":"Je prends le temps de bien comprendre ce qu'on attend de moi."}] },
+  { id: "q18", cat: "Motivation",    text: "Mon environnement de travail idéal…",
+    choices: [{v:"yellow","t":"Dynamique, créatif, social et varié."},{v:"red","t":"Stimulant, autonome, avec des objectifs ambitieux."},{v:"green","t":"Stable, harmonieux et basé sur la collaboration."},{v:"blue","t":"Structuré, calme et axé sur la qualité."}] },
+  { id: "q19", cat: "Motivation",    text: "La meilleure façon de me montrer de la reconnaissance…",
+    choices: [{v:"yellow","t":"Me féliciter publiquement et valoriser ma contribution."},{v:"red","t":"Me donner plus de responsabilités ou de défis."},{v:"green","t":"Exprimer sincèrement ta gratitude en privé."},{v:"blue","t":"Reconnaître la qualité et la précision de mon travail."}] },
+  { id: "q20", cat: "Motivation",    text: "Face à un objectif difficile…",
+    choices: [{v:"red","t":"Je me motive par le défi lui-même."},{v:"yellow","t":"Je cherche à rendre ça amusant et stimulant."},{v:"green","t":"Je progresse doucement mais sûrement."},{v:"blue","t":"Je le découpe en étapes claires et je les suis."}] },
+
+  // Changement & adaptabilité (5 questions)
+  { id: "q21", cat: "Adaptabilité", text: "Dans un changement imprévu…",
+    choices: [{v:"green","t":"J'ai besoin de temps pour m'adapter."},{v:"red","t":"Je m'adapte vite et j'en profite."},{v:"blue","t":"Je veux comprendre les raisons avant d'accepter."},{v:"yellow","t":"Je trouve ça excitant et plein de possibilités."}] },
+  { id: "q22", cat: "Adaptabilité", text: "Face à une nouvelle façon de faire…",
+    choices: [{v:"blue","t":"Je vérifie si c'est logique et mieux que l'ancienne façon."},{v:"red","t":"Si ça va plus vite, je suis partant."},{v:"yellow","t":"J'aime essayer de nouvelles choses."},{v:"green","t":"J'ai besoin qu'on m'explique et qu'on me laisse du temps."}] },
+  { id: "q23", cat: "Adaptabilité", text: "Quand les règles changent soudainement…",
+    choices: [{v:"blue","t":"Je veux comprendre la logique derrière le changement."},{v:"red","t":"Je m'adapte si ça sert les résultats."},{v:"green","t":"Ça me perturbe, j'ai besoin de stabilité."},{v:"yellow","t":"Je roule avec ça et cherche le positif."}] },
+  { id: "q24", cat: "Adaptabilité", text: "Dans un environnement chaotique…",
+    choices: [{v:"red","t":"Je prends le contrôle et mets de l'ordre."},{v:"yellow","t":"Je reste positif et je gère avec humour."},{v:"blue","t":"Je me sens mal à l'aise et cherche à structurer."},{v:"green","t":"Je garde mon calme et j'aide les autres à gérer."}] },
+  { id: "q25", cat: "Adaptabilité", text: "Si un plan prévu ne fonctionne pas…",
+    choices: [{v:"red","t":"Je pivote rapidement vers une autre solution."},{v:"blue","t":"J'analyse ce qui a mal tourné avant d'agir."},{v:"green","t":"Je consulte l'équipe pour repartir ensemble."},{v:"yellow","t":"Je reste optimiste et improvise une nouvelle approche."}] },
+
+  // Comportements & valeurs (10 questions)
+  { id: "q26", cat: "Valeurs",      text: "Ce qui me définit le mieux comme collègue…",
+    choices: [{v:"green","t":"Je suis là pour soutenir et aider."},{v:"yellow","t":"J'apporte de la bonne humeur et de l'énergie."},{v:"blue","t":"Je m'assure que les choses sont bien faites."},{v:"red","t":"Je pousse l'équipe à se dépasser."}] },
+  { id: "q27", cat: "Valeurs",      text: "En dehors du travail, je préfère…",
+    choices: [{v:"yellow","t":"Socialiser, sortir, voir des gens."},{v:"red","t":"Faire des activités stimulantes ou compétitives."},{v:"green","t":"Passer du temps en famille ou avec des amis proches."},{v:"blue","t":"Des activités calmes et enrichissantes (lecture, création, etc.)."}] },
+  { id: "q28", cat: "Valeurs",      text: "Quand je fixe un objectif pour moi-même…",
+    choices: [{v:"red","t":"Je vise haut et je fais tout pour y arriver."},{v:"yellow","t":"Je me fixe des buts qui m'enthousiasment."},{v:"green","t":"Je m'assure que c'est réaliste et équilibré."},{v:"blue","t":"Je planifie soigneusement chaque étape."}] },
+  { id: "q29", cat: "Valeurs",      text: "Dans mes relations personnelles, je suis plutôt…",
+    choices: [{v:"green","t":"Loyal, stable et présent sur le long terme."},{v:"yellow","t":"Chaleureux, expressif et enthousiaste."},{v:"red","t":"Direct et peu enclin aux jeux de rôle ou aux sous-entendus."},{v:"blue","t":"Attentif, réfléchi et prudent avant de m'ouvrir."}] },
+  { id: "q30", cat: "Valeurs",      text: "Quand quelqu'un ne respecte pas ses engagements…",
+    choices: [{v:"red","t":"Je le confronte directement."},{v:"blue","t":"Je documente et cherche pourquoi c'est arrivé."},{v:"green","t":"Je tente de comprendre et de pardonner."},{v:"yellow","t":"Je minimise et cherche comment avancer malgré tout."}] },
+  { id: "q31", cat: "Valeurs",      text: "Ma plus grande force personnelle est…",
+    choices: [{v:"red","t":"Ma capacité à obtenir des résultats contre vents et marées."},{v:"yellow","t":"Ma capacité à motiver et rassembler autour d'une vision."},{v:"green","t":"Ma capacité à maintenir la confiance et l'harmonie."},{v:"blue","t":"Ma capacité à analyser et produire un travail de qualité."}] },
+  { id: "q32", cat: "Valeurs",      text: "Mon plus grand risque / point d'amélioration…",
+    choices: [{v:"red","t":"Manquer de patience ou de sensibilité avec les autres."},{v:"yellow","t":"Manquer de suivi ou de discipline dans l'exécution."},{v:"green","t":"Avoir du mal à m'affirmer ou à confronter."},{v:"blue","t":"Être paralysé par l'analyse ou le perfectionnisme."}] },
+  { id: "q33", cat: "Valeurs",      text: "Face au risque ou à l'incertitude, je…",
+    choices: [{v:"red","t":"Je fonce — le risque fait partie du jeu."},{v:"yellow","t":"Je reste optimiste — ça va s'arranger."},{v:"green","t":"J'évalue soigneusement avant de me lancer."},{v:"blue","t":"Je veux avoir toutes les données avant de décider."}] },
+  { id: "q34", cat: "Valeurs",      text: "Quand je fais une erreur…",
+    choices: [{v:"red","t":"Je l'assume, je corrige et je passe à autre chose."},{v:"yellow","t":"Je n'y attache pas trop d'importance et je rebondis."},{v:"green","t":"Je me sens mal et je veux réparer la relation."},{v:"blue","t":"Je l'analyse pour comprendre et ne plus la répéter."}] },
+  { id: "q35", cat: "Valeurs",      text: "Ce que je valorise le plus dans un leader…",
+    choices: [{v:"red","t":"La vision, la décision et le courage."},{v:"yellow","t":"L'énergie, l'inspiration et l'humanité."},{v:"green","t":"La stabilité, l'écoute et la confiance."},{v:"blue","t":"La compétence, la rigueur et la cohérence."}] },
+
+  // Style de leadership / gestion (5 questions)
+  { id: "q36", cat: "Leadership",   text: "Comme gestionnaire, mon approche naturelle serait…",
+    choices: [{v:"red","t":"Fixer des objectifs clairs et pousser l'équipe à performer."},{v:"yellow","t":"Créer un environnement positif et motivant."},{v:"green","t":"M'assurer que chacun se sent bien et soutenu."},{v:"blue","t":"M'assurer que les processus sont rigoureux et les erreurs minimisées."}] },
+  { id: "q37", cat: "Leadership",   text: "Dans un projet d'équipe, mon rôle naturel est souvent…",
+    choices: [{v:"red","t":"Mener la charge et décider."},{v:"yellow","t":"Faire le lien entre les personnes et maintenir l'enthousiasme."},{v:"green","t":"Soutenir les autres et assurer la cohésion."},{v:"blue","t":"Planifier, documenter et contrôler la qualité."}] },
+  { id: "q38", cat: "Leadership",   text: "Comment je priorise mon travail…",
+    choices: [{v:"red","t":"Par impact et par urgence."},{v:"blue","t":"Par ordre logique et importance stratégique."},{v:"green","t":"En tenant compte des besoins de l'équipe."},{v:"yellow","t":"Par ce qui m'inspire le plus ce jour-là."}] },
+  { id: "q39", cat: "Leadership",   text: "Sous pression, je…",
+    choices: [{v:"red","t":"Intensifie mes efforts et deviens encore plus focalisé."},{v:"yellow","t":"Reste positif et communique pour garder la motivation."},{v:"green","t":"Garde mon calme et je travaille méthodiquement."},{v:"blue","t":"Revérifie mon plan et m'assure que rien ne déraille."}] },
+  { id: "q40", cat: "Leadership",   text: "Ce que je retiens d'une expérience réussie…",
+    choices: [{v:"red","t":"L'objectif atteint et la fierté du résultat."},{v:"yellow","t":"Le plaisir du voyage et l'énergie partagée."},{v:"green","t":"La solidité des relations construites."},{v:"blue","t":"Les apprentissages et ce que je peux améliorer."}] },
+];
+
+// ===== BUILD QUESTIONS =====
+function buildQuestions() {
+  const container = document.getElementById("questionsContainer");
+  container.innerHTML = questions.map((q, i) => `
+    <div class="quiz-question" id="block-${q.id}">
+      <div class="q-category">${q.cat}</div>
+      <h3>${i + 1}. ${q.text}</h3>
+      <div class="choices">
+        ${shuffle([...q.choices]).map(c => `
+          <label class="choice">
+            <input type="radio" name="${q.id}" value="${c.v}" onchange="updateProgress()">
+            ${c.t}
+          </label>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function updateProgress() {
+  const answered = questions.filter(q => document.querySelector(`input[name="${q.id}"]:checked`)).length;
+  const total = questions.length;
+  const pct = Math.round((answered / total) * 100);
+  document.getElementById("progressLabel").textContent = `${answered} / ${total} réponses`;
+  document.getElementById("progressPct").textContent = `${pct}%`;
+  document.getElementById("quizProgressBar").style.width = `${pct}%`;
+}
+
+// ===== CALCULATE =====
+function calculateDisc() {
+  const scores = { yellow: 0, red: 0, green: 0, blue: 0 };
+
+  for (const q of questions) {
+    const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+    if (!selected) {
+      const unanswered = questions.find(q2 => !document.querySelector(`input[name="${q2.id}"]:checked`));
+      if (unanswered) {
+        document.getElementById(`block-${unanswered.id}`).scrollIntoView({ behavior: "smooth", block: "center" });
+        document.getElementById(`block-${unanswered.id}`).style.border = "1px solid rgba(207,91,91,0.6)";
+        setTimeout(() => { document.getElementById(`block-${unanswered.id}`).style.border = ""; }, 2000);
       }
-
-      const total = questions.length;
-
-      const percentages = {
-        yellow: Math.round((scores.yellow / total) * 100),
-        red: Math.round((scores.red / total) * 100),
-        green: Math.round((scores.green / total) * 100),
-        blue: Math.round((scores.blue / total) * 100)
-      };
-
-      let dominant = "yellow";
-      let max = scores.yellow;
-
-      for (const color of ["red", "green", "blue"]) {
-        if (scores[color] > max) {
-          dominant = color;
-          max = scores[color];
-        }
-      }
-
-      const sorted = Object.entries(scores)
-        .sort((a, b) => b[1] - a[1])
-        .map(entry => entry[0]);
-
-      const second = sorted[1];
-
-      const resultMap = {
-        yellow: {
-          title: "Tendance Jaune",
-          text: "Tu sembles orienté énergie, enthousiasme, relations et spontanéité. Tu gagnes souvent à être vu, entendu et à évoluer dans un climat positif."
-        },
-        red: {
-          title: "Tendance Rouge",
-          text: "Tu sembles orienté action, rapidité, défis et résultats. Tu apprécies souvent les décisions claires, les objectifs concrets et l’efficacité."
-        },
-        green: {
-          title: "Tendance Verte",
-          text: "Tu sembles orienté stabilité, respect, patience et harmonie. Tu apprécies souvent les environnements calmes, fiables et collaboratifs."
-        },
-        blue: {
-          title: "Tendance Bleue",
-          text: "Tu sembles orienté précision, logique, qualité et structure. Tu apprécies souvent les faits, la clarté et les façons de faire rigoureuses."
-        }
-      };
-
-      const secondMap = {
-        yellow: "avec une touche Jaune",
-        red: "avec une touche Rouge",
-        green: "avec une touche Verte",
-        blue: "avec une touche Bleue"
-      };
-
-      document.getElementById("resultTitle").textContent = "Répartition de ton profil";
-      document.getElementById("dominantTitle").textContent = `${resultMap[dominant].title} ${second ? `— ${secondMap[second]}` : ""}`;
-      document.getElementById("resultText").textContent = resultMap[dominant].text;
-
-      document.getElementById("yellowPct").textContent = `${percentages.yellow}%`;
-      document.getElementById("redPct").textContent = `${percentages.red}%`;
-      document.getElementById("greenPct").textContent = `${percentages.green}%`;
-      document.getElementById("bluePct").textContent = `${percentages.blue}%`;
-
-      document.getElementById("yellowBar").style.width = `${percentages.yellow}%`;
-      document.getElementById("redBar").style.width = `${percentages.red}%`;
-      document.getElementById("greenBar").style.width = `${percentages.green}%`;
-      document.getElementById("blueBar").style.width = `${percentages.blue}%`;
-
-      document.getElementById("resultBox").style.display = "block";
-      document.getElementById("resultBox").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      alert("Réponds à toutes les questions avant de voir le résultat.");
+      return;
     }
-  </script>
+    scores[selected.value]++;
+  }
+
+  const total = questions.length;
+  const pct = {
+    yellow: Math.round((scores.yellow / total) * 100),
+    red:    Math.round((scores.red    / total) * 100),
+    green:  Math.round((scores.green  / total) * 100),
+    blue:   Math.round((scores.blue   / total) * 100),
+  };
+
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const dominant = sorted[0][0];
+  const second   = sorted[1][0];
+  const third    = sorted[2][0];
+
+  const resultMap = {
+    yellow: {
+      title: "Tendance Jaune — Influence",
+      text: "Tu es naturellement orienté enthousiasme, relations et communication. Tu gagnes de l'énergie au contact des autres, tu aimes les idées nouvelles et tu sais fédérer. Tu es souvent le moteur émotionnel d'un groupe. Ton défi principal : rester focalisé et aller jusqu'au bout de ce que tu commences."
+    },
+    red: {
+      title: "Tendance Rouge — Dominance",
+      text: "Tu es naturellement orienté action, résultats et leadership. Tu prends des décisions rapidement, tu aimes relever des défis et tu pousses les choses à avancer. Tu es souvent perçu comme un leader naturel. Ton défi principal : prendre le temps d'écouter et de considérer l'impact émotionnel de ton style direct."
+    },
+    green: {
+      title: "Tendance Verte — Stabilité",
+      text: "Tu es naturellement orienté harmonie, stabilité et soutien. Tu es le pilier discret mais indispensable des équipes — tu crées la confiance, tu maintiens les liens et tu t'assures que tout le monde va bien. Ton défi principal : t'affirmer davantage et ne pas éviter les confrontations nécessaires."
+    },
+    blue: {
+      title: "Tendance Bleue — Conformité/Qualité",
+      text: "Tu es naturellement orienté précision, qualité et logique. Tu prends le temps de comprendre avant d'agir et tu produis un travail rigoureux. Tu es souvent l'expert technique ou l'analyste incontournable d'un groupe. Ton défi principal : éviter la paralysie par l'analyse et apprendre à avancer même sans tout contrôler."
+    }
+  };
+
+  const comboMap = {
+    "yellow-red":  { title: "Jaune-Rouge : L'Influenceur Énergique", text: "Tu combines enthousiasme et détermination. Tu es charismatique, persuasif et orienté résultats. Profil fort en vente, entrepreneuriat ou leadership inspirant." },
+    "yellow-green": { title: "Jaune-Vert : Le Communicateur Empathique", text: "Tu combines chaleur humaine et sensibilité aux autres. Tu es excellent dans les rôles d'accompagnement, de service, de coaching ou d'animation." },
+    "yellow-blue":  { title: "Jaune-Bleu : Le Créatif Structuré", text: "Tu combines créativité et rigueur. Tu sais générer des idées ET les mettre en forme. Profil fort en marketing, communication stratégique ou design." },
+    "red-yellow":   { title: "Rouge-Jaune : Le Leader Charismatique", text: "Tu combines leadership et charisme. Tu fédères en motivant et en poussant à performer. Profil fort en vente, gestion d'équipe ou entrepreneuriat." },
+    "red-blue":     { title: "Rouge-Bleu : Le Stratège Exigeant", text: "Tu combines ambition et rigueur analytique. Tu es un décideur solide qui base ses choix sur des données. Profil fort en direction, gestion de projet ou finance." },
+    "red-green":    { title: "Rouge-Vert : Le Leader Bienveillant", text: "Tu combines efficacité et souci des personnes. Tu sais pousser à performer tout en t'assurant du bien-être de l'équipe. Profil fort en gestion opérationnelle." },
+    "green-yellow": { title: "Vert-Jaune : Le Rassembleur Chaleureux", text: "Tu combines harmonie et enthousiasme. Tu es apprécié de tous et tu crées des environnements positifs. Profil fort en ressources humaines, service et formation." },
+    "green-blue":   { title: "Vert-Bleu : L'Expert Fiable", text: "Tu combines patience, rigueur et fiabilité. Tu produis un travail de qualité et tu maintiens la confiance sur le long terme. Profil fort en expertise technique ou en conseil." },
+    "green-red":    { title: "Vert-Rouge : Le Collaborateur Efficace", text: "Tu combines harmonie et orientation résultats. Tu sais avancer efficacement tout en préservant les relations. Profil fort en coordination et gestion de projets d'équipe." },
+    "blue-red":     { title: "Bleu-Rouge : L'Analytique Décisif", text: "Tu combines analyse poussée et capacité de décision. Tu ne te précipites pas, mais quand tu décides, c'est bien fondé. Profil fort en ingénierie, finance ou direction technique." },
+    "blue-green":   { title: "Bleu-Vert : Le Spécialiste Consciencieux", text: "Tu combines rigueur et souci des autres. Tu es un expert de confiance, méthodique et fiable, qui prend soin de bien communiquer ses analyses." },
+    "blue-yellow":  { title: "Bleu-Jaune : Le Penseur Créatif", text: "Tu combines profondeur analytique et créativité. Tu sais analyser ET te projeter dans des idées nouvelles. Profil fort en R&D, innovation ou stratégie créative." },
+  };
+
+  const comboKey = `${dominant}-${second}`;
+  const combo = comboMap[comboKey] || { title: "Profil mixte", text: "Ton profil est bien équilibré entre plusieurs tendances, ce qui te rend polyvalent et adaptable selon les contextes." };
+
+  const tipMap = {
+    yellow: { label: "Jaune",   tip: "Utilise ton énergie pour fédérer, mais pense à structurer et suivre tes actions." },
+    red:    { label: "Rouge",   tip: "Utilise ton leadership pour avancer vite, mais prends le temps d'écouter ton équipe." },
+    green:  { label: "Vert",    tip: "Utilise ta stabilité pour créer la confiance, mais ose t'affirmer davantage." },
+    blue:   { label: "Bleu",    tip: "Utilise ta rigueur pour garantir la qualité, mais sais décider sans tout contrôler." },
+  };
+
+  // Update UI
+  document.getElementById("yellowPct").textContent = `${pct.yellow}%`;
+  document.getElementById("redPct").textContent    = `${pct.red}%`;
+  document.getElementById("greenPct").textContent  = `${pct.green}%`;
+  document.getElementById("bluePct").textContent   = `${pct.blue}%`;
+
+  document.getElementById("yellowBar").style.width = `${pct.yellow}%`;
+  document.getElementById("redBar").style.width    = `${pct.red}%`;
+  document.getElementById("greenBar").style.width  = `${pct.green}%`;
+  document.getElementById("blueBar").style.width   = `${pct.blue}%`;
+
+  document.getElementById("dominantTitle").textContent = resultMap[dominant].title;
+  document.getElementById("resultText").textContent    = resultMap[dominant].text;
+
+  document.getElementById("comboTitle").textContent = combo.title;
+  document.getElementById("comboText").textContent  = combo.text;
+
+  const tipGrid = document.getElementById("tipGrid");
+  tipGrid.innerHTML = [dominant, second, third].map(c => `
+    <div class="tip-item">
+      <strong>${tipMap[c].label}</strong>${tipMap[c].tip}
+    </div>
+  `).join("");
+
+  const resultBox = document.getElementById("resultBox");
+  resultBox.style.display = "block";
+  resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function resetQuiz() {
+  questions.forEach(q => {
+    document.querySelectorAll(`input[name="${q.id}"]`).forEach(r => r.checked = false);
+  });
+  document.getElementById("resultBox").style.display = "none";
+  updateProgress();
+  document.getElementById("quiz").scrollIntoView({ behavior: "smooth" });
+}
+
+function toggleMore(id, btn) {
+  const el = document.getElementById(id);
+  const isOpen = el.classList.contains("open");
+  el.classList.toggle("open", !isOpen);
+  btn.textContent = isOpen
+    ? `▼ En savoir plus sur le profil ${btn.textContent.split(" ").slice(-1)[0]}`
+    : `▲ Réduire`;
+}
+
+// Init
+buildQuestions();
+</script>
 </body>
 </html>
