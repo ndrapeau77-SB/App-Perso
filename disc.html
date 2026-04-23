@@ -49,6 +49,61 @@
     h1, h2, h3, p { margin-top: 0; }
     h1, h2 { color: var(--accent); }
 
+    /* ===== COLLAPSIBLE SECTIONS ===== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 0;
+      gap: 10px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      flex: 1;
+    }
+
+    .section-toggle {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: 1px solid rgba(212,175,55,0.35);
+      background: rgba(212,175,55,0.08);
+      color: var(--accent);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease, background 0.15s;
+      cursor: pointer;
+    }
+
+    .section-header:hover .section-toggle {
+      background: rgba(212,175,55,0.18);
+    }
+
+    .section-toggle.collapsed {
+      transform: rotate(-90deg);
+    }
+
+    .section-body {
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.25s ease, margin-top 0.25s ease;
+      max-height: 9999px;
+      opacity: 1;
+      margin-top: 14px;
+    }
+
+    .section-body.collapsed {
+      max-height: 0;
+      opacity: 0;
+      margin-top: 0;
+      pointer-events: none;
+    }
+
     .top-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -520,6 +575,205 @@
       .compat-sections { grid-template-columns: 1fr 1fr; }
     }
 
+    /* ===== MOTIVATIONS ===== */
+    .motiv-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .motiv-card {
+      border-radius: 18px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .motiv-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .motiv-body { flex: 1; }
+
+    .motiv-name {
+      font-weight: 700;
+      font-size: 0.97rem;
+      margin-bottom: 4px;
+    }
+
+    .motiv-name.cognitif   { color: #7ec8e3; }
+    .motiv-name.utilitaire { color: #e8c14c; }
+    .motiv-name.esthetique { color: #d78fdb; }
+    .motiv-name.altruiste  { color: #63a77a; }
+    .motiv-name.individuel { color: #cf5b5b; }
+    .motiv-name.traditionnel { color: #b8975a; }
+
+    .motiv-desc {
+      color: var(--muted);
+      font-size: 0.89rem;
+      line-height: 1.55;
+      margin: 0 0 6px;
+    }
+
+    .motiv-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .motiv-kw {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* Quiz motivations */
+    .motiv-quiz-q {
+      background: linear-gradient(180deg, rgba(28,45,42,0.98), rgba(24,38,36,0.98));
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .motiv-quiz-q h3 {
+      font-size: 0.97rem;
+      color: #fff9eb;
+      margin-bottom: 10px;
+    }
+
+    .motiv-scale {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .motiv-scale-btn {
+      border: 1px solid rgba(212,175,55,0.22);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      border-radius: 12px;
+      padding: 8px 4px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.12s;
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .motiv-scale-btn .scale-num {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .motiv-scale-btn .scale-lbl {
+      font-size: 0.68rem;
+      line-height: 1.1;
+    }
+
+    .motiv-scale-btn:hover, .motiv-scale-btn.picked {
+      background: rgba(212,175,55,0.14);
+      border-color: rgba(212,175,55,0.5);
+      color: var(--accent);
+    }
+
+    /* Result motivations */
+    .motiv-result-box {
+      display: none;
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(212,175,55,0.07);
+      border: 1px solid rgba(212,175,55,0.22);
+    }
+
+    .motiv-result-box.visible { display: block; }
+
+    .motiv-result-list {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .motiv-result-row { display: grid; gap: 5px; }
+
+    .motiv-result-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .motiv-bar-wrap {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      overflow: hidden;
+    }
+
+    .motiv-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    .motiv-bar-fill.cognitif    { background: #7ec8e3; }
+    .motiv-bar-fill.utilitaire  { background: #e8c14c; }
+    .motiv-bar-fill.esthetique  { background: #d78fdb; }
+    .motiv-bar-fill.altruiste   { background: #63a77a; }
+    .motiv-bar-fill.individuel  { background: #cf5b5b; }
+    .motiv-bar-fill.traditionnel { background: #b8975a; }
+
+    .motiv-dominant-cards {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .motiv-dominant-card {
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .motiv-dominant-title {
+      font-weight: 700;
+      font-size: 0.96rem;
+      margin-bottom: 6px;
+    }
+
+    .motiv-disc-link {
+      margin-top: 8px;
+      font-size: 0.83rem;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(212,175,55,0.07);
+      border: 1px solid rgba(212,175,55,0.15);
+    }
+
+    .motiv-disc-link strong { color: var(--accent); }
+
+    @media (min-width: 760px) {
+      .motiv-intro-grid { grid-template-columns: 1fr 1fr; }
+      .compat-sections { grid-template-columns: 1fr 1fr; }
+    }
+
     @media (min-width: 760px) {
       body { padding: 16px; }
       .top-actions { display: flex; flex-wrap: wrap; }
@@ -541,19 +795,25 @@
     </p>
     <div class="top-actions">
       <a href="index.html" class="btn btn-home">← Accueil</a>
+      <button class="btn" onclick="document.getElementById('motivations').scrollIntoView({behavior:'smooth'})">
+        6 Motivations (Spranger)
+      </button>
       <button class="btn" onclick="document.getElementById('compat').scrollIntoView({behavior:'smooth'})">
         Compatibilité entre couleurs
       </button>
       <button class="btn" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
-        Faire le test (40 questions)
+        Test DISC (40 questions)
       </button>
     </div>
   </section>
 
   <!-- LES 4 COULEURS -->
   <section class="panel">
-    <h2>Les 4 couleurs</h2>
-
+    <div class="section-header" onclick="toggleSection('colors-body', this)">
+      <h2>Les 4 couleurs</h2>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="colors-body">
     <div class="color-grid">
 
       <!-- JAUNE -->
@@ -777,11 +1037,121 @@
       </article>
 
     </div>
+    </div><!-- end section-body -->
+  </section>
+
+  <!-- MOTIVATIONS / FORCES MOTRICES -->
+  <section class="panel" id="motivations">
+    <div class="section-header" onclick="toggleSection('motivations-body', this)">
+      <h2>Les 6 Motivations (Forces motrices de Spranger)</h2>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="motivations-body">
+    <p class="intro">
+      Complémentaires au DISC, les 6 motivations expliquent le <strong style="color:var(--accent)">pourquoi</strong> de nos comportements — les moteurs profonds qui guident nos décisions et nos priorités. Le DISC montre <em>comment</em> tu te comportes ; les motivations révèlent <em>pourquoi</em> tu fais ce que tu fais. Chaque personne a 1 à 3 motivations dominantes à haute intensité.
+    </p>
+
+    <div class="motiv-intro-grid">
+      <div class="motiv-card">
+        <div class="motiv-icon">🔍</div>
+        <div class="motiv-body">
+          <div class="motiv-name cognitif">Cognitive (Théorique)</div>
+          <p class="motiv-desc">Motivé par la recherche de la vérité, l'apprentissage continu, l'analyse et la compréhension profonde des choses. Veut comprendre <em>comment</em> et <em>pourquoi</em> les choses fonctionnent.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Savoir</span><span class="motiv-kw">Apprendre</span><span class="motiv-kw">Analyser</span><span class="motiv-kw">Comprendre</span><span class="motiv-kw">Recherche</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">⚡</div>
+        <div class="motiv-body">
+          <div class="motiv-name utilitaire">Utilitaire (Économique)</div>
+          <p class="motiv-desc">Motivé par le retour sur investissement, l'efficacité et les résultats pratiques. Chaque action doit avoir une valeur concrète et mesurable. Cherche à maximiser le ROI de son temps et son énergie.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Efficacité</span><span class="motiv-kw">ROI</span><span class="motiv-kw">Pragmatisme</span><span class="motiv-kw">Résultats</span><span class="motiv-kw">Gains concrets</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">🎨</div>
+        <div class="motiv-body">
+          <div class="motiv-name esthetique">Esthétique</div>
+          <p class="motiv-desc">Motivé par l'harmonie, la beauté, la créativité et l'expérience sensorielle. Accorde beaucoup d'importance au sens des choses, à l'équilibre et à la forme autant qu'au fond.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Harmonie</span><span class="motiv-kw">Beauté</span><span class="motiv-kw">Créativité</span><span class="motiv-kw">Sens</span><span class="motiv-kw">Équilibre</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">🤝</div>
+        <div class="motiv-body">
+          <div class="motiv-name altruiste">Altruiste (Sociale)</div>
+          <p class="motiv-desc">Motivé par l'entraide, le dévouement et le bien-être des autres. Trouve sa satisfaction dans le fait d'aider, de soutenir et de contribuer positivement à la vie des personnes autour de lui.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Aider</span><span class="motiv-kw">Bienveillance</span><span class="motiv-kw">Dévouement</span><span class="motiv-kw">Soutien</span><span class="motiv-kw">Collectif</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">👑</div>
+        <div class="motiv-body">
+          <div class="motiv-name individuel">Individuelle (Pouvoir)</div>
+          <p class="motiv-desc">Motivé par la prise de responsabilité, l'influence, le leadership et l'affirmation de soi. Veut avoir un impact, laisser une marque et exercer une influence sur les décisions et les gens.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Leadership</span><span class="motiv-kw">Influence</span><span class="motiv-kw">Pouvoir</span><span class="motiv-kw">Autonomie</span><span class="motiv-kw">Impact</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">⚖️</div>
+        <div class="motiv-body">
+          <div class="motiv-name traditionnel">Traditionnelle (Ordre)</div>
+          <p class="motiv-desc">Motivé par des principes de vie forts, des valeurs rigoureuses et une recherche d'ordre ou de sens profond. S'appuie sur des repères solides — éthique, foi, traditions, règles — pour orienter ses décisions.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Ordre</span><span class="motiv-kw">Valeurs</span><span class="motiv-kw">Principes</span><span class="motiv-kw">Sens</span><span class="motiv-kw">Structure</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:4px;">Découvre tes motivations dominantes</h2>
+    <p class="intro">Pour chaque affirmation, indique à quel point elle te ressemble : 1 = Pas du tout moi → 5 = C'est exactement moi.</p>
+
+    <div id="motivQuizContainer"></div>
+
+    <button class="btn btn-accent" onclick="calculateMotivations()" style="margin-top:8px;">
+      Voir mes motivations dominantes
+    </button>
+
+    <div class="motiv-result-box" id="motivResultBox">
+      <div class="result-title">Ton profil de motivations</div>
+
+      <div class="motiv-result-list" id="motivResultList"></div>
+
+      <div class="result-title" style="margin-top:16px; font-size:1rem;">Tes 2 motivations dominantes</div>
+      <div class="motiv-dominant-cards" id="motivDominantCards"></div>
+
+      <div class="compat-tip" style="margin-top:14px;" id="motivDiscLink"></div>
+
+      <div style="margin-top:14px;">
+        <button class="btn" onclick="resetMotivations()">🔄 Recommencer</button>
+      </div>
+    </div>
+    </div><!-- end section-body -->
   </section>
 
   <!-- COMPATIBILITÉ -->
   <section class="panel" id="compat">
-    <h2>Compatibilité entre couleurs</h2>
+    <div class="section-header" onclick="toggleSection('compat-body', this)">
+      <h2>Compatibilité entre couleurs</h2>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="compat-body">
     <p class="intro">
       Choisis ta couleur dominante et celle d'une autre personne (collègue, partenaire, ami) pour voir ce qui vous unit, ce qui peut créer de la friction, et comment mieux communiquer ensemble.
     </p>
@@ -844,11 +1214,16 @@
 
       <div class="compat-tip" id="compatTip"></div>
     </div>
+    </div><!-- end section-body -->
   </section>
 
   <!-- QUIZ -->
   <section class="panel" id="quiz">
-    <h2>Test DISC — 40 questions</h2>
+    <div class="section-header" onclick="toggleSection('quiz-body', this)">
+      <h2>Test DISC — 40 questions</h2>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="quiz-body">
     <p class="intro">
       Choisis la réponse qui te ressemble le plus pour chaque question. Réponds spontanément — il n'y a pas de bonne ou mauvaise réponse.
     </p>
@@ -917,6 +1292,7 @@
         <button class="btn" onclick="resetQuiz()">🔄 Recommencer le test</button>
       </div>
     </div>
+    </div><!-- end section-body -->
   </section>
 
 </div>
@@ -1347,6 +1723,175 @@ function renderCompat() {
 
   result.classList.add("visible");
   result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+// ===== MOTIVATIONS DE SPRANGER =====
+const motivQuestions = [
+  { id:"m1",  motiv:"cognitif",     text:"J'aime comprendre comment les choses fonctionnent en profondeur, même si ça n'a pas d'utilité immédiate." },
+  { id:"m2",  motiv:"cognitif",     text:"Je lis, me forme ou cherche à apprendre régulièrement, par pur plaisir intellectuel." },
+  { id:"m3",  motiv:"cognitif",     text:"Avant d'agir, je veux comprendre le pourquoi et le comment, pas juste suivre une méthode." },
+  { id:"m4",  motiv:"cognitif",     text:"Les débats d'idées, les analyses et les questions complexes m'attirent naturellement." },
+  { id:"m5",  motiv:"utilitaire",   text:"Je mesure la valeur d'une action à son retour concret — temps, argent, résultats." },
+  { id:"m6",  motiv:"utilitaire",   text:"Je n'aime pas les réunions, formations ou projets qui ne mènent nulle part concrètement." },
+  { id:"m7",  motiv:"utilitaire",   text:"Être efficace et productif est quelque chose qui me motive profondément au quotidien." },
+  { id:"m8",  motiv:"utilitaire",   text:"Je recherche toujours le chemin le plus court et le plus rentable pour atteindre un objectif." },
+  { id:"m9",  motiv:"esthetique",   text:"L'harmonie dans mon environnement (visuel, sonore, relationnel) est importante pour mon bien-être." },
+  { id:"m10", motiv:"esthetique",   text:"Je suis sensible à la beauté, au design et à la façon dont les choses sont présentées." },
+  { id:"m11", motiv:"esthetique",   text:"J'aime que les choses aient un sens profond, une esthétique ou une forme soignée." },
+  { id:"m12", motiv:"esthetique",   text:"La créativité, l'expression artistique ou l'expérience sensorielle m'inspirent naturellement." },
+  { id:"m13", motiv:"altruiste",    text:"Aider les autres me procure une satisfaction profonde — parfois plus que mes propres succès." },
+  { id:"m14", motiv:"altruiste",    text:"Le bien-être de mon entourage (collègues, famille, communauté) compte énormément pour moi." },
+  { id:"m15", motiv:"altruiste",    text:"Je suis prêt à investir du temps et de l'énergie pour soutenir quelqu'un, même sans contrepartie." },
+  { id:"m16", motiv:"altruiste",    text:"Je me sens motivé à contribuer à quelque chose de plus grand que moi — une cause, une équipe, une mission." },
+  { id:"m17", motiv:"individuel",   text:"J'aime avoir de l'influence sur les décisions et les gens autour de moi." },
+  { id:"m18", motiv:"individuel",   text:"Prendre des responsabilités et occuper une position de leadership m'attire naturellement." },
+  { id:"m19", motiv:"individuel",   text:"Je veux laisser une marque — que mon passage ait un impact durable sur mon milieu." },
+  { id:"m20", motiv:"individuel",   text:"Mon autonomie et ma capacité à décider par moi-même sont des conditions essentielles à ma motivation." },
+  { id:"m21", motiv:"traditionnel", text:"Des valeurs fortes et des principes clairs guident la plupart de mes décisions de vie." },
+  { id:"m22", motiv:"traditionnel", text:"J'ai besoin d'un cadre, de règles ou d'une structure solide pour me sentir bien dans un environnement." },
+  { id:"m23", motiv:"traditionnel", text:"La cohérence entre mes valeurs et mes actions est quelque chose de fondamental pour moi." },
+  { id:"m24", motiv:"traditionnel", text:"Je m'appuie sur des repères stables — traditions, éthique, foi ou convictions profondes — pour avancer." },
+];
+
+const motivMeta = {
+  cognitif:     { label: "Cognitive",      icon: "🔍", color: "#7ec8e3", desc: "Tu es animé par le désir de comprendre et d'apprendre. Tu t'épanouis dans les environnements qui stimulent la réflexion, la recherche et la maîtrise intellectuelle." },
+  utilitaire:   { label: "Utilitaire",     icon: "⚡", color: "#e8c14c", desc: "Tu es motivé par les résultats concrets et l'efficacité. Tu veux que chaque effort ait un retour mesurable — en temps, en argent ou en impact réel." },
+  esthetique:   { label: "Esthétique",     icon: "🎨", color: "#d78fdb", desc: "Tu es sensible à l'harmonie, au sens et à la beauté. Tu t'épanouis dans des environnements équilibrés, créatifs et où la forme compte autant que le fond." },
+  altruiste:    { label: "Altruiste",      icon: "🤝", color: "#63a77a", desc: "Tu trouves ta satisfaction profonde dans le fait d'aider et de contribuer. Le bien-être des autres est un moteur central de tes décisions et de ton engagement." },
+  individuel:   { label: "Individuelle",   icon: "👑", color: "#cf5b5b", desc: "Tu es motivé par l'influence, le leadership et l'impact. Tu veux laisser une marque, avoir de l'autonomie et jouer un rôle déterminant dans les décisions." },
+  traditionnel: { label: "Traditionnelle", icon: "⚖️", color: "#b8975a", desc: "Tu t'appuies sur des valeurs et des principes solides. Tu trouves ta motivation dans la cohérence, l'ordre et l'alignement entre tes convictions et tes actions." },
+};
+
+const motivDiscMap = {
+  cognitif:     { note: "Souvent associée au profil 🔵 Bleu (rigueur analytique) ou 🟢 Vert (patience et réflexion). Le Cognitif donne la profondeur ; le DISC montre comment tu exprimes cette soif de savoir." },
+  utilitaire:   { note: "Souvent associée au profil 🔴 Rouge (résultats) ou 🟡 Jaune (efficacité enthousiaste). L'Utilitaire explique pourquoi le Rouge fonce et ne perd pas de temps." },
+  esthetique:   { note: "Souvent associée au profil 🟡 Jaune (créativité expressive) ou 🟢 Vert (harmonie relationnelle). L'Esthétique ajoute la dimension du sens et de la beauté." },
+  altruiste:    { note: "Souvent associée au profil 🟢 Vert (soutien et stabilité) ou 🟡 Jaune (chaleur humaine). L'Altruiste explique pourquoi le Vert met toujours les autres en premier." },
+  individuel:   { note: "Souvent associée au profil 🔴 Rouge (leadership direct) ou 🟡 Jaune (influence charismatique). L'Individuelle explique la soif de pouvoir et d'impact du Rouge." },
+  traditionnel: { note: "Souvent associée au profil 🔵 Bleu (respect des processus) ou 🟢 Vert (loyauté aux valeurs). Le Traditionnel explique pourquoi le Bleu tient tant aux règles et aux standards." },
+};
+
+const motivAnswers = {};
+
+function buildMotivQuiz() {
+  const container = document.getElementById("motivQuizContainer");
+  if (!container) return;
+  container.innerHTML = motivQuestions.map((q, i) => `
+    <div class="motiv-quiz-q" id="mblock-${q.id}">
+      <h3>${i + 1}. ${q.text}</h3>
+      <div class="motiv-scale">
+        ${[1,2,3,4,5].map(n => `
+          <button class="motiv-scale-btn" data-qid="${q.id}" data-val="${n}" onclick="pickMotiv('${q.id}', ${n}, this)">
+            <span class="scale-num">${n}</span>
+            <span class="scale-lbl">${n===1?"Pas moi":n===2?"Peu":n===3?"Parfois":n===4?"Souvent":"C'est moi"}</span>
+          </button>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function pickMotiv(qid, val, btn) {
+  document.querySelectorAll(`[data-qid="${qid}"]`).forEach(b => b.classList.remove("picked"));
+  btn.classList.add("picked");
+  motivAnswers[qid] = val;
+}
+
+function calculateMotivations() {
+  const unanswered = motivQuestions.find(q => !motivAnswers[q.id]);
+  if (unanswered) {
+    const block = document.getElementById(`mblock-${unanswered.id}`);
+    block.scrollIntoView({ behavior: "smooth", block: "center" });
+    block.style.border = "1px solid rgba(207,91,91,0.6)";
+    setTimeout(() => { block.style.border = ""; }, 2000);
+    alert("Réponds à toutes les affirmations avant de voir ton résultat.");
+    return;
+  }
+
+  const scores = { cognitif: 0, utilitaire: 0, esthetique: 0, altruiste: 0, individuel: 0, traditionnel: 0 };
+  motivQuestions.forEach(q => { scores[q.motiv] += motivAnswers[q.id] || 0; });
+
+  const maxScore = 20;
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+
+  // Bars
+  const listHtml = sorted.map(([key, val]) => {
+    const pct = Math.round((val / maxScore) * 100);
+    const m = motivMeta[key];
+    return `
+      <div class="motiv-result-row">
+        <div class="motiv-result-top">
+          <span style="font-weight:700; color:${m.color}">${m.icon} ${m.label}</span>
+          <span style="color:${m.color}; font-weight:700">${pct}%</span>
+        </div>
+        <div class="motiv-bar-wrap">
+          <div class="motiv-bar-fill ${key}" style="width:${pct}%"></div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  document.getElementById("motivResultList").innerHTML = listHtml;
+
+  // Top 2 dominant cards
+  const top2 = sorted.slice(0, 2);
+  const cardsHtml = top2.map(([key]) => {
+    const m = motivMeta[key];
+    const link = motivDiscMap[key];
+    return `
+      <div class="motiv-dominant-card">
+        <div class="motiv-dominant-title" style="color:${m.color}">${m.icon} ${m.label}</div>
+        <p class="muted" style="font-size:0.9rem; margin:0 0 8px;">${m.desc}</p>
+        <div class="motiv-disc-link"><strong>Lien DISC :</strong> ${link.note}</div>
+      </div>
+    `;
+  }).join("");
+  document.getElementById("motivDominantCards").innerHTML = cardsHtml;
+
+  // Combo note
+  const [d1, d2] = top2.map(([k]) => k);
+  const comboNotes = {
+    "cognitif-utilitaire":    "Tu veux comprendre ET que ça serve à quelque chose. Combinaison puissante en ingénierie, stratégie ou R&D appliquée.",
+    "cognitif-esthetique":    "Tu cherches le sens et la beauté dans la connaissance. Profil philosophique, artistique ou conceptuel très fort.",
+    "cognitif-altruiste":     "Tu veux apprendre pour mieux aider. Profil naturel d'enseignant, de coach ou de consultant bienveillant.",
+    "cognitif-individuel":    "Tu veux comprendre pour mieux influencer et décider. Profil d'expert-leader ou de stratège intellectuel.",
+    "cognitif-traditionnel":  "Tu cherches la vérité dans des cadres rigoureux. Profil scientifique, juridique ou éthique fort.",
+    "utilitaire-esthetique":  "Tu veux des résultats, mais avec du style et de l'harmonie. Profil fort en design, marketing ou architecture.",
+    "utilitaire-altruiste":   "Tu veux que ton efficacité serve les autres. Profil de gestionnaire social ou d'entrepreneur à impact.",
+    "utilitaire-individuel":  "Tu veux des résultats ET du pouvoir. Profil entrepreneurial ou commercial très fort.",
+    "utilitaire-traditionnel":"Tu veux être efficace dans un cadre clair et rigoureux. Profil d'administrateur, d'opérations ou de finance.",
+    "esthetique-altruiste":   "Tu veux créer de la beauté et du sens pour les autres. Profil artistique, éducatif ou de service à forte dimension humaine.",
+    "esthetique-individuel":  "Tu veux exprimer ton unicité et laisser une marque créative. Profil d'artiste, de créateur ou d'entrepreneur visionnaire.",
+    "esthetique-traditionnel":"Tu cherches l'harmonie dans des valeurs solides. Profil fort en art, spiritualité ou architecture culturelle.",
+    "altruiste-individuel":   "Tu veux aider ET avoir de l'impact. Profil de leader social, d'ONG ou de gestionnaire inspirant.",
+    "altruiste-traditionnel": "Tu veux aider dans un cadre de valeurs solides. Profil de service communautaire, religieux ou institutionnel.",
+    "individuel-traditionnel":"Tu veux exercer ton leadership dans un cadre de valeurs. Profil de dirigeant éthique ou de figure d'autorité respectée.",
+  };
+
+  const comboKey = [d1, d2].sort().join("-");
+  const note = comboNotes[comboKey] || "Ta combinaison est unique et reflète une richesse de motivations complémentaires.";
+  document.getElementById("motivDiscLink").innerHTML = `<strong>✨ Combinaison ${motivMeta[d1].label} + ${motivMeta[d2].label} :</strong> ${note}`;
+
+  const box = document.getElementById("motivResultBox");
+  box.classList.add("visible");
+  box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function resetMotivations() {
+  Object.keys(motivAnswers).forEach(k => delete motivAnswers[k]);
+  document.querySelectorAll(".motiv-scale-btn").forEach(b => b.classList.remove("picked"));
+  document.getElementById("motivResultBox").classList.remove("visible");
+  document.getElementById("motivations").scrollIntoView({ behavior: "smooth" });
+}
+
+buildMotivQuiz();
+
+// ===== COLLAPSIBLE SECTIONS =====
+function toggleSection(bodyId, headerEl) {
+  const body   = document.getElementById(bodyId);
+  const toggle = headerEl.querySelector('.section-toggle');
+  const isCollapsed = body.classList.contains('collapsed');
+  body.classList.toggle('collapsed', !isCollapsed);
+  toggle.classList.toggle('collapsed', !isCollapsed);
 }
 </script>
 </body>
