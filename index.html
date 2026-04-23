@@ -319,6 +319,7 @@
       margin-top: 10px;
     }
 
+    /* MENU GRID */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -328,8 +329,10 @@
 
     .menu-card {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 10px;
       min-height: 108px;
       text-align: center;
       border-radius: 24px;
@@ -337,12 +340,24 @@
       background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
       color: #f2f0e8;
       text-decoration: none;
-      font-size: 1.02rem;
+      font-size: 0.95rem;
       font-weight: 700;
       padding: 14px 12px;
       box-shadow: 0 10px 24px rgba(0,0,0,0.12);
       transition: transform 0.12s ease, background 0.12s ease;
       width: 100%;
+    }
+
+    .menu-card img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .menu-card span {
+      display: block;
+      line-height: 1.2;
     }
 
     .install-banner {
@@ -434,52 +449,18 @@
 </head>
 <body>
   <main class="app">
-    <div class="top-nav">
-      <div class="top-nav-scroll">
-        <a href="menage.html" class="nav-pill">
-          <div class="nav-pill-icon">
-            <img src="pastille/menage.png" alt="Ménage">
-          </div>
-          <div class="nav-pill-label">Ménage</div>
-        </a>
-
-        <a href="notes.html" class="nav-pill">
-          <div class="nav-pill-icon">
-            <img src="pastille/notes.png" alt="Notes">
-          </div>
-          <div class="nav-pill-label">Notes</div>
-        </a>
-
-        <a href="notes-vocales.html" class="nav-pill">
-          <div class="nav-pill-icon">
-            <img src="pastille/notesvocales.png" alt="Notes vocales">
-          </div>
-          <div class="nav-pill-label">Vocales</div>
-        </a>
-
-        <a href="videos.html" class="nav-pill">
-          <div class="nav-pill-icon">
-            <img src="pastille/video.png" alt="Vidéos">
-          </div>
-          <div class="nav-pill-label">Vidéos</div>
-        </a>
-      </div>
-    </div>
 
     <section class="hero-card">
-      <p class="top-title">Excellence personnelle</p>
-
+      <p class="top-title">Citation du jour</p>
+      <div class="routine-box">
+        <p class="quote-text" id="quoteText">
+          Success doesn't just find you. You have to go out and get it.
+        </p>
+        <p class="quote-author" id="quoteAuthor">— Inconnu</p>
+      </div>
       <div class="action-row">
         <button class="pill-btn" id="favoritesBtn">☆ Favoris</button>
         <button class="pill-btn" id="quoteBtn">Nouvelle citation</button>
-      </div>
-
-      <div class="routine-box">
-        <p class="routine-label">Citation du jour</p>
-        <p class="quote-text" id="quoteText">
-          Success doesn’t just find you. You have to go out and get it.
-        </p>
-        <p class="quote-author" id="quoteAuthor">— Inconnu</p>
       </div>
     </section>
 
@@ -557,7 +538,7 @@
           </div>
 
           <div class="tracker-section">
-            <p class="tracker-section-title">Niveau d’énergie</p>
+            <p class="tracker-section-title">Niveau d'énergie</p>
             <div class="energy-row">
               <button class="pill-btn energy-btn" data-energy="low">Bas</button>
               <button class="pill-btn energy-btn" data-energy="medium">Moyen</button>
@@ -596,7 +577,7 @@
 
           <div class="tracker-section">
             <p class="tracker-section-title">Review du jour</p>
-            <textarea class="tracker-textarea" id="reviewText" placeholder="Ex. Ce que j’ai accompli, ce que je veux améliorer, une pensée de fin de journée..."></textarea>
+            <textarea class="tracker-textarea" id="reviewText" placeholder="Ex. Ce que j'ai accompli, ce que je veux améliorer, une pensée de fin de journée..."></textarea>
             <div class="review-actions">
               <button class="pill-btn" id="saveReviewBtn">Enregistrer</button>
               <button class="pill-btn" id="clearReviewBtn">Effacer</button>
@@ -612,21 +593,44 @@
     </section>
 
     <section class="menu-grid">
-      <a href="videos.html" class="menu-card">Vidéos</a>
-      <a href="notes.html" class="menu-card">Notes</a>
-      <a href="notes-vocales.html" class="menu-card">Notes vocales</a>
-      <a href="menage.html" class="menu-card">Ménage</a>
-      <a href="disc.html" class="menu-card">DISC / Couleurs</a>
-      <a href="decouvertes.html" class="menu-card">Découverte / apprentissage</a>
-      <a href="musique.html" class="menu-card">Musique</a>
-      <a href="objectifs.html" class="menu-card">Objectifs</a>
-      <a href="moodboard.html" class="menu-card">Mood board</a>
-      <a href="calendrier.html" class="menu-card">Calendrier</a>
+      <a href="calendrier.html" class="menu-card">
+        <img src="calendrier.png" alt="Calendrier" />
+        <span>Calendrier</span>
+      </a>
+      <a href="videos.html" class="menu-card">
+        <img src="video.png" alt="Vidéos" />
+        <span>Vidéos</span>
+      </a>
+      <a href="notes.html" class="menu-card">
+        <img src="notes.png" alt="Notes" />
+        <span>Notes</span>
+      </a>
+      <a href="notes-vocales.html" class="menu-card">
+        <img src="notesvocales.png" alt="Notes vocales" />
+        <span>Notes vocales</span>
+      </a>
+      <a href="menage.html" class="menu-card">
+        <img src="menage.png" alt="Ménage" />
+        <span>Ménage</span>
+      </a>
+      <a href="disc.html" class="menu-card">
+        <img src="disc.png" alt="DISC / Couleurs" />
+        <span>DISC / Couleurs</span>
+      </a>
+      <a href="decouvertes.html" class="menu-card">
+        <img src="apprendre.png" alt="Apprendre" />
+        <span>Apprendre</span>
+      </a>
+      <a href="objectifs.html" class="menu-card">
+        <img src="objectif.png" alt="Objectifs" />
+        <span>Objectifs</span>
+      </a>
     </section>
 
     <div class="install-banner" id="installBanner">
-      <button class="install-btn" id="installBtn">Installer l’app</button>
+      <button class="install-btn" id="installBtn">Installer l'app</button>
     </div>
+
   </main>
 
   <script src="data.js"></script>
@@ -634,7 +638,7 @@
     const defaultQuotes = [
       {
         title: "Citation du jour",
-        text: "Success doesn’t just find you. You have to go out and get it.",
+        text: "Success doesn't just find you. You have to go out and get it.",
         author: "Inconnu"
       },
       {
@@ -644,7 +648,7 @@
       },
       {
         title: "Citation du jour",
-        text: "Tu n’as pas besoin d’attendre d’être motivé pour commencer.",
+        text: "Tu n'as pas besoin d'attendre d'être motivé pour commencer.",
         author: "Inconnu"
       },
       {
@@ -665,12 +669,8 @@
         if (Array.isArray(data) && data.length) {
           quotesData = data.map(item => {
             if (typeof item === "string") {
-              return {
-                text: item,
-                author: "Inconnu"
-              };
+              return { text: item, author: "Inconnu" };
             }
-
             return {
               text: item.text || item.quote || "Contenu indisponible.",
               author: item.author || item.auteur || "Inconnu"
@@ -696,11 +696,8 @@
     });
 
     function getTaskPlan() {
-      try {
-        return JSON.parse(localStorage.getItem("weeklyTaskPlan")) || {};
-      } catch {
-        return {};
-      }
+      try { return JSON.parse(localStorage.getItem("weeklyTaskPlan")) || {}; }
+      catch { return {}; }
     }
 
     function setTaskPlan(plan) {
@@ -708,11 +705,8 @@
     }
 
     function getTaskDoneState() {
-      try {
-        return JSON.parse(localStorage.getItem("weeklyTaskDone")) || {};
-      } catch {
-        return {};
-      }
+      try { return JSON.parse(localStorage.getItem("weeklyTaskDone")) || {}; }
+      catch { return {}; }
     }
 
     function setTaskDoneState(done) {
@@ -749,12 +743,12 @@
 
       if (!rawTasks.length) {
         summaryEl.textContent = `Aucune tâche prévue pour ${dayNameFr(dayIndex)}. Planifie ta semaine pour les voir ici.`;
-        listEl.innerHTML = `<div class="empty-tasks">Rien à faire aujourd’hui pour le moment.</div>`;
+        listEl.innerHTML = `<div class="empty-tasks">Rien à faire aujourd'hui pour le moment.</div>`;
         return;
       }
 
       summaryEl.textContent = visibleTasks.length
-        ? `${visibleTasks.length} tâche${visibleTasks.length > 1 ? 's' : ''} à faire aujourd’hui.`
+        ? `${visibleTasks.length} tâche${visibleTasks.length > 1 ? 's' : ''} à faire aujourd'hui.`
         : `Bravo, toutes tes tâches du ${dayNameFr(dayIndex)} sont cochées.`;
 
       listEl.innerHTML = visibleTasks.length
@@ -777,7 +771,7 @@
               </label>
             `;
           }).join("")
-        : `<div class="empty-tasks">Tu as tout terminé pour aujourd’hui ✨</div>`;
+        : `<div class="empty-tasks">Tu as tout terminé pour aujourd'hui ✨</div>`;
     }
 
     function fillPlannerInputs() {
@@ -792,10 +786,7 @@
       const nextPlan = {};
       document.querySelectorAll(".planner-input").forEach(input => {
         const day = input.dataset.day;
-        nextPlan[day] = input.value
-          .split("|")
-          .map(item => item.trim())
-          .filter(Boolean);
+        nextPlan[day] = input.value.split("|").map(item => item.trim()).filter(Boolean);
       });
       setTaskPlan(nextPlan);
       renderTodayTasks();
@@ -822,20 +813,15 @@
       const dayIndex = currentDayIndex();
       const today = todayKey();
       Object.keys(done).forEach(key => {
-        if (key.startsWith(`${today}-${dayIndex}-`)) {
-          delete done[key];
-        }
+        if (key.startsWith(`${today}-${dayIndex}-`)) delete done[key];
       });
       setTaskDoneState(done);
       renderTodayTasks();
     }
 
     function getDailyTrackerStore() {
-      try {
-        return JSON.parse(localStorage.getItem("dailyTrackerStore")) || {};
-      } catch {
-        return {};
-      }
+      try { return JSON.parse(localStorage.getItem("dailyTrackerStore")) || {}; }
+      catch { return {}; }
     }
 
     function setDailyTrackerStore(store) {
@@ -846,14 +832,7 @@
       const store = getDailyTrackerStore();
       const key = todayKey();
       if (!store[key]) {
-        store[key] = {
-          water: 0,
-          energy: "",
-          move: false,
-          relax: false,
-          brainDump: "",
-          review: ""
-        };
+        store[key] = { water: 0, energy: "", move: false, relax: false, brainDump: "", review: "" };
         setDailyTrackerStore(store);
       }
       return store[key];
@@ -862,14 +841,7 @@
     function updateTodayTracker(patch) {
       const store = getDailyTrackerStore();
       const key = todayKey();
-      const current = store[key] || {
-        water: 0,
-        energy: "",
-        move: false,
-        relax: false,
-        brainDump: "",
-        review: ""
-      };
+      const current = store[key] || { water: 0, energy: "", move: false, relax: false, brainDump: "", review: "" };
       store[key] = { ...current, ...patch };
       setDailyTrackerStore(store);
       return store[key];
