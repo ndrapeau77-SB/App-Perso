@@ -357,6 +357,169 @@
 
     .reset-btn-wrap { margin-top: 14px; }
 
+    /* ===== COMPATIBILITÉ ===== */
+    .color-picker-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .picker-block label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .color-select-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .color-pick-btn {
+      border: 2px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      border-radius: 14px;
+      padding: 10px 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .color-pick-btn:hover {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .color-pick-btn.selected-yellow { border-color: var(--yellow); background: rgba(232,193,76,0.14); color: var(--yellow); font-weight: 700; }
+    .color-pick-btn.selected-red    { border-color: var(--red);    background: rgba(207,91,91,0.14);  color: var(--red);    font-weight: 700; }
+    .color-pick-btn.selected-green  { border-color: var(--green);  background: rgba(99,167,122,0.14); color: var(--green);  font-weight: 700; }
+    .color-pick-btn.selected-blue   { border-color: var(--blue);   background: rgba(93,143,203,0.14); color: var(--blue);   font-weight: 700; }
+
+    .compat-result {
+      display: none;
+      margin-top: 6px;
+    }
+
+    .compat-result.visible { display: block; }
+
+    .compat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .compat-badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .compat-badge.yellow { background: rgba(232,193,76,0.18); color: var(--yellow); border-color: rgba(232,193,76,0.35); }
+    .compat-badge.red    { background: rgba(207,91,91,0.18);  color: var(--red);    border-color: rgba(207,91,91,0.35); }
+    .compat-badge.green  { background: rgba(99,167,122,0.18); color: var(--green);  border-color: rgba(99,167,122,0.35); }
+    .compat-badge.blue   { background: rgba(93,143,203,0.18); color: var(--blue);   border-color: rgba(93,143,203,0.35); }
+
+    .compat-arrow {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .compat-score-wrap {
+      margin-bottom: 16px;
+    }
+
+    .compat-score-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .compat-score-bar-wrap {
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      overflow: hidden;
+      border: 1px solid rgba(212,175,55,0.18);
+    }
+
+    .compat-score-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+      background: linear-gradient(90deg, rgba(212,175,55,0.5), var(--accent));
+    }
+
+    .compat-score-val {
+      text-align: right;
+      font-size: 0.88rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .compat-sections {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .compat-section {
+      border-radius: 16px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .compat-section-title {
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .compat-section-title.fit    { color: var(--green); }
+    .compat-section-title.challenge { color: var(--red); }
+    .compat-section-title.comm   { color: var(--blue); }
+    .compat-section-title.motiv  { color: var(--yellow); }
+
+    .compat-section ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 0.93rem;
+    }
+
+    .compat-tip {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(212,175,55,0.07);
+      border: 1px solid rgba(212,175,55,0.18);
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .compat-tip strong { color: var(--accent); }
+
+    @media (min-width: 760px) {
+      .compat-sections { grid-template-columns: 1fr 1fr; }
+    }
+
     @media (min-width: 760px) {
       body { padding: 16px; }
       .top-actions { display: flex; flex-wrap: wrap; }
@@ -378,6 +541,9 @@
     </p>
     <div class="top-actions">
       <a href="index.html" class="btn btn-home">← Accueil</a>
+      <button class="btn" onclick="document.getElementById('compat').scrollIntoView({behavior:'smooth'})">
+        Compatibilité entre couleurs
+      </button>
       <button class="btn" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
         Faire le test (40 questions)
       </button>
@@ -610,6 +776,73 @@
         </div>
       </article>
 
+    </div>
+  </section>
+
+  <!-- COMPATIBILITÉ -->
+  <section class="panel" id="compat">
+    <h2>Compatibilité entre couleurs</h2>
+    <p class="intro">
+      Choisis ta couleur dominante et celle d'une autre personne (collègue, partenaire, ami) pour voir ce qui vous unit, ce qui peut créer de la friction, et comment mieux communiquer ensemble.
+    </p>
+
+    <div class="color-picker-grid">
+      <div class="picker-block">
+        <label>🙋 Ma couleur</label>
+        <div class="color-select-group">
+          <button class="color-pick-btn" data-picker="me" data-color="yellow" onclick="pickColor('me','yellow',this)">🟡 Jaune</button>
+          <button class="color-pick-btn" data-picker="me" data-color="red"    onclick="pickColor('me','red',this)">🔴 Rouge</button>
+          <button class="color-pick-btn" data-picker="me" data-color="green"  onclick="pickColor('me','green',this)">🟢 Vert</button>
+          <button class="color-pick-btn" data-picker="me" data-color="blue"   onclick="pickColor('me','blue',this)">🔵 Bleu</button>
+        </div>
+      </div>
+      <div class="picker-block">
+        <label>🧑 L'autre personne</label>
+        <div class="color-select-group">
+          <button class="color-pick-btn" data-picker="other" data-color="yellow" onclick="pickColor('other','yellow',this)">🟡 Jaune</button>
+          <button class="color-pick-btn" data-picker="other" data-color="red"    onclick="pickColor('other','red',this)">🔴 Rouge</button>
+          <button class="color-pick-btn" data-picker="other" data-color="green"  onclick="pickColor('other','green',this)">🟢 Vert</button>
+          <button class="color-pick-btn" data-picker="other" data-color="blue"   onclick="pickColor('other','blue',this)">🔵 Bleu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="compat-result" id="compatResult">
+      <div class="compat-header">
+        <span class="compat-badge" id="compatBadgeMe"></span>
+        <span class="compat-arrow">⇄</span>
+        <span class="compat-badge" id="compatBadgeOther"></span>
+        <span style="color:var(--muted); font-size:0.92rem;" id="compatTitle"></span>
+      </div>
+
+      <div class="compat-score-wrap">
+        <div class="compat-score-label">Indice de compatibilité naturelle</div>
+        <div class="compat-score-bar-wrap">
+          <div class="compat-score-fill" id="compatScoreFill"></div>
+        </div>
+        <div class="compat-score-val" id="compatScoreVal"></div>
+      </div>
+
+      <div class="compat-sections">
+        <div class="compat-section">
+          <div class="compat-section-title fit">✅ Ce qui fonctionne bien</div>
+          <ul id="compatFit"></ul>
+        </div>
+        <div class="compat-section">
+          <div class="compat-section-title challenge">⚡ Les défis potentiels</div>
+          <ul id="compatChallenge"></ul>
+        </div>
+        <div class="compat-section">
+          <div class="compat-section-title comm">💬 Comment mieux communiquer</div>
+          <ul id="compatComm"></ul>
+        </div>
+        <div class="compat-section">
+          <div class="compat-section-title motiv">🎯 Motivations respectives</div>
+          <ul id="compatMotiv"></ul>
+        </div>
+      </div>
+
+      <div class="compat-tip" id="compatTip"></div>
     </div>
   </section>
 
@@ -945,6 +1178,176 @@ function toggleMore(id, btn) {
 
 // Init
 buildQuestions();
+
+// ===== COMPATIBILITÉ =====
+const colorLabels = {
+  yellow: { emoji: "🟡", name: "Jaune" },
+  red:    { emoji: "🔴", name: "Rouge" },
+  green:  { emoji: "🟢", name: "Vert" },
+  blue:   { emoji: "🔵", name: "Bleu" },
+};
+
+const colorMotivations = {
+  yellow: ["Être reconnu et apprécié", "S'amuser et créer", "Partager des idées nouvelles", "Avoir de la liberté et de la variété"],
+  red:    ["Relever des défis difficiles", "Atteindre des résultats concrets", "Avoir du contrôle et de l'autonomie", "Avancer vite et être efficace"],
+  green:  ["Maintenir l'harmonie du groupe", "Sentir qu'il contribue vraiment", "Avoir des relations stables et de confiance", "Travailler dans un environnement calme"],
+  blue:   ["Produire un travail de haute qualité", "Comprendre en profondeur avant d'agir", "Respecter et faire respecter les standards", "Éviter les erreurs et l'improvisation"],
+};
+
+const compatData = {
+  "yellow-yellow": {
+    score: 80,
+    title: "Duo Enthousiaste",
+    fit: ["Énergie et enthousiasme partagés", "Facilité à créer une ambiance positive", "Brainstorming créatif et spontané", "Plaisir et humour naturels"],
+    challenge: ["Risque de manquer de suivi et d'exécution", "Peut tourner en rond dans les idées sans décider", "Difficulté à rester focalisé sur les priorités", "Aucun des deux ne prendra naturellement le rôle d'organisateur"],
+    comm: ["Mettez des actions concrètes derrière vos idées", "Désignez quelqu'un pour assurer le suivi", "Gardez des moments de focus sans distraction", "Célébrez les victoires pour maintenir la motivation"],
+    tip: "<strong>Conseil :</strong> Vous vous entendrez très bien naturellement, mais attention à transformer l'énergie en résultats concrets. Associez-vous à un profil Bleu ou Rouge pour l'exécution."
+  },
+  "yellow-red": {
+    score: 72,
+    title: "L'Équipe Feu",
+    fit: ["Énergie et dynamisme complémentaires", "Le Jaune motive, le Rouge exécute", "Bonne capacité à embarquer les autres", "Duo efficace en vente et leadership"],
+    challenge: ["Le Rouge peut trouver le Jaune trop dispersé", "Le Jaune peut trouver le Rouge trop brusque", "Le Rouge veut des résultats ; le Jaune veut du plaisir", "Risque de compétition pour l'attention"],
+    comm: ["Jaune : va plus à l'essentiel avec le Rouge, sois concis", "Rouge : laisse de la place à l'expression du Jaune", "Partagez vos objectifs clairement dès le départ", "Le Rouge prend les décisions, le Jaune gère les relations"],
+    tip: "<strong>Conseil :</strong> Excellente combinaison en vente et en leadership. Le Rouge donne la direction, le Jaune crée l'adhésion. Évitez les guerres d'ego."
+  },
+  "yellow-green": {
+    score: 85,
+    title: "La Chaleur Humaine",
+    fit: ["Les deux sont orientés personnes et relations", "Le Jaune anime, le Vert stabilise", "Excellente complicité naturelle", "Bonne écoute et communication fluide"],
+    challenge: ["Risque d'éviter les décisions difficiles", "Peut manquer d'orientation résultats", "Le Jaune peut bousculer le Vert avec son rythme", "Le Vert peut freiner l'enthousiasme du Jaune"],
+    comm: ["Jaune : ralentis parfois pour laisser le Vert s'adapter", "Vert : exprime ton inconfort au lieu de subir", "Partagez régulièrement sur votre bien-être respectif", "Célébrez les relations et les petites victoires ensemble"],
+    tip: "<strong>Conseil :</strong> Duo très harmonieux et chaleureux. Pour performer, associez-vous à un Rouge ou Bleu pour la rigueur et les résultats."
+  },
+  "yellow-blue": {
+    score: 55,
+    title: "L'Opposé Complémentaire",
+    fit: ["Le Bleu structure les idées du Jaune", "Le Jaune sort le Bleu de ses angles morts créatifs", "Complémentarité fort si les rôles sont clairs", "Le Bleu apporte la rigueur, le Jaune l'énergie"],
+    challenge: ["Le Bleu trouve le Jaune trop impulsif et désorganisé", "Le Jaune trouve le Bleu trop lent, froid et rigide", "Rythmes très différents — l'un fonce, l'autre analyse", "La communication peut sembler froide vs trop émotive"],
+    comm: ["Jaune : donne des données concrètes au Bleu, pas juste des idées", "Bleu : montre de l'enthousiasme pour les idées du Jaune avant de les critiquer", "Établissez un processus clair : idées du Jaune → validation du Bleu", "Respectez les rythmes de décision de chacun"],
+    tip: "<strong>Conseil :</strong> Duo qui peut être très puissant si vous comprenez vos différences. Le Jaune apporte l'élan, le Bleu apporte la solidité. Évitez de vous juger mutuellement."
+  },
+  "red-red": {
+    score: 60,
+    title: "Deux Locomotives",
+    fit: ["Rythme rapide et efficace partagé", "Les deux veulent des résultats — pas de perte de temps", "Décisions rapides et orientation action", "Haute performance quand les objectifs sont alignés"],
+    challenge: ["Forte tendance aux conflits de pouvoir", "Aucun ne veut céder — risque d'impasse", "Peu d'espace pour les émotions ou les nuances", "Peut manquer de soutien humain dans l'équipe"],
+    comm: ["Définissez clairement les zones de responsabilité de chacun", "Évitez les batailles d'ego — focalisez sur l'objectif commun", "Apprenez à écouter avant de répondre", "Accordez-vous des temps de discussion structurés"],
+    tip: "<strong>Conseil :</strong> Duo très efficace si vous clarifiez les rôles. Sinon, risque de clash constant. L'un doit accepter de suivre l'autre sur certains sujets."
+  },
+  "red-green": {
+    score: 65,
+    title: "La Force et la Douceur",
+    fit: ["Le Rouge pousse à performer, le Vert maintient l'harmonie", "Bon équilibre entre résultats et bien-être d'équipe", "Le Vert calme les élans trop agressifs du Rouge", "Complémentarité forte en gestion"],
+    challenge: ["Le Rouge peut blesser le Vert avec sa franchise", "Le Vert peut sembler trop lent ou passif au Rouge", "Le Rouge veut décider vite ; le Vert veut consulter", "Le Vert évite les conflits que le Rouge trouve nécessaires"],
+    comm: ["Rouge : adoucis ta façon de donner du feedback au Vert", "Vert : ose exprimer ton désaccord clairement plutôt que de subir", "Donnez-vous des temps de discussion avant de décider", "Le Rouge prend la décision finale, le Vert veille au bien-être de l'équipe"],
+    tip: "<strong>Conseil :</strong> Duo complémentaire en leadership. Le Rouge donne la direction, le Vert s'assure que personne n'est laissé pour compte. Respectez-vous mutuellement."
+  },
+  "red-blue": {
+    score: 68,
+    title: "L'Ambitieux et le Stratège",
+    fit: ["Le Rouge agit, le Bleu structure — tandem puissant", "Haut niveau d'exigence partagé", "Excellent pour les projets complexes à fort enjeu", "Le Bleu évite les erreurs du Rouge impulsif"],
+    challenge: ["Le Rouge trouve le Bleu trop lent et trop prudent", "Le Bleu trouve le Rouge trop impulsif et risqué", "Tension entre vitesse d'action et rigueur d'analyse", "Peu d'espace pour les émotions et la relation humaine"],
+    comm: ["Rouge : donne au Bleu le temps d'analyser avant de décider", "Bleu : présente tes analyses de façon concise et orientée résultats", "Établissez des délais clairs pour les décisions", "Respectez mutuellement votre niveau d'exigence élevé"],
+    tip: "<strong>Conseil :</strong> Duo redoutable en affaires quand les rôles sont clairs. Le Rouge prend les décisions audacieuses, le Bleu les solides. Apprenez à vous faire confiance."
+  },
+  "green-green": {
+    score: 88,
+    title: "L'Harmonie Parfaite",
+    fit: ["Très bonne entente naturelle et peu de conflits", "Écoute mutuelle et respect des besoins", "Environnement de travail calme et stable", "Loyauté et fiabilité partagées"],
+    challenge: ["Peut éviter les décisions difficiles ou les confrontations", "Risque de manquer d'ambition ou de prise de risque", "Tendance à maintenir le statu quo même quand il faut changer", "Peu de dynamisme pour se dépasser ou innover"],
+    comm: ["Osez exprimer vos désaccords — l'harmonie ne signifie pas l'accord total", "Planifiez des moments de prise de décision structurés", "Cherchez des alliés Rouges ou Jaunes pour vous pousser à avancer", "Célébrez votre fiabilité — c'est une force rare"],
+    tip: "<strong>Conseil :</strong> Excellente relation humaine, mais veillez à ne pas vous installer dans un confort qui freine la croissance. Challengez-vous mutuellement avec bienveillance."
+  },
+  "green-blue": {
+    score: 75,
+    title: "La Précision Bienveillante",
+    fit: ["Les deux sont calmes, posés et réfléchis", "Respect mutuel des processus et des délais", "Bonne qualité de travail partagée", "Peu de conflits — les deux évitent les confrontations inutiles"],
+    challenge: ["Risque de paralysie — aucun ne pousse à avancer vite", "Manque d'énergie et d'enthousiasme dans la dynamique", "Le Bleu peut être perçu comme froid par le Vert", "Le Vert peut sembler trop flou pour le Bleu analytique"],
+    comm: ["Vert : sois plus direct dans tes attentes avec le Bleu", "Bleu : montre de l'empathie et reconnais la contribution humaine du Vert", "Définissez ensemble des objectifs clairs avec des délais", "Associez-vous à un Rouge ou Jaune pour l'élan"],
+    tip: "<strong>Conseil :</strong> Duo fiable et de qualité. Pour maximiser votre potentiel, cherchez des contextes où la rigueur et la bienveillance sont des atouts — RH, qualité, service client."
+  },
+  "blue-blue": {
+    score: 70,
+    title: "Les Deux Analystes",
+    fit: ["Haut niveau de rigueur et de qualité partagé", "Respect mutuel des processus et des détails", "Très peu d'erreurs et grande fiabilité", "Communication précise et factuelle"],
+    challenge: ["Risque de sur-analyse et d'inaction", "Manque d'élan et de dynamisme dans la relation", "Peut être difficile de décider sans données parfaites", "Peu d'espace pour la créativité et l'improvisation"],
+    comm: ["Établissez des délais fermes pour sortir de l'analyse", "Définissez qui a le dernier mot pour éviter les blocages", "Reconnaissez les efforts de l'autre — le Bleu a besoin de validation", "Associez-vous à un Rouge ou Jaune pour les phases d'action"],
+    tip: "<strong>Conseil :</strong> Duo d'une grande rigueur. Le risque est la paralysie par l'analyse. Forcez-vous à des décisions imparfaites — le perfectionnisme peut être l'ennemi du progrès."
+  },
+};
+
+// Génère la clé symétrique
+function getCompatKey(a, b) {
+  const key = `${a}-${b}`;
+  const keyRev = `${b}-${a}`;
+  return compatData[key] ? key : (compatData[keyRev] ? keyRev : null);
+}
+
+let pickedMe = null;
+let pickedOther = null;
+
+function pickColor(picker, color, btn) {
+  // Deselect old button for this picker
+  document.querySelectorAll(`[data-picker="${picker}"]`).forEach(b => {
+    b.className = "color-pick-btn";
+  });
+  btn.classList.add(`selected-${color}`);
+
+  if (picker === "me") pickedMe = color;
+  else pickedOther = color;
+
+  if (pickedMe && pickedOther) renderCompat();
+}
+
+function renderCompat() {
+  const key = getCompatKey(pickedMe, pickedOther);
+  const data = compatData[key] || null;
+
+  const result = document.getElementById("compatResult");
+
+  const meLabel    = colorLabels[pickedMe];
+  const otherLabel = colorLabels[pickedOther];
+
+  document.getElementById("compatBadgeMe").textContent    = `${meLabel.emoji} ${meLabel.name}`;
+  document.getElementById("compatBadgeMe").className      = `compat-badge ${pickedMe}`;
+  document.getElementById("compatBadgeOther").textContent = `${otherLabel.emoji} ${otherLabel.name}`;
+  document.getElementById("compatBadgeOther").className   = `compat-badge ${pickedOther}`;
+
+  if (!data) {
+    result.classList.add("visible");
+    document.getElementById("compatTitle").textContent = "Combinaison";
+    document.getElementById("compatScoreFill").style.width = "60%";
+    document.getElementById("compatScoreVal").textContent = "60% — Complémentaire";
+    document.getElementById("compatFit").innerHTML = "<li>Des complémentarités sont toujours possibles</li>";
+    document.getElementById("compatChallenge").innerHTML = "<li>Des ajustements de communication seront nécessaires</li>";
+    document.getElementById("compatComm").innerHTML = "<li>Prenez le temps de vous connaître mutuellement</li>";
+    document.getElementById("compatMotiv").innerHTML = `
+      <li><strong>${meLabel.name} :</strong> ${colorMotivations[pickedMe].join(", ")}</li>
+      <li><strong>${otherLabel.name} :</strong> ${colorMotivations[pickedOther].join(", ")}</li>
+    `;
+    document.getElementById("compatTip").innerHTML = "<strong>Conseil :</strong> Explorez vos différences avec curiosité plutôt qu'avec jugement.";
+    return;
+  }
+
+  document.getElementById("compatTitle").textContent = `— ${data.title}`;
+  document.getElementById("compatScoreFill").style.width = `${data.score}%`;
+  document.getElementById("compatScoreVal").textContent  = `${data.score}% — ${data.score >= 80 ? "Très bonne compatibilité naturelle" : data.score >= 65 ? "Bonne compatibilité avec quelques ajustements" : "Complémentaire — demande des efforts de compréhension"}`;
+
+  document.getElementById("compatFit").innerHTML      = data.fit.map(t => `<li>${t}</li>`).join("");
+  document.getElementById("compatChallenge").innerHTML = data.challenge.map(t => `<li>${t}</li>`).join("");
+  document.getElementById("compatComm").innerHTML     = data.comm.map(t => `<li>${t}</li>`).join("");
+
+  // Motivations — toujours affiche les deux couleurs
+  const motivMe    = colorMotivations[pickedMe].map(m => `<li><strong>${meLabel.emoji} ${meLabel.name} :</strong> ${m}</li>`).join("");
+  const motivOther = colorMotivations[pickedOther].map(m => `<li><strong>${otherLabel.emoji} ${otherLabel.name} :</strong> ${m}</li>`).join("");
+  document.getElementById("compatMotiv").innerHTML = motivMe + motivOther;
+
+  document.getElementById("compatTip").innerHTML = data.tip;
+
+  result.classList.add("visible");
+  result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
 </script>
 </body>
 </html>
