@@ -319,7 +319,110 @@
       margin-top: 10px;
     }
 
-    /* MENU GRID */
+    /* ===== TASK + CALENDAR ROW ===== */
+    .task-cal-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+      margin-bottom: 0;
+      align-items: stretch;
+    }
+
+    .cal-btn {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(170, 142, 65, 0.56);
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      background: rgba(4, 24, 23, 0.72);
+      min-height: 52px;
+      transition: transform 0.12s ease;
+    }
+
+    .cal-btn:active { transform: scale(0.97); }
+
+    .cal-btn img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .cal-btn span {
+      position: relative;
+      z-index: 1;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #f2f0e8;
+      text-align: center;
+      padding: 4px 6px 6px;
+      width: 100%;
+      background: linear-gradient(to top, rgba(2,14,12,0.92) 0%, transparent 100%);
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+    }
+
+    /* ===== COMPACT WATER BUTTON ===== */
+    .water-btn-wrap {
+      margin-top: 14px;
+    }
+
+    .water-compact {
+      border: 1px solid rgba(170, 142, 65, 0.45);
+      border-radius: 18px;
+      padding: 12px 14px;
+      background: rgba(4, 24, 23, 0.62);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .water-compact-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .water-compact-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .water-compact-val {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .water-compact-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      border: 1px solid rgba(170, 142, 65, 0.18);
+    }
+
+    .water-compact-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green-deep), var(--green-soft));
+      transition: width 0.18s ease;
+    }
+
+    .water-compact-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+    }
+
+    /* ===== MENU GRID ===== */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -328,38 +431,51 @@
     }
 
     .menu-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 108px;
-      text-align: center;
+      position: relative;
+      display: block;
+      aspect-ratio: 1 / 1;
       border-radius: 24px;
       border: 1px solid rgba(170, 142, 65, 0.56);
-      background: linear-gradient(180deg, rgba(4, 37, 34, 0.96), rgba(3, 27, 26, 0.96));
-      color: #f2f0e8;
+      overflow: hidden;
       text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 14px 12px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-      transition: transform 0.12s ease, background 0.12s ease;
-      width: 100%;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      transition: transform 0.12s ease;
+    }
+
+    .menu-card:active {
+      transform: scale(0.97);
     }
 
     .menu-card img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
     .menu-card span {
-      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 10px 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f2f0e8;
+      background: linear-gradient(
+        to top,
+        rgba(2, 14, 12, 0.95) 0%,
+        rgba(2, 14, 12, 0.6) 55%,
+        transparent 100%
+      );
+      text-align: center;
       line-height: 1.2;
     }
 
+    /* ===== INSTALL BANNER ===== */
     .install-banner {
       position: sticky;
       bottom: 10px;
@@ -381,7 +497,7 @@
       box-shadow: 0 8px 22px rgba(0,0,0,0.22);
     }
 
-    /* NAVIGATION PASTILLES */
+    /* ===== NAVIGATION PASTILLES ===== */
     .top-nav {
       position: sticky;
       top: 0;
@@ -440,10 +556,6 @@
       .app {
         max-width: 640px;
       }
-
-      .menu-card {
-        min-height: 118px;
-      }
     }
   </style>
 </head>
@@ -471,9 +583,15 @@
         <p class="task-summary" id="taskSummary">Planifie tes tâches de la semaine et coche-les quand elles sont terminées.</p>
         <div class="task-list" id="todayTasksList"></div>
 
-        <div class="action-row" style="margin-top:14px; margin-bottom:0;">
-          <button class="pill-btn" id="togglePlannerBtn">Planifier la semaine</button>
-          <button class="pill-btn" id="resetTasksBtn">Réinitialiser</button>
+        <div class="task-cal-row">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <button class="pill-btn" id="togglePlannerBtn">Planifier la semaine</button>
+            <button class="pill-btn" id="resetTasksBtn">Réinitialiser</button>
+          </div>
+          <a href="calendrier.html" class="cal-btn">
+            <img src="pastille/calendrier.png" alt="Calendrier" />
+            <span>Calendrier</span>
+          </a>
         </div>
 
         <div class="planner-box" id="plannerBox">
@@ -516,34 +634,24 @@
       </div>
     </section>
 
-    <section class="tracker-card">
-      <p class="top-title">Suivi du jour</p>
-
-      <div class="tracker-box">
-        <div class="tracker-grid">
-          <div class="tracker-section">
-            <p class="tracker-section-title">Eau</p>
-            <div class="water-top">
-              <div class="tracker-summary" style="margin:0;">Objectif : 3 L</div>
-              <div class="water-value" id="waterValue">0 ml / 3000 ml</div>
-            </div>
-            <div class="progress-wrap">
-              <div class="progress-bar" id="waterProgressBar"></div>
-            </div>
-            <div class="water-actions">
-              <button class="pill-btn" id="waterMinusBtn">-250 ml</button>
-              <button class="pill-btn" id="waterPlusBtn">+250 ml</button>
-              <button class="pill-btn" id="waterResetBtn">Reset</button>
-            </div>
-          </div>
-          
-    </section>
+    <div class="water-btn-wrap">
+      <div class="water-compact">
+        <div class="water-compact-top">
+          <span class="water-compact-label">💧 Eau</span>
+          <span class="water-compact-val" id="waterValue">0 ml / 3000 ml</span>
+        </div>
+        <div class="water-compact-bar">
+          <div class="water-compact-fill" id="waterProgressBar"></div>
+        </div>
+        <div class="water-compact-btns">
+          <button class="pill-btn" id="waterMinusBtn" style="min-height:40px; font-size:0.88rem;">-250 ml</button>
+          <button class="pill-btn" id="waterPlusBtn"  style="min-height:40px; font-size:0.88rem;">+250 ml</button>
+          <button class="pill-btn" id="waterResetBtn" style="min-height:40px; font-size:0.88rem;">Reset</button>
+        </div>
+      </div>
+    </div>
 
     <section class="menu-grid">
-      <a href="calendrier.html" class="menu-card">
-        <img src="pastille/calendrier.png" alt="Calendrier" />
-        <span>Calendrier</span>
-      </a>
       <a href="videos.html" class="menu-card">
         <img src="pastille/video.png" alt="Vidéos" />
         <span>Vidéos</span>
@@ -829,38 +937,38 @@
 
     function renderHabits() {
       const today = ensureTodayTracker();
-      document.getElementById("habitMove").checked = !!today.move;
-      document.getElementById("habitRelax").checked = !!today.relax;
+      document.getElementById("habitMove")?.checked && (document.getElementById("habitMove").checked = !!today.move);
+      document.getElementById("habitRelax")?.checked && (document.getElementById("habitRelax").checked = !!today.relax);
     }
 
     function renderBrainDump() {
-      const today = ensureTodayTracker();
-      document.getElementById("brainDumpText").value = today.brainDump || "";
+      const el = document.getElementById("brainDumpText");
+      if (el) el.value = ensureTodayTracker().brainDump || "";
     }
 
     function renderReview() {
-      const today = ensureTodayTracker();
-      document.getElementById("reviewText").value = today.review || "";
+      const el = document.getElementById("reviewText");
+      if (el) el.value = ensureTodayTracker().review || "";
     }
 
     function saveBrainDump() {
-      const value = document.getElementById("brainDumpText").value.trim();
-      updateTodayTracker({ brainDump: value });
+      const value = document.getElementById("brainDumpText")?.value.trim();
+      if (value !== undefined) updateTodayTracker({ brainDump: value });
     }
 
     function clearBrainDump() {
-      document.getElementById("brainDumpText").value = "";
-      updateTodayTracker({ brainDump: "" });
+      const el = document.getElementById("brainDumpText");
+      if (el) { el.value = ""; updateTodayTracker({ brainDump: "" }); }
     }
 
     function saveReview() {
-      const value = document.getElementById("reviewText").value.trim();
-      updateTodayTracker({ review: value });
+      const value = document.getElementById("reviewText")?.value.trim();
+      if (value !== undefined) updateTodayTracker({ review: value });
     }
 
     function clearReview() {
-      document.getElementById("reviewText").value = "";
-      updateTodayTracker({ review: "" });
+      const el = document.getElementById("reviewText");
+      if (el) { el.value = ""; updateTodayTracker({ review: "" }); }
     }
 
     function initTracker() {
@@ -885,18 +993,18 @@
       btn.addEventListener("click", () => setEnergy(btn.dataset.energy));
     });
 
-    document.getElementById("habitMove").addEventListener("change", (e) => {
+    document.getElementById("habitMove")?.addEventListener("change", (e) => {
       updateTodayTracker({ move: e.target.checked });
     });
 
-    document.getElementById("habitRelax").addEventListener("change", (e) => {
+    document.getElementById("habitRelax")?.addEventListener("change", (e) => {
       updateTodayTracker({ relax: e.target.checked });
     });
 
-    document.getElementById("saveBrainDumpBtn").addEventListener("click", saveBrainDump);
-    document.getElementById("clearBrainDumpBtn").addEventListener("click", clearBrainDump);
-    document.getElementById("saveReviewBtn").addEventListener("click", saveReview);
-    document.getElementById("clearReviewBtn").addEventListener("click", clearReview);
+    document.getElementById("saveBrainDumpBtn")?.addEventListener("click", saveBrainDump);
+    document.getElementById("clearBrainDumpBtn")?.addEventListener("click", clearBrainDump);
+    document.getElementById("saveReviewBtn")?.addEventListener("click", saveReview);
+    document.getElementById("clearReviewBtn")?.addEventListener("click", clearReview);
 
     window.completeTask = completeTask;
 
