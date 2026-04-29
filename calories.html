@@ -118,36 +118,62 @@ async function searchFood(){
   box.innerHTML = `<div class="meta">Recherche...</div>`;
 
   try{
-    const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=8`;
-    const res = await fetch(url);
+    const url =
+      `https://world.openfoodfacts.org/api/v2/search?search_terms=${encodeURIComponent(query)}&page_size=10&fields=product_name,brands,nutriments,image_front_small_url`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      cache: "no-store"
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
     const data = await res.json();
 
     const products = (data.products || [])
-      .filter(p => p.product_name && p.nutriments && p.nutriments["energy-kcal_100g"]);
+      .filter(p =>
+        p.product_name &&
+        p.nutriments &&
+        (
+          p.nutriments["energy-kcal_100g"] ||
+          p.nutriments["energy-kcal"]
+        )
+      );
 
     if(!products.length){
-      box.innerHTML = `<div class="meta">Aucun résultat clair trouvé.</div>`;
+      box.innerHTML = `<div class="meta">Aucun résultat clair trouvé pour "${query}".</div>`;
       return;
     }
 
     box.innerHTML = products.map((p, index) => {
-      const name = p.product_name;
+      const name = p.product_name || "Aliment";
       const brand = p.brands || "";
-      const kcal = Math.round(p.nutriments["energy-kcal_100g"]);
+      const kcal = Math.round(
+        p.nutriments["energy-kcal_100g"] ||
+        p.nutriments["energy-kcal"] ||
+        0
+      );
+
+      const safeName = encodeURIComponent(name);
+
       return `
         <div class="result">
           <div class="name">${name}</div>
           <div class="meta">${brand ? brand + " • " : ""}${kcal} cal / 100 g</div>
+          ${p.image_front_small_url ? `<img src="${p.image_front_small_url}" style="max-width:90px;border-radius:12px;margin:8px 0;">` : ""}
           <input class="input" id="qty-${index}" type="number" placeholder="Quantité en grammes ex: 125">
-          <button class="btn" onclick="addFood('${encodeURIComponent(name)}', ${kcal}, 'qty-${index}')">Ajouter</button>
+          <button class="btn" onclick="addFood('${safeName}', ${kcal}, 'qty-${index}')">Ajouter</button>
         </div>
       `;
     }).join("");
+
   }catch(e){
-    box.innerHTML = `<div class="meta">Erreur de recherche.</div>`;
+    box.innerHTML = `<div class="meta">Erreur de recherche : ${e.message}</div>`;
+    console.error(e);
   }
 }
-
 function addFood(encodedName, kcal100g, qtyId){
   const name = decodeURIComponent(encodedName);
   const qty = Number(document.getElementById(qtyId).value || 100);
