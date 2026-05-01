@@ -185,8 +185,8 @@
     /* CONTEXT CHOICE */
     #page-context {
       min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 60px 20px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding: 64px 20px 60px;
     }
     .context-title {
       font-family: 'Playfair Display', serif;
@@ -489,7 +489,9 @@
       .dual-profile { grid-template-columns: 1fr; }
       .ml-header, .ml-row { grid-template-columns: 1fr 60px 60px; }
     }
-  </style>
+  
+#page-landing{justify-content:flex-start!important;padding-top:48px!important}.landing-sections-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0 28px}.mini-nav-btn{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:10px 16px;cursor:pointer}.app-sections{width:min(1100px,100%);text-align:left}.panel{background:linear-gradient(180deg,rgba(26,26,34,.98),rgba(20,20,28,.98));border:1px solid rgba(212,175,55,.22);border-radius:22px;padding:18px;margin-bottom:16px}.panel h2{color:var(--gold);font-size:1.35rem}.intro,.muted{color:var(--text-muted);line-height:1.6}.section-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer}.section-toggle{width:32px;height:32px;border-radius:10px;border:1px solid rgba(212,175,55,.35);background:rgba(212,175,55,.08);color:var(--gold);display:flex;align-items:center;justify-content:center}.section-toggle.collapsed{transform:rotate(-90deg)}.section-body{margin-top:14px;overflow:hidden}.section-body.collapsed{max-height:0;opacity:0;margin-top:0;pointer-events:none}.color-grid,.motiv-intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}.color-card,.motiv-card,.compat-section,.motiv-quiz-q{border-radius:18px;padding:16px;background:linear-gradient(180deg,rgba(28,45,42,.62),rgba(24,38,36,.50));border:1px solid rgba(255,255,255,.08)}.color-card.yellow{border-left:8px solid var(--jaune-mid)}.color-card.red{border-left:8px solid var(--rouge-mid)}.color-card.green{border-left:8px solid var(--vert-mid)}.color-card.blue{border-left:8px solid var(--bleu-mid)}.tag{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.82rem;margin-bottom:10px}.tag.yellow{color:#f4dd96}.tag.red{color:#f1b0b0}.tag.green{color:#bee4c8}.tag.blue{color:#c7dcf7}.sub{color:var(--gold);margin:14px 0 8px}.list{line-height:1.7}.more-toggle-btn{background:transparent;border:1px solid rgba(255,255,255,.14);color:var(--text-muted);border-radius:10px;padding:8px 14px;cursor:pointer;margin-top:14px;width:100%}.more-content{display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px}.more-content.open{display:block}.strengths-grid,.compat-sections{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.strength-chip,.motiv-kw{padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);color:var(--text-muted);text-align:center}.profile-combo-note,.compat-tip,.motiv-disc-link{color:var(--text-muted);line-height:1.6;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.15);border-radius:14px;padding:12px;margin-top:12px}.motiv-card{display:flex;gap:12px}.motiv-icon{font-size:1.8rem}.motiv-name{font-weight:700}.motiv-name.cognitif{color:#7ec8e3}.motiv-name.utilitaire{color:#e8c14c}.motiv-name.esthetique{color:#d78fdb}.motiv-name.altruiste{color:#63a77a}.motiv-name.individuel{color:#cf5b5b}.motiv-name.traditionnel{color:#b8975a}.motiv-keywords{display:flex;flex-wrap:wrap;gap:5px}.motiv-scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.motiv-scale-btn,.color-pick-btn{border:1px solid rgba(212,175,55,.22);background:rgba(255,255,255,.03);color:var(--text-muted);border-radius:12px;padding:8px 4px;cursor:pointer;text-align:center}.motiv-scale-btn{display:flex;flex-direction:column}.motiv-scale-btn.picked{background:rgba(212,175,55,.14);color:var(--gold)}.motiv-result-box,.compat-result{display:none;margin-top:14px;padding:16px;border-radius:18px;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.22)}.motiv-result-box.visible,.compat-result.visible{display:block}.motiv-bar-wrap,.compat-score-bar-wrap{height:12px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}.motiv-bar-fill,.compat-score-fill{height:100%;border-radius:999px}.motiv-bar-fill.cognitif{background:#7ec8e3}.motiv-bar-fill.utilitaire{background:#e8c14c}.motiv-bar-fill.esthetique{background:#d78fdb}.motiv-bar-fill.altruiste{background:#63a77a}.motiv-bar-fill.individuel{background:#cf5b5b}.motiv-bar-fill.traditionnel{background:#b8975a}.color-picker-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.color-select-group{display:grid;grid-template-columns:1fr 1fr;gap:8px}.compat-header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.compat-badge{padding:6px 14px;border-radius:999px;font-weight:700}.compat-badge.yellow{color:var(--jaune-mid)}.compat-badge.red{color:var(--rouge-mid)}.compat-badge.green{color:var(--vert-mid)}.compat-badge.blue{color:var(--bleu-mid)}.compat-score-fill{background:linear-gradient(90deg,rgba(212,175,55,.5),var(--gold))}.result-detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px}.result-detail-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px}.result-detail-card h4{color:var(--gold);margin-bottom:10px}.result-detail-card ul{padding-left:18px;line-height:1.7;color:var(--text-muted)}@media(max-width:600px){.motiv-scale,.color-picker-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
@@ -551,7 +553,417 @@
     <button class="btn-primary" onclick="startTest()">Commencer le test</button>
     <button class="btn-secondary" id="btn-see-saved" style="display:none" onclick="showSaved()">Voir mon dernier résultat</button>
   </div>
-</div>
+<div class="landing-sections-nav"><button class="mini-nav-btn" onclick="document.getElementById('colors-info').scrollIntoView({behavior:'smooth'})">Les 4 couleurs</button><button class="mini-nav-btn" onclick="document.getElementById('motivations').scrollIntoView({behavior:'smooth'})">6 motivations</button><button class="mini-nav-btn" onclick="document.getElementById('compat').scrollIntoView({behavior:'smooth'})">Compatibilité</button></div><div class="app-sections">  <!-- LES 4 COULEURS -->
+  <section class="panel" id="colors-info">
+    <div class="section-header" onclick="toggleSection('colors-body', this)">
+      <h2>Les 4 couleurs</h2>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="colors-body">
+    <div class="color-grid">
+
+      <!-- JAUNE -->
+      <article class="color-card yellow">
+        <div class="tag yellow">Jaune — Influence / Enthousiasme</div>
+        <h3>🟡 Jaune (I — Influence)</h3>
+        <p class="muted">Spontané, chaleureux, expressif et orienté relations. Le Jaune aime les gens, les idées nouvelles et les environnements dynamiques. Il est souvent perçu comme le moteur émotionnel d'un groupe.</p>
+
+        <div class="sub">Besoins fondamentaux</div>
+        <ul class="list">
+          <li>Être reconnu et apprécié</li>
+          <li>Avoir du plaisir et de la liberté</li>
+          <li>Pouvoir s'exprimer librement</li>
+          <li>Sentir une bonne énergie dans son entourage</li>
+          <li>Éviter la routine et l'isolement</li>
+        </ul>
+
+        <div class="sub">Comment communiquer avec un Jaune</div>
+        <ul class="list">
+          <li>Sois chaleureux et enthousiaste</li>
+          <li>Va à l'essentiel sans être froid ou distant</li>
+          <li>Laisse-lui de l'espace pour parler et partager</li>
+          <li>Mets l'accent sur les possibilités et la vision</li>
+          <li>Évite les longs détails techniques en introduction</li>
+        </ul>
+
+        <button class="more-toggle-btn" onclick="toggleMore('yellow-more', this)">▼ En savoir plus sur le profil Jaune</button>
+        <div class="more-content" id="yellow-more">
+          <div class="sub">Forces clés</div>
+          <div class="strengths-grid">
+            <div class="strength-chip">Communicateur naturel</div>
+            <div class="strength-chip">Créatif & innovant</div>
+            <div class="strength-chip">Optimiste</div>
+            <div class="strength-chip">Persuasif</div>
+            <div class="strength-chip">Enthousiaste</div>
+            <div class="strength-chip">Fédérateur</div>
+          </div>
+
+          <div class="sub">Points de vigilance</div>
+          <ul class="list">
+            <li>Peut manquer de rigueur dans le suivi des tâches</li>
+            <li>Tendance à s'éparpiller ou commencer sans finir</li>
+            <li>Peut être trop émotif dans les prises de décision</li>
+            <li>Peut parler plus qu'écouter</li>
+          </ul>
+
+          <div class="sub">En contexte de travail</div>
+          <p class="muted">Le Jaune excelle dans les rôles de vente, de communication, de relation client, de coaching et d'animation. Il motive les équipes et insuffle de l'énergie dans les projets. Il a besoin de variété et de reconnaissance pour rester engagé.</p>
+
+          <div class="sub">Profils combinés fréquents</div>
+          <div class="profile-combo-note">
+            <strong>Jaune-Rouge :</strong> Très dynamique et orienté résultats avec beaucoup d'entrain. Excellent vendeur ou entrepreneur.<br><br>
+            <strong>Jaune-Vert :</strong> Chaud, empathique et social. Très à l'aise dans les rôles d'accompagnement et de service aux personnes.
+          </div>
+        </div>
+      </article>
+
+      <!-- ROUGE -->
+      <article class="color-card red">
+        <div class="tag red">Rouge — Dominance / Action</div>
+        <h3>🔴 Rouge (D — Dominance)</h3>
+        <p class="muted">Direct, déterminé, compétitif et orienté résultats. Le Rouge prend des décisions rapidement et aime relever des défis. Il est souvent perçu comme un leader naturel, parfois perçu comme trop brusque par les profils plus doux.</p>
+
+        <div class="sub">Besoins fondamentaux</div>
+        <ul class="list">
+          <li>Avoir du contrôle sur les décisions</li>
+          <li>Avancer vite et efficacement</li>
+          <li>Obtenir des résultats concrets et mesurables</li>
+          <li>Relever des défis stimulants</li>
+          <li>Être vu comme compétent et efficace</li>
+        </ul>
+
+        <div class="sub">Comment communiquer avec un Rouge</div>
+        <ul class="list">
+          <li>Sois clair, direct et concis</li>
+          <li>Présente des options concrètes avec des délais</li>
+          <li>Évite de tourner autour du pot</li>
+          <li>Parle en termes de résultats et d'impacts</li>
+          <li>Respecte son temps — va droit au but</li>
+        </ul>
+
+        <button class="more-toggle-btn" onclick="toggleMore('red-more', this)">▼ En savoir plus sur le profil Rouge</button>
+        <div class="more-content" id="red-more">
+          <div class="sub">Forces clés</div>
+          <div class="strengths-grid">
+            <div class="strength-chip">Leadership naturel</div>
+            <div class="strength-chip">Décisif</div>
+            <div class="strength-chip">Orienté objectifs</div>
+            <div class="strength-chip">Courageux</div>
+            <div class="strength-chip">Efficace</div>
+            <div class="strength-chip">Ambitieux</div>
+          </div>
+
+          <div class="sub">Points de vigilance</div>
+          <ul class="list">
+            <li>Peut paraître impatient, autoritaire ou brusque</li>
+            <li>Tendance à négliger les émotions des autres</li>
+            <li>Risque de prendre des décisions trop vite sans assez d'information</li>
+            <li>Peut intimider sans le vouloir</li>
+          </ul>
+
+          <div class="sub">En contexte de travail</div>
+          <p class="muted">Le Rouge excelle dans les rôles de gestion, de direction, de vente compétitive, d'entrepreneuriat et de négociation. Il a besoin d'autonomie, de défis et de reconnaissances concrètes (résultats, promotions, responsabilités).</p>
+
+          <div class="sub">Profils combinés fréquents</div>
+          <div class="profile-combo-note">
+            <strong>Rouge-Bleu :</strong> Combine ambition et rigueur. Excellent gestionnaire de projet, stratège ou dirigeant technique.<br><br>
+            <strong>Rouge-Jaune :</strong> Très charismatique et persuasif. Profil entrepreneurial fort, souvent en vente ou en leadership.
+          </div>
+        </div>
+      </article>
+
+      <!-- VERT -->
+      <article class="color-card green">
+        <div class="tag green">Vert — Stabilité / Harmonie</div>
+        <h3>🟢 Vert (S — Stabilité)</h3>
+        <p class="muted">Patient, loyal, empathique et orienté harmonie. Le Vert est le pilier discret mais indispensable d'une équipe. Il favorise la collaboration, la confiance et la continuité plutôt que le changement rapide.</p>
+
+        <div class="sub">Besoins fondamentaux</div>
+        <ul class="list">
+          <li>Se sentir en sécurité et en confiance</li>
+          <li>Avoir de la stabilité et une routine claire</li>
+          <li>Entretenir des relations harmonieuses</li>
+          <li>Avoir du temps pour s'adapter aux changements</li>
+          <li>Sentir qu'il contribue concrètement</li>
+        </ul>
+
+        <div class="sub">Comment communiquer avec un Vert</div>
+        <ul class="list">
+          <li>Sois calme, patient et respectueux</li>
+          <li>Évite la pression agressive ou les ultimatums</li>
+          <li>Explique les changements à l'avance et doucement</li>
+          <li>Mets l'accent sur la collaboration et le soutien mutuel</li>
+          <li>Valorise sa fiabilité et sa contribution</li>
+        </ul>
+
+        <button class="more-toggle-btn" onclick="toggleMore('green-more', this)">▼ En savoir plus sur le profil Vert</button>
+        <div class="more-content" id="green-more">
+          <div class="sub">Forces clés</div>
+          <div class="strengths-grid">
+            <div class="strength-chip">Loyal & fiable</div>
+            <div class="strength-chip">Bon écoutant</div>
+            <div class="strength-chip">Patient</div>
+            <div class="strength-chip">Collaboratif</div>
+            <div class="strength-chip">Empathique</div>
+            <div class="strength-chip">Stable sous pression</div>
+          </div>
+
+          <div class="sub">Points de vigilance</div>
+          <ul class="list">
+            <li>Peut avoir du mal à dire non ou à confronter</li>
+            <li>Résiste aux changements brusques</li>
+            <li>Tendance à mettre les besoins des autres avant les siens</li>
+            <li>Peut sembler passif ou indécis</li>
+          </ul>
+
+          <div class="sub">En contexte de travail</div>
+          <p class="muted">Le Vert excelle dans les rôles de soutien, de coordination, de ressources humaines, de service à la clientèle, d'enseignement et de soins. Il est le "ciment" des équipes — il maintient la cohésion dans le temps.</p>
+
+          <div class="sub">Profils combinés fréquents</div>
+          <div class="profile-combo-note">
+            <strong>Vert-Bleu :</strong> Méthodique, fiable et organisé. Excellent dans les rôles qui demandent précision ET bonne relation avec les gens.<br><br>
+            <strong>Vert-Jaune :</strong> Très chaleureux et social. Profil idéal pour le coaching, l'accompagnement ou les services aux personnes.
+          </div>
+        </div>
+      </article>
+
+      <!-- BLEU -->
+      <article class="color-card blue">
+        <div class="tag blue">Bleu — Précision / Qualité</div>
+        <h3>🔵 Bleu (C — Conformité)</h3>
+        <p class="muted">Analytique, rigoureux, structuré et orienté qualité. Le Bleu prend le temps de comprendre avant d'agir. Il cherche l'exactitude, la logique et la cohérence dans tout ce qu'il fait.</p>
+
+        <div class="sub">Besoins fondamentaux</div>
+        <ul class="list">
+          <li>Avoir accès à des informations complètes et fiables</li>
+          <li>Comprendre le pourquoi avant d'agir</li>
+          <li>Travailler dans un cadre clair et logique</li>
+          <li>Éviter les erreurs et maintenir une qualité élevée</li>
+          <li>Être reconnu pour son expertise</li>
+        </ul>
+
+        <div class="sub">Comment communiquer avec un Bleu</div>
+        <ul class="list">
+          <li>Sois précis, structuré et factuel</li>
+          <li>Donne des données, des exemples et de la logique</li>
+          <li>Évite les vagues et les improvisations</li>
+          <li>Donne-lui le temps de réfléchir avant de décider</li>
+          <li>Respecte ses standards de qualité</li>
+        </ul>
+
+        <button class="more-toggle-btn" onclick="toggleMore('blue-more', this)">▼ En savoir plus sur le profil Bleu</button>
+        <div class="more-content" id="blue-more">
+          <div class="sub">Forces clés</div>
+          <div class="strengths-grid">
+            <div class="strength-chip">Analytique</div>
+            <div class="strength-chip">Rigoureux</div>
+            <div class="strength-chip">Organisé</div>
+            <div class="strength-chip">Orienté qualité</div>
+            <div class="strength-chip">Systématique</div>
+            <div class="strength-chip">Expert dans son domaine</div>
+          </div>
+
+          <div class="sub">Points de vigilance</div>
+          <ul class="list">
+            <li>Peut être paralysé par l'excès d'analyse</li>
+            <li>Tendance au perfectionnisme qui freine l'action</li>
+            <li>Peut paraître froid ou distant émotionnellement</li>
+            <li>Difficulté à déléguer par peur de l'erreur</li>
+          </ul>
+
+          <div class="sub">En contexte de travail</div>
+          <p class="muted">Le Bleu excelle dans les rôles techniques, d'analyse, de finance, de qualité, d'ingénierie, de recherche ou de conformité. Il produit un travail de haute qualité et est souvent l'expert incontournable de son équipe.</p>
+
+          <div class="sub">Profils combinés fréquents</div>
+          <div class="profile-combo-note">
+            <strong>Bleu-Rouge :</strong> Stratège redoutable — combine ambition et rigueur. Profil de directeur technique ou de gestionnaire orienté performance.<br><br>
+            <strong>Bleu-Vert :</strong> Prudent, fiable et très consciencieux. Excellent dans les rôles d'expert-conseil ou de spécialiste de haut niveau.
+          </div>
+        </div>
+      </article>
+
+    </div>
+    </div><!-- end section-body -->
+  </section>
+
+  <!-- MOTIVATIONS / FORCES MOTRICES -->
+  <section class="panel" id="motivations">
+    <div class="section-header" onclick="toggleSection('motivations-body', this)">
+      <h2>Les 6 Motivations (Forces motrices de Spranger)</h2>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="motivations-body">
+    <p class="intro">
+      Complémentaires au DISC, les 6 motivations expliquent le <strong style="color:var(--accent)">pourquoi</strong> de nos comportements — les moteurs profonds qui guident nos décisions et nos priorités. Le DISC montre <em>comment</em> tu te comportes ; les motivations révèlent <em>pourquoi</em> tu fais ce que tu fais. Chaque personne a 1 à 3 motivations dominantes à haute intensité.
+    </p>
+
+    <div class="motiv-intro-grid">
+      <div class="motiv-card">
+        <div class="motiv-icon">🔍</div>
+        <div class="motiv-body">
+          <div class="motiv-name cognitif">Cognitive (Théorique)</div>
+          <p class="motiv-desc">Motivé par la recherche de la vérité, l'apprentissage continu, l'analyse et la compréhension profonde des choses. Veut comprendre <em>comment</em> et <em>pourquoi</em> les choses fonctionnent.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Savoir</span><span class="motiv-kw">Apprendre</span><span class="motiv-kw">Analyser</span><span class="motiv-kw">Comprendre</span><span class="motiv-kw">Recherche</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">⚡</div>
+        <div class="motiv-body">
+          <div class="motiv-name utilitaire">Utilitaire (Économique)</div>
+          <p class="motiv-desc">Motivé par le retour sur investissement, l'efficacité et les résultats pratiques. Chaque action doit avoir une valeur concrète et mesurable. Cherche à maximiser le ROI de son temps et son énergie.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Efficacité</span><span class="motiv-kw">ROI</span><span class="motiv-kw">Pragmatisme</span><span class="motiv-kw">Résultats</span><span class="motiv-kw">Gains concrets</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">🎨</div>
+        <div class="motiv-body">
+          <div class="motiv-name esthetique">Esthétique</div>
+          <p class="motiv-desc">Motivé par l'harmonie, la beauté, la créativité et l'expérience sensorielle. Accorde beaucoup d'importance au sens des choses, à l'équilibre et à la forme autant qu'au fond.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Harmonie</span><span class="motiv-kw">Beauté</span><span class="motiv-kw">Créativité</span><span class="motiv-kw">Sens</span><span class="motiv-kw">Équilibre</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">🤝</div>
+        <div class="motiv-body">
+          <div class="motiv-name altruiste">Altruiste (Sociale)</div>
+          <p class="motiv-desc">Motivé par l'entraide, le dévouement et le bien-être des autres. Trouve sa satisfaction dans le fait d'aider, de soutenir et de contribuer positivement à la vie des personnes autour de lui.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Aider</span><span class="motiv-kw">Bienveillance</span><span class="motiv-kw">Dévouement</span><span class="motiv-kw">Soutien</span><span class="motiv-kw">Collectif</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">👑</div>
+        <div class="motiv-body">
+          <div class="motiv-name individuel">Individuelle (Pouvoir)</div>
+          <p class="motiv-desc">Motivé par la prise de responsabilité, l'influence, le leadership et l'affirmation de soi. Veut avoir un impact, laisser une marque et exercer une influence sur les décisions et les gens.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Leadership</span><span class="motiv-kw">Influence</span><span class="motiv-kw">Pouvoir</span><span class="motiv-kw">Autonomie</span><span class="motiv-kw">Impact</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motiv-card">
+        <div class="motiv-icon">⚖️</div>
+        <div class="motiv-body">
+          <div class="motiv-name traditionnel">Traditionnelle (Ordre)</div>
+          <p class="motiv-desc">Motivé par des principes de vie forts, des valeurs rigoureuses et une recherche d'ordre ou de sens profond. S'appuie sur des repères solides — éthique, foi, traditions, règles — pour orienter ses décisions.</p>
+          <div class="motiv-keywords">
+            <span class="motiv-kw">Ordre</span><span class="motiv-kw">Valeurs</span><span class="motiv-kw">Principes</span><span class="motiv-kw">Sens</span><span class="motiv-kw">Structure</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:4px;">Découvre tes motivations dominantes</h2>
+    <p class="intro">Pour chaque affirmation, indique à quel point elle te ressemble : 1 = Pas du tout moi → 5 = C'est exactement moi.</p>
+
+    <div id="motivQuizContainer"></div>
+
+    <button class="btn btn-accent" onclick="calculateMotivations()" style="margin-top:8px;">
+      Voir mes motivations dominantes
+    </button>
+
+    <div class="motiv-result-box" id="motivResultBox">
+      <div class="result-title">Ton profil de motivations</div>
+
+      <div class="motiv-result-list" id="motivResultList"></div>
+
+      <div class="result-title" style="margin-top:16px; font-size:1rem;">Tes 2 motivations dominantes</div>
+      <div class="motiv-dominant-cards" id="motivDominantCards"></div>
+
+      <div class="compat-tip" style="margin-top:14px;" id="motivDiscLink"></div>
+
+      <div style="margin-top:14px;">
+        <button class="btn" onclick="resetMotivations()">🔄 Recommencer</button>
+      </div>
+    </div>
+    </div><!-- end section-body -->
+  </section>
+
+  <!-- COMPATIBILITÉ -->
+  <section class="panel" id="compat">
+    <div class="section-header" onclick="toggleSection('compat-body', this)">
+      <h2>Compatibilité entre couleurs</h2>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="compat-body">
+    <p class="intro">
+      Choisis ta couleur dominante et celle d'une autre personne (collègue, partenaire, ami) pour voir ce qui vous unit, ce qui peut créer de la friction, et comment mieux communiquer ensemble.
+    </p>
+
+    <div class="color-picker-grid">
+      <div class="picker-block">
+        <label>🙋 Ma couleur</label>
+        <div class="color-select-group">
+          <button class="color-pick-btn" data-picker="me" data-color="yellow" onclick="pickColor('me','yellow',this)">🟡 Jaune</button>
+          <button class="color-pick-btn" data-picker="me" data-color="red"    onclick="pickColor('me','red',this)">🔴 Rouge</button>
+          <button class="color-pick-btn" data-picker="me" data-color="green"  onclick="pickColor('me','green',this)">🟢 Vert</button>
+          <button class="color-pick-btn" data-picker="me" data-color="blue"   onclick="pickColor('me','blue',this)">🔵 Bleu</button>
+        </div>
+      </div>
+      <div class="picker-block">
+        <label>🧑 L'autre personne</label>
+        <div class="color-select-group">
+          <button class="color-pick-btn" data-picker="other" data-color="yellow" onclick="pickColor('other','yellow',this)">🟡 Jaune</button>
+          <button class="color-pick-btn" data-picker="other" data-color="red"    onclick="pickColor('other','red',this)">🔴 Rouge</button>
+          <button class="color-pick-btn" data-picker="other" data-color="green"  onclick="pickColor('other','green',this)">🟢 Vert</button>
+          <button class="color-pick-btn" data-picker="other" data-color="blue"   onclick="pickColor('other','blue',this)">🔵 Bleu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="compat-result" id="compatResult">
+      <div class="compat-header">
+        <span class="compat-badge" id="compatBadgeMe"></span>
+        <span class="compat-arrow">⇄</span>
+        <span class="compat-badge" id="compatBadgeOther"></span>
+        <span style="color:var(--muted); font-size:0.92rem;" id="compatTitle"></span>
+      </div>
+
+      <div class="compat-score-wrap">
+        <div class="compat-score-label">Indice de compatibilité naturelle</div>
+        <div class="compat-score-bar-wrap">
+          <div class="compat-score-fill" id="compatScoreFill"></div>
+        </div>
+        <div class="compat-score-val" id="compatScoreVal"></div>
+      </div>
+
+      <div class="compat-sections">
+        <div class="compat-section">
+          <div class="compat-section-title fit">✅ Ce qui fonctionne bien</div>
+          <ul id="compatFit"></ul>
+        </div>
+        <div class="compat-section">
+          <div class="compat-section-title challenge">⚡ Les défis potentiels</div>
+          <ul id="compatChallenge"></ul>
+        </div>
+        <div class="compat-section">
+          <div class="compat-section-title comm">💬 Comment mieux communiquer</div>
+          <ul id="compatComm"></ul>
+        </div>
+        <div class="compat-section">
+          <div class="compat-section-title motiv">🎯 Motivations respectives</div>
+          <ul id="compatMotiv"></ul>
+        </div>
+      </div>
+
+      <div class="compat-tip" id="compatTip"></div>
+    </div>
+    </div><!-- end section-body -->
+  </section>
+
+  <!-- QUIZ --></div></div>
 
 <!-- CONTEXT -->
 <div id="page-context" class="page">
@@ -608,6 +1020,7 @@
     <div class="archetype-name" id="arch-name"></div>
     <div class="archetype-desc" id="arch-desc"></div>
   </div>
+<div class="result-detail-grid" id="result-detail-grid"></div>
 
   <div class="correlation-card" id="correlation-card" style="display:none">
     <h3>🔗 Corrélation DISC × Motivations</h3>
@@ -1383,6 +1796,10 @@ function computeResults() {
   document.getElementById('arch-name').textContent = arch.name;
   document.getElementById('arch-desc').textContent = arch.desc;
   document.getElementById('stress-text').textContent = arch.stress;
+  const COLOR_DETAILS={rouge:{points:['Décisions rapides et orientation résultats','Capacité à trancher quand ça bloque','Goût du défi'],watch:['Peut sembler brusque','Gagne à ralentir pour embarquer les autres']},jaune:{points:['Énergie, idées et influence positive','Facilité à créer des liens','Capacité à rendre un projet vivant'],watch:['Peut perdre le fil','Gagne à structurer ses priorités']},vert:{points:['Stabilité, loyauté et cohésion','Écoute et climat de confiance','Capacité à soutenir dans la durée'],watch:['Peut éviter les confrontations','Gagne à dire ses limites']},bleu:{points:['Rigueur et standards élevés','Analyse logique avant l’action','Prévention des erreurs'],watch:['Peut tomber dans la suranalyse','Gagne à décider avec information imparfaite']}};
+  const dd=COLOR_DETAILS[dom], sd=COLOR_DETAILS[sec];
+  document.getElementById('result-detail-grid').innerHTML=`<div class="result-detail-card"><h4>🎯 Dominante : ${colorNames[dom]}</h4><ul>${dd.points.map(p=>`<li>${p}</li>`).join('')}</ul></div><div class="result-detail-card"><h4>🧩 Secondaire : ${colorNames[sec]}</h4><ul>${sd.points.map(p=>`<li>${p}</li>`).join('')}</ul></div><div class="result-detail-card"><h4>⚠️ Points de vigilance</h4><ul>${[...dd.watch,...sd.watch].map(p=>`<li>${p}</li>`).join('')}</ul></div><div class="result-detail-card"><h4>💬 Pour mieux travailler avec toi</h4><ul><li>Donner un contexte clair.</li><li>Respecter ta dominante et ton secondaire.</li><li>Éviter les messages vagues.</li></ul></div>`;
+
 
   // Dual profile from localStorage
   const savedTravail = JSON.parse(localStorage.getItem('disc_travail') || 'null');
@@ -1500,6 +1917,345 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSavedNotice();
   showPage('page-landing');
 });
+function toggleMore(id,btn){const el=document.getElementById(id);if(!el)return;const open=el.classList.contains('open');el.classList.toggle('open',!open);btn.textContent=open?'▼ En savoir plus':'▲ Réduire';}
+// ===== COMPATIBILITÉ =====
+const colorLabels = {
+  yellow: { emoji: "🟡", name: "Jaune" },
+  red:    { emoji: "🔴", name: "Rouge" },
+  green:  { emoji: "🟢", name: "Vert" },
+  blue:   { emoji: "🔵", name: "Bleu" },
+};
+
+const colorMotivations = {
+  yellow: ["Être reconnu et apprécié", "S'amuser et créer", "Partager des idées nouvelles", "Avoir de la liberté et de la variété"],
+  red:    ["Relever des défis difficiles", "Atteindre des résultats concrets", "Avoir du contrôle et de l'autonomie", "Avancer vite et être efficace"],
+  green:  ["Maintenir l'harmonie du groupe", "Sentir qu'il contribue vraiment", "Avoir des relations stables et de confiance", "Travailler dans un environnement calme"],
+  blue:   ["Produire un travail de haute qualité", "Comprendre en profondeur avant d'agir", "Respecter et faire respecter les standards", "Éviter les erreurs et l'improvisation"],
+};
+
+const compatData = {
+  "yellow-yellow": {
+    score: 80,
+    title: "Duo Enthousiaste",
+    fit: ["Énergie et enthousiasme partagés", "Facilité à créer une ambiance positive", "Brainstorming créatif et spontané", "Plaisir et humour naturels"],
+    challenge: ["Risque de manquer de suivi et d'exécution", "Peut tourner en rond dans les idées sans décider", "Difficulté à rester focalisé sur les priorités", "Aucun des deux ne prendra naturellement le rôle d'organisateur"],
+    comm: ["Mettez des actions concrètes derrière vos idées", "Désignez quelqu'un pour assurer le suivi", "Gardez des moments de focus sans distraction", "Célébrez les victoires pour maintenir la motivation"],
+    tip: "<strong>Conseil :</strong> Vous vous entendrez très bien naturellement, mais attention à transformer l'énergie en résultats concrets. Associez-vous à un profil Bleu ou Rouge pour l'exécution."
+  },
+  "yellow-red": {
+    score: 72,
+    title: "L'Équipe Feu",
+    fit: ["Énergie et dynamisme complémentaires", "Le Jaune motive, le Rouge exécute", "Bonne capacité à embarquer les autres", "Duo efficace en vente et leadership"],
+    challenge: ["Le Rouge peut trouver le Jaune trop dispersé", "Le Jaune peut trouver le Rouge trop brusque", "Le Rouge veut des résultats ; le Jaune veut du plaisir", "Risque de compétition pour l'attention"],
+    comm: ["Jaune : va plus à l'essentiel avec le Rouge, sois concis", "Rouge : laisse de la place à l'expression du Jaune", "Partagez vos objectifs clairement dès le départ", "Le Rouge prend les décisions, le Jaune gère les relations"],
+    tip: "<strong>Conseil :</strong> Excellente combinaison en vente et en leadership. Le Rouge donne la direction, le Jaune crée l'adhésion. Évitez les guerres d'ego."
+  },
+  "yellow-green": {
+    score: 85,
+    title: "La Chaleur Humaine",
+    fit: ["Les deux sont orientés personnes et relations", "Le Jaune anime, le Vert stabilise", "Excellente complicité naturelle", "Bonne écoute et communication fluide"],
+    challenge: ["Risque d'éviter les décisions difficiles", "Peut manquer d'orientation résultats", "Le Jaune peut bousculer le Vert avec son rythme", "Le Vert peut freiner l'enthousiasme du Jaune"],
+    comm: ["Jaune : ralentis parfois pour laisser le Vert s'adapter", "Vert : exprime ton inconfort au lieu de subir", "Partagez régulièrement sur votre bien-être respectif", "Célébrez les relations et les petites victoires ensemble"],
+    tip: "<strong>Conseil :</strong> Duo très harmonieux et chaleureux. Pour performer, associez-vous à un Rouge ou Bleu pour la rigueur et les résultats."
+  },
+  "yellow-blue": {
+    score: 55,
+    title: "L'Opposé Complémentaire",
+    fit: ["Le Bleu structure les idées du Jaune", "Le Jaune sort le Bleu de ses angles morts créatifs", "Complémentarité fort si les rôles sont clairs", "Le Bleu apporte la rigueur, le Jaune l'énergie"],
+    challenge: ["Le Bleu trouve le Jaune trop impulsif et désorganisé", "Le Jaune trouve le Bleu trop lent, froid et rigide", "Rythmes très différents — l'un fonce, l'autre analyse", "La communication peut sembler froide vs trop émotive"],
+    comm: ["Jaune : donne des données concrètes au Bleu, pas juste des idées", "Bleu : montre de l'enthousiasme pour les idées du Jaune avant de les critiquer", "Établissez un processus clair : idées du Jaune → validation du Bleu", "Respectez les rythmes de décision de chacun"],
+    tip: "<strong>Conseil :</strong> Duo qui peut être très puissant si vous comprenez vos différences. Le Jaune apporte l'élan, le Bleu apporte la solidité. Évitez de vous juger mutuellement."
+  },
+  "red-red": {
+    score: 60,
+    title: "Deux Locomotives",
+    fit: ["Rythme rapide et efficace partagé", "Les deux veulent des résultats — pas de perte de temps", "Décisions rapides et orientation action", "Haute performance quand les objectifs sont alignés"],
+    challenge: ["Forte tendance aux conflits de pouvoir", "Aucun ne veut céder — risque d'impasse", "Peu d'espace pour les émotions ou les nuances", "Peut manquer de soutien humain dans l'équipe"],
+    comm: ["Définissez clairement les zones de responsabilité de chacun", "Évitez les batailles d'ego — focalisez sur l'objectif commun", "Apprenez à écouter avant de répondre", "Accordez-vous des temps de discussion structurés"],
+    tip: "<strong>Conseil :</strong> Duo très efficace si vous clarifiez les rôles. Sinon, risque de clash constant. L'un doit accepter de suivre l'autre sur certains sujets."
+  },
+  "red-green": {
+    score: 65,
+    title: "La Force et la Douceur",
+    fit: ["Le Rouge pousse à performer, le Vert maintient l'harmonie", "Bon équilibre entre résultats et bien-être d'équipe", "Le Vert calme les élans trop agressifs du Rouge", "Complémentarité forte en gestion"],
+    challenge: ["Le Rouge peut blesser le Vert avec sa franchise", "Le Vert peut sembler trop lent ou passif au Rouge", "Le Rouge veut décider vite ; le Vert veut consulter", "Le Vert évite les conflits que le Rouge trouve nécessaires"],
+    comm: ["Rouge : adoucis ta façon de donner du feedback au Vert", "Vert : ose exprimer ton désaccord clairement plutôt que de subir", "Donnez-vous des temps de discussion avant de décider", "Le Rouge prend la décision finale, le Vert veille au bien-être de l'équipe"],
+    tip: "<strong>Conseil :</strong> Duo complémentaire en leadership. Le Rouge donne la direction, le Vert s'assure que personne n'est laissé pour compte. Respectez-vous mutuellement."
+  },
+  "red-blue": {
+    score: 68,
+    title: "L'Ambitieux et le Stratège",
+    fit: ["Le Rouge agit, le Bleu structure — tandem puissant", "Haut niveau d'exigence partagé", "Excellent pour les projets complexes à fort enjeu", "Le Bleu évite les erreurs du Rouge impulsif"],
+    challenge: ["Le Rouge trouve le Bleu trop lent et trop prudent", "Le Bleu trouve le Rouge trop impulsif et risqué", "Tension entre vitesse d'action et rigueur d'analyse", "Peu d'espace pour les émotions et la relation humaine"],
+    comm: ["Rouge : donne au Bleu le temps d'analyser avant de décider", "Bleu : présente tes analyses de façon concise et orientée résultats", "Établissez des délais clairs pour les décisions", "Respectez mutuellement votre niveau d'exigence élevé"],
+    tip: "<strong>Conseil :</strong> Duo redoutable en affaires quand les rôles sont clairs. Le Rouge prend les décisions audacieuses, le Bleu les solides. Apprenez à vous faire confiance."
+  },
+  "green-green": {
+    score: 88,
+    title: "L'Harmonie Parfaite",
+    fit: ["Très bonne entente naturelle et peu de conflits", "Écoute mutuelle et respect des besoins", "Environnement de travail calme et stable", "Loyauté et fiabilité partagées"],
+    challenge: ["Peut éviter les décisions difficiles ou les confrontations", "Risque de manquer d'ambition ou de prise de risque", "Tendance à maintenir le statu quo même quand il faut changer", "Peu de dynamisme pour se dépasser ou innover"],
+    comm: ["Osez exprimer vos désaccords — l'harmonie ne signifie pas l'accord total", "Planifiez des moments de prise de décision structurés", "Cherchez des alliés Rouges ou Jaunes pour vous pousser à avancer", "Célébrez votre fiabilité — c'est une force rare"],
+    tip: "<strong>Conseil :</strong> Excellente relation humaine, mais veillez à ne pas vous installer dans un confort qui freine la croissance. Challengez-vous mutuellement avec bienveillance."
+  },
+  "green-blue": {
+    score: 75,
+    title: "La Précision Bienveillante",
+    fit: ["Les deux sont calmes, posés et réfléchis", "Respect mutuel des processus et des délais", "Bonne qualité de travail partagée", "Peu de conflits — les deux évitent les confrontations inutiles"],
+    challenge: ["Risque de paralysie — aucun ne pousse à avancer vite", "Manque d'énergie et d'enthousiasme dans la dynamique", "Le Bleu peut être perçu comme froid par le Vert", "Le Vert peut sembler trop flou pour le Bleu analytique"],
+    comm: ["Vert : sois plus direct dans tes attentes avec le Bleu", "Bleu : montre de l'empathie et reconnais la contribution humaine du Vert", "Définissez ensemble des objectifs clairs avec des délais", "Associez-vous à un Rouge ou Jaune pour l'élan"],
+    tip: "<strong>Conseil :</strong> Duo fiable et de qualité. Pour maximiser votre potentiel, cherchez des contextes où la rigueur et la bienveillance sont des atouts — RH, qualité, service client."
+  },
+  "blue-blue": {
+    score: 70,
+    title: "Les Deux Analystes",
+    fit: ["Haut niveau de rigueur et de qualité partagé", "Respect mutuel des processus et des détails", "Très peu d'erreurs et grande fiabilité", "Communication précise et factuelle"],
+    challenge: ["Risque de sur-analyse et d'inaction", "Manque d'élan et de dynamisme dans la relation", "Peut être difficile de décider sans données parfaites", "Peu d'espace pour la créativité et l'improvisation"],
+    comm: ["Établissez des délais fermes pour sortir de l'analyse", "Définissez qui a le dernier mot pour éviter les blocages", "Reconnaissez les efforts de l'autre — le Bleu a besoin de validation", "Associez-vous à un Rouge ou Jaune pour les phases d'action"],
+    tip: "<strong>Conseil :</strong> Duo d'une grande rigueur. Le risque est la paralysie par l'analyse. Forcez-vous à des décisions imparfaites — le perfectionnisme peut être l'ennemi du progrès."
+  },
+};
+
+// Génère la clé symétrique
+function getCompatKey(a, b) {
+  const key = `${a}-${b}`;
+  const keyRev = `${b}-${a}`;
+  return compatData[key] ? key : (compatData[keyRev] ? keyRev : null);
+}
+
+let pickedMe = null;
+let pickedOther = null;
+
+function pickColor(picker, color, btn) {
+  // Deselect old button for this picker
+  document.querySelectorAll(`[data-picker="${picker}"]`).forEach(b => {
+    b.className = "color-pick-btn";
+  });
+  btn.classList.add(`selected-${color}`);
+
+  if (picker === "me") pickedMe = color;
+  else pickedOther = color;
+
+  if (pickedMe && pickedOther) renderCompat();
+}
+
+function renderCompat() {
+  const key = getCompatKey(pickedMe, pickedOther);
+  const data = compatData[key] || null;
+
+  const result = document.getElementById("compatResult");
+
+  const meLabel    = colorLabels[pickedMe];
+  const otherLabel = colorLabels[pickedOther];
+
+  document.getElementById("compatBadgeMe").textContent    = `${meLabel.emoji} ${meLabel.name}`;
+  document.getElementById("compatBadgeMe").className      = `compat-badge ${pickedMe}`;
+  document.getElementById("compatBadgeOther").textContent = `${otherLabel.emoji} ${otherLabel.name}`;
+  document.getElementById("compatBadgeOther").className   = `compat-badge ${pickedOther}`;
+
+  if (!data) {
+    result.classList.add("visible");
+    document.getElementById("compatTitle").textContent = "Combinaison";
+    document.getElementById("compatScoreFill").style.width = "60%";
+    document.getElementById("compatScoreVal").textContent = "60% — Complémentaire";
+    document.getElementById("compatFit").innerHTML = "<li>Des complémentarités sont toujours possibles</li>";
+    document.getElementById("compatChallenge").innerHTML = "<li>Des ajustements de communication seront nécessaires</li>";
+    document.getElementById("compatComm").innerHTML = "<li>Prenez le temps de vous connaître mutuellement</li>";
+    document.getElementById("compatMotiv").innerHTML = `
+      <li><strong>${meLabel.name} :</strong> ${colorMotivations[pickedMe].join(", ")}</li>
+      <li><strong>${otherLabel.name} :</strong> ${colorMotivations[pickedOther].join(", ")}</li>
+    `;
+    document.getElementById("compatTip").innerHTML = "<strong>Conseil :</strong> Explorez vos différences avec curiosité plutôt qu'avec jugement.";
+    return;
+  }
+
+  document.getElementById("compatTitle").textContent = `— ${data.title}`;
+  document.getElementById("compatScoreFill").style.width = `${data.score}%`;
+  document.getElementById("compatScoreVal").textContent  = `${data.score}% — ${data.score >= 80 ? "Très bonne compatibilité naturelle" : data.score >= 65 ? "Bonne compatibilité avec quelques ajustements" : "Complémentaire — demande des efforts de compréhension"}`;
+
+  document.getElementById("compatFit").innerHTML      = data.fit.map(t => `<li>${t}</li>`).join("");
+  document.getElementById("compatChallenge").innerHTML = data.challenge.map(t => `<li>${t}</li>`).join("");
+  document.getElementById("compatComm").innerHTML     = data.comm.map(t => `<li>${t}</li>`).join("");
+
+  // Motivations — toujours affiche les deux couleurs
+  const motivMe    = colorMotivations[pickedMe].map(m => `<li><strong>${meLabel.emoji} ${meLabel.name} :</strong> ${m}</li>`).join("");
+  const motivOther = colorMotivations[pickedOther].map(m => `<li><strong>${otherLabel.emoji} ${otherLabel.name} :</strong> ${m}</li>`).join("");
+  document.getElementById("compatMotiv").innerHTML = motivMe + motivOther;
+
+  document.getElementById("compatTip").innerHTML = data.tip;
+
+  result.classList.add("visible");
+  result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+// ===== MOTIVATIONS DE SPRANGER =====
+const motivQuestions = [
+  { id:"m1",  motiv:"cognitif",     text:"J'aime comprendre comment les choses fonctionnent en profondeur, même si ça n'a pas d'utilité immédiate." },
+  { id:"m2",  motiv:"cognitif",     text:"Je lis, me forme ou cherche à apprendre régulièrement, par pur plaisir intellectuel." },
+  { id:"m3",  motiv:"cognitif",     text:"Avant d'agir, je veux comprendre le pourquoi et le comment, pas juste suivre une méthode." },
+  { id:"m4",  motiv:"cognitif",     text:"Les débats d'idées, les analyses et les questions complexes m'attirent naturellement." },
+  { id:"m5",  motiv:"utilitaire",   text:"Je mesure la valeur d'une action à son retour concret — temps, argent, résultats." },
+  { id:"m6",  motiv:"utilitaire",   text:"Je n'aime pas les réunions, formations ou projets qui ne mènent nulle part concrètement." },
+  { id:"m7",  motiv:"utilitaire",   text:"Être efficace et productif est quelque chose qui me motive profondément au quotidien." },
+  { id:"m8",  motiv:"utilitaire",   text:"Je recherche toujours le chemin le plus court et le plus rentable pour atteindre un objectif." },
+  { id:"m9",  motiv:"esthetique",   text:"L'harmonie dans mon environnement (visuel, sonore, relationnel) est importante pour mon bien-être." },
+  { id:"m10", motiv:"esthetique",   text:"Je suis sensible à la beauté, au design et à la façon dont les choses sont présentées." },
+  { id:"m11", motiv:"esthetique",   text:"J'aime que les choses aient un sens profond, une esthétique ou une forme soignée." },
+  { id:"m12", motiv:"esthetique",   text:"La créativité, l'expression artistique ou l'expérience sensorielle m'inspirent naturellement." },
+  { id:"m13", motiv:"altruiste",    text:"Aider les autres me procure une satisfaction profonde — parfois plus que mes propres succès." },
+  { id:"m14", motiv:"altruiste",    text:"Le bien-être de mon entourage (collègues, famille, communauté) compte énormément pour moi." },
+  { id:"m15", motiv:"altruiste",    text:"Je suis prêt à investir du temps et de l'énergie pour soutenir quelqu'un, même sans contrepartie." },
+  { id:"m16", motiv:"altruiste",    text:"Je me sens motivé à contribuer à quelque chose de plus grand que moi — une cause, une équipe, une mission." },
+  { id:"m17", motiv:"individuel",   text:"J'aime avoir de l'influence sur les décisions et les gens autour de moi." },
+  { id:"m18", motiv:"individuel",   text:"Prendre des responsabilités et occuper une position de leadership m'attire naturellement." },
+  { id:"m19", motiv:"individuel",   text:"Je veux laisser une marque — que mon passage ait un impact durable sur mon milieu." },
+  { id:"m20", motiv:"individuel",   text:"Mon autonomie et ma capacité à décider par moi-même sont des conditions essentielles à ma motivation." },
+  { id:"m21", motiv:"traditionnel", text:"Des valeurs fortes et des principes clairs guident la plupart de mes décisions de vie." },
+  { id:"m22", motiv:"traditionnel", text:"J'ai besoin d'un cadre, de règles ou d'une structure solide pour me sentir bien dans un environnement." },
+  { id:"m23", motiv:"traditionnel", text:"La cohérence entre mes valeurs et mes actions est quelque chose de fondamental pour moi." },
+  { id:"m24", motiv:"traditionnel", text:"Je m'appuie sur des repères stables — traditions, éthique, foi ou convictions profondes — pour avancer." },
+];
+
+const motivMeta = {
+  cognitif:     { label: "Cognitive",      icon: "🔍", color: "#7ec8e3", desc: "Tu es animé par le désir de comprendre et d'apprendre. Tu t'épanouis dans les environnements qui stimulent la réflexion, la recherche et la maîtrise intellectuelle." },
+  utilitaire:   { label: "Utilitaire",     icon: "⚡", color: "#e8c14c", desc: "Tu es motivé par les résultats concrets et l'efficacité. Tu veux que chaque effort ait un retour mesurable — en temps, en argent ou en impact réel." },
+  esthetique:   { label: "Esthétique",     icon: "🎨", color: "#d78fdb", desc: "Tu es sensible à l'harmonie, au sens et à la beauté. Tu t'épanouis dans des environnements équilibrés, créatifs et où la forme compte autant que le fond." },
+  altruiste:    { label: "Altruiste",      icon: "🤝", color: "#63a77a", desc: "Tu trouves ta satisfaction profonde dans le fait d'aider et de contribuer. Le bien-être des autres est un moteur central de tes décisions et de ton engagement." },
+  individuel:   { label: "Individuelle",   icon: "👑", color: "#cf5b5b", desc: "Tu es motivé par l'influence, le leadership et l'impact. Tu veux laisser une marque, avoir de l'autonomie et jouer un rôle déterminant dans les décisions." },
+  traditionnel: { label: "Traditionnelle", icon: "⚖️", color: "#b8975a", desc: "Tu t'appuies sur des valeurs et des principes solides. Tu trouves ta motivation dans la cohérence, l'ordre et l'alignement entre tes convictions et tes actions." },
+};
+
+const motivDiscMap = {
+  cognitif:     { note: "Souvent associée au profil 🔵 Bleu (rigueur analytique) ou 🟢 Vert (patience et réflexion). Le Cognitif donne la profondeur ; le DISC montre comment tu exprimes cette soif de savoir." },
+  utilitaire:   { note: "Souvent associée au profil 🔴 Rouge (résultats) ou 🟡 Jaune (efficacité enthousiaste). L'Utilitaire explique pourquoi le Rouge fonce et ne perd pas de temps." },
+  esthetique:   { note: "Souvent associée au profil 🟡 Jaune (créativité expressive) ou 🟢 Vert (harmonie relationnelle). L'Esthétique ajoute la dimension du sens et de la beauté." },
+  altruiste:    { note: "Souvent associée au profil 🟢 Vert (soutien et stabilité) ou 🟡 Jaune (chaleur humaine). L'Altruiste explique pourquoi le Vert met toujours les autres en premier." },
+  individuel:   { note: "Souvent associée au profil 🔴 Rouge (leadership direct) ou 🟡 Jaune (influence charismatique). L'Individuelle explique la soif de pouvoir et d'impact du Rouge." },
+  traditionnel: { note: "Souvent associée au profil 🔵 Bleu (respect des processus) ou 🟢 Vert (loyauté aux valeurs). Le Traditionnel explique pourquoi le Bleu tient tant aux règles et aux standards." },
+};
+
+const motivAnswers = {};
+
+function buildMotivQuiz() {
+  const container = document.getElementById("motivQuizContainer");
+  if (!container) return;
+  container.innerHTML = motivQuestions.map((q, i) => `
+    <div class="motiv-quiz-q" id="mblock-${q.id}">
+      <h3>${i + 1}. ${q.text}</h3>
+      <div class="motiv-scale">
+        ${[1,2,3,4,5].map(n => `
+          <button class="motiv-scale-btn" data-qid="${q.id}" data-val="${n}" onclick="pickMotiv('${q.id}', ${n}, this)">
+            <span class="scale-num">${n}</span>
+            <span class="scale-lbl">${n===1?"Pas moi":n===2?"Peu":n===3?"Parfois":n===4?"Souvent":"C'est moi"}</span>
+          </button>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function pickMotiv(qid, val, btn) {
+  document.querySelectorAll(`[data-qid="${qid}"]`).forEach(b => b.classList.remove("picked"));
+  btn.classList.add("picked");
+  motivAnswers[qid] = val;
+}
+
+function calculateMotivations() {
+  const unanswered = motivQuestions.find(q => !motivAnswers[q.id]);
+  if (unanswered) {
+    const block = document.getElementById(`mblock-${unanswered.id}`);
+    block.scrollIntoView({ behavior: "smooth", block: "center" });
+    block.style.border = "1px solid rgba(207,91,91,0.6)";
+    setTimeout(() => { block.style.border = ""; }, 2000);
+    alert("Réponds à toutes les affirmations avant de voir ton résultat.");
+    return;
+  }
+
+  const scores = { cognitif: 0, utilitaire: 0, esthetique: 0, altruiste: 0, individuel: 0, traditionnel: 0 };
+  motivQuestions.forEach(q => { scores[q.motiv] += motivAnswers[q.id] || 0; });
+
+  const maxScore = 20;
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+
+  // Bars
+  const listHtml = sorted.map(([key, val]) => {
+    const pct = Math.round((val / maxScore) * 100);
+    const m = motivMeta[key];
+    return `
+      <div class="motiv-result-row">
+        <div class="motiv-result-top">
+          <span style="font-weight:700; color:${m.color}">${m.icon} ${m.label}</span>
+          <span style="color:${m.color}; font-weight:700">${pct}%</span>
+        </div>
+        <div class="motiv-bar-wrap">
+          <div class="motiv-bar-fill ${key}" style="width:${pct}%"></div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  document.getElementById("motivResultList").innerHTML = listHtml;
+
+  // Top 2 dominant cards
+  const top2 = sorted.slice(0, 2);
+  const cardsHtml = top2.map(([key]) => {
+    const m = motivMeta[key];
+    const link = motivDiscMap[key];
+    return `
+      <div class="motiv-dominant-card">
+        <div class="motiv-dominant-title" style="color:${m.color}">${m.icon} ${m.label}</div>
+        <p class="muted" style="font-size:0.9rem; margin:0 0 8px;">${m.desc}</p>
+        <div class="motiv-disc-link"><strong>Lien DISC :</strong> ${link.note}</div>
+      </div>
+    `;
+  }).join("");
+  document.getElementById("motivDominantCards").innerHTML = cardsHtml;
+
+  // Combo note
+  const [d1, d2] = top2.map(([k]) => k);
+  const comboNotes = {
+    "cognitif-utilitaire":    "Tu veux comprendre ET que ça serve à quelque chose. Combinaison puissante en ingénierie, stratégie ou R&D appliquée.",
+    "cognitif-esthetique":    "Tu cherches le sens et la beauté dans la connaissance. Profil philosophique, artistique ou conceptuel très fort.",
+    "cognitif-altruiste":     "Tu veux apprendre pour mieux aider. Profil naturel d'enseignant, de coach ou de consultant bienveillant.",
+    "cognitif-individuel":    "Tu veux comprendre pour mieux influencer et décider. Profil d'expert-leader ou de stratège intellectuel.",
+    "cognitif-traditionnel":  "Tu cherches la vérité dans des cadres rigoureux. Profil scientifique, juridique ou éthique fort.",
+    "utilitaire-esthetique":  "Tu veux des résultats, mais avec du style et de l'harmonie. Profil fort en design, marketing ou architecture.",
+    "utilitaire-altruiste":   "Tu veux que ton efficacité serve les autres. Profil de gestionnaire social ou d'entrepreneur à impact.",
+    "utilitaire-individuel":  "Tu veux des résultats ET du pouvoir. Profil entrepreneurial ou commercial très fort.",
+    "utilitaire-traditionnel":"Tu veux être efficace dans un cadre clair et rigoureux. Profil d'administrateur, d'opérations ou de finance.",
+    "esthetique-altruiste":   "Tu veux créer de la beauté et du sens pour les autres. Profil artistique, éducatif ou de service à forte dimension humaine.",
+    "esthetique-individuel":  "Tu veux exprimer ton unicité et laisser une marque créative. Profil d'artiste, de créateur ou d'entrepreneur visionnaire.",
+    "esthetique-traditionnel":"Tu cherches l'harmonie dans des valeurs solides. Profil fort en art, spiritualité ou architecture culturelle.",
+    "altruiste-individuel":   "Tu veux aider ET avoir de l'impact. Profil de leader social, d'ONG ou de gestionnaire inspirant.",
+    "altruiste-traditionnel": "Tu veux aider dans un cadre de valeurs solides. Profil de service communautaire, religieux ou institutionnel.",
+    "individuel-traditionnel":"Tu veux exercer ton leadership dans un cadre de valeurs. Profil de dirigeant éthique ou de figure d'autorité respectée.",
+  };
+
+  const comboKey = [d1, d2].sort().join("-");
+  const note = comboNotes[comboKey] || "Ta combinaison est unique et reflète une richesse de motivations complémentaires.";
+  document.getElementById("motivDiscLink").innerHTML = `<strong>✨ Combinaison ${motivMeta[d1].label} + ${motivMeta[d2].label} :</strong> ${note}`;
+
+  const box = document.getElementById("motivResultBox");
+  box.classList.add("visible");
+  box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function resetMotivations() {
+  Object.keys(motivAnswers).forEach(k => delete motivAnswers[k]);
+  document.querySelectorAll(".motiv-scale-btn").forEach(b => b.classList.remove("picked"));
+  document.getElementById("motivResultBox").classList.remove("visible");
+  document.getElementById("motivations").scrollIntoView({ behavior: "smooth" });
+}
+
+buildMotivQuiz();
+
+// ===== COLLAPSIBLE SECTIONS =====
+function toggleSection(bodyId, headerEl) {
+  const body   = document.getElementById(bodyId);
+  const toggle = headerEl.querySelector('.section-toggle');
+  const isCollapsed = body.classList.contains('collapsed');
+  body.classList.toggle('collapsed', !isCollapsed);
+  toggle.classList.toggle('collapsed', !isCollapsed);
+}
 </script>
 </body>
 </html>
