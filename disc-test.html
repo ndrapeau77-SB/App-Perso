@@ -77,8 +77,8 @@
     /* LANDING */
     #page-landing {
       min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 40px 20px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding: 48px 20px 60px;
       text-align: center;
     }
     .landing-badge {
@@ -126,33 +126,6 @@
     .color-dot.v { background: radial-gradient(circle at 35% 35%, #68D391, var(--vert)); }
     .color-dot.b { background: radial-gradient(circle at 35% 35%, #63B3ED, var(--bleu)); }
 
-    .info-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px; max-width: 640px; width: 100%; margin-bottom: 40px;
-    }
-    .info-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      text-align: left;
-    }
-    .info-card .ic-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-    .info-card .ic-value { font-size: 1.1rem; font-weight: 600; color: var(--text); }
-
-    .saved-notice {
-      background: linear-gradient(135deg, rgba(56,161,105,0.1), rgba(56,161,105,0.05));
-      border: 1px solid rgba(56,161,105,0.3);
-      border-radius: 12px;
-      padding: 16px 24px;
-      margin-bottom: 24px;
-      max-width: 480px;
-      text-align: left;
-      display: none;
-    }
-    .saved-notice h4 { color: var(--vert); font-size: 0.85rem; margin-bottom: 4px; }
-    .saved-notice p { font-size: 0.82rem; color: var(--text-muted); }
-
     .btn-primary {
       background: linear-gradient(135deg, var(--rouge), #C53030);
       color: white;
@@ -181,6 +154,105 @@
       margin-left: 12px;
     }
     .btn-secondary:hover { background: var(--surface2); }
+
+    /* ===== SAVED RESULTS ON LANDING ===== */
+    .saved-results-landing {
+      width: min(900px, 100%);
+      margin: 32px auto 0;
+      text-align: left;
+      display: none;
+    }
+    .saved-results-landing.visible { display: block; }
+    .saved-results-landing h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .saved-results-landing .saved-help {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .saved-results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .saved-result-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(26,26,34,0.98), rgba(20,20,28,0.98));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      cursor: pointer;
+      transition: transform .18s, border-color .18s, background .18s;
+    }
+    .saved-result-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      background: var(--surface2);
+    }
+    .saved-result-name {
+      font-weight: 800;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      padding-right: 32px;
+    }
+    .saved-result-profile {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .saved-result-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .saved-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+    .saved-result-delete {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all .15s;
+      z-index: 2;
+    }
+    .saved-result-delete:hover {
+      background: rgba(229,62,62,0.15);
+      border-color: var(--rouge);
+      color: var(--rouge-mid);
+    }
+    .saved-empty {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 24px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      font-size: 0.9rem;
+    }
 
     /* CONTEXT CHOICE */
     #page-context {
@@ -489,18 +561,93 @@
       .dual-profile { grid-template-columns: 1fr; }
       .ml-header, .ml-row { grid-template-columns: 1fr 60px 60px; }
     }
-  
-#page-landing{justify-content:flex-start!important;padding-top:48px!important}.landing-sections-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0 28px}.mini-nav-btn{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:10px 16px;cursor:pointer}.app-sections{width:min(1100px,100%);text-align:left}.panel{background:linear-gradient(180deg,rgba(26,26,34,.98),rgba(20,20,28,.98));border:1px solid rgba(212,175,55,.22);border-radius:22px;padding:18px;margin-bottom:16px}.panel h2{color:var(--gold);font-size:1.35rem}.intro,.muted{color:var(--text-muted);line-height:1.6}.section-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer}.section-toggle{width:32px;height:32px;border-radius:10px;border:1px solid rgba(212,175,55,.35);background:rgba(212,175,55,.08);color:var(--gold);display:flex;align-items:center;justify-content:center}.section-toggle.collapsed{transform:rotate(-90deg)}.section-body{margin-top:14px;overflow:hidden}.section-body.collapsed{max-height:0;opacity:0;margin-top:0;pointer-events:none}.color-grid,.motiv-intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}.color-card,.motiv-card,.compat-section,.motiv-quiz-q{border-radius:18px;padding:16px;background:linear-gradient(180deg,rgba(28,45,42,.62),rgba(24,38,36,.50));border:1px solid rgba(255,255,255,.08)}.color-card.yellow{border-left:8px solid var(--jaune-mid)}.color-card.red{border-left:8px solid var(--rouge-mid)}.color-card.green{border-left:8px solid var(--vert-mid)}.color-card.blue{border-left:8px solid var(--bleu-mid)}.tag{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.82rem;margin-bottom:10px}.tag.yellow{color:#f4dd96}.tag.red{color:#f1b0b0}.tag.green{color:#bee4c8}.tag.blue{color:#c7dcf7}.sub{color:var(--gold);margin:14px 0 8px}.list{line-height:1.7}.more-toggle-btn{background:transparent;border:1px solid rgba(255,255,255,.14);color:var(--text-muted);border-radius:10px;padding:8px 14px;cursor:pointer;margin-top:14px;width:100%}.more-content{display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px}.more-content.open{display:block}.strengths-grid,.compat-sections{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.strength-chip,.motiv-kw{padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);color:var(--text-muted);text-align:center}.profile-combo-note,.compat-tip,.motiv-disc-link{color:var(--text-muted);line-height:1.6;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.15);border-radius:14px;padding:12px;margin-top:12px}.motiv-card{display:flex;gap:12px}.motiv-icon{font-size:1.8rem}.motiv-name{font-weight:700}.motiv-name.cognitif{color:#7ec8e3}.motiv-name.utilitaire{color:#e8c14c}.motiv-name.esthetique{color:#d78fdb}.motiv-name.altruiste{color:#63a77a}.motiv-name.individuel{color:#cf5b5b}.motiv-name.traditionnel{color:#b8975a}.motiv-keywords{display:flex;flex-wrap:wrap;gap:5px}.motiv-scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.motiv-scale-btn,.color-pick-btn{border:1px solid rgba(212,175,55,.22);background:rgba(255,255,255,.03);color:var(--text-muted);border-radius:12px;padding:8px 4px;cursor:pointer;text-align:center}.motiv-scale-btn{display:flex;flex-direction:column}.motiv-scale-btn.picked{background:rgba(212,175,55,.14);color:var(--gold)}.motiv-result-box,.compat-result{display:none;margin-top:14px;padding:16px;border-radius:18px;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.22)}.motiv-result-box.visible,.compat-result.visible{display:block}.motiv-bar-wrap,.compat-score-bar-wrap{height:12px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}.motiv-bar-fill,.compat-score-fill{height:100%;border-radius:999px}.motiv-bar-fill.cognitif{background:#7ec8e3}.motiv-bar-fill.utilitaire{background:#e8c14c}.motiv-bar-fill.esthetique{background:#d78fdb}.motiv-bar-fill.altruiste{background:#63a77a}.motiv-bar-fill.individuel{background:#cf5b5b}.motiv-bar-fill.traditionnel{background:#b8975a}.color-picker-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.color-select-group{display:grid;grid-template-columns:1fr 1fr;gap:8px}.compat-header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.compat-badge{padding:6px 14px;border-radius:999px;font-weight:700}.compat-badge.yellow{color:var(--jaune-mid)}.compat-badge.red{color:var(--rouge-mid)}.compat-badge.green{color:var(--vert-mid)}.compat-badge.blue{color:var(--bleu-mid)}.compat-score-fill{background:linear-gradient(90deg,rgba(212,175,55,.5),var(--gold))}.result-detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px}.result-detail-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px}.result-detail-card h4{color:var(--gold);margin-bottom:10px}.result-detail-card ul{padding-left:18px;line-height:1.7;color:var(--text-muted)}@media(max-width:600px){.motiv-scale,.color-picker-grid{grid-template-columns:1fr}}
 
-/* ===== AJUSTEMENTS DEMANDÉS ===== */
-@media (min-width: 760px){#colors-info .color-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start;}}
-.name-card{width:min(560px,100%);margin:0 auto 22px;background:linear-gradient(180deg,rgba(26,26,34,.92),rgba(20,20,28,.92));border:1px solid rgba(212,175,55,.20);border-radius:20px;padding:18px;text-align:left;}
-.name-card label{display:block;color:var(--gold);font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:8px;font-weight:700;}.name-card input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;color:var(--text);font:inherit;padding:14px 16px;outline:none;}.name-card input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.12);}.name-error{display:none;color:var(--rouge-mid);font-size:.82rem;margin-top:8px;}.name-card.error .name-error{display:block;}
-.saved-context-results{width:min(760px,100%);margin:30px auto 0;text-align:left;display:none;}.saved-context-results h3{font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:6px;}.saved-context-results .saved-help{color:var(--text-muted);font-size:.9rem;margin-bottom:14px;line-height:1.5;}.saved-person-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;}.saved-person-card{background:linear-gradient(180deg,rgba(26,26,34,.98),rgba(20,20,28,.98));border:1px solid var(--border);border-radius:18px;padding:16px;cursor:pointer;transition:transform .18s,border-color .18s,background .18s;}.saved-person-card:hover{transform:translateY(-2px);border-color:var(--gold);background:var(--surface2);}.saved-person-name{font-weight:800;font-size:1.05rem;margin-bottom:8px;}.saved-person-profile{display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:.92rem;margin-bottom:8px;}.saved-person-meta{font-size:.78rem;color:var(--text-muted);}.saved-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid currentColor;border-radius:999px;padding:3px 9px;font-weight:700;}
-.motiv-cta{margin-top:18px!important;min-height:58px!important;border-radius:18px!important;background:linear-gradient(135deg,rgba(212,175,55,.28),rgba(229,62,62,.18))!important;border-color:rgba(212,175,55,.55)!important;box-shadow:0 10px 28px rgba(212,175,55,.10);font-weight:800!important;gap:8px;}.motiv-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(212,175,55,.18);}
-.result-report-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px;}.result-report-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px;}.result-report-card h4{color:var(--gold);margin-bottom:10px;font-size:.98rem;}.result-report-card p,.result-report-card li{color:var(--text-muted);line-height:1.65;font-size:.9rem;}.result-report-card ul{padding-left:18px;margin:0;}
+    .landing-sections-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0 28px}
+    .mini-nav-btn{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:10px 16px;cursor:pointer}
+    .mini-nav-btn:hover{background:var(--surface2);border-color:var(--gold)}
+    .app-sections{width:min(1100px,100%);text-align:left}
+    .panel{background:linear-gradient(180deg,rgba(26,26,34,.98),rgba(20,20,28,.98));border:1px solid rgba(212,175,55,.22);border-radius:22px;padding:18px;margin-bottom:16px}
+    .panel h2{color:var(--gold);font-size:1.35rem}
+    .intro,.muted{color:var(--text-muted);line-height:1.6}
+    .section-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+    .section-toggle{width:32px;height:32px;border-radius:10px;border:1px solid rgba(212,175,55,.35);background:rgba(212,175,55,.08);color:var(--gold);display:flex;align-items:center;justify-content:center}
+    .section-toggle.collapsed{transform:rotate(-90deg)}
+    .section-body{margin-top:14px;overflow:hidden}
+    .section-body.collapsed{max-height:0;opacity:0;margin-top:0;pointer-events:none}
+    .color-grid,.motiv-intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+    .color-card,.motiv-card,.compat-section,.motiv-quiz-q{border-radius:18px;padding:16px;background:linear-gradient(180deg,rgba(28,45,42,.62),rgba(24,38,36,.50));border:1px solid rgba(255,255,255,.08)}
+    .color-card.yellow{border-left:8px solid var(--jaune-mid)}
+    .color-card.red{border-left:8px solid var(--rouge-mid)}
+    .color-card.green{border-left:8px solid var(--vert-mid)}
+    .color-card.blue{border-left:8px solid var(--bleu-mid)}
+    .tag{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.82rem;margin-bottom:10px}
+    .tag.yellow{color:#f4dd96}.tag.red{color:#f1b0b0}.tag.green{color:#bee4c8}.tag.blue{color:#c7dcf7}
+    .sub{color:var(--gold);margin:14px 0 8px}
+    .list{line-height:1.7}
+    .more-toggle-btn{background:transparent;border:1px solid rgba(255,255,255,.14);color:var(--text-muted);border-radius:10px;padding:8px 14px;cursor:pointer;margin-top:14px;width:100%}
+    .more-content{display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px}
+    .more-content.open{display:block}
+    .strengths-grid,.compat-sections{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+    .strength-chip,.motiv-kw{padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);color:var(--text-muted);text-align:center}
+    .profile-combo-note,.compat-tip,.motiv-disc-link{color:var(--text-muted);line-height:1.6;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.15);border-radius:14px;padding:12px;margin-top:12px}
+    .motiv-card{display:flex;gap:12px}
+    .motiv-icon{font-size:1.8rem}
+    .motiv-name{font-weight:700}
+    .motiv-name.cognitif{color:#7ec8e3}
+    .motiv-name.utilitaire{color:#e8c14c}
+    .motiv-name.esthetique{color:#d78fdb}
+    .motiv-name.altruiste{color:#63a77a}
+    .motiv-name.individuel{color:#cf5b5b}
+    .motiv-name.traditionnel{color:#b8975a}
+    .motiv-keywords{display:flex;flex-wrap:wrap;gap:5px}
+    .motiv-scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .motiv-scale-btn,.color-pick-btn{border:1px solid rgba(212,175,55,.22);background:rgba(255,255,255,.03);color:var(--text-muted);border-radius:12px;padding:8px 4px;cursor:pointer;text-align:center}
+    .motiv-scale-btn{display:flex;flex-direction:column}
+    .motiv-scale-btn.picked{background:rgba(212,175,55,.14);color:var(--gold)}
+    .motiv-result-box,.compat-result{display:none;margin-top:14px;padding:16px;border-radius:18px;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.22)}
+    .motiv-result-box.visible,.compat-result.visible{display:block}
+    .motiv-bar-wrap,.compat-score-bar-wrap{height:12px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}
+    .motiv-bar-fill,.compat-score-fill{height:100%;border-radius:999px}
+    .motiv-bar-fill.cognitif{background:#7ec8e3}
+    .motiv-bar-fill.utilitaire{background:#e8c14c}
+    .motiv-bar-fill.esthetique{background:#d78fdb}
+    .motiv-bar-fill.altruiste{background:#63a77a}
+    .motiv-bar-fill.individuel{background:#cf5b5b}
+    .motiv-bar-fill.traditionnel{background:#b8975a}
+    .color-picker-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .color-select-group{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .compat-header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .compat-badge{padding:6px 14px;border-radius:999px;font-weight:700}
+    .compat-badge.yellow{color:var(--jaune-mid)}
+    .compat-badge.red{color:var(--rouge-mid)}
+    .compat-badge.green{color:var(--vert-mid)}
+    .compat-badge.blue{color:var(--bleu-mid)}
+    .compat-score-fill{background:linear-gradient(90deg,rgba(212,175,55,.5),var(--gold))}
+    .result-detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px}
+    .result-detail-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px}
+    .result-detail-card h4{color:var(--gold);margin-bottom:10px}
+    .result-detail-card ul{padding-left:18px;line-height:1.7;color:var(--text-muted)}
+    @media(max-width:600px){.motiv-scale,.color-picker-grid{grid-template-columns:1fr}}
 
-</style>
+    /* ===== AJUSTEMENTS ===== */
+    @media (min-width: 760px){
+      #colors-info .color-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start;}
+    }
+
+    .name-card{
+      width:min(560px,100%);margin:0 auto 22px;
+      background:linear-gradient(180deg,rgba(26,26,34,.92),rgba(20,20,28,.92));
+      border:1px solid rgba(212,175,55,.20);border-radius:20px;padding:18px;text-align:left;
+    }
+    .name-card label{display:block;color:var(--gold);font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:8px;font-weight:700;}
+    .name-card input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;color:var(--text);font:inherit;padding:14px 16px;outline:none;}
+    .name-card input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.12);}
+    .name-error{display:none;color:var(--rouge-mid);font-size:.82rem;margin-top:8px;}
+    .name-card.error .name-error{display:block;}
+
+    .motiv-cta{margin-top:18px!important;min-height:58px!important;border-radius:18px!important;background:linear-gradient(135deg,rgba(212,175,55,.28),rgba(229,62,62,.18))!important;border-color:rgba(212,175,55,.55)!important;box-shadow:0 10px 28px rgba(212,175,55,.10);font-weight:800!important;gap:8px;}
+    .motiv-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(212,175,55,.18);}
+  </style>
 </head>
 <body>
 
@@ -548,21 +695,27 @@
     <div class="color-dot v">🟢</div>
     <div class="color-dot b">🔵</div>
   </div>
-  <div class="info-grid">
-    <div class="info-card"><div class="ic-label">Questions</div><div class="ic-value">75</div></div>
-    <div class="info-card"><div class="ic-label">Format</div><div class="ic-value">Mixte</div></div>
-    <div class="info-card"><div class="ic-label">Durée</div><div class="ic-value">~15 min</div></div>
-    <div class="info-card"><div class="ic-label">Profils</div><div class="ic-value">2 contextes</div></div>
-  </div>
-  <div class="saved-notice" id="saved-notice">
-    <h4>✓ Résultat sauvegardé</h4>
-    <p id="saved-notice-text"></p>
-  </div>
+
   <div>
     <button class="btn-primary" onclick="startTest()">Commencer le test</button>
-    <button class="btn-secondary" id="btn-see-saved" style="display:none" onclick="showSaved()">Voir mon dernier résultat</button>
+    <button class="btn-secondary" id="btn-see-saved" style="display:none" onclick="toggleSavedResults()">Voir les résultats</button>
   </div>
-<div class="landing-sections-nav"><button class="mini-nav-btn" onclick="document.getElementById('colors-info').scrollIntoView({behavior:'smooth'})">Les 4 couleurs</button><button class="mini-nav-btn" onclick="document.getElementById('motivations').scrollIntoView({behavior:'smooth'})">6 motivations</button><button class="mini-nav-btn" onclick="document.getElementById('compat').scrollIntoView({behavior:'smooth'})">Compatibilité</button></div><div class="app-sections">  <!-- LES 4 COULEURS -->
+
+  <!-- ===== SAVED RESULTS LIST ===== -->
+  <div class="saved-results-landing" id="saved-results-landing">
+    <h3>📋 Résultats sauvegardés</h3>
+    <p class="saved-help">Clique sur une carte pour ouvrir le profil détaillé. Utilise ✕ pour supprimer un test.</p>
+    <div class="saved-results-grid" id="saved-results-grid"></div>
+  </div>
+
+  <div class="landing-sections-nav">
+    <button class="mini-nav-btn" onclick="document.getElementById('colors-info').scrollIntoView({behavior:'smooth'})">Les 4 couleurs</button>
+    <button class="mini-nav-btn" onclick="document.getElementById('motivations').scrollIntoView({behavior:'smooth'})">6 motivations</button>
+    <button class="mini-nav-btn" onclick="document.getElementById('compat').scrollIntoView({behavior:'smooth'})">Compatibilité</button>
+  </div>
+
+  <div class="app-sections">
+  <!-- LES 4 COULEURS -->
   <section class="panel" id="colors-info">
     <div class="section-header" onclick="toggleSection('colors-body', this)">
       <h2>Les 4 couleurs</h2>
@@ -792,10 +945,10 @@
       </article>
 
     </div>
-    </div><!-- end section-body -->
+    </div>
   </section>
 
-  <!-- MOTIVATIONS / FORCES MOTRICES -->
+  <!-- MOTIVATIONS -->
   <section class="panel" id="motivations">
     <div class="section-header" onclick="toggleSection('motivations-body', this)">
       <h2>Les 6 Motivations (Forces motrices de Spranger)</h2>
@@ -803,7 +956,7 @@
     </div>
     <div class="section-body" id="motivations-body">
     <p class="intro">
-      Complémentaires au DISC, les 6 motivations expliquent le <strong style="color:var(--accent)">pourquoi</strong> de nos comportements — les moteurs profonds qui guident nos décisions et nos priorités. Le DISC montre <em>comment</em> tu te comportes ; les motivations révèlent <em>pourquoi</em> tu fais ce que tu fais. Chaque personne a 1 à 3 motivations dominantes à haute intensité.
+      Complémentaires au DISC, les 6 motivations expliquent le <strong style="color:var(--gold)">pourquoi</strong> de nos comportements — les moteurs profonds qui guident nos décisions et nos priorités. Le DISC montre <em>comment</em> tu te comportes ; les motivations révèlent <em>pourquoi</em> tu fais ce que tu fais. Chaque personne a 1 à 3 motivations dominantes à haute intensité.
     </p>
 
     <div class="motiv-intro-grid">
@@ -897,7 +1050,7 @@
         <button class="btn" onclick="resetMotivations()">🔄 Recommencer</button>
       </div>
     </div>
-    </div><!-- end section-body -->
+    </div>
   </section>
 
   <!-- COMPATIBILITÉ -->
@@ -937,7 +1090,7 @@
         <span class="compat-badge" id="compatBadgeMe"></span>
         <span class="compat-arrow">⇄</span>
         <span class="compat-badge" id="compatBadgeOther"></span>
-        <span style="color:var(--muted); font-size:0.92rem;" id="compatTitle"></span>
+        <span style="color:var(--text-muted); font-size:0.92rem;" id="compatTitle"></span>
       </div>
 
       <div class="compat-score-wrap">
@@ -969,10 +1122,10 @@
 
       <div class="compat-tip" id="compatTip"></div>
     </div>
-    </div><!-- end section-body -->
+    </div>
   </section>
-
-  <!-- QUIZ --></div></div>
+  </div>
+</div>
 
 <!-- CONTEXT -->
 <div id="page-context" class="page">
@@ -981,9 +1134,9 @@
   <p class="context-sub">Tu peux faire le test deux fois pour comparer ton profil naturel (avec tes proches) et ton profil adapté (au travail).</p>
 
   <div class="name-card" id="name-card">
-    <label for="participant-name">Nom de la personne testée</label>
-    <input id="participant-name" type="text" placeholder="Ex. Nicolas, Marie, Employé 1..." autocomplete="name" />
-    <div class="name-error">Entre un nom avant de commencer le test.</div>
+    <label for="participant-name">Nom de la personne testée *</label>
+    <input id="participant-name" type="text" placeholder="Ex. Nicolas, Marie, Employé 1..." autocomplete="name" required />
+    <div class="name-error">⚠️ Entre un nom avant de continuer — c'est obligatoire pour identifier ce test dans la liste de tes résultats.</div>
   </div>
 
   <div class="context-cards">
@@ -1000,12 +1153,6 @@
   </div>
   <div style="text-align:center;margin-top:32px">
     <button class="btn-primary" id="btn-context-next" onclick="goToQuiz()" style="display:none">Commencer →</button>
-  </div>
-
-  <div class="saved-context-results" id="saved-context-results">
-    <h3>Résultats sauvegardés</h3>
-    <p class="saved-help">Clique sur une personne pour ouvrir son profil détaillé.</p>
-    <div class="saved-person-grid" id="saved-person-grid"></div>
   </div>
 </div>
 
@@ -1042,7 +1189,7 @@
     <div class="archetype-name" id="arch-name"></div>
     <div class="archetype-desc" id="arch-desc"></div>
   </div>
-<div class="result-detail-grid" id="result-detail-grid"></div>
+  <div class="result-detail-grid" id="result-detail-grid"></div>
 
   <div class="correlation-card" id="correlation-card" style="display:none">
     <h3>🔗 Corrélation DISC × Motivations</h3>
@@ -1087,7 +1234,7 @@ const ARCHETYPES = {
   'JR': { icon: '🎤', name: 'Le Visionnaire Dynamique', desc: 'Jaune devant, Rouge en support : tu inspires en premier lieu, tu agis en second. Tu vends des idées avec passion et tu as la capacité de pousser les choses à se réaliser. Attention à finir ce que tu commences.', stress: 'tu dramatises et tu cherches de l\'attention. Tu peux saboter un projet par impulsivité émotionnelle.' },
   'JV': { icon: '☀️', name: 'L\'Animateur Bienveillant', desc: 'La combinaison la plus chaleureuse du DISC. Tu crées des environnements où les gens veulent être. Excellent en coaching, enseignement, relation client. Parfois trop accommodant au détriment de tes propres limites.', stress: 'tu évites les conflits à tout prix et tu accumules les frustrations en silence.' },
   'JB': { icon: '🎨', name: 'Le Créatif Méthodique', desc: 'Idées du Jaune, rigueur du Bleu : une combinaison rare et précieuse. Tu génères des concepts innovants ET tu peux les structurer. Excellent en design, marketing analytique, consulting créatif. La dualité peut parfois te paralyser.', stress: 'tu over-analyzes tes propres idées et tu procrastines par peur de l\'erreur.' },
-  'VJ': { icon: '🌿', name: 'L\'Ambassadeur Chaleureux', desc: 'Vert en premier : tu construis des ponts entre les gens avec la générosité du Jaune en renfort. Tu n\'aimes pas les conflits et tu travailles activement pour les résoudre. Pilier invisible d\'une équipe soudée.', stress: 'tu saurires dehors mais tu souffres dedans. Tu as du mal à exprimer que tu es dépassé.' },
+  'VJ': { icon: '🌿', name: 'L\'Ambassadeur Chaleureux', desc: 'Vert en premier : tu construis des ponts entre les gens avec la générosité du Jaune en renfort. Tu n\'aimes pas les conflits et tu travailles activement pour les résoudre. Pilier invisible d\'une équipe soudée.', stress: 'tu souris dehors mais tu souffres dedans. Tu as du mal à exprimer que tu es dépassé.' },
   'VR': { icon: '🛡️', name: 'Le Gardien Discret', desc: 'Tu défends les tiens avec conviction mais sans éclat. Loyal à l\'extrême, tu agis quand ça compte vraiment. Quelqu\'un sur qui on peut compter dans une crise calme. Difficile à pousser à bout.', stress: 'tu te fermes complètement et tu coupes le contact. Le silence est ton mécanisme de défense.' },
   'VB': { icon: '🏛️', name: 'Le Garant de Qualité', desc: 'Stabilité et précision : tu garantis que les choses sont bien faites et que l\'équipe reste soudée. Excellent en assurance qualité, coordination, gestion des processus. Prudent et réfléchi avant de changer d\'avis.', stress: 'tu deviens rigide et tu résistes au changement même nécessaire. Routine comme bouclier.' },
   'BR': { icon: '🔬', name: 'Le Stratège Froid', desc: 'Bleu d\'abord, Rouge en support : tu analyses tout avant d\'agir, mais quand tu agis, c\'est décisif. Excellent en ingénierie, finance, logistique. Tu n\'as pas besoin d\'être populaire pour être efficace.', stress: 'tu deviens glacial et tu coupes les relations inutiles. Les autres peuvent te percevoir comme arrogant.' },
@@ -1095,7 +1242,6 @@ const ARCHETYPES = {
   'BV': { icon: '🧭', name: 'L\'Expert Fiable', desc: 'La combinaison la plus calme du DISC. Tu travailles bien, tu respectes les processus et tu maintiens la cohésion. On sait qu\'avec toi, rien ne déraille. Peu visible mais indispensable. Peut manquer d\'assertivité.', stress: 'tu te noies dans les détails et tu évites les décisions difficiles en cherchant encore plus de données.' }
 };
 
-// Motivations correlation
 const MOTIV_DISC = {
   'Utilitaire': { colors: ['rouge', 'bleu'], note: 'Tu es orienté résultats et efficacité — cohérent avec ton profil dominant.' },
   'Théorique': { colors: ['bleu', 'rouge'], note: 'Tu cherches à comprendre en profondeur — le Bleu est ton allié naturel.' },
@@ -1108,12 +1254,7 @@ const MOTIV_DISC = {
 // ============================================================
 // 75 QUESTIONS
 // ============================================================
-
-// Format classic: { type:'classic', text, options:[{text,color}] }
-// Format mostleast: { type:'ml', text, items:[{text,color}] }
-
 const QUESTIONS_RAW = [
-  // ---- SECTION 1: Classiques 1-20 ----
   {type:'classic', text:'Quand tu dois prendre une décision importante, tu...', options:[
     {text:'Décides rapidement et tu assumes les conséquences',color:'rouge'},
     {text:'En parles avec plusieurs personnes pour recueillir des avis',color:'jaune'},
@@ -1235,7 +1376,6 @@ const QUESTIONS_RAW = [
     {text:'Documentes les progrès et tu maintiens la qualité à chaque étape',color:'bleu'}
   ]},
 
-  // ---- SECTION 2: Most/Least 1-15 ----
   {type:'ml', text:'Parmi ces 4 affirmations, laquelle te ressemble le PLUS et laquelle te ressemble le MOINS ?', items:[
     {text:'J\'aime relever des défis difficiles et me dépasser',color:'rouge'},
     {text:'J\'aime créer des liens et m\'amuser avec les gens',color:'jaune'},
@@ -1327,7 +1467,6 @@ const QUESTIONS_RAW = [
     {text:'Je me concentre profondément sur une chose à la fois',color:'bleu'}
   ]},
 
-  // ---- SECTION 3: Classiques 21-40 ----
   {type:'classic', text:'Quand quelqu\'un parle trop longuement sans arriver au point, tu...', options:[
     {text:'L\'interromps poliment pour recadrer',color:'rouge'},
     {text:'Gardes le sourire mais tu décraches mentalement',color:'jaune'},
@@ -1449,7 +1588,6 @@ const QUESTIONS_RAW = [
     {text:'Être plus flexible et accepter l\'imperfection',color:'bleu'}
   ]},
 
-  // ---- SECTION 4: Most/Least 16-25 (questions de validation + stress) ----
   {type:'ml', text:'Quand tu dois gérer une situation que tu n\'as jamais vécue :', items:[
     {text:'J\'agis et j\'ajuste — l\'expérience viendra',color:'rouge'},
     {text:'J\'improvise en m\'appuyant sur mes relations',color:'jaune'},
@@ -1474,7 +1612,6 @@ const QUESTIONS_RAW = [
     {text:'Je suis présent, stable et j\'offre beaucoup à ceux que j\'aime',color:'vert'},
     {text:'Je suis créatif, rigoureux et profondément concentré',color:'bleu'}
   ]},
-  // VALIDATION : questions formulées à l\'envers
   {type:'classic', text:'[VALIDATION] Face à une opportunité de gagner un débat important, tu...', options:[
     {text:'Recules et laisses l\'autre avoir le dernier mot pour préserver l\'harmonie',color:'vert'},
     {text:'Utilises tes arguments les plus solides pour convaincre',color:'rouge'},
@@ -1513,7 +1650,6 @@ const QUESTIONS_RAW = [
   ]},
 ];
 
-// Shuffle function
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -1523,7 +1659,6 @@ function shuffle(arr) {
   return a;
 }
 
-// Prepare questions: shuffle options for each classic question
 function prepareQuestions() {
   return QUESTIONS_RAW.map(q => {
     if (q.type === 'classic') {
@@ -1538,7 +1673,7 @@ function prepareQuestions() {
 // STATE
 // ============================================================
 let questions = [];
-let answers = {}; // {idx: {color, score}} for classic; {idx: {most:color, least:color}} for ml
+let answers = {};
 let selectedContext = null;
 let participantName = "";
 let scores = { rouge: 0, jaune: 0, vert: 0, bleu: 0 };
@@ -1552,8 +1687,18 @@ function showPage(id) {
   window.scrollTo(0,0);
 }
 
+// CORRECTION : startTest va vraiment au test (page-context)
 function startTest() {
-  renderSavedContextResults();
+  // Reset state pour un nouveau test
+  selectedContext = null;
+  participantName = "";
+  document.querySelectorAll('.context-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('btn-context-next').style.display = 'none';
+  const nameInput = document.getElementById('participant-name');
+  if (nameInput) nameInput.value = '';
+  const nameCard = document.getElementById('name-card');
+  if (nameCard) nameCard.classList.remove('error');
+
   showPage('page-context');
 }
 
@@ -1569,7 +1714,12 @@ function goToQuiz() {
   const nameInput = document.getElementById('participant-name');
   participantName = (nameInput?.value || '').trim();
   const nameCard = document.getElementById('name-card');
-  if (!participantName) { nameCard?.classList.add('error'); nameInput?.focus(); return; }
+  if (!participantName) {
+    nameCard?.classList.add('error');
+    nameInput?.focus();
+    nameCard?.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
   nameCard?.classList.remove('error');
   questions = prepareQuestions();
   answers = {};
@@ -1629,7 +1779,7 @@ function renderQuiz() {
       }
 
       html += `<div class="q-error">Veuillez compléter cette question avant de continuer.</div>`;
-      html += `</div>`; // qcard
+      html += `</div>`;
     }
   });
 
@@ -1646,17 +1796,14 @@ function renderQuiz() {
 // ============================================================
 function selectClassic(qIdx, optIdx, color) {
   const q = questions[qIdx];
-  // Remove previous selection
   q.options.forEach((_, oi) => {
     const btn = document.getElementById(`opt-${qIdx}-${oi}`);
     if (btn) btn.className = 'option-btn';
   });
-  // Set new selection
   const btn = document.getElementById(`opt-${qIdx}-${optIdx}`);
   if (btn) btn.className = `option-btn selected-${color}`;
-  
+
   const prev = answers[qIdx];
-  // Update live scores
   if (prev) scores[prev.color] = Math.max(0, scores[prev.color] - 2);
   scores[color] += 2;
   answers[qIdx] = { color };
@@ -1665,7 +1812,6 @@ function selectClassic(qIdx, optIdx, color) {
   updateProgress();
   updateLiveBars();
 
-  // Auto-scroll to next unanswered
   setTimeout(() => scrollToNextUnanswered(qIdx), 300);
 }
 
@@ -1673,11 +1819,9 @@ function selectML(qIdx, itemIdx, type, color) {
   const q = questions[qIdx];
   const prev = answers[qIdx] || {};
 
-  // Prevent selecting same item for both
   if (type === 'most' && prev.leastIdx === itemIdx) return;
   if (type === 'least' && prev.mostIdx === itemIdx) return;
 
-  // Remove old visual for same type
   if (type === 'most' && prev.mostIdx !== undefined) {
     const el = document.getElementById(`ml-most-${qIdx}-${prev.mostIdx}`);
     if (el) el.className = 'ml-radio';
@@ -1687,11 +1831,9 @@ function selectML(qIdx, itemIdx, type, color) {
     if (el) el.className = 'ml-radio';
   }
 
-  // Set new visual
   const newEl = document.getElementById(`ml-${type}-${qIdx}-${itemIdx}`);
   if (newEl) newEl.className = `ml-radio sel-${type}`;
 
-  // Update answer
   if (!answers[qIdx]) answers[qIdx] = {};
   if (type === 'most') {
     if (prev.mostColor) scores[prev.mostColor] = Math.max(0, scores[prev.mostColor] - 3);
@@ -1699,13 +1841,12 @@ function selectML(qIdx, itemIdx, type, color) {
     answers[qIdx].mostColor = color;
     scores[color] += 3;
   } else {
-    if (prev.leastColor) scores[prev.leastColor] += 1; // un-penalize
+    if (prev.leastColor) scores[prev.leastColor] += 1;
     answers[qIdx].leastIdx = itemIdx;
     answers[qIdx].leastColor = color;
     scores[color] = Math.max(0, scores[color] - 1);
   }
 
-  // Mark answered if both chosen
   if (answers[qIdx].mostColor && answers[qIdx].leastColor) {
     document.getElementById('qcard-' + qIdx).classList.add('answered');
     document.getElementById('qcard-' + qIdx).classList.remove('error');
@@ -1736,9 +1877,6 @@ function countAnswered() {
   return questions.filter((_, i) => isAnswered(i)).length;
 }
 
-// ============================================================
-// PROGRESS & LIVE BARS
-// ============================================================
 function updateProgress() {
   const done = countAnswered();
   const total = questions.length;
@@ -1751,7 +1889,6 @@ function updateLiveBars() {
   const total = Math.max(1, scores.rouge + scores.jaune + scores.vert + scores.bleu);
   ['rouge','jaune','vert','bleu'].forEach(c => {
     const pct = Math.round(scores[c] / total * 100);
-    const prefix = c[0];
     document.getElementById('lb-' + (c === 'rouge' ? 'r' : c === 'jaune' ? 'j' : c === 'vert' ? 'v' : 'b')).style.height = pct + '%';
   });
 }
@@ -1760,7 +1897,6 @@ function updateLiveBars() {
 // SUBMIT & RESULTS
 // ============================================================
 function submitQuiz() {
-  // Validate all answered
   let allOk = true;
   questions.forEach((_, i) => {
     if (!isAnswered(i)) {
@@ -1769,12 +1905,10 @@ function submitQuiz() {
     }
   });
   if (!allOk) {
-    // Scroll to first error
     const firstError = document.querySelector('.question-card.error');
     if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
-
   computeResults();
 }
 
@@ -1785,7 +1919,6 @@ function computeResults() {
     pcts[c] = total > 0 ? Math.round(scores[c] / total * 100) : 25;
   });
 
-  // Sort
   const sorted = Object.entries(pcts).sort((a,b) => b[1]-a[1]);
   const dom = sorted[0][0];
   const sec = sorted[1][0];
@@ -1793,16 +1926,12 @@ function computeResults() {
   const colorNames = { rouge: '🔴 Rouge', jaune: '🟡 Jaune', vert: '🟢 Vert', bleu: '🔵 Bleu' };
   const colorShort = { rouge: 'R', jaune: 'J', vert: 'V', bleu: 'B' };
 
-  // Build results page
-  // Badge
   const badge = document.getElementById('res-badge');
   badge.textContent = `Profil ${colorNames[dom]} — ${selectedContext === 'travail' ? 'Au travail' : 'Avec mes proches'}`;
 
-  // Title
   document.getElementById('res-title').innerHTML = `${colorNames[dom]}<br><span style="color:var(--text-muted);font-size:0.6em">secondaire : ${colorNames[sec]}</span>`;
   document.getElementById('res-subtitle').textContent = `${participantName ? participantName + ' • ' : ''}Contexte : ${selectedContext === 'travail' ? 'profil adapté (travail)' : 'profil naturel (avec mes proches)'}`;
 
-  // Color bars
   const barsEl = document.getElementById('color-bars');
   const colorKeys = [dom, sec, ...sorted.slice(2).map(e=>e[0])];
   barsEl.innerHTML = colorKeys.map(c => `
@@ -1814,49 +1943,73 @@ function computeResults() {
   `).join('');
   setTimeout(() => {
     colorKeys.forEach(c => {
-      document.getElementById('barfill-' + c).style.width = pcts[c] + '%';
+      const el = document.getElementById('barfill-' + c);
+      if (el) el.style.width = pcts[c] + '%';
     });
   }, 100);
 
-  // Archetype
   const key = colorShort[dom] + colorShort[sec];
   const arch = ARCHETYPES[key] || ARCHETYPES[colorShort[sec] + colorShort[dom]] || { icon: '🎯', name: dom + '-' + sec, desc: 'Un profil unique à explorer.', stress: 'varie selon le contexte.' };
   document.getElementById('arch-icon').textContent = arch.icon;
   document.getElementById('arch-name').textContent = arch.name;
   document.getElementById('arch-desc').textContent = arch.desc;
   document.getElementById('stress-text').textContent = arch.stress;
-  const COLOR_DETAILS={rouge:{points:['Décisions rapides et orientation résultats','Capacité à trancher quand ça bloque','Goût du défi'],watch:['Peut sembler brusque','Gagne à ralentir pour embarquer les autres']},jaune:{points:['Énergie, idées et influence positive','Facilité à créer des liens','Capacité à rendre un projet vivant'],watch:['Peut perdre le fil','Gagne à structurer ses priorités']},vert:{points:['Stabilité, loyauté et cohésion','Écoute et climat de confiance','Capacité à soutenir dans la durée'],watch:['Peut éviter les confrontations','Gagne à dire ses limites']},bleu:{points:['Rigueur et standards élevés','Analyse logique avant l’action','Prévention des erreurs'],watch:['Peut tomber dans la suranalyse','Gagne à décider avec information imparfaite']}};
-  const dd=COLOR_DETAILS[dom], sd=COLOR_DETAILS[sec];
-  document.getElementById('result-detail-grid').innerHTML=`<div class="result-detail-card"><h4>🎯 Ce que ça veut dire</h4><p>${profileMeaning(dom,sec)}</p></div><div class="result-detail-card"><h4>💪 Forces principales</h4><ul>${dd.points.concat(sd.points.slice(0,2)).map(p=>`<li>${p}</li>`).join('')}</ul></div><div class="result-detail-card"><h4>⚠️ Angles morts</h4><ul>${[...dd.watch,...sd.watch].map(p=>`<li>${p}</li>`).join('')}</ul></div><div class="result-detail-card"><h4>💬 Pour mieux travailler avec toi</h4><ul>${workTips(dom,sec).map(p=>`<li>${p}</li>`).join('')}</ul></div><div class="result-detail-card"><h4>🌱 Environnement idéal</h4><p>${idealEnvironment(dom,sec)}</p></div><div class="result-detail-card"><h4>🚦 Sous pression</h4><p>${arch.stress}</p></div>`;
 
+  const COLOR_DETAILS = {
+    rouge: {points:['Décisions rapides et orientation résultats','Capacité à trancher quand ça bloque','Goût du défi'], watch:['Peut sembler brusque','Gagne à ralentir pour embarquer les autres']},
+    jaune: {points:['Énergie, idées et influence positive','Facilité à créer des liens','Capacité à rendre un projet vivant'], watch:['Peut perdre le fil','Gagne à structurer ses priorités']},
+    vert:  {points:['Stabilité, loyauté et cohésion','Écoute et climat de confiance','Capacité à soutenir dans la durée'], watch:['Peut éviter les confrontations','Gagne à dire ses limites']},
+    bleu:  {points:['Rigueur et standards élevés','Analyse logique avant l\'action','Prévention des erreurs'], watch:['Peut tomber dans la suranalyse','Gagne à décider avec information imparfaite']}
+  };
+  const dd = COLOR_DETAILS[dom], sd = COLOR_DETAILS[sec];
+  document.getElementById('result-detail-grid').innerHTML = `
+    <div class="result-detail-card"><h4>🎯 Ce que ça veut dire</h4><p>${profileMeaning(dom,sec)}</p></div>
+    <div class="result-detail-card"><h4>💪 Forces principales</h4><ul>${dd.points.concat(sd.points.slice(0,2)).map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    <div class="result-detail-card"><h4>⚠️ Angles morts</h4><ul>${[...dd.watch,...sd.watch].map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    <div class="result-detail-card"><h4>💬 Pour mieux travailler avec toi</h4><ul>${workTips(dom,sec).map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    <div class="result-detail-card"><h4>🌱 Environnement idéal</h4><p>${idealEnvironment(dom,sec)}</p></div>
+    <div class="result-detail-card"><h4>🚦 Sous pression</h4><p>${arch.stress}</p></div>
+  `;
 
-  // Dual profile from localStorage
-  const savedTravail = JSON.parse(localStorage.getItem('disc_travail') || 'null');
-  const savedNaturel = JSON.parse(localStorage.getItem('disc_naturel') || 'null');
-  
-  // Save current
-  const currentResult = { id: window._viewingSavedId || ('r_' + Date.now()), name: participantName || 'Sans nom', dom, sec, pcts, date: new Date().toLocaleDateString('fr-CA'), context: selectedContext };
+  // Build current result object
+  const currentResult = {
+    id: window._viewingSavedId || ('r_' + Date.now() + '_' + Math.random().toString(36).slice(2,7)),
+    name: participantName || 'Sans nom',
+    dom, sec, pcts,
+    date: new Date().toLocaleDateString('fr-CA'),
+    context: selectedContext
+  };
+
+  // Save to localStorage (legacy keys for compatibility)
   localStorage.setItem('disc_' + selectedContext, JSON.stringify(currentResult));
-  if (!window._viewingSavedId) saveNamedResult(currentResult);
 
-  // Show dual profile if we have both
-  const travail = selectedContext === 'travail' ? currentResult : savedTravail;
-  const naturel = selectedContext === 'naturel' ? currentResult : savedNaturel;
+  // Save to named results list (only if not viewing existing)
+  if (!window._viewingSavedId) {
+    saveNamedResult(currentResult);
+  }
 
-  if (travail && naturel) {
+  // Dual profile (compare both contexts if same person)
+  const allResults = getNamedResults();
+  const sameNameTravail = allResults.find(r => r.name === currentResult.name && r.context === 'travail');
+  const sameNameNaturel = allResults.find(r => r.name === currentResult.name && r.context === 'naturel');
+
+  if (sameNameTravail && sameNameNaturel) {
     document.getElementById('dual-profile').style.display = 'grid';
     document.getElementById('profile-travail').style.display = 'block';
     document.getElementById('profile-naturel').style.display = 'block';
-    document.getElementById('pt-dominant').textContent = colorNames[travail.dom];
-    document.getElementById('pt-dominant').className = 'dominant text-' + travail.dom;
-    document.getElementById('pt-secondary').textContent = 'Secondaire : ' + colorNames[travail.sec];
-    document.getElementById('pn-dominant').textContent = colorNames[naturel.dom];
-    document.getElementById('pn-dominant').className = 'dominant text-' + naturel.dom;
-    document.getElementById('pn-secondary').textContent = 'Secondaire : ' + colorNames[naturel.sec];
+    document.getElementById('pt-dominant').textContent = colorNames[sameNameTravail.dom];
+    document.getElementById('pt-dominant').className = 'dominant text-' + sameNameTravail.dom;
+    document.getElementById('pt-secondary').textContent = 'Secondaire : ' + colorNames[sameNameTravail.sec];
+    document.getElementById('pn-dominant').textContent = colorNames[sameNameNaturel.dom];
+    document.getElementById('pn-dominant').className = 'dominant text-' + sameNameNaturel.dom;
+    document.getElementById('pn-secondary').textContent = 'Secondaire : ' + colorNames[sameNameNaturel.sec];
+  } else {
+    document.getElementById('dual-profile').style.display = 'none';
   }
 
   // Correlation with motivations
   const savedMotiv = JSON.parse(localStorage.getItem('disc_motivations') || 'null');
+  const corrCard = document.getElementById('correlation-card');
   if (savedMotiv && savedMotiv.top2) {
     const corrEl = document.getElementById('correlation-content');
     corrEl.innerHTML = `<p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:12px">Tes motivations dominantes : <strong style="color:var(--text)">${savedMotiv.top2.join(' & ')}</strong></p>`;
@@ -1864,26 +2017,23 @@ function computeResults() {
       const corr = MOTIV_DISC[motiv];
       if (corr) {
         const alignedColors = corr.colors.filter(c => c === dom || c === sec);
-        const tag = alignedColors.length > 0 
-          ? `<span class="correlation-tag text-${alignedColors[0]}" style="background:rgba(var(--${alignedColors[0]}-rgb,212,175,55),0.15);border:1px solid currentColor">${motiv}</span>` 
+        const tag = alignedColors.length > 0
+          ? `<span class="correlation-tag text-${alignedColors[0]}" style="background:rgba(212,175,55,0.10);border:1px solid currentColor">${motiv}</span>`
           : `<span class="correlation-tag" style="background:var(--surface2);color:var(--text-muted)">${motiv}</span>`;
         corrEl.innerHTML += `${tag}<p style="font-size:0.82rem;color:var(--text-muted);margin:6px 0 12px">${corr.note}</p>`;
       }
     });
-    document.getElementById('correlation-card').style.display = 'block';
+    corrCard.style.display = 'block';
+  } else {
+    corrCard.style.display = 'none';
   }
 
-  // Save to landing notice
-  updateSavedNotice();
-
-  // Hide progress nav
   document.getElementById('nav-progress').style.display = 'none';
   document.getElementById('live-bars').style.display = 'none';
 
   showPage('page-results');
 
-  // Prepare copy text
-  window._copyText = `Mon profil DISC (${selectedContext === 'travail' ? 'Au travail' : 'Avec mes proches'}) :\n` +
+  window._copyText = `Profil DISC de ${participantName || 'Sans nom'} (${selectedContext === 'travail' ? 'Au travail' : 'Avec mes proches'}) :\n` +
     `Dominant : ${colorNames[dom]} (${pcts[dom]}%)\n` +
     `Secondaire : ${colorNames[sec]} (${pcts[sec]}%)\n` +
     `${sorted[2] ? colorNames[sorted[2][0]] + ' : ' + sorted[2][1] + '%\n' : ''}` +
@@ -1903,34 +2053,77 @@ function copyResult() {
 }
 
 function restartTest() {
-  renderSavedContextResults();
-  showPage('page-context');
+  startTest();
 }
 
-
-function saveNamedResult(result){
+// ============================================================
+// SAVED RESULTS MANAGEMENT
+// ============================================================
+function saveNamedResult(result) {
   const list = getNamedResults();
   list.unshift(result);
   localStorage.setItem('disc_saved_results', JSON.stringify(list.slice(0,30)));
 }
-function getNamedResults(){
-  try { return JSON.parse(localStorage.getItem('disc_saved_results') || '[]'); } catch(e){ return []; }
+
+function getNamedResults() {
+  try { return JSON.parse(localStorage.getItem('disc_saved_results') || '[]'); }
+  catch(e){ return []; }
 }
-function renderSavedContextResults(){
-  const wrap = document.getElementById('saved-context-results');
-  const grid = document.getElementById('saved-person-grid');
+
+function deleteSavedResult(id, evt) {
+  if (evt) evt.stopPropagation();
+  const r = getNamedResults().find(x => x.id === id);
+  const name = r ? r.name : 'ce test';
+  if (!confirm(`Supprimer le test de "${name}" ?\nCette action est irréversible.`)) return;
+  const list = getNamedResults().filter(x => x.id !== id);
+  localStorage.setItem('disc_saved_results', JSON.stringify(list));
+  renderSavedResultsLanding();
+}
+
+function renderSavedResultsLanding() {
+  const wrap = document.getElementById('saved-results-landing');
+  const grid = document.getElementById('saved-results-grid');
+  const btnSee = document.getElementById('btn-see-saved');
   if (!wrap || !grid) return;
+
   const list = getNamedResults();
-  if (!list.length){ wrap.style.display='none'; grid.innerHTML=''; return; }
+  if (!list.length) {
+    wrap.classList.remove('visible');
+    grid.innerHTML = '';
+    if (btnSee) btnSee.style.display = 'none';
+    return;
+  }
+
+  if (btnSee) btnSee.style.display = 'inline-block';
+
   const colorNames = { rouge: '🔴 Rouge', jaune: '🟡 Jaune', vert: '🟢 Vert', bleu: '🔵 Bleu' };
-  grid.innerHTML = list.map(r => `<div class="saved-person-card" onclick="openSavedResult('${r.id}')">
-    <div class="saved-person-name">${escapeHtml(r.name || 'Sans nom')}</div>
-    <div class="saved-person-profile"><span class="saved-pill text-${r.dom}">${colorNames[r.dom]}</span><span>+ ${colorNames[r.sec]}</span></div>
-    <div class="saved-person-meta">${r.context === 'travail' ? '💼 Au travail' : '🏡 Avec mes proches'} • ${r.date}</div>
-  </div>`).join('');
-  wrap.style.display='block';
+  grid.innerHTML = list.map(r => `
+    <div class="saved-result-card" onclick="openSavedResult('${r.id}')">
+      <button class="saved-result-delete" onclick="deleteSavedResult('${r.id}', event)" title="Supprimer ce test">✕</button>
+      <div class="saved-result-name">${escapeHtml(r.name || 'Sans nom')}</div>
+      <div class="saved-result-profile">
+        <span class="saved-pill text-${r.dom}">${colorNames[r.dom]}</span>
+        <span>+ ${colorNames[r.sec]}</span>
+      </div>
+      <div class="saved-result-meta">${r.context === 'travail' ? '💼 Au travail' : '🏡 Avec mes proches'} • ${r.date}</div>
+    </div>
+  `).join('');
 }
-function openSavedResult(id){
+
+function toggleSavedResults() {
+  const wrap = document.getElementById('saved-results-landing');
+  if (!wrap) return;
+  const isVisible = wrap.classList.contains('visible');
+  if (isVisible) {
+    wrap.classList.remove('visible');
+  } else {
+    renderSavedResultsLanding();
+    wrap.classList.add('visible');
+    setTimeout(() => wrap.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  }
+}
+
+function openSavedResult(id) {
   const r = getNamedResults().find(x => x.id === id);
   if (!r) return;
   window._viewingSavedId = r.id;
@@ -1941,64 +2134,57 @@ function openSavedResult(id){
   computeResults();
   window._viewingSavedId = null;
 }
-function escapeHtml(str){return String(str).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));}
-function profileMeaning(dom,sec){
-  const txt={bleu:'Tu cherches à comprendre, structurer et sécuriser avant d’agir.',rouge:'Tu avances avec intensité, décision et orientation résultats.',jaune:'Tu crées de l’énergie, des liens et du mouvement autour de toi.',vert:'Tu stabilises, rassures et favorises la collaboration durable.'};
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+}
+
+function profileMeaning(dom, sec) {
+  const txt = {
+    bleu:  'Tu cherches à comprendre, structurer et sécuriser avant d\'agir.',
+    rouge: 'Tu avances avec intensité, décision et orientation résultats.',
+    jaune: 'Tu crées de l\'énergie, des liens et du mouvement autour de toi.',
+    vert:  'Tu stabilises, rassures et favorises la collaboration durable.'
+  };
   return `${txt[dom]} Ton ${sec} en secondaire ajoute une couche importante : ${txt[sec].replace('Tu','tu').replace('.', '')}.`;
 }
-function workTips(dom,sec){
-  const base={bleu:['Arriver préparé avec des faits clairs.','Éviter les zones floues et les improvisations inutiles.'],rouge:['Aller droit au but.','Présenter des options concrètes et des décisions à prendre.'],jaune:['Garder une énergie humaine et positive.','Laisser de la place aux idées et aux échanges.'],vert:['Être calme, respectueux et patient.','Expliquer les changements à l’avance.']};
+
+function workTips(dom, sec) {
+  const base = {
+    bleu:  ['Arriver préparé avec des faits clairs.','Éviter les zones floues et les improvisations inutiles.'],
+    rouge: ['Aller droit au but.','Présenter des options concrètes et des décisions à prendre.'],
+    jaune: ['Garder une énergie humaine et positive.','Laisser de la place aux idées et aux échanges.'],
+    vert:  ['Être calme, respectueux et patient.','Expliquer les changements à l\'avance.']
+  };
   return [...base[dom], ...base[sec]].slice(0,5);
 }
-function idealEnvironment(dom,sec){
-  const env={bleu:'des attentes claires, des données fiables et des standards de qualité bien définis',rouge:'des objectifs ambitieux, de l’autonomie et des décisions rapides',jaune:'de la variété, des échanges humains et une ambiance stimulante',vert:'un climat stable, respectueux, collaboratif et prévisible'};
+
+function idealEnvironment(dom, sec) {
+  const env = {
+    bleu:  'des attentes claires, des données fiables et des standards de qualité bien définis',
+    rouge: 'des objectifs ambitieux, de l\'autonomie et des décisions rapides',
+    jaune: 'de la variété, des échanges humains et une ambiance stimulante',
+    vert:  'un climat stable, respectueux, collaboratif et prévisible'
+  };
   return `Tu performes mieux dans un environnement avec ${env[dom]}, tout en gardant une dose de ${env[sec]}.`;
-}
-
-// ============================================================
-// SAVED NOTICE
-// ============================================================
-function updateSavedNotice() {
-  const t = JSON.parse(localStorage.getItem('disc_travail') || 'null');
-  const n = JSON.parse(localStorage.getItem('disc_naturel') || 'null');
-  const notice = document.getElementById('saved-notice');
-  const btnSaved = document.getElementById('btn-see-saved');
-  
-  let texts = [];
-  if (t) texts.push(`💼 ${t.name || 'Travail'} : ${t.dom} (${t.date})`);
-  if (n) texts.push(`🏡 ${n.name || 'Naturel'} : ${n.dom} (${n.date})`);
-  
-  if (texts.length > 0) {
-    notice.style.display = 'block';
-    document.getElementById('saved-notice-text').textContent = texts.join(' • ');
-    btnSaved.style.display = 'inline-block';
-  }
-}
-
-function showSaved() {
-  // Quick show last result
-  const t = JSON.parse(localStorage.getItem('disc_travail') || 'null');
-  const n = JSON.parse(localStorage.getItem('disc_naturel') || 'null');
-  const named = getNamedResults();
-  const last = named[0] || t || n;
-  if (!last) return;
-  
-  scores = { rouge: 0, jaune: 0, vert: 0, bleu: 0 };
-  Object.entries(last.pcts).forEach(([c, pct]) => { scores[c] = pct; });
-  selectedContext = last.context;
-  answers = {}; // no quiz
-  computeResults();
 }
 
 // ============================================================
 // INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-  updateSavedNotice();
-  renderSavedContextResults();
+  renderSavedResultsLanding();
   showPage('page-landing');
 });
-function toggleMore(id,btn){const el=document.getElementById(id);if(!el)return;const open=el.classList.contains('open');el.classList.toggle('open',!open);btn.textContent=open?'▼ En savoir plus':'▲ Réduire';}
+
+function toggleMore(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const open = el.classList.contains('open');
+  el.classList.toggle('open', !open);
+  btn.textContent = open ? '▼ En savoir plus' : '▲ Réduire';
+}
+
 // ===== COMPATIBILITÉ =====
 const colorLabels = {
   yellow: { emoji: "🟡", name: "Jaune" },
@@ -2015,89 +2201,58 @@ const colorMotivations = {
 };
 
 const compatData = {
-  "yellow-yellow": {
-    score: 80,
-    title: "Duo Enthousiaste",
+  "yellow-yellow": { score: 80, title: "Duo Enthousiaste",
     fit: ["Énergie et enthousiasme partagés", "Facilité à créer une ambiance positive", "Brainstorming créatif et spontané", "Plaisir et humour naturels"],
     challenge: ["Risque de manquer de suivi et d'exécution", "Peut tourner en rond dans les idées sans décider", "Difficulté à rester focalisé sur les priorités", "Aucun des deux ne prendra naturellement le rôle d'organisateur"],
     comm: ["Mettez des actions concrètes derrière vos idées", "Désignez quelqu'un pour assurer le suivi", "Gardez des moments de focus sans distraction", "Célébrez les victoires pour maintenir la motivation"],
-    tip: "<strong>Conseil :</strong> Vous vous entendrez très bien naturellement, mais attention à transformer l'énergie en résultats concrets. Associez-vous à un profil Bleu ou Rouge pour l'exécution."
-  },
-  "yellow-red": {
-    score: 72,
-    title: "L'Équipe Feu",
+    tip: "<strong>Conseil :</strong> Vous vous entendrez très bien naturellement, mais attention à transformer l'énergie en résultats concrets. Associez-vous à un profil Bleu ou Rouge pour l'exécution." },
+  "yellow-red": { score: 72, title: "L'Équipe Feu",
     fit: ["Énergie et dynamisme complémentaires", "Le Jaune motive, le Rouge exécute", "Bonne capacité à embarquer les autres", "Duo efficace en vente et leadership"],
     challenge: ["Le Rouge peut trouver le Jaune trop dispersé", "Le Jaune peut trouver le Rouge trop brusque", "Le Rouge veut des résultats ; le Jaune veut du plaisir", "Risque de compétition pour l'attention"],
     comm: ["Jaune : va plus à l'essentiel avec le Rouge, sois concis", "Rouge : laisse de la place à l'expression du Jaune", "Partagez vos objectifs clairement dès le départ", "Le Rouge prend les décisions, le Jaune gère les relations"],
-    tip: "<strong>Conseil :</strong> Excellente combinaison en vente et en leadership. Le Rouge donne la direction, le Jaune crée l'adhésion. Évitez les guerres d'ego."
-  },
-  "yellow-green": {
-    score: 85,
-    title: "La Chaleur Humaine",
+    tip: "<strong>Conseil :</strong> Excellente combinaison en vente et en leadership. Le Rouge donne la direction, le Jaune crée l'adhésion. Évitez les guerres d'ego." },
+  "yellow-green": { score: 85, title: "La Chaleur Humaine",
     fit: ["Les deux sont orientés personnes et relations", "Le Jaune anime, le Vert stabilise", "Excellente complicité naturelle", "Bonne écoute et communication fluide"],
     challenge: ["Risque d'éviter les décisions difficiles", "Peut manquer d'orientation résultats", "Le Jaune peut bousculer le Vert avec son rythme", "Le Vert peut freiner l'enthousiasme du Jaune"],
     comm: ["Jaune : ralentis parfois pour laisser le Vert s'adapter", "Vert : exprime ton inconfort au lieu de subir", "Partagez régulièrement sur votre bien-être respectif", "Célébrez les relations et les petites victoires ensemble"],
-    tip: "<strong>Conseil :</strong> Duo très harmonieux et chaleureux. Pour performer, associez-vous à un Rouge ou Bleu pour la rigueur et les résultats."
-  },
-  "yellow-blue": {
-    score: 55,
-    title: "L'Opposé Complémentaire",
+    tip: "<strong>Conseil :</strong> Duo très harmonieux et chaleureux. Pour performer, associez-vous à un Rouge ou Bleu pour la rigueur et les résultats." },
+  "yellow-blue": { score: 55, title: "L'Opposé Complémentaire",
     fit: ["Le Bleu structure les idées du Jaune", "Le Jaune sort le Bleu de ses angles morts créatifs", "Complémentarité fort si les rôles sont clairs", "Le Bleu apporte la rigueur, le Jaune l'énergie"],
     challenge: ["Le Bleu trouve le Jaune trop impulsif et désorganisé", "Le Jaune trouve le Bleu trop lent, froid et rigide", "Rythmes très différents — l'un fonce, l'autre analyse", "La communication peut sembler froide vs trop émotive"],
     comm: ["Jaune : donne des données concrètes au Bleu, pas juste des idées", "Bleu : montre de l'enthousiasme pour les idées du Jaune avant de les critiquer", "Établissez un processus clair : idées du Jaune → validation du Bleu", "Respectez les rythmes de décision de chacun"],
-    tip: "<strong>Conseil :</strong> Duo qui peut être très puissant si vous comprenez vos différences. Le Jaune apporte l'élan, le Bleu apporte la solidité. Évitez de vous juger mutuellement."
-  },
-  "red-red": {
-    score: 60,
-    title: "Deux Locomotives",
+    tip: "<strong>Conseil :</strong> Duo qui peut être très puissant si vous comprenez vos différences. Le Jaune apporte l'élan, le Bleu apporte la solidité. Évitez de vous juger mutuellement." },
+  "red-red": { score: 60, title: "Deux Locomotives",
     fit: ["Rythme rapide et efficace partagé", "Les deux veulent des résultats — pas de perte de temps", "Décisions rapides et orientation action", "Haute performance quand les objectifs sont alignés"],
     challenge: ["Forte tendance aux conflits de pouvoir", "Aucun ne veut céder — risque d'impasse", "Peu d'espace pour les émotions ou les nuances", "Peut manquer de soutien humain dans l'équipe"],
     comm: ["Définissez clairement les zones de responsabilité de chacun", "Évitez les batailles d'ego — focalisez sur l'objectif commun", "Apprenez à écouter avant de répondre", "Accordez-vous des temps de discussion structurés"],
-    tip: "<strong>Conseil :</strong> Duo très efficace si vous clarifiez les rôles. Sinon, risque de clash constant. L'un doit accepter de suivre l'autre sur certains sujets."
-  },
-  "red-green": {
-    score: 65,
-    title: "La Force et la Douceur",
+    tip: "<strong>Conseil :</strong> Duo très efficace si vous clarifiez les rôles. Sinon, risque de clash constant. L'un doit accepter de suivre l'autre sur certains sujets." },
+  "red-green": { score: 65, title: "La Force et la Douceur",
     fit: ["Le Rouge pousse à performer, le Vert maintient l'harmonie", "Bon équilibre entre résultats et bien-être d'équipe", "Le Vert calme les élans trop agressifs du Rouge", "Complémentarité forte en gestion"],
     challenge: ["Le Rouge peut blesser le Vert avec sa franchise", "Le Vert peut sembler trop lent ou passif au Rouge", "Le Rouge veut décider vite ; le Vert veut consulter", "Le Vert évite les conflits que le Rouge trouve nécessaires"],
     comm: ["Rouge : adoucis ta façon de donner du feedback au Vert", "Vert : ose exprimer ton désaccord clairement plutôt que de subir", "Donnez-vous des temps de discussion avant de décider", "Le Rouge prend la décision finale, le Vert veille au bien-être de l'équipe"],
-    tip: "<strong>Conseil :</strong> Duo complémentaire en leadership. Le Rouge donne la direction, le Vert s'assure que personne n'est laissé pour compte. Respectez-vous mutuellement."
-  },
-  "red-blue": {
-    score: 68,
-    title: "L'Ambitieux et le Stratège",
+    tip: "<strong>Conseil :</strong> Duo complémentaire en leadership. Le Rouge donne la direction, le Vert s'assure que personne n'est laissé pour compte. Respectez-vous mutuellement." },
+  "red-blue": { score: 68, title: "L'Ambitieux et le Stratège",
     fit: ["Le Rouge agit, le Bleu structure — tandem puissant", "Haut niveau d'exigence partagé", "Excellent pour les projets complexes à fort enjeu", "Le Bleu évite les erreurs du Rouge impulsif"],
     challenge: ["Le Rouge trouve le Bleu trop lent et trop prudent", "Le Bleu trouve le Rouge trop impulsif et risqué", "Tension entre vitesse d'action et rigueur d'analyse", "Peu d'espace pour les émotions et la relation humaine"],
     comm: ["Rouge : donne au Bleu le temps d'analyser avant de décider", "Bleu : présente tes analyses de façon concise et orientée résultats", "Établissez des délais clairs pour les décisions", "Respectez mutuellement votre niveau d'exigence élevé"],
-    tip: "<strong>Conseil :</strong> Duo redoutable en affaires quand les rôles sont clairs. Le Rouge prend les décisions audacieuses, le Bleu les solides. Apprenez à vous faire confiance."
-  },
-  "green-green": {
-    score: 88,
-    title: "L'Harmonie Parfaite",
+    tip: "<strong>Conseil :</strong> Duo redoutable en affaires quand les rôles sont clairs. Le Rouge prend les décisions audacieuses, le Bleu les solides. Apprenez à vous faire confiance." },
+  "green-green": { score: 88, title: "L'Harmonie Parfaite",
     fit: ["Très bonne entente naturelle et peu de conflits", "Écoute mutuelle et respect des besoins", "Environnement de travail calme et stable", "Loyauté et fiabilité partagées"],
     challenge: ["Peut éviter les décisions difficiles ou les confrontations", "Risque de manquer d'ambition ou de prise de risque", "Tendance à maintenir le statu quo même quand il faut changer", "Peu de dynamisme pour se dépasser ou innover"],
     comm: ["Osez exprimer vos désaccords — l'harmonie ne signifie pas l'accord total", "Planifiez des moments de prise de décision structurés", "Cherchez des alliés Rouges ou Jaunes pour vous pousser à avancer", "Célébrez votre fiabilité — c'est une force rare"],
-    tip: "<strong>Conseil :</strong> Excellente relation humaine, mais veillez à ne pas vous installer dans un confort qui freine la croissance. Challengez-vous mutuellement avec bienveillance."
-  },
-  "green-blue": {
-    score: 75,
-    title: "La Précision Bienveillante",
+    tip: "<strong>Conseil :</strong> Excellente relation humaine, mais veillez à ne pas vous installer dans un confort qui freine la croissance. Challengez-vous mutuellement avec bienveillance." },
+  "green-blue": { score: 75, title: "La Précision Bienveillante",
     fit: ["Les deux sont calmes, posés et réfléchis", "Respect mutuel des processus et des délais", "Bonne qualité de travail partagée", "Peu de conflits — les deux évitent les confrontations inutiles"],
     challenge: ["Risque de paralysie — aucun ne pousse à avancer vite", "Manque d'énergie et d'enthousiasme dans la dynamique", "Le Bleu peut être perçu comme froid par le Vert", "Le Vert peut sembler trop flou pour le Bleu analytique"],
     comm: ["Vert : sois plus direct dans tes attentes avec le Bleu", "Bleu : montre de l'empathie et reconnais la contribution humaine du Vert", "Définissez ensemble des objectifs clairs avec des délais", "Associez-vous à un Rouge ou Jaune pour l'élan"],
-    tip: "<strong>Conseil :</strong> Duo fiable et de qualité. Pour maximiser votre potentiel, cherchez des contextes où la rigueur et la bienveillance sont des atouts — RH, qualité, service client."
-  },
-  "blue-blue": {
-    score: 70,
-    title: "Les Deux Analystes",
+    tip: "<strong>Conseil :</strong> Duo fiable et de qualité. Pour maximiser votre potentiel, cherchez des contextes où la rigueur et la bienveillance sont des atouts — RH, qualité, service client." },
+  "blue-blue": { score: 70, title: "Les Deux Analystes",
     fit: ["Haut niveau de rigueur et de qualité partagé", "Respect mutuel des processus et des détails", "Très peu d'erreurs et grande fiabilité", "Communication précise et factuelle"],
     challenge: ["Risque de sur-analyse et d'inaction", "Manque d'élan et de dynamisme dans la relation", "Peut être difficile de décider sans données parfaites", "Peu d'espace pour la créativité et l'improvisation"],
     comm: ["Établissez des délais fermes pour sortir de l'analyse", "Définissez qui a le dernier mot pour éviter les blocages", "Reconnaissez les efforts de l'autre — le Bleu a besoin de validation", "Associez-vous à un Rouge ou Jaune pour les phases d'action"],
-    tip: "<strong>Conseil :</strong> Duo d'une grande rigueur. Le risque est la paralysie par l'analyse. Forcez-vous à des décisions imparfaites — le perfectionnisme peut être l'ennemi du progrès."
-  },
+    tip: "<strong>Conseil :</strong> Duo d'une grande rigueur. Le risque est la paralysie par l'analyse. Forcez-vous à des décisions imparfaites — le perfectionnisme peut être l'ennemi du progrès." },
 };
 
-// Génère la clé symétrique
 function getCompatKey(a, b) {
   const key = `${a}-${b}`;
   const keyRev = `${b}-${a}`;
@@ -2108,7 +2263,6 @@ let pickedMe = null;
 let pickedOther = null;
 
 function pickColor(picker, color, btn) {
-  // Deselect old button for this picker
   document.querySelectorAll(`[data-picker="${picker}"]`).forEach(b => {
     b.className = "color-pick-btn";
   });
@@ -2123,16 +2277,14 @@ function pickColor(picker, color, btn) {
 function renderCompat() {
   const key = getCompatKey(pickedMe, pickedOther);
   const data = compatData[key] || null;
-
   const result = document.getElementById("compatResult");
-
-  const meLabel    = colorLabels[pickedMe];
+  const meLabel = colorLabels[pickedMe];
   const otherLabel = colorLabels[pickedOther];
 
-  document.getElementById("compatBadgeMe").textContent    = `${meLabel.emoji} ${meLabel.name}`;
-  document.getElementById("compatBadgeMe").className      = `compat-badge ${pickedMe}`;
+  document.getElementById("compatBadgeMe").textContent = `${meLabel.emoji} ${meLabel.name}`;
+  document.getElementById("compatBadgeMe").className = `compat-badge ${pickedMe}`;
   document.getElementById("compatBadgeOther").textContent = `${otherLabel.emoji} ${otherLabel.name}`;
-  document.getElementById("compatBadgeOther").className   = `compat-badge ${pickedOther}`;
+  document.getElementById("compatBadgeOther").className = `compat-badge ${pickedOther}`;
 
   if (!data) {
     result.classList.add("visible");
@@ -2152,19 +2304,17 @@ function renderCompat() {
 
   document.getElementById("compatTitle").textContent = `— ${data.title}`;
   document.getElementById("compatScoreFill").style.width = `${data.score}%`;
-  document.getElementById("compatScoreVal").textContent  = `${data.score}% — ${data.score >= 80 ? "Très bonne compatibilité naturelle" : data.score >= 65 ? "Bonne compatibilité avec quelques ajustements" : "Complémentaire — demande des efforts de compréhension"}`;
+  document.getElementById("compatScoreVal").textContent = `${data.score}% — ${data.score >= 80 ? "Très bonne compatibilité naturelle" : data.score >= 65 ? "Bonne compatibilité avec quelques ajustements" : "Complémentaire — demande des efforts de compréhension"}`;
 
-  document.getElementById("compatFit").innerHTML      = data.fit.map(t => `<li>${t}</li>`).join("");
+  document.getElementById("compatFit").innerHTML = data.fit.map(t => `<li>${t}</li>`).join("");
   document.getElementById("compatChallenge").innerHTML = data.challenge.map(t => `<li>${t}</li>`).join("");
-  document.getElementById("compatComm").innerHTML     = data.comm.map(t => `<li>${t}</li>`).join("");
+  document.getElementById("compatComm").innerHTML = data.comm.map(t => `<li>${t}</li>`).join("");
 
-  // Motivations — toujours affiche les deux couleurs
-  const motivMe    = colorMotivations[pickedMe].map(m => `<li><strong>${meLabel.emoji} ${meLabel.name} :</strong> ${m}</li>`).join("");
+  const motivMe = colorMotivations[pickedMe].map(m => `<li><strong>${meLabel.emoji} ${meLabel.name} :</strong> ${m}</li>`).join("");
   const motivOther = colorMotivations[pickedOther].map(m => `<li><strong>${otherLabel.emoji} ${otherLabel.name} :</strong> ${m}</li>`).join("");
   document.getElementById("compatMotiv").innerHTML = motivMe + motivOther;
 
   document.getElementById("compatTip").innerHTML = data.tip;
-
   result.classList.add("visible");
   result.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
@@ -2252,13 +2402,12 @@ function calculateMotivations() {
     return;
   }
 
-  const scores = { cognitif: 0, utilitaire: 0, esthetique: 0, altruiste: 0, individuel: 0, traditionnel: 0 };
-  motivQuestions.forEach(q => { scores[q.motiv] += motivAnswers[q.id] || 0; });
+  const scoresM = { cognitif: 0, utilitaire: 0, esthetique: 0, altruiste: 0, individuel: 0, traditionnel: 0 };
+  motivQuestions.forEach(q => { scoresM[q.motiv] += motivAnswers[q.id] || 0; });
 
   const maxScore = 20;
-  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const sorted = Object.entries(scoresM).sort((a, b) => b[1] - a[1]);
 
-  // Bars
   const listHtml = sorted.map(([key, val]) => {
     const pct = Math.round((val / maxScore) * 100);
     const m = motivMeta[key];
@@ -2276,7 +2425,6 @@ function calculateMotivations() {
   }).join("");
   document.getElementById("motivResultList").innerHTML = listHtml;
 
-  // Top 2 dominant cards
   const top2 = sorted.slice(0, 2);
   const cardsHtml = top2.map(([key]) => {
     const m = motivMeta[key];
@@ -2291,7 +2439,6 @@ function calculateMotivations() {
   }).join("");
   document.getElementById("motivDominantCards").innerHTML = cardsHtml;
 
-  // Combo note
   const [d1, d2] = top2.map(([k]) => k);
   const comboNotes = {
     "cognitif-utilitaire":    "Tu veux comprendre ET que ça serve à quelque chose. Combinaison puissante en ingénierie, stratégie ou R&D appliquée.",
@@ -2315,6 +2462,13 @@ function calculateMotivations() {
   const note = comboNotes[comboKey] || "Ta combinaison est unique et reflète une richesse de motivations complémentaires.";
   document.getElementById("motivDiscLink").innerHTML = `<strong>✨ Combinaison ${motivMeta[d1].label} + ${motivMeta[d2].label} :</strong> ${note}`;
 
+  // Save motivations result
+  localStorage.setItem('disc_motivations', JSON.stringify({
+    top2: [motivMeta[d1].label, motivMeta[d2].label],
+    scores: scoresM,
+    date: new Date().toLocaleDateString('fr-CA')
+  }));
+
   const box = document.getElementById("motivResultBox");
   box.classList.add("visible");
   box.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -2331,7 +2485,7 @@ buildMotivQuiz();
 
 // ===== COLLAPSIBLE SECTIONS =====
 function toggleSection(bodyId, headerEl) {
-  const body   = document.getElementById(bodyId);
+  const body = document.getElementById(bodyId);
   const toggle = headerEl.querySelector('.section-toggle');
   const isCollapsed = body.classList.contains('collapsed');
   body.classList.toggle('collapsed', !isCollapsed);
